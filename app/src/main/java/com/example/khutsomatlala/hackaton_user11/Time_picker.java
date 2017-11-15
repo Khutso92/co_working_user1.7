@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-
 public class Time_picker extends AppCompatActivity {
 
     //dialog
@@ -30,7 +29,7 @@ public class Time_picker extends AppCompatActivity {
 
 
     String name;
-    String PlaceKey ;
+    String PlaceKey;
 
     boolean btnTimein = false, btnTimeOut = true;
     Dialog dialog;
@@ -51,7 +50,6 @@ public class Time_picker extends AppCompatActivity {
         setContentView(R.layout.activity_time_picker);
 
 
-
         //Get the widgets reference from XML layout
         tvin = (TextView) findViewById(R.id.tvIn);
         tvout = (TextView) findViewById(R.id.tvOut);
@@ -70,7 +68,7 @@ public class Time_picker extends AppCompatActivity {
 
         Intent i = getIntent();
         name = i.getStringExtra("placeName");
-        Toast.makeText(this, "Place name"+name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Place name" + name, Toast.LENGTH_SHORT).show();
         timeIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,20 +158,26 @@ public class Time_picker extends AppCompatActivity {
     public void CheckAvailability(View view) {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mbookingReference = mFirebaseDatabase.getReference().child("working_hours").child(name) ;
+        mbookingReference = mFirebaseDatabase.getReference().child("working_hours").child(name);
         mbookingReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    snapshot.child("close_time").getValue().toString();
+                    snapshot.child("close_open").getValue().toString();
+
+                    Toast.makeText(Time_picker.this, "" + snapshot.child("close_open").getValue().toString() + snapshot.child("close_time").getValue().toString() + "\n", Toast.LENGTH_SHORT).show();
+                }
 
 
                 //  Toast.makeText(activity, "k----  "+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Time_picker.this, "  "+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Time_picker.this, "  "+dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Time_picker.this, "  " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Time_picker.this, "  " + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
 
                 String name = dataSnapshot.getValue().toString();
 
-                if (name.contains("close_time")){
+                if (name.contains("close_time")) {
                     Toast.makeText(Time_picker.this, "found", Toast.LENGTH_SHORT).show();
                 }
 
