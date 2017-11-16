@@ -29,7 +29,7 @@
                 android:id="@+id/reviews"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@android:color/transparent"
+
                 android:text="0" />
 
 
