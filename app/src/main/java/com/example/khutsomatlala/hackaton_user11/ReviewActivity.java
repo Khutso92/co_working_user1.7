@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +29,8 @@ import java.util.List;
 public class ReviewActivity extends Activity {
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCommentsDatabaseReference;
+    private DatabaseReference mCommentsDatabaseReference,mRateDatabaseReference;
+    private String  rateMessage;
     EditText message;
     String PlaceName;
     List<FriendlyMessage> mComments;
@@ -47,6 +48,18 @@ public class ReviewActivity extends Activity {
       String users;
     long reviews;
 
+
+    //rating
+    int mTotalRating = 0;
+    long mNumberofUser = 0;
+    float mAverage = 0;
+    Button ftitle2, ftitle3;
+    RatingBar ratingBar;
+
+    RatingBar ratingRatingBar;
+    TextView ratingDisplayTextView;
+    int RateNumber;
+    String NumberofUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,6 +196,95 @@ public class ReviewActivity extends Activity {
 
             }
         });
+        mRateDatabaseReference = mFirebaseDatabase.getReference();
+        ratingRatingBar = findViewById(R.id.rating_rating_bar);
+        ratingDisplayTextView = findViewById(R.id.rating_display_text_View);
+        ratingRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(final RatingBar ratingBar, float v, boolean b) {
+                if (ratingRatingBar.getRating() == 1) {
+                    rateMessage = "Hated it";
+                    RateNumber = 1;
 
+                } else if ((int) v == 2) {
+                    rateMessage = "Disliked it";
+                    RateNumber = 2;
+                } else if ((int) v == 3) {
+                    rateMessage = "It's OK";
+                    RateNumber = 3;
+                } else if ((int) v == 4) {
+                    rateMessage = "Liked it";
+                    RateNumber = 4;
+                } else {
+                    rateMessage = "Loved it";
+                    RateNumber = 5;
+                }
+
+                ratingDisplayTextView.setText("" + rateMessage);
+
+                //sending the rating
+                mRateDatabaseReference.child("Rating").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        // mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(RateNumber);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+            }
+
+
+        });
+
+        mRateDatabaseReference.child("Rating").child(PlaceName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                mNumberofUser = dataSnapshot.getChildrenCount();
+
+
+                NumberofUser = String.valueOf(mNumberofUser);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    mTotalRating = mTotalRating + Integer.parseInt(snapshot.getValue().toString());
+                }
+                try {
+
+                    mAverage = (float) ((mTotalRating / mNumberofUser));
+
+                 /*   DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+                    ftitle2.setText(decimalFormat.format(mAverage) + "\n Stars");*/
+
+                    mTotalRating = 0;
+
+                } catch (ArithmeticException e) {
+                    Toast.makeText(ReviewActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
+    }
+
+    public void GoToReview(View view) {
+
+        Intent intent = new Intent(this, ReviewActivity.class);
+        intent.putExtra("PlaceName", PlaceName);
+        intent.putExtra("number", NumberofUser);
+        startActivity(intent);
     }
 }
