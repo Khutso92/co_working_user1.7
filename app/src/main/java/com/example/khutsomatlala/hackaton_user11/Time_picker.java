@@ -64,8 +64,8 @@ public class Time_picker extends AppCompatActivity {
         btn_availability = (Button) findViewById(R.id.Availability);
 
         //Display the TimePicker initial time
-        tvin.setText("time in \n " + hourOfDay + ":" + minute + ":" + second);
-        tvout.setText("time out \n " + hourOfDay + ":" + minute + ":" + second);
+        /*tvin.setText("time in \n " + hourOfDay + ":" + minute + ":" + second);
+        tvout.setText("time out \n " + hourOfDay + ":" + minute + ":" + second);*/
 
 
         Intent i = getIntent();

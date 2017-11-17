@@ -6,29 +6,7 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="8dp">
-    <TextView
-        android:id="@+id/tvIn"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textColor="#3A69D3 "
-        android:textSize="20dp"
-        tools:text="time in"/>
 
-    <TextView
-        android:id="@+id/tvOut"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textColor="#3A69D3 "
-        android:textSize="20dp"
-        tools:text="time out"/>
-    </LinearLayout>
 
     <Button
         android:id="@+id/Availability"
@@ -68,6 +46,29 @@
         tools:ignore="OnClick" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+        <TextView
+            android:id="@+id/tvIn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#3A69D3 "
+            android:textSize="20dp"
+            tools:text="time in"/>
+
+        <TextView
+            android:id="@+id/tvOut"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#3A69D3 "
+            android:textSize="20dp"
+            tools:text="time out"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -75,6 +76,7 @@
     <TextView
         android:id="@+id/dataShap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/square"/>
     </ScrollView>
 </LinearLayout>

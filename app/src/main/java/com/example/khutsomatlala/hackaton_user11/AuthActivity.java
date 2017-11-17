@@ -69,7 +69,7 @@ public class AuthActivity extends AppCompatActivity {
                 String getEmail = email.getText().toString().trim();
                 String getPassword = password.getText().toString().trim();
 
-                if (!validateForm()) {
+                if (!validateSign()) {
 
                     return;
                 } else {
@@ -171,6 +171,27 @@ public class AuthActivity extends AppCompatActivity {
             cell.setError(" Cell Required.");
             valid = false;
         }
+
+
+        return valid;
+    }
+
+    //
+    private boolean validateSign() {
+        boolean valid = true;
+
+        String getEmail    = email.getText().toString().trim();
+        String   getPassword = password.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(getEmail)) {
+            email.setError("Email Required.");
+            valid = false;
+        }
+        if (TextUtils.isEmpty(getPassword)) {
+            password.setError("Password  Required");
+        }
+
 
 
         return valid;
