@@ -88,9 +88,6 @@ public class book_new extends AppCompatActivity {
     CompactCalendarView compactCalendarView;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
 
-    //No of people
-    int numOfPeople = 0;
-    TextView txtNoOfPpl;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
@@ -119,8 +116,6 @@ public class book_new extends AppCompatActivity {
         onePerson = (RadioButton) findViewById(R.id.rb_onePerson);
         radioGroup = (RadioGroup) findViewById(R.id.RadioGroup);
         PeopleNumber = (EditText) findViewById(R.id.edtPeopleNumber);
-
-        txtNoOfPpl = (TextView) findViewById(R.id.tvNoOfPpl);
 
 
         //Get a new instance of Calendar
@@ -177,7 +172,6 @@ public class book_new extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -293,24 +287,6 @@ public class book_new extends AppCompatActivity {
 
         }
 
-    }
-
-    public void increase(View view) {
-        numOfPeople = numOfPeople + 1;
-        display(numOfPeople);
-
-    }public void decrease(View view) {
-
-
-        if (numOfPeople > 0){
-            numOfPeople = numOfPeople - 1;
-            display(numOfPeople);
-        }
-    }
-
-    private void display(int number) {
-        TextView displayInteger = (TextView) findViewById(R.id.tvNoOfPpl);
-        displayInteger.setText("" + number);
     }
 
 }

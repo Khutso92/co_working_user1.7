@@ -132,9 +132,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         feat2Pic = i.getStringExtra("feat2Pic");
         feat3Pic = i.getStringExtra("feat3Pic");
 
-        // Toast.makeText(this, "today's date\n" +dayStamp, Toast.LENGTH_SHORT).show();
-
-
         SendTextLinearLayout = findViewById(R.id.linearLayout);
         placeName = findViewById(R.id.txt_placeName);
         placeLocation = findViewById(R.id.txt_location);
