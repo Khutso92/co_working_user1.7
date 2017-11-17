@@ -48,7 +48,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, ratingDisplayTextView, readAllReviews;
+    TextView placeName, placeLocation, txtInformation, ratingDisplayTextView, readAllReviews, txtPrice;
 
     ImageView feat1P, feat2P, feat3P;
 
@@ -147,6 +147,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         readAllReviews = findViewById(R.id.txtReadAll);
         txtInformation = findViewById(R.id.txtInformation);
         PlacePic = findViewById(R.id.ivPlacePic);
+        txtPrice = findViewById(R.id.txtPrice);
 
         feat1P = findViewById(R.id.feat1Pic);
         feat2P = findViewById(R.id.feat2Pic);
@@ -161,6 +162,8 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         ftitle1.setText("" + feat1Title);
         ftitle2.setText("" + feat2Title);
         ftitle3.setText("" + feat3Title);
+
+        txtPrice.setText("R" +price + " per hour");
 
         Glide.with(this)
                 .load(pic1)

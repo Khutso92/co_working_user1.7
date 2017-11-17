@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:onClick="NumPeople"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:weightSum="5">
 
         <RadioButton
@@ -45,6 +46,55 @@
 
     </RadioGroup>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No of people"
+            android:textSize="16sp"
+            android:textColor="#0E3047"
+            android:layout_marginLeft="8dp"/>
+
+        <Button
+            android:onClick="decrease"
+            android:layout_marginLeft="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#0E3047"
+            android:textColor="#fff"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/tvNoOfPpl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:layout_marginLeft="8dp"/>
+
+        <Button
+            android:onClick="increase"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:background="#0E3047"
+            android:textColor="#fff"
+            android:text="+"/>
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:hint="insert text"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/square"
+        android:layout_gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:text="Total"
+            android:text="Total price"
             android:textColor="#0e3047"
             android:textStyle="bold" />
     </LinearLayout>

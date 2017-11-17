@@ -5,48 +5,69 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
     <TextView
         android:id="@+id/tvIn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textColor="#3A69D3 "
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        tools:text="time in"/>
 
     <TextView
         android:id="@+id/tvOut"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textColor="#3A69D3 "
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/time_in"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="time in"
-        android:textAllCaps="false"
-        tools:ignore="OnClick" />
-
-    <Button
-        android:id="@+id/time_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="time out"
-        android:textAllCaps="false"
-        tools:ignore="OnClick" />
+        android:textSize="20dp"
+        tools:text="time out"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/Availability"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_margin="8dp"
         android:background="#0E3047"
         android:onClick="CheckAvailability"
         android:text="Check Availability"
         android:textColor="#fff" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/square"
+        android:layout_margin="8dp">
+
+    <Button
+        android:id="@+id/time_in"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="time in"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/time_out"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="time out"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        tools:ignore="OnClick" />
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
