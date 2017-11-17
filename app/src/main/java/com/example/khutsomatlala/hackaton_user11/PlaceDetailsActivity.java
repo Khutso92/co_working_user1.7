@@ -416,7 +416,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         });*/
 
         //getting number total number of users and calc. the average
-        mRateDatabaseReference.child("Rating").child(PlaceName).addValueEventListener(new ValueEventListener() {
+   /*     mRateDatabaseReference.child("Rating").child(PlaceName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -433,9 +433,9 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
                     mAverage = (float) ((mTotalRating / mNumberofUser));
 
-                 /*   DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                 *//*   DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-                    ftitle2.setText(decimalFormat.format(mAverage) + "\n Stars");*/
+                    ftitle2.setText(decimalFormat.format(mAverage) + "\n Stars");*//*
 
                     mTotalRating = 0;
 
@@ -451,11 +451,11 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             }
 
         });
-
+*/
 
         //rating  the place
 
-        ratingRatingBar = findViewById(R.id.rating_rating_bar);
+  /*      ratingRatingBar = findViewById(R.id.rating_rating_bar);
         ratingDisplayTextView = findViewById(R.id.rating_display_text_View);
         ratingRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -497,7 +497,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
         });
-
+*/
 
     }
 
