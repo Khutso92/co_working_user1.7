@@ -30,9 +30,11 @@ public class Time_picker extends AppCompatActivity {
 
     int hourIn, hourOut;
 
+    Boolean Bool_hourIn, Bool_hourOut;
+
     String name, date;
     String times = "available time bookings \n\n";
-
+    String aTime1, aTime2;
     boolean btnTimein = false, btnTimeOut = true;
     Dialog dialog;
 
@@ -41,7 +43,6 @@ public class Time_picker extends AppCompatActivity {
 
     TextView dataShap;
 
-    private DatabaseReference mPlacesReference;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCheckSpaceReference;
@@ -92,7 +93,7 @@ public class Time_picker extends AppCompatActivity {
 
         });
 
-        mPlacesReference = FirebaseDatabase.getInstance().getReference("places");
+
     }
 
     private void timeInpicker() {
@@ -111,13 +112,34 @@ public class Time_picker extends AppCompatActivity {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 //Display the new time to app interface
-                tvin.setText("time in \n " + hourOfDay + ":" + minute);
 
-                hourIn = hourOfDay;
+                try {
+                    if (Integer.parseInt(aTime1) == hourOfDay || Integer.parseInt(aTime2) == hourOfDay) {
 
-                Toast.makeText(Time_picker.this, hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+                        hourIn = hourOfDay;
+                        Bool_hourIn = true;
+
+
+                    } else {
+                        Toast.makeText(Time_picker.this, " Time not available for booking", Toast.LENGTH_SHORT).show();
+
+                        Bool_hourIn = false;
+                    }
+                } catch (Exception e) {
+
+
+                    Toast.makeText(Time_picker.this, "invaid time", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+                tvin.setText("Check in Hour \n " + hourOfDay + ":00");
+
             }
         });
+
+
         dialog.dismiss();
 
         dialog.show();
@@ -139,13 +161,33 @@ public class Time_picker extends AppCompatActivity {
         dialogButton.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+
+
+                try {
+
+
+                    if (Integer.parseInt(aTime1) == hourOfDay || Integer.parseInt(aTime2) == hourOfDay) {
+
+                        hourOut = hourOfDay;
+                        Bool_hourOut = true;
+
+
+                    } else {
+                        Toast.makeText(Time_picker.this, " Time not available for booking", Toast.LENGTH_SHORT).show();
+
+                        Bool_hourOut = false;
+                    }
+                } catch (Exception e) {
+
+                    Toast.makeText(Time_picker.this, "Something went wrong ", Toast.LENGTH_SHORT).show();
+
+                }
+
+
                 //Display the new time to app interface
-                tvout.setText("time out \n " + hourOfDay + ":" + minute);
+                tvout.setText("Check Out Hour \n " + hourOfDay + ":00");
 
 
-                hourOut = hourOfDay;
-
-                Toast.makeText(Time_picker.this, hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
             }
         });
         dialogOut.dismiss();
@@ -159,13 +201,19 @@ public class Time_picker extends AppCompatActivity {
             btnTimein = false;
         } else if (btnTimeOut) {
 
-            Intent i = new Intent(this, book_new.class);
+            if (Bool_hourOut && Bool_hourIn) {
+                Intent i = new Intent(this, book_new.class);
 
-            i.putExtra("hourIn",     Integer.toString( hourIn));
-            i.putExtra("hourOut",Integer.toString( hourOut));
+                i.putExtra("hourIn", Integer.toString(hourIn));
+                i.putExtra("hourOut", Integer.toString(hourOut));
 
-            startActivity(i);
-            dialog.dismiss();
+                startActivity(i);
+                dialog.dismiss();
+
+            } else {
+                dataShap.setText("Invaild hours \nPress check Availability  to list Available hours ");
+                dialog.dismiss();
+            }
         }
     }
 
@@ -178,44 +226,54 @@ public class Time_picker extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
-        mCheckSpaceReference = mFirebaseDatabase.getReference().child("working_hours").child(name).child(date);
+        try {
+            mCheckSpaceReference = mFirebaseDatabase.getReference().child("working_hours").child(name).child(date);
 
-        mCheckSpaceReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            mCheckSpaceReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                if (dataSnapshot.hasChildren()) {
+                    if (dataSnapshot.hasChildren()) {
 
-                    String CurrentNumber = dataSnapshot.child("1:00").child("CurrentNumber").getValue().toString();
-                    String time_1 = dataSnapshot.child("1:00").child("MaxSpace").getValue().toString();
+                        String CurrentNumber = dataSnapshot.child("1:00").child("CurrentNumber").getValue().toString();
+                        String time_1 = dataSnapshot.child("1:00").child("MaxSpace").getValue().toString();
 
-                    String CurrentNumber2 = dataSnapshot.child("2:00").child("CurrentNumber").getValue().toString();
-                    String time_2 = dataSnapshot.child("2:00").child("MaxSpace").getValue().toString();
+                        aTime1 = dataSnapshot.child("1:00").child("time").getValue().toString();
+                        aTime2 = dataSnapshot.child("2:00").child("time").getValue().toString();
 
-                    if (Integer.parseInt(CurrentNumber) <= Integer.parseInt(time_1)) {
-                        times = times + "1:00 am \n";
+
+                        String CurrentNumber2 = dataSnapshot.child("2:00").child("CurrentNumber").getValue().toString();
+                        String time_2 = dataSnapshot.child("2:00").child("MaxSpace").getValue().toString();
+
+                        if (Integer.parseInt(CurrentNumber) <= Integer.parseInt(time_1)) {
+                            times = times + "1:00 am \n";
+                        }
+
+                        if (Integer.parseInt(CurrentNumber2) <= Integer.parseInt(time_2)) {
+                            times = times + "2:00 am \n";
+                        }
+
+                        dataShap.setText(times);
+
+
+                        Toast.makeText(Time_picker.this, " times\n" + aTime1 + "\n " + aTime2, Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+                        Toast.makeText(Time_picker.this, "place dates not allocated", Toast.LENGTH_SHORT).show();
+                        dataShap.setText("place dates not allocated");
                     }
+                }
 
-                    if (Integer.parseInt(CurrentNumber2) <= Integer.parseInt(time_2)) {
-                        times = times + "2:00 am \n";
-                    }
-
-                    dataShap.setText(times);
-
-                } else {
-                    Toast.makeText(Time_picker.this, "place dates not allocated", Toast.LENGTH_SHORT).show();
-
-                    dataShap.setText("place dates not allocated");
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
                 }
-            }
+            });
+        } catch (Exception e) {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+            Toast.makeText(this, "Something went wrong with the database" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

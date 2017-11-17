@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -51,7 +50,6 @@ public class book_new extends AppCompatActivity {
 
     String pic, name, pricee, mTimeIn, mTimeOut, mDate, mEmail, mUsername;
 
-    ImageView BookPic;
 
     TextView placeName, mPrice, tv_date, txtTotalPrice;
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
@@ -86,6 +84,8 @@ public class book_new extends AppCompatActivity {
     int minteger = 0;
 
 
+
+    String month, year, day, date;
     //Calendar
     CompactCalendarView compactCalendarView;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
@@ -111,6 +111,9 @@ public class book_new extends AppCompatActivity {
         mEmail = i.getStringExtra("email");
         mUsername = i.getStringExtra("mUsername");
         user_uid = i.getStringExtra("user_uid");
+
+
+
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
         txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
@@ -144,26 +147,18 @@ public class book_new extends AppCompatActivity {
             @Override
             public void onDayClick(Date dateClicked) {
 
-              /* Context context = getApplicationContext();
+                year = "20" + (dateClicked.getYear() - 100);
 
-               Calendar beginTime = Calendar.getInstance();
-               beginTime.set(2012, 0, 19, 7, 30);
-               Calendar endTime = Calendar.getInstance();
-               endTime.set(2012, 0, 19, 8, 30);
-               Intent intent = new Intent(Intent.ACTION_INSERT)
-                       .setData(CalendarContract.Events.CONTENT_URI)
-                       .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                       .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                       .putExtra(CalendarContract.Events.TITLE, "Yoga")
-                       .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
-                       .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
-                       .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-                       .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
-               startActivity(intent);*/
+                day = "" + dateClicked.getDate();
+
+                month = "" + (dateClicked.getMonth() + 1);
+
+                date = day + "-" + month + "-" + year;
 
                 Intent i = new Intent(book_new.this, Time_picker.class);
 
-                i.putExtra("placeName",name);
+                i.putExtra("placeName", name);
+                i.putExtra("date", date);
                 startActivity(i);
             }
 
@@ -190,7 +185,7 @@ public class book_new extends AppCompatActivity {
                 Bookings bookings = new Bookings("names", "2", "07:00", "08:00", "14 - 11-17");
 
                 String key = mbookingReference.push().getKey();
-                
+
                 mbookingReference.child(key).setValue(bookings);
 
             }
@@ -206,91 +201,7 @@ public class book_new extends AppCompatActivity {
 
 
 
-    public void NumPeople(View view) {
 
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-
-
-        switch (selectedId) {
-
-            case R.id.rb_MorePeople:
-                txtTotalPrice.setText("R0.00");
-
-                mTotal = 0;
-                more = true;
-                if (dateEntered) {
-                    if (TimeIn && TimeOut) {
-
-                        mDiffMins = mMinsIn + mMinsOut;
-
-                        duration = String.valueOf(mHoursOut - mHoursIn);
-
-                        if (mDiffMins >= 60) {
-
-                            mTotal = (mHoursOut - mHoursIn) + 1;
-
-                        } else {
-
-                            mTotal = (mHoursOut - mHoursIn);
-
-                        }
-
-                        mTotal = mTotal * Integer.parseInt(pricee);
-
-                        numberOfPeople = PeopleNumber.getText().toString();
-
-
-                        if (!TextUtils.isEmpty(numberOfPeople)) {
-                            txtTotalPrice.setText("R" + Math.abs(mTotal) * Integer.parseInt(numberOfPeople) + "0");
-                        } else {
-                            Toast.makeText(this, "enter number of people", Toast.LENGTH_SHORT).show();
-                        }
-
-                    } else {
-                        Toast.makeText(this, "Enter time in and out", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "Select a date", Toast.LENGTH_SHORT).show();
-                }
-
-                break;
-
-            case R.id.rb_onePerson:
-                one = true;
-                mTotal = 0;
-
-                numberOfPeople = "1";
-
-                if (TimeIn && TimeOut) {
-
-                    mDiffMins = mMinsIn + mMinsOut;
-
-                    duration = String.valueOf(mHoursOut - mHoursIn);
-
-                    if (mDiffMins >= 60) {
-
-                        mTotal = (mHoursOut - mHoursIn) + 1;
-
-                    } else {
-
-                        mTotal = (mHoursOut - mHoursIn);
-
-                    }
-
-                    mTotal = mTotal * Integer.parseInt(pricee);
-
-                    txtTotalPrice.setText("R" + Math.abs(mTotal) + "0");
-                } else {
-                    Toast.makeText(this, "Enter time in and out", Toast.LENGTH_SHORT).show();
-                }
-
-
-                break;
-
-        }
-
-
-    }
 
     public void increase(View view) {
 
