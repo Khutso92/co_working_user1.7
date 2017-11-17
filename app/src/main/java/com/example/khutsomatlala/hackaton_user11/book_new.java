@@ -83,6 +83,8 @@ public class book_new extends AppCompatActivity {
 
     boolean btnTimein = false, btnTimeOut = true;
     Dialog dialog;
+    int minteger = 0;
+
 
     //Calendar
     CompactCalendarView compactCalendarView;
@@ -288,6 +290,25 @@ public class book_new extends AppCompatActivity {
         }
 
 
+    }
+
+    public void increase(View view) {
+
+        minteger = minteger + 1;
+        display(minteger);
+
+    }public void decrease(View view) {
+
+        if (minteger > 0) {
+            minteger = minteger - 1;
+            display(minteger);
+        }
+    }
+
+    private void display(int number) {
+        TextView displayInteger = (TextView) findViewById(
+                R.id.tvNoOfPpl);
+        displayInteger.setText("" + number);
     }
 
 }

@@ -549,4 +549,9 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         startActivity(intent);
     }
 
+    public void readMore (View view){
+        Intent intent = new Intent(this,Read_more.class);
+        intent.putExtra("infor", infor);
+        startActivity(intent);
+    }
 }

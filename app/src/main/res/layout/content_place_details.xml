@@ -107,11 +107,12 @@
                 android:lines="2"/>
 
             <TextView
-                android:id="@+id/txtReadMore"
+                android:onClick="readMore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="read more"
-                android:textColor="#00f" />
+                android:textColor="#00f"
+                tools:ignore="OnClick" />
         </LinearLayout>
 
         <RelativeLayout
