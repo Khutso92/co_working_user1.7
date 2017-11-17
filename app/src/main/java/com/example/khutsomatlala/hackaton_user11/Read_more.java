@@ -10,4 +10,5 @@ public class Read_more extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_more);
     }
+
 }
