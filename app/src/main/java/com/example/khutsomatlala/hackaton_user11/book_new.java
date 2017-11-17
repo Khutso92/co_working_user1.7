@@ -1,6 +1,5 @@
 package com.example.khutsomatlala.hackaton_user11;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -44,6 +43,7 @@ public class book_new extends AppCompatActivity {
     private int mHoursIn, mHoursOut, mMinsOut, mMinsIn, mDay, mMonth, mYear, mDiffMins;
 
     private float mTotal = 0;
+    String date;
 
     String duration;
 
@@ -52,9 +52,10 @@ public class book_new extends AppCompatActivity {
     String pic, name, pricee, mTimeIn, mTimeOut, mDate, mEmail, mUsername;
 
     ImageView BookPic;
+    int PushControl = 1;
 
-    TextView placeName, mPrice, tv_date, txtTotalPrice;
-    String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
+
+    TextView mPrice, txtTotalPrice;
 
     //Time and date picker
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
@@ -81,13 +82,12 @@ public class book_new extends AppCompatActivity {
     int minute;
     int second;
 
-    boolean btnTimein = false, btnTimeOut = true;
-    Dialog dialog;
+
+    String hourIn, hourOut;
 
     //Calendar
     CompactCalendarView compactCalendarView;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
@@ -102,6 +102,7 @@ public class book_new extends AppCompatActivity {
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
+
         Intent i = getIntent();
         pic = i.getStringExtra("pic");
         name = i.getStringExtra("name");
@@ -109,6 +110,17 @@ public class book_new extends AppCompatActivity {
         mEmail = i.getStringExtra("email");
         mUsername = i.getStringExtra("mUsername");
         user_uid = i.getStringExtra("user_uid");
+
+
+        Intent u = getIntent();
+
+        //from the timepicker
+        hourIn = u.getStringExtra("hourIn");
+        hourOut = u.getStringExtra("hourOut");
+
+
+        Toast.makeText(this, "Hour in" + hourIn + "\nHour Out" + hourOut, Toast.LENGTH_SHORT).show();
+
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
         txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
@@ -135,33 +147,21 @@ public class book_new extends AppCompatActivity {
         compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
 
-        Event ev1 = new Event(Color.RED, 1510305111000l, "Personal date");
+        Event ev1 = new Event(Color.GREEN, 1510305111000l, "Personal date");
         compactCalendarView.addEvent(ev1);
 
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDayClick(Date dateClicked) {
 
-              /* Context context = getApplicationContext();
+                date = dateClicked.getDate() + "-" + Integer.toString(dateClicked.getMonth() + 1) + "-20" + Integer.toString(dateClicked.getYear() - 100);
 
-               Calendar beginTime = Calendar.getInstance();
-               beginTime.set(2012, 0, 19, 7, 30);
-               Calendar endTime = Calendar.getInstance();
-               endTime.set(2012, 0, 19, 8, 30);
-               Intent intent = new Intent(Intent.ACTION_INSERT)
-                       .setData(CalendarContract.Events.CONTENT_URI)
-                       .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                       .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                       .putExtra(CalendarContract.Events.TITLE, "Yoga")
-                       .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
-                       .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
-                       .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-                       .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
-               startActivity(intent);*/
-
+                Toast.makeText(book_new.this, "" + date, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(book_new.this, Time_picker.class);
 
-                i.putExtra("placeName",name);
+                i.putExtra("date", date);
+                i.putExtra("placeName", name);
                 startActivity(i);
             }
 
@@ -179,29 +179,37 @@ public class book_new extends AppCompatActivity {
 
     public void email(View view) {
 
-        mbookingReference = mFirebaseDatabase.getReference().child("bookings").child(name);
 
-        mbookingReference.child(name).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        try {
 
-                Bookings bookings = new Bookings("names", "2", "07:00", "08:00", "14 - 11-17");
+            mbookingReference = mFirebaseDatabase.getReference().child("bookings").child(name);
+            mbookingReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String key = mbookingReference.push().getKey();
-                
-                mbookingReference.child(key).setValue(bookings);
+                    Bookings bookings = new Bookings("names", "2", "07:00", "08:00", "14 - 11-17");
 
-            }
+                    if (PushControl == 1) {
+                        mbookingReference.push().setValue(bookings);
+                        PushControl++;
+                    }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+
+        } catch (Exception e)
+
+        {
+
+            Toast.makeText(this, " Something went wrong with the booking", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
-
 
 
     public void NumPeople(View view) {

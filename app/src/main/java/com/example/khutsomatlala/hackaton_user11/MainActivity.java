@@ -2,11 +2,10 @@ package com.example.khutsomatlala.hackaton_user11;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.Feature;
@@ -52,6 +51,7 @@ public class MainActivity extends Activity {
         adapter = new MyItemRecyclerViewAdapter(workingSpaces, MainActivity.this);
         mRecyclerView.setAdapter(adapter);
 
+        try {
 
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,7 +106,10 @@ public class MainActivity extends Activity {
             }
         });
 
+        } catch (Exception e) {
 
+            Toast.makeText(this, "unable to load the co working space", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

@@ -28,8 +28,10 @@ public class Time_picker extends AppCompatActivity {
     int second;
 
 
-    String name;
-    String PlaceKey;
+    int hourIn, hourOut;
+
+    String name, date;
+    String times = "available time bookings \n\n";
 
     boolean btnTimein = false, btnTimeOut = true;
     Dialog dialog;
@@ -42,7 +44,7 @@ public class Time_picker extends AppCompatActivity {
     private DatabaseReference mPlacesReference;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mbookingReference;
+    private DatabaseReference mCheckSpaceReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,10 @@ public class Time_picker extends AppCompatActivity {
 
 
         Intent i = getIntent();
+
         name = i.getStringExtra("placeName");
-        Toast.makeText(this, "Place name" + name, Toast.LENGTH_SHORT).show();
+        date = i.getStringExtra("date");
+
         timeIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +112,9 @@ public class Time_picker extends AppCompatActivity {
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 //Display the new time to app interface
                 tvin.setText("time in \n " + hourOfDay + ":" + minute);
+
+                hourIn = hourOfDay;
+
                 Toast.makeText(Time_picker.this, hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
             }
         });
@@ -116,7 +123,6 @@ public class Time_picker extends AppCompatActivity {
         dialog.show();
 
         btnTimein = true;
-
 
     }
 
@@ -135,6 +141,10 @@ public class Time_picker extends AppCompatActivity {
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 //Display the new time to app interface
                 tvout.setText("time out \n " + hourOfDay + ":" + minute);
+
+
+                hourOut = hourOfDay;
+
                 Toast.makeText(Time_picker.this, hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
             }
         });
@@ -148,40 +158,57 @@ public class Time_picker extends AppCompatActivity {
             dialog.dismiss();
             btnTimein = false;
         } else if (btnTimeOut) {
-            dialog.dismiss();
+
             Intent i = new Intent(this, book_new.class);
+
+            i.putExtra("hourIn",     Integer.toString( hourIn));
+            i.putExtra("hourOut",Integer.toString( hourOut));
+
             startActivity(i);
+            dialog.dismiss();
         }
     }
 
     //check availability from places node
     public void CheckAvailability(View view) {
 
+        dataShap.setText("");
+
+        times = "available time bookings \n\n";
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mbookingReference = mFirebaseDatabase.getReference().child("working_hours").child(name);
-        mbookingReference.addValueEventListener(new ValueEventListener() {
+
+        mCheckSpaceReference = mFirebaseDatabase.getReference().child("working_hours").child(name).child(date);
+
+        mCheckSpaceReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    snapshot.child("close_time").getValue().toString();
-                    snapshot.child("close_open").getValue().toString();
 
-                    Toast.makeText(Time_picker.this, "" + snapshot.child("close_open").getValue().toString() + snapshot.child("close_time").getValue().toString() + "\n", Toast.LENGTH_SHORT).show();
+                if (dataSnapshot.hasChildren()) {
+
+                    String CurrentNumber = dataSnapshot.child("1:00").child("CurrentNumber").getValue().toString();
+                    String time_1 = dataSnapshot.child("1:00").child("MaxSpace").getValue().toString();
+
+                    String CurrentNumber2 = dataSnapshot.child("2:00").child("CurrentNumber").getValue().toString();
+                    String time_2 = dataSnapshot.child("2:00").child("MaxSpace").getValue().toString();
+
+                    if (Integer.parseInt(CurrentNumber) <= Integer.parseInt(time_1)) {
+                        times = times + "1:00 am \n";
+                    }
+
+                    if (Integer.parseInt(CurrentNumber2) <= Integer.parseInt(time_2)) {
+                        times = times + "2:00 am \n";
+                    }
+
+                    dataShap.setText(times);
+
+                } else {
+                    Toast.makeText(Time_picker.this, "place dates not allocated", Toast.LENGTH_SHORT).show();
+
+                    dataShap.setText("place dates not allocated");
+
                 }
-
-
-                //  Toast.makeText(activity, "k----  "+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Time_picker.this, "  " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(Time_picker.this, "  " + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
-
-                String name = dataSnapshot.getValue().toString();
-
-                if (name.contains("close_time")) {
-                    Toast.makeText(Time_picker.this, "found", Toast.LENGTH_SHORT).show();
-                }
-
-
             }
 
             @Override
