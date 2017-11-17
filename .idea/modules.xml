@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/co_working_user1.7.iml" filepath="$PROJECT_DIR$/.idea/co_working_user1.7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/co_working_user1.1-master-master.iml" filepath="$PROJECT_DIR$/co_working_user1.1-master-master.iml" />
+      <module fileurl="file://C:\Users\mlab\Desktop\auth_email_password\co_working_user1.1-master-master\.idea\co_working_user1.7.iml" filepath="C:\Users\mlab\Desktop\auth_email_password\co_working_user1.1-master-master\.idea\co_working_user1.7.iml" />
     </modules>
   </component>
 </project>
