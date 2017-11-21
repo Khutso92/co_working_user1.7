@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -36,7 +34,7 @@ import java.util.Locale;
  * Created by Admin on 9/15/2017.
  */
 
-public class book_new extends AppCompatActivity {
+public class book_new extends AppCompatActivity{
 
 
     //time and date memebers
@@ -196,6 +194,8 @@ public class book_new extends AppCompatActivity {
 
             }
         });
+
+
 
 
 
