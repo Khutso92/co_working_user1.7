@@ -228,4 +228,5 @@ public class AuthActivity extends Activity {
         Intent i = new Intent(AuthActivity.this,Auth_login.class);
         startActivity(i);
     }
+
 }
