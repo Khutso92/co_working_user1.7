@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -223,5 +222,10 @@ public class AuthActivity extends Activity {
 
                     }
                 });
+    }
+
+    public void tvLogin(View view){
+        Intent i = new Intent(AuthActivity.this,Auth_login.class);
+        startActivity(i);
     }
 }

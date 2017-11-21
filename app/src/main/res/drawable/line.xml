@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+    android:shape="line">
 
     <!-- view background color -->
-   <!-- <solid
-        android:color="#a9c5ac" >
-    </solid>-->
+    <!-- <solid
+         android:color="#a9c5ac" >
+     </solid>-->
 
     <!-- view border color and width -->
     <stroke
@@ -22,5 +22,9 @@
         android:bottom="4dp"    >
     </padding>
 
+    <!-- Here is the corner radius -->
+    <corners
+        android:radius="10dp"   >
+    </corners>
 
 </shape>

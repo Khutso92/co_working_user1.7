@@ -3,7 +3,7 @@
     package="com.example.khutsomatlala.hackaton_user11">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AuthActivity"
+            android:name=".Auth_login"
             android:label="Co-Working Spaces">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +25,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <activity android:name=".AuthActivity"/>
 
         <activity
             android:name=".MapsActivity"
@@ -46,7 +47,8 @@
             android:name=".ReviewActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Time_picker" />
-        <activity android:name=".Read_more"></activity>
+        <activity android:name=".Read_more" />
+
     </application>
 
 </manifest>
