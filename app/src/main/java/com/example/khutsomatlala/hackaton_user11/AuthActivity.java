@@ -113,7 +113,8 @@ public class AuthActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
 
 
-                                Toast.makeText(AuthActivity.this, "Account created  ", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(AuthActivity.this,Splash.class);
+                                startActivity(i);
 
 
                                 // Write a message to the database

@@ -1,5 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -9,6 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -24,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
+import com.example.khutsomatlala.hackaton_user11.model.slideImagePojo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -37,6 +42,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +51,27 @@ import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class PlaceDetailsActivity extends FragmentActivity implements OnMapReadyCallback {
+    //slide
+    List<PlaceDetailsActivity> catalogList;
+    LinearLayoutManager linearLayoutManager;
+    List<PlaceDetailsActivity> catalogLists, catalogListCars, catalogListFurniture, catalogListPhones;
+    DatabaseReference getDatabaseImages;
+    ImagesAdapter Slideadapter;
+
+
+    //FIREBASE CONNECTION
+    private DatabaseReference Slidedatabase;
+    private StorageReference mStorageReference;
+
+    private ProgressDialog mDialog;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+    //--- end of slide
+
+
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid;
     LinearLayout SendTextLinearLayout;
@@ -96,6 +123,9 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     float mAverage = 0;
     Button ftitle2, ftitle3;
     RatingBar ratingBar;
+
+    //transition
+    boolean visible;
 
 
     //Date format - yyyy.MM.dd.HH.mm.ss
@@ -502,6 +532,48 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         });
 */
 
+
+
+  //slide
+        catalogList = new ArrayList<>();
+        final List<slideImagePojo> image = new ArrayList<>();
+
+        /**
+         * PLACES PICTURES IN LISTVIEW
+         */
+        Slidedatabase= FirebaseDatabase.getInstance().getReference().child("slide").child(PlaceName).child("pictures");
+
+        Slidedatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                catalogList.clear();
+                for (DataSnapshot catalogSnapshot : dataSnapshot.getChildren()) {
+
+                    slideImagePojo image1= catalogSnapshot.getValue(slideImagePojo.class);
+
+
+                    image1.setImage(image1.getImage());
+                    image.add(image1);
+                    LinearLayoutManager layoutManager
+                            = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
+                    RecyclerView ListViewCatalog =  findViewById(R.id.recycler_view);
+                    Slideadapter = new ImagesAdapter(PlaceDetailsActivity.this, image);
+//                    Toast.makeText(CatalogActivity.this, ""+catalog.getCatalogtitle(), Toast.LENGTH_SHORT).show();
+                    ListViewCatalog.setLayoutManager(layoutManager);
+
+                    ListViewCatalog.setAdapter(Slideadapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(PlaceDetailsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     public void GoToBook(View view) {
@@ -549,7 +621,19 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         startActivity(intent);
     }
 
+
+
     public void readMore (View view){
+//        final ViewGroup transitionsContainer = (ViewGroup) view.findViewById(R.id.transitions_container);
+//        TextView readMoreDetails = (TextView)findViewById(R.id.readMoreDetails);
+//        TransitionSet set = new TransitionSet()
+//                .addTransition(new Scale(0.7f))
+//                .addTransition(new Fade())
+//                .setInterpolator(visible ? new LinearOutSlowInInterpolator() :
+//                        new FastOutLinearInInterpolator());
+//
+//        TransitionManager.beginDelayedTransition(transitionsContainer, set);
+//        readMoreDetails.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
         Intent intent = new Intent(this,Read_more.class);
         intent.putExtra("infor", infor);
         startActivity(intent);

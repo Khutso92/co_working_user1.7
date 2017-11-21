@@ -32,10 +32,10 @@ public class ImageActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_images);
+        setContentView(R.layout.activity_place_details);
 
 
-        imageView = (ImageView) findViewById(R.id.image);
+        imageView = (ImageView) findViewById(R.id.ivPlacePic);
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         /*
@@ -48,7 +48,7 @@ public class ImageActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         //Queries Firebase for places endpoint
-        FirebaseDatabase.getInstance().getReference().child("places").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("slide").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
@@ -56,7 +56,7 @@ public class ImageActivity extends AppCompatActivity {
                     if (dataSnapshot.hasChildren()) {
                         System.out.println(dataSnapshot.getChildrenCount());
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            System.out.println(snapshot.child("details").child("cover_photo").getValue());
+                            System.out.println(snapshot.child("slide").child( "").child("pictures").getValue());
 
                             //images.add(snapshot.child("url2").getValue().toString());
                             //images.add(snapshot.child("url3").getValue().toString());
@@ -78,7 +78,7 @@ public class ImageActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("Main ACtivity", "Failed to read value.", error.toException());
+                Log.w("MainActivity", "Failed to read value.", error.toException());
             }
         });
 
