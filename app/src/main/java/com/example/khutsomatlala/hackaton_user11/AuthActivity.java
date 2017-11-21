@@ -1,5 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AuthActivity extends AppCompatActivity {
+public class AuthActivity extends Activity {
 
     private FirebaseAuth mAuth;
 

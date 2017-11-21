@@ -384,7 +384,6 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
 
                                         mCheckSpaceReference.child("11:00").updateChildren(postValues);
                                         // mCheckSpaceReference.child("12:00").removeValue();
-
                                     }
 
                                     //Making a booking
@@ -400,6 +399,9 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
                                             mbookingReference.child(key).setValue(bookings);
 
                                             Toast.makeText(Time_picker.this, "Successfully booked", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(Time_picker.this,MainActivity.class);
+                                            startActivity(intent);
                                         }
 
                                         @Override
