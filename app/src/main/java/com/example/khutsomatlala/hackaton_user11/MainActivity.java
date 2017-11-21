@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressDialog.dismiss();
                 workingSpaces.clear();
+
                 //Fectching information from database
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     WorkingSpace workingSpace = new WorkingSpace();
@@ -94,7 +95,6 @@ public class MainActivity extends Activity {
                         features.add(feature);
                     }
                     workingSpace.setFeatures(features);
-
                     workingSpaces.add(workingSpace);
                 }
                 adapter.notifyDataSetChanged();

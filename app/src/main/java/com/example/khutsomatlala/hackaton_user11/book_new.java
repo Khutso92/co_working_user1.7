@@ -1,16 +1,12 @@
 package com.example.khutsomatlala.hackaton_user11;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,33 +34,21 @@ import java.util.Locale;
 public class book_new extends AppCompatActivity {
 
 
-    //time and date memebers
-
-    private int mHoursIn, mHoursOut, mMinsOut, mMinsIn, mDay, mMonth, mYear, mDiffMins;
-
     private float mTotal = 0;
 
-    String duration;
 
     Boolean TimeIn = false, TimeOut = false, dateEntered = false, one = false, more = false;
 
-    String pic, name, pricee, mTimeIn, mTimeOut, mDate, mEmail, mUsername;
+    String pic, name, pricee, mEmail, mUsername;
 
 
-    TextView placeName, mPrice, tv_date, txtTotalPrice;
+    TextView placeName, mPrice;
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
 
     //Time and date picker
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
 
     Calendar dateTime = Calendar.getInstance();
-
-    private TextView text;
-
-    private TextView textout;
-
-    private Button btn_date, btn_time, btn_time_out;
-
 
     //Number of people
     RadioButton MorePeople, onePerson;
@@ -80,11 +63,8 @@ public class book_new extends AppCompatActivity {
     int minute;
     int second;
 
-    boolean btnTimein = false, btnTimeOut = true;
-    Dialog dialog;
-    int minteger = 0;
 
-
+    String in_hour, out_hour;
 
     String month, year, day, date;
     //Calendar
@@ -112,16 +92,10 @@ public class book_new extends AppCompatActivity {
         mEmail = i.getStringExtra("email");
         mUsername = i.getStringExtra("mUsername");
         user_uid = i.getStringExtra("user_uid");
-
-
-
+        in_hour = i.getStringExtra("hourIn");
+        out_hour = i.getStringExtra("hourOut");
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
-        txtTotalPrice = (TextView) findViewById(R.id.txtTotalPrice);
-        MorePeople = (RadioButton) findViewById(R.id.rb_MorePeople);
-        onePerson = (RadioButton) findViewById(R.id.rb_onePerson);
-        radioGroup = (RadioGroup) findViewById(R.id.RadioGroup);
-        PeopleNumber = (EditText) findViewById(R.id.edtPeopleNumber);
 
 
         //Get a new instance of Calendar
@@ -141,9 +115,6 @@ public class book_new extends AppCompatActivity {
         compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
 
-        Event ev1 = new Event(Color.RED, 1510305111000l, "Personal date");
-        compactCalendarView.addEvent(ev1);
-
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
@@ -160,6 +131,9 @@ public class book_new extends AppCompatActivity {
 
                 i.putExtra("placeName", name);
                 i.putExtra("date", date);
+                i.putExtra("price", pricee);
+
+                Toast.makeText(book_new.this, "" + date, Toast.LENGTH_SHORT).show();
                 startActivity(i);
             }
 
@@ -175,54 +149,8 @@ public class book_new extends AppCompatActivity {
     }
 
 
-    public void email(View view) {
-
-        mbookingReference = mFirebaseDatabase.getReference().child("bookings").child(name);
-
-        mbookingReference.child(name).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Bookings bookings = new Bookings("names", "2", "07:00", "08:00", "14 - 11-17");
-
-                String key = mbookingReference.push().getKey();
-
-                mbookingReference.child(key).setValue(bookings);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
-
-    }
-
-
-
-
-
-    public void increase(View view) {
-
-        minteger = minteger + 1;
-        display(minteger);
-
-    }public void decrease(View view) {
-
-        if (minteger > 0) {
-            minteger = minteger - 1;
-            display(minteger);
-        }
-    }
-
-    private void display(int number) {
-        TextView displayInteger = (TextView) findViewById(
-                R.id.tvNoOfPpl);
-        displayInteger.setText("" + number);
-    }
 
 }
 

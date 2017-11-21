@@ -227,7 +227,9 @@ public class ReviewActivity extends Activity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        // mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(RateNumber);
+                        //mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(RateNumber);
+                         mRateDatabaseReference.child("Rating").child(PlaceName).child("Khutso").setValue(RateNumber);
+
                     }
 
                     @Override
