@@ -69,6 +69,7 @@ public class Auth_login extends AppCompatActivity {
 
     }
 
+
     private boolean validateForm() {
         boolean valid = true;
 

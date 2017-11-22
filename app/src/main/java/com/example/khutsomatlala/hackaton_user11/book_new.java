@@ -191,7 +191,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice), date);
+                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn ), Integer.toString(hourIn), Integer.toString(hourOut), date , Integer.toString(personNumber), Integer.toString(totalPrice) );
 
                                         String key = mbookingReference.push().getKey();
 
