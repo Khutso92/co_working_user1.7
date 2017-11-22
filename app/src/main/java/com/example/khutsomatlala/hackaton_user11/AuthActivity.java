@@ -215,7 +215,7 @@ public class AuthActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                          Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(AuthActivity.this, "auth_failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AuthActivity.this, "email or password incorrect", Toast.LENGTH_SHORT).show();
                         } else {
                             startActivity(new Intent(getApplicationContext(), Splash.class));
                         }
