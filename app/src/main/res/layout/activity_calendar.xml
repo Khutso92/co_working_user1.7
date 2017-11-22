@@ -15,7 +15,7 @@
         app:compactCalendarTextSize="12sp" />
 
 
-    <LinearLayout
+<!--    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -134,7 +134,7 @@
             android:layout_marginTop="350dp"
             android:onClick="decrease"
             android:text="-"
-            android:textColor="#fff"
+            android:textColor="###"
             android:background="@drawable/roundedbutton"/>
 
         <TextView
@@ -184,7 +184,7 @@
         android:onClick="validateTime"
         android:text="book"
         android:textColor="#fff"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
 
 
 

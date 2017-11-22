@@ -151,8 +151,9 @@ public class ReviewActivity extends Activity {
             @Override
             public void onClick(View view) {
                 mComments.clear();
+
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(),  ANONYMOUS);
 
                 String key = mCommentsDatabaseReference.push().getKey();
 
