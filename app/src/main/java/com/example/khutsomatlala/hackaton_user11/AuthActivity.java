@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,7 +62,7 @@ public class AuthActivity extends Activity {
         }
 
 
-        signIn.setOnClickListener(new View.OnClickListener() {
+       /* signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String getEmail = email.getText().toString().trim();
@@ -77,7 +76,7 @@ public class AuthActivity extends Activity {
                     callSignIn(getEmail, getPassword);
                 }
             }
-        });
+        });*/
 
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -150,35 +149,14 @@ public class AuthActivity extends Activity {
            getCell = cell.getText().toString().trim();
 
 
-        if (TextUtils.isEmpty(getEmail)) {
-            email.setError("Email Required.");
-            valid = false;
-        }
-          if (TextUtils.isEmpty(getPassword)) {
-            password.setError("Password  Required");
-        }
 
-        if (TextUtils.isEmpty(getname)) {
-            name.setError(" Name Required.");
-            valid = false;
-        }
-
-        if (TextUtils.isEmpty(getSurname)) {
-            surname.setError(" Surname Required.");
-            valid = false;
-        }
-
-        if (TextUtils.isEmpty(getCell)) {
-            cell.setError(" Cell Required.");
-            valid = false;
-        }
 
 
         return valid;
     }
 
     //
-    private boolean validateSign() {
+  /*  private boolean validateSign() {
         boolean valid = true;
 
         String getEmail    = email.getText().toString().trim();
@@ -196,7 +174,7 @@ public class AuthActivity extends Activity {
 
 
         return valid;
-    }
+    }*/
 
     //Now start sign in process
 
@@ -215,7 +193,7 @@ public class AuthActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                          Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(AuthActivity.this, "email or password incorrect", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AuthActivity.this, "email or password do not match", Toast.LENGTH_SHORT).show();
                         } else {
                             startActivity(new Intent(getApplicationContext(), Splash.class));
                         }
