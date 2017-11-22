@@ -6,16 +6,6 @@
     android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/Availability"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="#0E3047"
-        android:onClick="CheckAvailability"
-        android:text="Check Availability"
-        android:textColor="#fff" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,16 +13,7 @@
         android:background="@drawable/square"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/time_in"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="time in"
-            android:textAllCaps="false"
-            android:visibility="gone"
-            tools:ignore="OnClick" />
+
 
         <Spinner
             android:id="@+id/spinnerTimeIn"
@@ -55,16 +36,6 @@
             android:layout_weight="1"
             android:autofillHints="sssss"></Spinner>
 
-        <Button
-            android:id="@+id/time_out"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:text="time out"
-            android:textAllCaps="false"
-            android:visibility="gone"
-            tools:ignore="OnClick" />
 
     </LinearLayout>
 
@@ -91,6 +62,7 @@
             android:textColor="#3A69D3 "
             android:textSize="20dp"
             tools:text="time out" />
+
     </LinearLayout>
 
     <ScrollView
@@ -107,49 +79,7 @@
     </ScrollView>
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="No of people"
-            android:textColor="#0E3047"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btn_neg"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:background="#0E3047"
-            android:onClick="decrease"
-            android:text="-"
-            android:textColor="#fff" />
-
-        <TextView
-            android:id="@+id/tvNoOfPpl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="0"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/btn_pos"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:background="#0E3047"
-            android:onClick="increase"
-            android:text="+"
-            android:textColor="#fff" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/quotation"

@@ -127,7 +127,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     //transition
     boolean visible;
 
-
     //Date format - yyyy.MM.dd.HH.mm.ss
     String dayStamp = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
     String timeStamp = new SimpleDateFormat("HH.mm").format(new Date());

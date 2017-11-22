@@ -28,23 +28,22 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
     private static Button timeIn, timeout, btnok;
     private static TextView tvin, tvout;
 
-    int minteger = 0;
 
-    String[] TimeIn = {"time in ", "1:00", "2:00", "3:00", "4:00", "5:00",
+
+    String[] TimeIn = {"1:00", "2:00", "3:00", "4:00", "5:00",
             "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00",
             "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
-            "22:00", "23:00", "00:00"};
+            "22:00", "23:00"  };
 
-
-    String[] TimeOut = {"time out ", "1:00", "2:00", "3:00", "4:00", "5:00",
+    String[] TimeOut = {"1:00", "2:00", "3:00", "4:00", "5:00",
             "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00",
             "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
-            "22:00", "23:00", "00:00"};
+            "22:00", "23:00"};
 
     int hourIn, hourOut, personNumber, totalPrice;
 
     //Number of user in space
-    String CurrentNumber_11;
+    String   open_time, close_time;
 
     //Time for a space
     String time_11;
@@ -54,10 +53,9 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
     String times = "available time bookings \n\n";
     TextView dataShap, txtTotalPrice;
 
-    private DatabaseReference mbookingReference;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCheckSpaceReference;
+    private DatabaseReference mCheckSpaceReference, mbookingReference  ;
 
     Spinner spinnerTimeIn, spinnerTimeOut;
     Button book, add, subtract;
@@ -67,13 +65,13 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_picker);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         //Get the widgets reference from XML layout
         tvin = (TextView) findViewById(R.id.tvIn);
         tvout = (TextView) findViewById(R.id.tvOut);
         TimePicker tp = (TimePicker) findViewById(R.id.tp);
-        timeIn = (Button) findViewById(R.id.time_in);
-        timeout = (Button) findViewById(R.id.time_out);
+
         btnok = (Button) findViewById(R.id.btnOk);
 
         book = (Button) findViewById(R.id.btn_book);
@@ -102,72 +100,11 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
         date = i.getStringExtra("date");
         price = i.getStringExtra("price");
 
-        spinnerTimeIn.setEnabled(false);
-        spinnerTimeOut.setEnabled(false);
-        book.setEnabled(false);
-        add.setEnabled(false);
-        subtract.setEnabled(false);
 
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
     }
 
 
-    //check availability from places node
-    public void CheckAvailability(View view) {
 
-        dataShap.setText("");
-        times = "available time bookings \n\n";
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-
-        try {
-            mCheckSpaceReference = mFirebaseDatabase.getReference().child("working_hours").child(name).child(date);
-
-            mCheckSpaceReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                    if (dataSnapshot.hasChildren()) {
-
-                        //11:00 am
-                        CurrentNumber_11 = dataSnapshot.child("11:00").child("CurrentNumber").getValue().toString();
-                        time_11 = dataSnapshot.child("11:00").child("MaxSpace").getValue().toString();
-
-
-                        if (Integer.parseInt(CurrentNumber_11) <= Integer.parseInt(time_11)) {
-                            times = times + "11:00   \n";
-
-                        }
-
-                        dataShap.setText(times + "\n" + dataSnapshot.getChildrenCount());
-
-                        // if time is available for booking
-                        spinnerTimeIn.setEnabled(true);
-                        spinnerTimeOut.setEnabled(true);
-                        add.setEnabled(true);
-                        subtract.setEnabled(true);
-
-
-                    } else {
-
-                        dataShap.setText("Dates not yet allocated, please select another space ");
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        } catch (Exception e) {
-
-            Toast.makeText(this, "Something went wrong with the database", Toast.LENGTH_SHORT).show();
-
-            dataShap.setText("Please restart the application ");
-        }
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -248,10 +185,7 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
                     break;
                 case "23:00":
                     hourIn = 23;
-                    break;
-                case "00:00":
-                    hourIn = 12;
-                    break;
+
             }
 
             dataShap.setText(hourIn + "");
@@ -331,10 +265,7 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
                     break;
                 case "23:00":
                     hourOut = 23;
-                    break;
-                case "00:00":
-                    hourOut = 12;
-                    break;
+
             }
 
 
@@ -349,7 +280,8 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
-
+    //TODo  old booking
+/*
     public void validateTime(View view) {
 
         if ((hourIn < hourOut)) {
@@ -400,7 +332,7 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
 
                                             Toast.makeText(Time_picker.this, "Successfully booked", Toast.LENGTH_SHORT).show();
 
-                                            Intent intent = new Intent(Time_picker.this,MainActivity.class);
+                                            Intent intent = new Intent(Time_picker.this, MainActivity.class);
                                             startActivity(intent);
                                         }
 
@@ -441,41 +373,9 @@ public class Time_picker extends AppCompatActivity implements AdapterView.OnItem
             dataShap.setText("invalid time,Time in must be lesser than time out");
         }
 
-    }
+    }*/
 
-    public void increase(View view) {
 
-        minteger = minteger + 1;
-        display(minteger);
-
-    }
-
-    public void decrease(View view) {
-
-        if (minteger > 0) {
-            minteger = minteger - 1;
-            display(minteger);
-        }
-    }
-
-    private void display(int number) {
-        TextView displayInteger = (TextView) findViewById(R.id.tvNoOfPpl);
-        displayInteger.setText("" + number);
-
-        personNumber = number;
-
-        try {
-            //txtTotalPrice.setText("R"+number * Integer.parseInt( ""+price));
-
-            totalPrice = Integer.parseInt("" + price) * number;
-
-            Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-
-            Toast.makeText(this, "Something went wrong ", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 
 }

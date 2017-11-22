@@ -7,8 +7,91 @@
     <include layout="@layout/activity_calendar" />
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/square"
+        android:orientation="horizontal">
 
 
+        <Spinner
+            android:id="@+id/spinnerTimeIn"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:autofillHints="sssss"></Spinner>
+
+
+        <Spinner
+            android:id="@+id/spinnerTimeOut"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:autofillHints="sssss"></Spinner>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="No of people"
+            android:textColor="#0E3047"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_neg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/roundedbutton"
+            android:onClick="decrease"
+            android:text="-"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/tvNoOfPpl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="0"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_pos"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+
+            android:onClick="increase"
+            android:background="@drawable/roundedbutton"
+            android:text="+"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="book"
+        android:text="book" />
 
 </LinearLayout>
 

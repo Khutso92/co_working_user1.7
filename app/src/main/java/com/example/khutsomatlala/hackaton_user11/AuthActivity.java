@@ -88,7 +88,6 @@ public class AuthActivity extends Activity {
 
                 createAccount(getEmail, getPassword);
                 callSignIn(getEmail, getPassword);
-
             }
         });
 
