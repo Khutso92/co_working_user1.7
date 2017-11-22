@@ -3,6 +3,12 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="large_text">
+
+        <string-array name="Time">
+            <item>Time in</item>
+            <item>Time out</item>
+
+        </string-array>
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
