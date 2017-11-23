@@ -47,6 +47,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
     Spinner spinnerTimeIn, spinnerTimeOut;
     Button book, add, subtract;
 
+
+    Date  Cal_date;
     private DatabaseReference mCheckSpaceReference, mbookingReference;
 
     String details = "Booking Details\n\n",Time_in,Time_out,numberofPeople;
@@ -120,9 +122,6 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         txtDateBooked = (TextView) findViewById(R.id.txtDateBooked);
         txtNumberOfppl = (TextView) findViewById(R.id.txtNumberPpl);
 
-
-
-
         spinnerTimeIn = (Spinner) findViewById(R.id.spinnerTimeIn);
         spinnerTimeOut = (Spinner) findViewById(R.id.spinnerTimeOut);
 
@@ -139,10 +138,13 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
         //Calendar
         final Calendar cal = Calendar.getInstance();
+        final SimpleDateFormat dateFormat = new SimpleDateFormat(" MMMM yyyy");
+
 
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(null);
+
+       actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle(  dateFormat.format(cal.getTime() ));
 
         compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
@@ -168,7 +170,11 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
                 actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
 
+
+                Cal_date = firstDayOfNewMonth;
             }
+
+
         });
 
 
