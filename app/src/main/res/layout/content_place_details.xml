@@ -42,7 +42,7 @@
                     android:layout_width="130dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/background_book"
+                    android:background="#196b69"
                     android:fontFamily="sans-serif"
                     android:onClick="GoToBook"
                     android:text="Book now"
@@ -63,6 +63,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtHours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="24hrs"

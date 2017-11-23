@@ -25,16 +25,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Time in" />
+                android:text="Time in"
+                android:layout_marginLeft="26dp"/>
 
 
             <Spinner
                 android:id="@+id/spinnerTimeIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"></Spinner>
 
@@ -52,15 +52,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Time out" />
+
+                android:text="Time out"
+                android:layout_marginLeft="24dp"/>
 
             <Spinner
                 android:id="@+id/spinnerTimeOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:autofillHints="sssss"></Spinner>
@@ -184,7 +185,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="book"
-
+        android:background="#196b69"
+        android:textColor="#fff"
         android:text="book your space" />
 
 </LinearLayout>
