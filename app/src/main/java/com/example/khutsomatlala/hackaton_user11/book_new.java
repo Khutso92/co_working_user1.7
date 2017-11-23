@@ -41,12 +41,14 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
     int hourIn, hourOut, personNumber, totalPrice;
 
-    TextView mPrice;
+    TextView mPrice,txt_detail;
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
     Button book, add, subtract;
 
     private DatabaseReference mCheckSpaceReference, mbookingReference;
+
+    String details = "Details\n\n";
 
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
 
@@ -98,6 +100,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         out_hour = i.getStringExtra("hourOut");
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
+        txt_detail = (TextView) findViewById(R.id.details);
 
 
         //Get a new instance of Calendar
@@ -196,7 +199,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice), date);
+                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn ), Integer.toString(hourIn), Integer.toString(hourOut), date , Integer.toString(personNumber), Integer.toString(totalPrice) );
 
                                         String key = mbookingReference.push().getKey();
 
@@ -422,6 +425,12 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         if (minteger > 0) {
             minteger = minteger - 1;
             display(minteger);
+
+
+        }
+        else
+        {
+            Toast.makeText(this, "cant be less than zero", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -437,6 +446,9 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             totalPrice = Integer.parseInt("" + pricee) * number;
 
             Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
+
+            details = ""+totalPrice;
+            txt_detail.setText(details);
         } catch (Exception e) {
 
             Toast.makeText(this, "Something went wrong ", Toast.LENGTH_SHORT).show();

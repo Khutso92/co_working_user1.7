@@ -11,10 +11,11 @@ public class Bookings {
     public String date_booked;
     public String numberOfPeople;
     public String Price;
-    public String date;
 
 
-    public Bookings(String names, String booked_hours, String start_time, String end_time, String date_booked, String numberOfPeople, String price, String date) {
+
+    public Bookings(String names, String booked_hours, String start_time, String end_time, String date_booked, String numberOfPeople, String price ) {
+
         this.names = names;
         this.booked_hours = booked_hours;
         this.start_time = start_time;
@@ -22,6 +23,6 @@ public class Bookings {
         this.date_booked = date_booked;
         this.numberOfPeople = numberOfPeople;
         Price = price;
-        this.date = date;
+
     }
 }

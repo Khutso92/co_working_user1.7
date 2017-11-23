@@ -5,9 +5,6 @@ import com.google.firebase.database.Exclude;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by mlab on 11/20/2017.
- */
 
 public class CurrentNumber {
 
@@ -17,12 +14,12 @@ public class CurrentNumber {
 
     public CurrentNumber() {
 
+
     }
 
     public CurrentNumber(int CurrentNumber) {
         this.CurrentNumber = CurrentNumber;
     }
-
 
     @Exclude
     public Map<String, Object> toMap() {
