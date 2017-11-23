@@ -7,14 +7,15 @@ package com.example.khutsomatlala.hackaton_user11.model;
 public class userInformation {
 
     public String name;
-    public String surname;
-    public String cell;
 
 
+    public String key;
+    public String email;
 
-    public userInformation(String name, String surname, String cell) {
+
+    public userInformation(String name,   String key ,String email) {
         this.name = name;
-        this.surname = surname;
-        this.cell = cell;
+        this.key = key;
+        this.email = email;
     }
 }

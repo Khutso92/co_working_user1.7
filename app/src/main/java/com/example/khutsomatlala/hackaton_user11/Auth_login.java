@@ -15,18 +15,30 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Auth_login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
     private Button signIn,signUp;
+    String name;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_login);
         mAuth = FirebaseAuth.getInstance();
 
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference( );
 
         email = (EditText) findViewById(R.id.edt_email);
         password = (EditText) findViewById(R.id.edt_password);
@@ -36,9 +48,30 @@ public class Auth_login extends AppCompatActivity {
         //Checks if user is already logged in
         if (mAuth.getCurrentUser() != null) {
 
+            myRef.child("users").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                   key = mAuth.getCurrentUser().getUid();
+
+
+                   name = dataSnapshot.child( key).child("name").getValue().toString();
+
+                  Toast.makeText(Auth_login.this,  "" +  name, Toast.LENGTH_SHORT).show();
+                }
+
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 //            User not logged in
             finish();
-            startActivity(new Intent(getApplicationContext(), Splash.class));
+
+            Intent intent = new Intent(Auth_login.this,Splash.class);
+            intent.putExtra("UserName",name);
         }
 
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +136,6 @@ public class Auth_login extends AppCompatActivity {
         if (TextUtils.isEmpty(getPassword)) {
             password.setError("Password  Required");
         }
-
 
 
         return valid;

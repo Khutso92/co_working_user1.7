@@ -21,8 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AuthActivity extends Activity {
 
     private FirebaseAuth mAuth;
+    FirebaseDatabase database;
 
-    String  getname,getCell,getSurname   ;
+    DatabaseReference myRef;
+    String getname, getCell, getSurname;
 
     private EditText email;
     private EditText password;
@@ -94,7 +96,7 @@ public class AuthActivity extends Activity {
     }
 
 
-    private void createAccount(String email, String password) {
+    private void createAccount(final String email, String password) {
 
         if (!validateForm()) {
 
@@ -111,18 +113,20 @@ public class AuthActivity extends Activity {
                                 // Sign in success, update UI with the signed-in user's information
 
 
-                                Intent i = new Intent(AuthActivity.this,Splash.class);
+                                Intent i = new Intent(AuthActivity.this, Splash.class);
                                 startActivity(i);
 
 
                                 // Write a message to the database
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                DatabaseReference myRef = database.getReference("users");
+                                database = FirebaseDatabase.getInstance();
+                                myRef = database.getReference("users");
 
-                                userInformation userInfor = new userInformation(getname, getSurname, getCell);
 
-                                String key = myRef.push().getKey();
+                                String key = mAuth.getCurrentUser().getUid();
+                                userInformation userInfor = new userInformation(getname, key, email);
+
                                 myRef.child(key).setValue(userInfor);
+
 
                             } else {
 
@@ -141,14 +145,11 @@ public class AuthActivity extends Activity {
     private boolean validateForm() {
         boolean valid = true;
 
-       String getEmail    = email.getText().toString().trim();
-        String   getPassword = password.getText().toString().trim();
-          getname = name.getText().toString().trim();
-          getSurname = surname.getText().toString().trim();
-           getCell = cell.getText().toString().trim();
-
-
-
+        String getEmail = email.getText().toString().trim();
+        String getPassword = password.getText().toString().trim();
+        getname = name.getText().toString().trim();
+        getSurname = surname.getText().toString().trim();
+        getCell = cell.getText().toString().trim();
 
 
         return valid;
@@ -181,7 +182,7 @@ public class AuthActivity extends Activity {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    public static final String TAG ="Auth" ;
+                    public static final String TAG = "Auth";
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -191,19 +192,28 @@ public class AuthActivity extends Activity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                         Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(AuthActivity.this, "email or password do not match", Toast.LENGTH_SHORT).show();
                         } else {
+
+
+
                             startActivity(new Intent(getApplicationContext(), Splash.class));
+
+
                         }
 
                     }
                 });
     }
 
-    public void tvLogin(View view){
-        Intent i = new Intent(AuthActivity.this,Auth_login.class);
+    public void tvLogin(View view) {
+        Intent i = new Intent(AuthActivity.this, Auth_login.class);
         startActivity(i);
     }
+
+
+
+
 
 }
