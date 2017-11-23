@@ -45,7 +45,7 @@ public class ReviewActivity extends Activity {
     private EditText mMessageEditText;
       Button mSendButton ,numberOfUser,numberOfReviews;
       String mUsername;
-      String users;
+      String user_name;
     long reviews;
 
 
@@ -69,8 +69,9 @@ public class ReviewActivity extends Activity {
         mComments = new ArrayList<>();
 
         Intent i = getIntent();
+        user_name = i.getStringExtra("user_name");
         PlaceName = i.getStringExtra("PlaceName");
-        users =i.getStringExtra("number");
+
 
         mUsername = ANONYMOUS;
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -153,7 +154,7 @@ public class ReviewActivity extends Activity {
                 mComments.clear();
 
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(),  ANONYMOUS);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(),  user_name);
 
                 String key = mCommentsDatabaseReference.push().getKey();
 

@@ -8,14 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.PlaceDetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.model.Bookings;
-import com.example.khutsomatlala.hackaton_user11.model.PlaceDetails;
 import com.example.khutsomatlala.hackaton_user11.model.WorkingSpace;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +26,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     private final List<WorkingSpace> mValues;
     private Activity activity;
+
+    private FirebaseAuth mAuth;
+    String  nameofUser;
 
 
     public MyItemRecyclerViewAdapter(List<WorkingSpace> items, Activity activity) {
@@ -64,54 +65,84 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
         // System.out.println(mValues.get(position).getPictures().get(0).getImageUrl());
 
-     //   System.out.print("Name --" + mValues.get(position).getPlaceDetails().getPlaceName());
+        // System.out.print("Name --" + mValues.get(position).getPlaceDetails().getPlaceName());
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(activity, PlaceDetailsActivity.class);
+                FirebaseDatabase database;
+                DatabaseReference myRef;
+                database = FirebaseDatabase.getInstance();
+                myRef = database.getReference( );
 
-                String lat = mValues.get(position).getPlaceDetails().getPlaceLatitude();
-                String lon = mValues.get(position).getPlaceDetails().getPlaceLongitude();
-                String name = mValues.get(position).getPlaceDetails().getPlaceName();
-                String call = mValues.get(position).getPlaceDetails().getPlaceCell();
-                String hours = mValues.get(position).getPlaceDetails().getPlaceHours();
-                String address = mValues.get(position).getPlaceDetails().getPlaceAddress();
-                String infor = mValues.get(position).getPlaceDetails().getPlaceInfo();
-                String pic1 = mValues.get(position).getPictures().get(0).getImageUrl();
-                String email = mValues.get(position).getPlaceDetails().getPlaceWebsite();
+                mAuth = FirebaseAuth.getInstance();
+                String key = mAuth.getCurrentUser().getUid();
 
-                String price = Long.toString(mValues.get(position).getPlaceDetails().getPrice());
+                myRef.child("users").child(key).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String feat1Pic = mValues.get(position).getFeatures().get(0).getImageUrl();
-                String feat2Pic = mValues.get(position).getFeatures().get(1).getImageUrl();
-                String feat3Pic = mValues.get(position).getFeatures().get(2).getImageUrl();
 
-                String feat1Title = mValues.get(position).getFeatures().get(0).getTitle();
-                String feat2Title = mValues.get(position).getFeatures().get(1).getTitle();
-                String feat3Title = mValues.get(position).getFeatures().get(2).getTitle();
+                        String  user_name =   dataSnapshot.child("name").getValue().toString();
 
-                intent.putExtra("lat", lat);
-                intent.putExtra("lon", lon);
-                intent.putExtra("name", name);
-                intent.putExtra("call", call);
-                intent.putExtra("infor", infor);
-                intent.putExtra("hours", hours);
-                intent.putExtra("address", address);
-                intent.putExtra("pic1", pic1);
-                intent.putExtra("price", price);
-                intent.putExtra("email", email);
 
-                // System.out.println("pic 1 - " + pic1);
 
-                intent.putExtra("feat1Pic", feat1Pic);
-                intent.putExtra("feat2Pic", feat2Pic);
-                intent.putExtra("feat3Pic", feat3Pic);
 
-                intent.putExtra("feat1Title", feat1Title);
-                intent.putExtra("feat2Title", feat2Title);
-                intent.putExtra("feat3Title", feat3Title);
-                activity.startActivity(intent);
+                        Intent intent = new Intent(activity, PlaceDetailsActivity.class);
+
+                        String lat = mValues.get(position).getPlaceDetails().getPlaceLatitude();
+                        String lon = mValues.get(position).getPlaceDetails().getPlaceLongitude();
+                        String name = mValues.get(position).getPlaceDetails().getPlaceName();
+                        String call = mValues.get(position).getPlaceDetails().getPlaceCell();
+                        String hours = mValues.get(position).getPlaceDetails().getPlaceHours();
+                        String address = mValues.get(position).getPlaceDetails().getPlaceAddress();
+                        String infor = mValues.get(position).getPlaceDetails().getPlaceInfo();
+                        String pic1 = mValues.get(position).getPictures().get(0).getImageUrl();
+                        String email = mValues.get(position).getPlaceDetails().getPlaceWebsite();
+
+                        String price = Long.toString(mValues.get(position).getPlaceDetails().getPrice());
+
+                        String feat1Pic = mValues.get(position).getFeatures().get(0).getImageUrl();
+                        String feat2Pic = mValues.get(position).getFeatures().get(1).getImageUrl();
+                        String feat3Pic = mValues.get(position).getFeatures().get(2).getImageUrl();
+
+                        String feat1Title = mValues.get(position).getFeatures().get(0).getTitle();
+                        String feat2Title = mValues.get(position).getFeatures().get(1).getTitle();
+                        String feat3Title = mValues.get(position).getFeatures().get(2).getTitle();
+
+                        intent.putExtra("lat", lat);
+                        intent.putExtra("lon", lon);
+                        intent.putExtra("name", name);
+                        intent.putExtra("call", call);
+                        intent.putExtra("infor", infor);
+                        intent.putExtra("hours", hours);
+                        intent.putExtra("address", address);
+                        intent.putExtra("pic1", pic1);
+                        intent.putExtra("price", price);
+                        intent.putExtra("email", email);
+
+                        // System.out.println("pic 1 - " + pic1);
+
+                        intent.putExtra("feat1Pic", feat1Pic);
+                        intent.putExtra("feat2Pic", feat2Pic);
+                        intent.putExtra("feat3Pic", feat3Pic);
+
+                        intent.putExtra("feat1Title", feat1Title);
+                        intent.putExtra("feat2Title", feat2Title);
+                        intent.putExtra("feat3Title", feat3Title);
+
+                        intent.putExtra("user_name",user_name );
+
+                        activity.startActivity(intent);
+                    }
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
 
 

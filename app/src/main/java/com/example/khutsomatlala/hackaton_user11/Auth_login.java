@@ -15,21 +15,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Auth_login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
-    private Button signIn,signUp;
-    String name;
+    private Button signIn, signUp;
+
     FirebaseDatabase database;
     DatabaseReference myRef;
-    String key;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,40 +35,21 @@ public class Auth_login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference( );
+        myRef = database.getReference();
 
         email = (EditText) findViewById(R.id.edt_email);
         password = (EditText) findViewById(R.id.edt_password);
         signIn = (Button) findViewById(R.id.btn_sign_in);
         signUp = (Button) findViewById(R.id.btn_sign_up);
 
+
         //Checks if user is already logged in
         if (mAuth.getCurrentUser() != null) {
 
-            myRef.child("users").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                   key = mAuth.getCurrentUser().getUid();
-
-
-                   name = dataSnapshot.child( key).child("name").getValue().toString();
-
-                  Toast.makeText(Auth_login.this,  "" +  name, Toast.LENGTH_SHORT).show();
-                }
-
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
 
 //            User not logged in
             finish();
-
-            Intent intent = new Intent(Auth_login.this,Splash.class);
-            intent.putExtra("UserName",name);
+            startActivity(new Intent(getApplicationContext(), Splash.class));
         }
 
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +71,8 @@ public class Auth_login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               Intent i = new Intent(Auth_login.this,AuthActivity.class);
-               startActivity(i);
+                Intent i = new Intent(Auth_login.this, AuthActivity.class);
+                startActivity(i);
 
             }
         });
@@ -106,9 +84,8 @@ public class Auth_login extends AppCompatActivity {
     private boolean validateForm() {
         boolean valid = true;
 
-        String getEmail    = email.getText().toString().trim();
-        String   getPassword = password.getText().toString().trim();
-
+        String getEmail = email.getText().toString().trim();
+        String getPassword = password.getText().toString().trim();
 
 
         if (TextUtils.isEmpty(getEmail)) {
@@ -125,8 +102,8 @@ public class Auth_login extends AppCompatActivity {
     private boolean validateSign() {
         boolean valid = true;
 
-        String getEmail    = email.getText().toString().trim();
-        String   getPassword = password.getText().toString().trim();
+        String getEmail = email.getText().toString().trim();
+        String getPassword = password.getText().toString().trim();
 
 
         if (TextUtils.isEmpty(getEmail)) {
@@ -145,7 +122,7 @@ public class Auth_login extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    public static final String TAG ="Auth" ;
+                    public static final String TAG = "Auth";
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

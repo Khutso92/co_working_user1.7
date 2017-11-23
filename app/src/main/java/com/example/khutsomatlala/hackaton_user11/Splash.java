@@ -12,9 +12,7 @@ public class Splash extends Activity {
     private TextView tv;
     private ImageView iv;
 
-    Intent i = getIntent();
 
-    String name = i.getStringExtra("UserName");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class Splash extends Activity {
         iv.startAnimation(myanim);
         final Intent i = new Intent(this, MainActivity.class);
 
-        i.putExtra("UserName", name);
+
 
         Thread timer = new Thread() {
             public void run() {

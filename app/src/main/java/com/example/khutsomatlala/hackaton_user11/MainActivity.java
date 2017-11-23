@@ -2,7 +2,6 @@ package com.example.khutsomatlala.hackaton_user11;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
@@ -31,11 +30,10 @@ public class MainActivity extends Activity {
     private MyItemRecyclerViewAdapter adapter;
     private ProgressDialog progressDialog;
     public static Boolean stauts = false;
+
     ImageView ivBook;
 
-    Intent i = getIntent();
 
-    String name = i.getStringExtra("UserName");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

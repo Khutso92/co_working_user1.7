@@ -73,7 +73,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
 
-    String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid;
+    String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid,user_name;
     LinearLayout SendTextLinearLayout;
     TextView placeName, placeLocation, txtInformation, ratingDisplayTextView, readAllReviews, txtPrice,txtHours;
 
@@ -152,6 +152,8 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         price = i.getStringExtra("price");
         location = i.getStringExtra("location");
         email = i.getStringExtra("email");
+        user_name = i.getStringExtra("user_name");
+
 
         feat1Title = i.getStringExtra("feat1Title");
         feat2Title = i.getStringExtra("feat2Title");
@@ -160,6 +162,8 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         feat1Pic = i.getStringExtra("feat1Pic");
         feat2Pic = i.getStringExtra("feat2Pic");
         feat3Pic = i.getStringExtra("feat3Pic");
+
+
 
         SendTextLinearLayout = findViewById(R.id.linearLayout);
         placeName = findViewById(R.id.txt_placeName);
@@ -619,7 +623,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
         Intent intent = new Intent(this, ReviewActivity.class);
         intent.putExtra("PlaceName", PlaceName);
-        intent.putExtra("number", NumberofUser);
+        intent.putExtra("user_name", user_name);
         startActivity(intent);
     }
 
