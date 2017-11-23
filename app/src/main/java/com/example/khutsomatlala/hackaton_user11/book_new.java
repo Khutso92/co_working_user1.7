@@ -41,14 +41,15 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
     int hourIn, hourOut, personNumber, totalPrice;
 
-    TextView mPrice,txt_detail;
+    TextView mPrice,   txtPrice,txtTimein,txtTimeOut,txtDateBooked,txtNumberOfppl;
+
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
     Button book, add, subtract;
 
     private DatabaseReference mCheckSpaceReference, mbookingReference;
 
-    String details = "Details\n\n";
+    String details = "Booking Details\n\n",Time_in,Time_out,numberofPeople;
 
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
 
@@ -65,12 +66,12 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
 
 
-    String[] TimeIn = {"time in", "1:00", "2:00", "3:00", "4:00", "5:00",
+    String[] TimeIn = {" 1:00", "2:00", "3:00", "4:00", "5:00",
             "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00",
             "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
             "22:00", "23:00"};
 
-    String[] TimeOut = {"time out", "1:00", "2:00", "3:00", "4:00", "5:00",
+    String[] TimeOut = {"1:00", "2:00", "3:00", "4:00", "5:00",
             "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00",
             "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
             "22:00", "23:00"};
@@ -100,7 +101,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         out_hour = i.getStringExtra("hourOut");
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
-        txt_detail = (TextView) findViewById(R.id.details);
+
+        txtPrice = (TextView) findViewById(R.id.txtPrice);
 
 
         //Get a new instance of Calendar
@@ -112,6 +114,14 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         book = (Button) findViewById(R.id.btn_book);
         add = (Button) findViewById(R.id.btn_pos);
         subtract = (Button) findViewById(R.id.btn_neg);
+
+        txtTimein = (TextView) findViewById(R.id.txtTimein);
+        txtTimeOut = (TextView) findViewById(R.id.txtTimeout);
+        txtDateBooked = (TextView) findViewById(R.id.txtDateBooked);
+        txtNumberOfppl = (TextView) findViewById(R.id.txtNumberPpl);
+
+
+
 
         spinnerTimeIn = (Spinner) findViewById(R.id.spinnerTimeIn);
         spinnerTimeOut = (Spinner) findViewById(R.id.spinnerTimeOut);
@@ -199,10 +209,13 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn ), Integer.toString(hourIn), Integer.toString(hourOut), date , Integer.toString(personNumber), Integer.toString(totalPrice) );
+                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice));
 
                                         String key = mbookingReference.push().getKey();
 
+
+                                        Time_in = Integer.toString( hourIn);
+                                        Time_out = Integer.toString( hourOut);
 
                                         if (bookBlocker == 0) {
                                             mbookingReference.child(key).setValue(bookings);
@@ -219,16 +232,16 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                                     }
                                 });
                             } else {
-                                Toast.makeText(book_new.this, "invalid time,Time in must be lesser than time out", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(book_new.this, "Time in must be lesser than time out", Toast.LENGTH_SHORT).show();
 
                             }
                         } else {
-                            Toast.makeText(book_new.this, " out of bound ,time out \n choose before " + close_time, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(book_new.this, name +" closed at " + close_time+":00", Toast.LENGTH_SHORT).show();
                         }
 
 
                     } else {
-                        Toast.makeText(book_new.this, " invalid time in,", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(book_new.this, name +" opens at - "+ open_time + ":00" , Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -334,7 +347,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         if (itemOut == TimeOut[position].toString()) {
 
             switch (itemOut) {
-                case "1:00":
+                case "1:00 ":
                     hourOut = 1;
                     break;
                 case "2:00":
@@ -427,9 +440,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             display(minteger);
 
 
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "cant be less than zero", Toast.LENGTH_SHORT).show();
         }
     }
@@ -439,6 +450,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         displayInteger.setText("" + number);
 
         personNumber = number;
+        numberofPeople = Integer.toString(personNumber);
 
         try {
             //txtTotalPrice.setText("R"+number * Integer.parseInt( ""+price));
@@ -447,8 +459,11 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
             Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
 
-            details = ""+totalPrice;
-            txt_detail.setText(details);
+            txtTimein.setText("Time in - " + hourIn +":00");
+            txtTimeOut.setText("Time out - " + hourOut +":00");
+            txtDateBooked.setText("Date booked - "+ date );
+            txtNumberOfppl.setText("Number of people - "+  numberofPeople );
+            txtPrice.setText("R" + totalPrice);
         } catch (Exception e) {
 
             Toast.makeText(this, "Something went wrong ", Toast.LENGTH_SHORT).show();
@@ -474,8 +489,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             case R.id.about:
                 mAuth.signOut();
 
-            Intent i = new Intent(book_new.this,Auth_login.class);
-            startActivity(i);
+                Intent i = new Intent(book_new.this, Auth_login.class);
+                startActivity(i);
 
         }
         return true;

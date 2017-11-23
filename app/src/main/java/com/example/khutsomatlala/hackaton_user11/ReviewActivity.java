@@ -84,7 +84,7 @@ public class ReviewActivity extends Activity {
         numberOfReviews = (Button)findViewById(R.id.reviews);
         numberOfUser = (Button)findViewById(R.id.NumberUsers);
 
-        numberOfUser.setText(""+users);
+      //  numberOfUser.setText(""+users);
 
 
         // Initialize message ListView and its adapter
