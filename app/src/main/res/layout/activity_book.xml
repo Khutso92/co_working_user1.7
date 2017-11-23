@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="4dp"
+    android:background="@drawable/rect_draw"
     android:orientation="vertical">
-
 
 
     <include layout="@layout/activity_calendar" />
@@ -42,18 +43,19 @@
     </LinearLayout>
 
 
-
     <LinearLayout
-        android:layout_width="wrap_content"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="24dp"
             android:text="No of people"
             android:textColor="#0E3047"
             android:textSize="16sp" />
@@ -81,19 +83,28 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
-
-            android:onClick="increase"
             android:background="@drawable/roundedbutton"
+            android:onClick="increase"
             android:text="+"
             android:textColor="#fff" />
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rect_draw"
+        android:text="Details for the book" />
+
     <Button
         android:id="@+id/btn_book"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:onClick="book"
-        android:text="book" />
+        android:text="book your space" />
 
 </LinearLayout>
 
