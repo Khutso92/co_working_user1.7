@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +37,7 @@ import java.util.Locale;
  */
 
 public class book_new extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private FirebaseAuth mAuth;
 
     int hourIn, hourOut, personNumber, totalPrice;
 
@@ -438,5 +443,33 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         }
 
     }
+
+    //Log out menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        mAuth = FirebaseAuth.getInstance();
+
+
+        //respond to menu item selection
+
+        switch (item.getItemId()) {
+            case R.id.about:
+                mAuth.signOut();
+
+            Intent i = new Intent(book_new.this,Auth_login.class);
+            startActivity(i);
+
+        }
+        return true;
+
+    }
+
+
 }
 
