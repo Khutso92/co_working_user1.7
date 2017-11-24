@@ -11,7 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2">
+        >
+
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -20,39 +22,12 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/blackchat" />
-
-            <Button
-                android:id="@+id/reviews"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@android:color/transparent"
-                android:text="0" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/people" />
-
-            <Button
-                android:id="@+id/NumberUsers"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@android:color/transparent"
-                android:text="0" />
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_height="match_parent"
+                android:text="REVIEWS"/>
 
 
         </LinearLayout>

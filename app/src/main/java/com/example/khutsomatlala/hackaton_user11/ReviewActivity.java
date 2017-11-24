@@ -88,8 +88,6 @@ public class ReviewActivity extends Activity {
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
 
-        numberOfReviews = (Button) findViewById(R.id.reviews);
-        numberOfUser = (Button) findViewById(R.id.NumberUsers);
 
         //  numberOfUser.setText(""+users);
 
@@ -150,7 +148,6 @@ public class ReviewActivity extends Activity {
             }
         });
 
-
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
 
         // Send button sends a message and clears the EditText
@@ -189,7 +186,7 @@ public class ReviewActivity extends Activity {
 
                     reviews = dataSnapshot.getChildrenCount();
 
-                    numberOfReviews.setText("" + reviews);
+
 
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
