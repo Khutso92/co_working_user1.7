@@ -15,64 +15,19 @@
  */
 package com.example.khutsomatlala.hackaton_user11;
 
-import java.security.PrivateKey;
-import java.util.Date;
-
 public class FriendlyMessage {
 
     private String text;
     private String name;
-    private int RateNumber;
-
-    public int getRateNumber() {
-        return RateNumber;
-    }
-
-    public void setRateNumber(int rateNumber) {
-        RateNumber = rateNumber;
-    }
-
-    public void setMessageTime(long messageTime) {
-        this.messageTime = messageTime;
-    }
-
-    private long messageTime;
-
-//    //Like
-//    private String like;
-//    private int num;
-//
-//
-//    public int getNum() {
-//        return num;
-//    }
-//
-//    public void setNum(int num) {
-//        this.num = num;
-//    }
-//
-//    public String getLike() {
-//        return like;
-//    }
-//
-//    public void setLike(String like) {
-//        this.like = like;
-//    }
+    private     String messageTime;
 
     public FriendlyMessage() {
     }
 
-
-
-    public FriendlyMessage(int RateNumber) {
-
-        this.RateNumber = RateNumber;
-    }
-
-    public FriendlyMessage(String text, String name ) {
+    public FriendlyMessage(String text, String name, String messageTime) {
         this.text = text;
         this.name = name;
-
+        this.messageTime = messageTime;
     }
 
     public String getText() {
@@ -91,7 +46,7 @@ public class FriendlyMessage {
         this.name = name;
     }
 
-    public long getMessageTime() {
+    public String getMessageTime() {
         return messageTime;
     }
 

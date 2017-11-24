@@ -321,7 +321,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             public void onClick(View view) {
                 mComments.clear();
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername ,"time");
 
                 String key = mCommentsDatabaseReference.push().getKey();
 

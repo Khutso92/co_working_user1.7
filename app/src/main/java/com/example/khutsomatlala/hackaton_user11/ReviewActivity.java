@@ -24,13 +24,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ReviewActivity extends Activity {
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCommentsDatabaseReference,mRateDatabaseReference;
-    private String  rateMessage;
+    private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference;
+    private String rateMessage;
     EditText message;
     String PlaceName;
     List<FriendlyMessage> mComments;
@@ -43,10 +45,13 @@ public class ReviewActivity extends Activity {
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private EditText mMessageEditText;
-      Button mSendButton ,numberOfUser,numberOfReviews;
-      String mUsername;
-      String user_name;
+    Button mSendButton, numberOfUser, numberOfReviews;
+    String mUsername;
+    String user_name;
     long reviews;
+
+
+    int minute, hour;
 
 
     //rating
@@ -60,6 +65,7 @@ public class ReviewActivity extends Activity {
     TextView ratingDisplayTextView;
     int RateNumber;
     String NumberofUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +88,10 @@ public class ReviewActivity extends Activity {
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
 
-        numberOfReviews = (Button)findViewById(R.id.reviews);
-        numberOfUser = (Button)findViewById(R.id.NumberUsers);
+        numberOfReviews = (Button) findViewById(R.id.reviews);
+        numberOfUser = (Button) findViewById(R.id.NumberUsers);
 
-      //  numberOfUser.setText(""+users);
+        //  numberOfUser.setText(""+users);
 
 
         // Initialize message ListView and its adapter
@@ -153,8 +159,14 @@ public class ReviewActivity extends Activity {
             public void onClick(View view) {
                 mComments.clear();
 
+                GregorianCalendar date = new GregorianCalendar();
+                minute = date.get(Calendar.MINUTE);
+                hour = date.get(Calendar.HOUR);
+
+
+
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(),  user_name);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name,  hour+":"+minute);
 
                 String key = mCommentsDatabaseReference.push().getKey();
 
@@ -177,7 +189,7 @@ public class ReviewActivity extends Activity {
 
                     reviews = dataSnapshot.getChildrenCount();
 
-                    numberOfReviews.setText( ""+ reviews);
+                    numberOfReviews.setText("" + reviews);
 
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
@@ -230,7 +242,7 @@ public class ReviewActivity extends Activity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         //mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(RateNumber);
-                         mRateDatabaseReference.child("Rating").child(PlaceName).child("Khutso").setValue(RateNumber);
+                        mRateDatabaseReference.child("Rating").child(PlaceName).child("Khutso").setValue(RateNumber);
 
                     }
 
@@ -279,7 +291,6 @@ public class ReviewActivity extends Activity {
             }
 
         });
-
 
 
     }
