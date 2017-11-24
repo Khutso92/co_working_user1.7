@@ -239,7 +239,7 @@
             android:layout_marginRight="16dp"
             android:gravity="center"
             android:onClick="GoToReview"
-            android:text="Read all 417 reviews" />
+            android:text="Read  reviews" />
 
     </LinearLayout>
 

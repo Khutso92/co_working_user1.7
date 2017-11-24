@@ -87,8 +87,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         String  user_name =   dataSnapshot.child("name").getValue().toString();
 
 
-
-
                         Intent intent = new Intent(activity, PlaceDetailsActivity.class);
 
                         String lat = mValues.get(position).getPlaceDetails().getPlaceLatitude();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class AuthActivity extends Activity {
     FirebaseDatabase database;
 
     DatabaseReference myRef;
-    String getname, getCell, getSurname;
+    String getname,     getEmail, getPassword;
 
     private EditText email;
     private EditText password;
@@ -98,8 +99,7 @@ public class AuthActivity extends Activity {
 
     private void createAccount(final String email, String password) {
 
-        if (!validateForm()) {
-
+        if (!validateFormSignUp()) {
 
             return;
         } else {
@@ -112,7 +112,7 @@ public class AuthActivity extends Activity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
 
-
+                                finish();
                                 Intent i = new Intent(AuthActivity.this, Splash.class);
                                 startActivity(i);
 
@@ -142,21 +142,33 @@ public class AuthActivity extends Activity {
     }
 
     //
-    private boolean validateForm() {
+    private boolean validateFormSignUp() {
         boolean valid = true;
 
-        String getEmail = email.getText().toString().trim();
-        String getPassword = password.getText().toString().trim();
+          getEmail = email.getText().toString().trim();
+          getPassword = password.getText().toString().trim();
         getname = name.getText().toString().trim();
-        getSurname = surname.getText().toString().trim();
-        getCell = cell.getText().toString().trim();
+
+
+        if (TextUtils.isEmpty(getEmail)) {
+            email.setError("Email Required.");
+            valid = false;
+        }
+
+        if (TextUtils.isEmpty(getPassword)) {
+            password.setError("Password  Required");
+        }
+
+        if (TextUtils.isEmpty(getname)) {
+            name.setError(" name  Required");
+        }
 
 
         return valid;
     }
 
-    //
-  /*  private boolean validateSign() {
+
+    private boolean validateSignIn() {
         boolean valid = true;
 
         String getEmail    = email.getText().toString().trim();
@@ -174,39 +186,44 @@ public class AuthActivity extends Activity {
 
 
         return valid;
-    }*/
+    }
 
     //Now start sign in process
 
     public void callSignIn(String email, String password) {
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    public static final String TAG = "Auth";
 
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+        if (!validateSignIn()) {
+
+            return;
+        } else {
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        public static final String TAG = "Auth";
+
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 //                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(AuthActivity.this, "email or password do not match", Toast.LENGTH_SHORT).show();
-                        } else {
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG, "signInWithEmail:failed", task.getException());
+                                Toast.makeText(AuthActivity.this, "email or password do not match", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), Splash.class));
 
 
-
-                            startActivity(new Intent(getApplicationContext(), Splash.class));
-
+                            }
 
                         }
-
-                    }
-                });
+                    });
+        }
     }
-
     public void tvLogin(View view) {
         Intent i = new Intent(AuthActivity.this, Auth_login.class);
         startActivity(i);

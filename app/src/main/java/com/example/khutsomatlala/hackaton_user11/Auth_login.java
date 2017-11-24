@@ -1,9 +1,9 @@
 package com.example.khutsomatlala.hackaton_user11;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Auth_login extends AppCompatActivity {
+public class Auth_login extends Activity {
     private FirebaseAuth mAuth;
-    private EditText email;
+    private EditText email ,name;
     private EditText password;
     private Button signIn, signUp;
 
@@ -41,6 +41,7 @@ public class Auth_login extends AppCompatActivity {
         password = (EditText) findViewById(R.id.edt_password);
         signIn = (Button) findViewById(R.id.btn_sign_in);
         signUp = (Button) findViewById(R.id.btn_sign_up);
+
 
 
         //Checks if user is already logged in
@@ -70,7 +71,7 @@ public class Auth_login extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finish();
                 Intent i = new Intent(Auth_login.this, AuthActivity.class);
                 startActivity(i);
 
@@ -86,7 +87,6 @@ public class Auth_login extends AppCompatActivity {
 
         String getEmail = email.getText().toString().trim();
         String getPassword = password.getText().toString().trim();
-
 
         if (TextUtils.isEmpty(getEmail)) {
             email.setError("Email Required.");
@@ -114,7 +114,6 @@ public class Auth_login extends AppCompatActivity {
             password.setError("Password  Required");
         }
 
-
         return valid;
     }
 
@@ -123,6 +122,7 @@ public class Auth_login extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     public static final String TAG = "Auth";
+
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -135,6 +135,7 @@ public class Auth_login extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(Auth_login.this, "Email or Password incorrect", Toast.LENGTH_SHORT).show();
                         } else {
+                            finish();
                             startActivity(new Intent(getApplicationContext(), Splash.class));
                         }
 

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -161,9 +160,8 @@ public class ReviewActivity extends Activity {
                 hour = date.get(Calendar.HOUR);
 
 
-
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name,  hour+":"+minute);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name, hour + ":" + minute);
 
                 String key = mCommentsDatabaseReference.push().getKey();
 
@@ -186,8 +184,6 @@ public class ReviewActivity extends Activity {
 
                     reviews = dataSnapshot.getChildrenCount();
 
-
-
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
 
@@ -199,7 +195,6 @@ public class ReviewActivity extends Activity {
 
                 //
                 mMessageListView.setAdapter(mMessageAdapter);
-
             }
 
             @Override
@@ -277,7 +272,7 @@ public class ReviewActivity extends Activity {
                     mTotalRating = 0;
 
                 } catch (ArithmeticException e) {
-                    Toast.makeText(ReviewActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(ReviewActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }

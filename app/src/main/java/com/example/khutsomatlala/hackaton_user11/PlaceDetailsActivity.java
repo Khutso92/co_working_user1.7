@@ -347,16 +347,14 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                     reviews = dataSnapshot.getChildrenCount();
 
                     //  ftitle1.setText(reviews + "\nreviews");
-                    readAllReviews.setText("Read all " + reviews + " reviews");
+                    //readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);
-
 
                 }
 
                 //Init adapter
                 mMessageAdapter = new MessageAdapter(PlaceDetailsActivity.this, R.layout.image_item, mComments);
 
-                //
                 mMessageListView.setAdapter(mMessageAdapter);
 
             }
