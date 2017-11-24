@@ -463,7 +463,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
             totalPrice = Integer.parseInt("" + pricee) * number;
 
-            Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
 
             txtTimein.setText("Time in - " + hourIn +":00");
             txtTimeOut.setText("Time out - " + hourOut +":00");

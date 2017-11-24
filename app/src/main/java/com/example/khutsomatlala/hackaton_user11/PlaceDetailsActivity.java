@@ -577,7 +577,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             }
         });
 
-
     }
 
     public void GoToBook(View view) {
