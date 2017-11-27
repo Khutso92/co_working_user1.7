@@ -2,17 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:orientation="vertical">
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/compactcalendar_view"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="180dp"
         android:layout_margin="16dp"
         android:background="@drawable/rect_draw"
-        app:compactCalendarTargetHeight="250dp"
-        app:compactCalendarTextSize="12sp" />
+        app:compactCalendarTargetHeight="200dp"
+        app:compactCalendarTextSize="10sp" />
 
 
 <!--    <LinearLayout
