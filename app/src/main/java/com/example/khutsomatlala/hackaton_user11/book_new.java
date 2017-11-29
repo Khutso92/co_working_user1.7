@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khutsomatlala.Profile;
+import com.example.khutsomatlala.ProfilePojo;
 import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -37,11 +40,17 @@ import java.util.Locale;
  */
 
 public class book_new extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+
+    //Profile adapter
+    DatabaseReference db;
+    Boolean saved;
+    ArrayList<ProfilePojo> profileList = new ArrayList<>();
     private FirebaseAuth mAuth;
 
     int hourIn, hourOut, personNumber, totalPrice;
 
-    TextView mPrice,   txtPrice,txtTimein,txtTimeOut,txtDateBooked,txtNumberOfppl;
+    TextView mPrice,   txtPrice,txtTimein,txtTimeOut,txtDateBooked,txtNumberOfppl, nameOfPerson;
 
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
@@ -61,7 +70,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
     private FirebaseDatabase mFirebaseDatabase;
 
     int hourOfDay, minute, second, minteger = 0, bookBlocker = 0;
-    String in_hour, out_hour, month, year, day, date, user_uid, open_time, close_time, pic, name, pricee, mEmail, mUsername;
+    String in_hour, out_hour, month, year, day, date, user_uid, open_time, close_time, pic, name, pricee, mEmail, mUsername,placeName;
 
     //Calendar
     CompactCalendarView compactCalendarView;
@@ -93,6 +102,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         Intent i = getIntent();
+
         pic = i.getStringExtra("pic");
         name = i.getStringExtra("name");
         pricee = i.getStringExtra("price");
@@ -101,6 +111,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         user_uid = i.getStringExtra("user_uid");
         in_hour = i.getStringExtra("hourIn");
         out_hour = i.getStringExtra("hourOut");
+
+
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
 
@@ -121,6 +133,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         txtTimeOut = (TextView) findViewById(R.id.txtTimeout);
         txtDateBooked = (TextView) findViewById(R.id.txtDateBooked);
         txtNumberOfppl = (TextView) findViewById(R.id.txtNumberPpl);
+        nameOfPerson = findViewById(R.id.nameOfPerson);
 
         spinnerTimeIn = (Spinner) findViewById(R.id.spinnerTimeIn);
         spinnerTimeOut = (Spinner) findViewById(R.id.spinnerTimeOut);
@@ -210,12 +223,12 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
 
                                 //Making a booking
-                                mbookingReference = mFirebaseDatabase.getReference().child("bookings").child(name);
+                                mbookingReference = mFirebaseDatabase.getReference().child("booking").child("user_id").child(user_uid);
                                 mbookingReference.child(name).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Bookings bookings = new Bookings("Kwaja", Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice));
+                                        Bookings bookings = new Bookings(mUsername+"",""+name,Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice));
 
                                         String key = mbookingReference.push().getKey();
 
@@ -230,7 +243,9 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                                         } else {
                                             Toast.makeText(book_new.this, "You have already booked", Toast.LENGTH_SHORT).show();
                                         }
+
                                     }
+
 
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
@@ -262,7 +277,16 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
+
+        Intent intent = new Intent(this, Profile.class);
+        intent.putExtra("user_uid", user_uid);
+        intent.putExtra("mUsername", mUsername);
+
+        startActivity(intent);
+
+
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -464,11 +488,12 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             totalPrice = Integer.parseInt("" + pricee) * number;
 
           //  Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
-
+            nameOfPerson.setText("Name " + mUsername);
             txtTimein.setText("Time in - " + hourIn +":00");
             txtTimeOut.setText("Time out - " + hourOut +":00");
             txtDateBooked.setText("Date booked - "+ date );
             txtNumberOfppl.setText("Number of people - "+  numberofPeople );
+
             txtPrice.setText("R " + totalPrice);
         } catch (Exception e) {
 
@@ -476,6 +501,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         }
 
     }
+
 
     //Log out menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -497,6 +523,20 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
                 Intent i = new Intent(book_new.this, Auth_login.class);
                 startActivity(i);
+
+        }
+
+        switch (item.getItemId()) {
+            case R.id.profile:
+
+
+                Intent intent = new Intent(this, Profile.class);
+                intent.putExtra("user_uid", user_uid);
+                intent.putExtra("mUsername", mUsername);
+                Toast.makeText(this, "" + mUsername, Toast.LENGTH_SHORT).show();
+
+                startActivity(intent);
+
 
         }
         return true;

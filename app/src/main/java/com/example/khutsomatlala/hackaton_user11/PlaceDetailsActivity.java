@@ -586,11 +586,13 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         i.putExtra("name", PlaceName);
         i.putExtra("price", price);
         i.putExtra("email", email);
-        i.putExtra("mUsername", mUsername);
+        i.putExtra("mUsername", user_name);
         i.putExtra("user_uid", uid);
+
 
         startActivity(i);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

@@ -28,7 +28,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private Activity activity;
 
     private FirebaseAuth mAuth;
-    String  nameofUser;
+    String nameofUser;
 
 
     public MyItemRecyclerViewAdapter(List<WorkingSpace> items, Activity activity) {
@@ -74,7 +74,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 FirebaseDatabase database;
                 DatabaseReference myRef;
                 database = FirebaseDatabase.getInstance();
-                myRef = database.getReference( );
+                myRef = database.getReference();
 
                 mAuth = FirebaseAuth.getInstance();
                 String key = mAuth.getCurrentUser().getUid();
@@ -84,7 +84,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                        String  user_name =   dataSnapshot.child("name").getValue().toString();
+                        String user_name = dataSnapshot.child("name").getValue().toString();
 
 
                         Intent intent = new Intent(activity, PlaceDetailsActivity.class);
@@ -130,7 +130,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         intent.putExtra("feat2Title", feat2Title);
                         intent.putExtra("feat3Title", feat3Title);
 
-                        intent.putExtra("user_name",user_name );
+                        intent.putExtra("user_name", user_name);
 
                         activity.startActivity(intent);
                     }
@@ -141,7 +141,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
                     }
                 });
-
 
 
             }
