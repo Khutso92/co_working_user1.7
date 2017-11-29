@@ -141,5 +141,12 @@ public class Auth_login extends Activity {
 
                     }
                 });
+
+
+    }
+
+    public void forgotPassword(View view){
+        Intent i = new Intent(Auth_login.this,Forgot_Password.class);
+        startActivity(i);
     }
 }

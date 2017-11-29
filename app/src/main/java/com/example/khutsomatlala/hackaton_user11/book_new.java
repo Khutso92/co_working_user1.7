@@ -469,7 +469,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             txtTimeOut.setText("Time out - " + hourOut +":00");
             txtDateBooked.setText("Date booked - "+ date );
             txtNumberOfppl.setText("Number of people - "+  numberofPeople );
-            txtPrice.setText("R" + totalPrice);
+            txtPrice.setText("R " + totalPrice);
         } catch (Exception e) {
 
             Toast.makeText(this, "Something went wrong ", Toast.LENGTH_SHORT).show();
