@@ -51,21 +51,21 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         System.out.println(mValues.get(position).getPlaceDetails().getPlaceName() + " " + mValues.get(position).getPlaceDetails().getPlaceHours());
 
         //Assigning data
-        Glide.with(activity).load(mValues.get(position).getPictures().get(0).getImageUrl());
+       Glide.with(activity).load(mValues.get(position).getPlaceDetails().getCover_pic());
         holder.hours.setText(mValues.get(position).getPlaceDetails().getPlaceHours() + " - R" + mValues.get(position).getPlaceDetails().getPrice() + " per hour");
         holder.address.setText(mValues.get(position).getPlaceDetails().getPlaceAddress());
         holder.placeName.setText(mValues.get(position).getPlaceDetails().getPlaceName());
 
-        holder.feat1.setText(mValues.get(position).getFeatures().get(0).getTitle().toString());
-        holder.feat2.setText(mValues.get(position).getFeatures().get(1).getTitle().toString());
-        holder.feat3.setText(mValues.get(position).getFeatures().get(2).getTitle().toString());
+//        holder.feat1.setText(mValues.get(position).getFeatures().get(0).getTitle().toString());
+//        holder.feat2.setText(mValues.get(position).getFeatures().get(1).getTitle().toString());
+//        holder.feat3.setText(mValues.get(position).getFeatures().get(2).getTitle().toString());
 
 
-        Glide.with(activity).load(mValues.get(position).getPictures().get(0).getImageUrl()).into(holder.pic);
+      Glide.with(activity).load(mValues.get(position).getPlaceDetails().getCover_pic()).into(holder.pic);
 
-        // System.out.println(mValues.get(position).getPictures().get(0).getImageUrl());
+       //System.out.println(mValues.get(position).getPictures().get(0).getImageUrl());
 
-        // System.out.print("Name --" + mValues.get(position).getPlaceDetails().getPlaceName());
+       // System.out.print("Pic --" + mValues.get(position).getPlaceDetails().getCover_pic());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,18 +96,18 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         String hours = mValues.get(position).getPlaceDetails().getPlaceHours();
                         String address = mValues.get(position).getPlaceDetails().getPlaceAddress();
                         String infor = mValues.get(position).getPlaceDetails().getPlaceInfo();
-                        String pic1 = mValues.get(position).getPictures().get(0).getImageUrl();
+                     //   String pic1 = mValues.get(position).getPictures().get(0).getImageUrl();
                         String email = mValues.get(position).getPlaceDetails().getPlaceWebsite();
 
                         String price = Long.toString(mValues.get(position).getPlaceDetails().getPrice());
 
-                        String feat1Pic = mValues.get(position).getFeatures().get(0).getImageUrl();
-                        String feat2Pic = mValues.get(position).getFeatures().get(1).getImageUrl();
-                        String feat3Pic = mValues.get(position).getFeatures().get(2).getImageUrl();
-
-                        String feat1Title = mValues.get(position).getFeatures().get(0).getTitle();
-                        String feat2Title = mValues.get(position).getFeatures().get(1).getTitle();
-                        String feat3Title = mValues.get(position).getFeatures().get(2).getTitle();
+//                        String feat1Pic = mValues.get(position).getFeatures().get(0).getImageUrl();
+//                        String feat2Pic = mValues.get(position).getFeatures().get(1).getImageUrl();
+//                        String feat3Pic = mValues.get(position).getFeatures().get(2).getImageUrl();
+//
+//                        String feat1Title = mValues.get(position).getFeatures().get(0).getTitle();
+//                        String feat2Title = mValues.get(position).getFeatures().get(1).getTitle();
+//                        String feat3Title = mValues.get(position).getFeatures().get(2).getTitle();
 
                         intent.putExtra("lat", lat);
                         intent.putExtra("lon", lon);
@@ -116,19 +116,19 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         intent.putExtra("infor", infor);
                         intent.putExtra("hours", hours);
                         intent.putExtra("address", address);
-                        intent.putExtra("pic1", pic1);
+                      //  intent.putExtra("pic1", pic1);
                         intent.putExtra("price", price);
                         intent.putExtra("email", email);
 
                         // System.out.println("pic 1 - " + pic1);
 
-                        intent.putExtra("feat1Pic", feat1Pic);
-                        intent.putExtra("feat2Pic", feat2Pic);
-                        intent.putExtra("feat3Pic", feat3Pic);
-
-                        intent.putExtra("feat1Title", feat1Title);
-                        intent.putExtra("feat2Title", feat2Title);
-                        intent.putExtra("feat3Title", feat3Title);
+//                        intent.putExtra("feat1Pic", feat1Pic);
+//                        intent.putExtra("feat2Pic", feat2Pic);
+//                        intent.putExtra("feat3Pic", feat3Pic);
+//
+//                        intent.putExtra("feat1Title", feat1Title);
+//                        intent.putExtra("feat2Title", feat2Title);
+//                        intent.putExtra("feat3Title", feat3Title);
 
                         intent.putExtra("user_name",user_name );
 

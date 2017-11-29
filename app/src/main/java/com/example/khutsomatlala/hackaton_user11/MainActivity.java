@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.Feature;
@@ -23,8 +22,9 @@ import java.util.List;
 
 public class MainActivity extends Activity {
 
-    public static final String FB_DATABASE_PATH = "places";
-    private DatabaseReference mDatabaseRef;
+    //public static final String FB_DATABASE_PATH = "new_places";
+    public static final String FB_DATABASE_PATH = "new_places";
+    private DatabaseReference mDatabaseRefDetails;
     private List<WorkingSpace> workingSpaces = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MyItemRecyclerViewAdapter adapter;
@@ -45,20 +45,22 @@ public class MainActivity extends Activity {
         // Showprogress dialog during list image loading
         progressDialog = new ProgressDialog(this);
 
-        progressDialog.setMessage("Co working places  loading...");
-        progressDialog.show();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
+     /*progressDialog.setMessage("Co working places  loading...");
+        progressDialog.show();*/
+
+        mDatabaseRefDetails = FirebaseDatabase.getInstance().getReference("new_places");
+
 
         //Init adapter
         adapter = new MyItemRecyclerViewAdapter(workingSpaces, MainActivity.this);
         mRecyclerView.setAdapter(adapter);
 
-        try {
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+
+        mDatabaseRefDetails.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
+              //  progressDialog.dismiss();
                 workingSpaces.clear();
 
                 //Fectching information from database
@@ -75,7 +77,7 @@ public class MainActivity extends Activity {
                     details.setPlaceLatitude(snapshot.child("details").child("Latitude").getValue().toString());
                     details.setPlaceLongitude(snapshot.child("details").child("Longitude").getValue().toString());
                     details.setPlaceWebsite(snapshot.child("details").child("PlaceWebsite").getValue().toString());
-
+                    details.setCover_pic(snapshot.child("details").child("cover_pic").getValue().toString());
 
                     workingSpace.setPlaceDetails(details);
                     List<PlacePicture> pictures = new ArrayList<>();
@@ -86,8 +88,8 @@ public class MainActivity extends Activity {
                         picture.setImageUrl(snap.child("url").getValue().toString());
                         pictures.add(picture);
                     }
-                    workingSpace.setPictures(pictures);
 
+                    workingSpace.setPictures(pictures);
                     //Get and set fetaures of working space
                     List<Feature> features = new ArrayList<>();
                     for (DataSnapshot _snap : snapshot.child("features").getChildren()) {
@@ -108,10 +110,8 @@ public class MainActivity extends Activity {
             }
         });
 
-        } catch (Exception e) {
 
-            Toast.makeText(this, "unable to load the co working space", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
 
