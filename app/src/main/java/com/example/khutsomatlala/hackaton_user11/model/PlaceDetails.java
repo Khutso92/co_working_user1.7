@@ -16,8 +16,14 @@ public class PlaceDetails {
     public String placeLongitude;
     public String placeLatitude;
     public long price;
+    public String cover_pic;
 
-    public PlaceDetails(String placeName, String placeInfo, String placeAddress, String placeCell, String placeHours, String placeWebsite, String placeLongitude, String placeLatitude, long price) {
+    public String getCover_pic() {
+        return cover_pic;
+    }
+
+    public PlaceDetails(String placeName, String placeInfo, String placeAddress, String placeCell, String placeHours, String placeWebsite, String placeLongitude, String placeLatitude, long price, String cover_pic) {
+
         this.placeName = placeName;
         this.placeInfo = placeInfo;
         this.placeAddress = placeAddress;
@@ -27,6 +33,7 @@ public class PlaceDetails {
         this.placeLongitude = placeLongitude;
         this.placeLatitude = placeLatitude;
         this.price = price;
+        this.cover_pic = cover_pic;
     }
 
     public PlaceDetails() {
@@ -57,6 +64,10 @@ public class PlaceDetails {
 
     public String getPlaceWebsite() {
         return placeWebsite;
+    }
+
+    public void setCover_pic(String cover_pic) {
+        this.cover_pic = cover_pic;
     }
 
     public String getPlaceLongitude() {

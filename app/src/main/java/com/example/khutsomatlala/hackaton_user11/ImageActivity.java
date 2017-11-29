@@ -35,7 +35,7 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place_details);
 
 
-        imageView = (ImageView) findViewById(R.id.ivPlacePic);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         /*

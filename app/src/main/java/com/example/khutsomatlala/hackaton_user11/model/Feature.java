@@ -5,9 +5,7 @@ import com.google.firebase.database.Exclude;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by mlab on 10/24/2017.
- */
+
 
 public class Feature {
 

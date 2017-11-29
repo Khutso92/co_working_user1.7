@@ -1,6 +1,7 @@
 package com.example.khutsomatlala.hackaton_user11;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -28,13 +29,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
-import com.example.khutsomatlala.hackaton_user11.model.slideImagePojo;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.example.khutsomatlala.hackaton_user11.model.Slide;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,10 +55,10 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     List<PlaceDetailsActivity> catalogLists, catalogListCars, catalogListFurniture, catalogListPhones;
     DatabaseReference getDatabaseImages;
     ImagesAdapter Slideadapter;
-
+    Context context;
 
     //FIREBASE CONNECTION
-    private DatabaseReference Slidedatabase;
+    private DatabaseReference Slidedatabase, mFeatdatabase;
     private StorageReference mStorageReference;
 
     private ProgressDialog mDialog;
@@ -72,15 +70,13 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     //--- end of slide
 
 
-
-    String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid,user_name;
+    String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid, user_name;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, ratingDisplayTextView, readAllReviews, txtPrice,txtHours;
+    TextView placeName, placeLocation, txtInformation, ratingDisplayTextView, readAllReviews, txtPrice, txtHours;
 
     ImageView feat1P, feat2P, feat3P;
 
 
-    ImageView PlacePic;
     RatingBar ratingRatingBar;
     long reviews;
     int RateNumber;
@@ -96,10 +92,10 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     private EditText mMessageEditText;
     private Button mSendButton, ftitle1;
 
-    private String mUsername, rateMessage;
+    String mUsername, rateMessage, Feat1, Feat2, Feat3;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference;
+    private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference, mDatabaseFeatures;
     EditText message;
 
     List<FriendlyMessage> mComments;
@@ -155,22 +151,12 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         user_name = i.getStringExtra("user_name");
 
 
-        feat1Title = i.getStringExtra("feat1Title");
-        feat2Title = i.getStringExtra("feat2Title");
-        feat3Title = i.getStringExtra("feat3Title");
-
-        feat1Pic = i.getStringExtra("feat1Pic");
-        feat2Pic = i.getStringExtra("feat2Pic");
-        feat3Pic = i.getStringExtra("feat3Pic");
-
-
-
         SendTextLinearLayout = findViewById(R.id.linearLayout);
         placeName = findViewById(R.id.txt_placeName);
         placeLocation = findViewById(R.id.txt_location);
         ratingBar = findViewById(R.id.rating_rating_bar);
 
-        txtHours =  findViewById(R.id.txtHours);
+        txtHours = findViewById(R.id.txtHours);
 
         ftitle1 = findViewById(R.id.btn_reviews);
         ftitle2 = findViewById(R.id.btn_ratingStars);
@@ -178,7 +164,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
         readAllReviews = findViewById(R.id.txtReadAll);
         txtInformation = findViewById(R.id.txtInformation);
-        PlacePic = findViewById(R.id.ivPlacePic);
+
         txtPrice = findViewById(R.id.txtPrice);
 
         feat1P = findViewById(R.id.feat1Pic);
@@ -191,35 +177,40 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         txtInformation.setText(" " + infor);
         SendTextLinearLayout.setVisibility(View.GONE);
 
-        ftitle1.setText("" + feat1Title);
-        ftitle2.setText("" + feat2Title);
-        ftitle3.setText("" + feat3Title);
 
         txtHours.setText(hours);
-        txtPrice.setText("R" +price + " per hour");
+        txtPrice.setText("R" + price + " per hour");
+
+//        Glide.with(this)
+//                .load(pic1)  string
+//                .centerCrop()
+//                .into(feat1P); widget
+//
+//        Glide.with(this)
+//                .load(feat1Pic)
+//                .override(70, 70)
+//                //.centerCrop()
+//                .into(feat1P);
+//
+//
+//        Glide.with(this)
+//                .load(feat2Pic)
+//                .override(70, 70)
+//                .into(feat2P);
+//
+//
+//        Glide.with(this)
+//                .load(feat3Pic)
+//                .override(70, 70)
+//                .into(feat3P);
+
+
+        getFeature();
 
         Glide.with(this)
-                .load(pic1)
+                .load(Feat1)
                 .centerCrop()
-                .into(PlacePic);
-
-        Glide.with(this)
-                .load(feat1Pic)
-                .override(70, 70)
-                //.centerCrop()
                 .into(feat1P);
-
-
-        Glide.with(this)
-                .load(feat2Pic)
-                .override(70, 70)
-                .into(feat2P);
-
-
-        Glide.with(this)
-                .load(feat3Pic)
-                .override(70, 70)
-                .into(feat3P);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -321,7 +312,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             public void onClick(View view) {
                 mComments.clear();
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername ,"time");
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, "time");
 
                 String key = mCommentsDatabaseReference.push().getKey();
 
@@ -537,38 +528,46 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 */
 
 
-
-  //slide
+        //slide
         catalogList = new ArrayList<>();
-        final List<slideImagePojo> image = new ArrayList<>();
+        final List<Slide> image = new ArrayList<>();
 
         /**
          * PLACES PICTURES IN LISTVIEW
          */
-        Slidedatabase= FirebaseDatabase.getInstance().getReference().child("slide").child(PlaceName).child("pictures");
 
+
+        Slidedatabase = FirebaseDatabase.getInstance().getReference().child("new_Slide");
         Slidedatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                catalogList.clear();
-                for (DataSnapshot catalogSnapshot : dataSnapshot.getChildren()) {
 
-                    slideImagePojo image1= catalogSnapshot.getValue(slideImagePojo.class);
+                if (dataSnapshot.hasChildren()) {
+                    catalogList.clear();
+                    for (DataSnapshot catalogSnapshot : dataSnapshot.child(PlaceName).getChildren()) {
 
+                        Slide image1 = catalogSnapshot.getValue(Slide.class);
+                        Toast.makeText(PlaceDetailsActivity.this, "scroller not empty", Toast.LENGTH_SHORT).show();
 
-                    image1.setImage(image1.getImage());
-                    image.add(image1);
-                    LinearLayoutManager layoutManager
-                            = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                        image1.setPic1(image1.getPic1());
 
-                    RecyclerView ListViewCatalog =  findViewById(R.id.recycler_view);
-                    Slideadapter = new ImagesAdapter(PlaceDetailsActivity.this, image);
+                        image.add(image1);
+
+                        LinearLayoutManager layoutManager
+                                = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
+                        RecyclerView ListViewCatalog = findViewById(R.id.recycler_view);
+                        Slideadapter = new ImagesAdapter(PlaceDetailsActivity.this, image);
 //                    Toast.makeText(CatalogActivity.this, ""+catalog.getCatalogtitle(), Toast.LENGTH_SHORT).show();
-                    ListViewCatalog.setLayoutManager(layoutManager);
+                        ListViewCatalog.setLayoutManager(layoutManager);
 
-                    ListViewCatalog.setAdapter(Slideadapter);
+                        ListViewCatalog.setAdapter(Slideadapter);
+                    }
+
+                } else {
+
+                    Toast.makeText(PlaceDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -604,14 +603,14 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
             String PlaceName = intent.getStringExtra("name");
 
-            Double lat = Double.parseDouble(intent.getStringExtra("lat"));
-            Double lon = Double.parseDouble(intent.getStringExtra("lon"));
+//            Double lat = Double.parseDouble(intent.getStringExtra("lat"));
+//            Double lon = Double.parseDouble(intent.getStringExtra("lon"));
 
             // Add a marker in co_space and move the camera
-            LatLng co_space = new LatLng(lat, lon);
+//            LatLng co_space = new LatLng(lat, lon);
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-            mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
+//            mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
         } catch (NullPointerException e) {
             e.printStackTrace();
             Toast.makeText(this, "NullPointerException  ", Toast.LENGTH_SHORT).show();
@@ -627,8 +626,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     }
 
 
-
-    public void readMore (View view){
+    public void readMore(View view) {
 //        final ViewGroup transitionsContainer = (ViewGroup) view.findViewById(R.id.transitions_container);
 //        TextView readMoreDetails = (TextView)findViewById(R.id.readMoreDetails);
 //        TransitionSet set = new TransitionSet()
@@ -639,8 +637,57 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 //
 //        TransitionManager.beginDelayedTransition(transitionsContainer, set);
 //        readMoreDetails.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
-        Intent intent = new Intent(this,Read_more.class);
+        Intent intent = new Intent(this, Read_more.class);
         intent.putExtra("infor", infor);
         startActivity(intent);
+    }
+
+    public void getFeature() {
+
+        mFeatdatabase = FirebaseDatabase.getInstance().getReference().child("Features").child(PlaceName);
+
+        mFeatdatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                if (dataSnapshot.hasChildren()) {
+
+                    Feat1 = dataSnapshot.child("feature1").getValue().toString();
+                    Feat2 = dataSnapshot.child("feature2").getValue().toString();
+                    Feat3 = dataSnapshot.child("feature3").getValue().toString();
+
+                  //  System.out.print("Feature 1 " + Feat1);
+                    //  System.out.print("Feature 2 " + Feat2);
+                    //System.out.print("Feature 3 " + Feat3);
+
+                    Glide.with(getApplicationContext())
+                            .load(Feat1)
+                            .override(80, 80)
+                            .into(feat1P);
+
+                    Glide.with(getApplicationContext())
+                            .load(Feat2)
+                            .override(80, 80)
+                            .into(feat2P);
+
+                    Glide.with(getApplicationContext())
+                            .load(Feat3)
+                            .override(80, 80)
+                            .into(feat3P);
+
+
+                } else {
+                    Toast.makeText(PlaceDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 }

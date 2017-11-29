@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.model.Slide;
 import com.example.khutsomatlala.hackaton_user11.model.slideImagePojo;
 
 import java.util.List;
@@ -22,12 +23,12 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyViewHold
 
 
     private Activity context;
-    private List<slideImagePojo> catalogList;
-    private List<slideImagePojo> catalogss;
+    private List<Slide> catalogList;
+    private List<Slide> catalogss;
     private Activity applicationContext;
     private slideImagePojo catalog;
 
-    public ImagesAdapter(Activity context, List<slideImagePojo> catalogList) {
+    public ImagesAdapter(Activity context, List<Slide> catalogList) {
         this.context = context;
         this.catalogList = catalogList;
 
@@ -48,11 +49,12 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final slideImagePojo catalog = catalogList.get(position);
+        final Slide catalog = catalogList.get(position);
 
         Glide.with(context)
-                .load(catalog.getImage())
+                .load(catalog.pic1)
                 .into(holder.imageButton1);
+
 
 
 
