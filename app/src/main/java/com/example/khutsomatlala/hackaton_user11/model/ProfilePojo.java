@@ -1,4 +1,4 @@
-package com.example.khutsomatlala;
+package com.example.khutsomatlala.hackaton_user11.model;
 
 /**
  * Created by Admin on 11/27/2017.

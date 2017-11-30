@@ -49,7 +49,7 @@
         <activity android:name=".Time_picker" />
         <activity android:name=".Read_more" />
         <activity android:name=".Forgot_Password" />
-        <activity android:name="com.example.khutsomatlala.Profile"></activity>
+        <activity android:name=".model.Profile"></activity>
     </application>
 
 </manifest>

@@ -17,8 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.khutsomatlala.Profile;
-import com.example.khutsomatlala.ProfilePojo;
+import com.example.khutsomatlala.hackaton_user11.model.Profile;
+import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
 import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.google.firebase.auth.FirebaseAuth;
