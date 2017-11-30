@@ -650,16 +650,17 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
                 if (dataSnapshot.hasChildren()) {
 
-                    Feat1 = dataSnapshot.child("feature1").getValue().toString();
-                    Feat2 = dataSnapshot.child("feature2").getValue().toString();
-                    Feat3 = dataSnapshot.child("feature3").getValue().toString();
+                  Feat1 = dataSnapshot.child("feature1").getValue().toString();
+                   Feat2 = dataSnapshot.child("feature2").getValue().toString();
+                   Feat3 = dataSnapshot.child("feature3").getValue().toString();
 
-                  //  System.out.print("Feature 1 " + Feat1);
+                 System.out.print("Feature 1 " + Feat1);
                     //  System.out.print("Feature 2 " + Feat2);
                     //System.out.print("Feature 3 " + Feat3);
+
+                    Toast.makeText(getApplicationContext(), ""+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
 
                     Glide.with(getApplicationContext())
                             .load(Feat1)
