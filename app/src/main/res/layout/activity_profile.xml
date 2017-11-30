@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="4dp"
+    tools:context="com.example.khutsomatlala.Profile">
+
+
+   <!-- <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="ivProfile"
+        android:src="@drawable/user"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="upload"
+         />-->
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profilePlaceName"
+        android:textColor="#196b69"
+        android:textSize="14sp"
+        android:text="Place Name"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileTimeIn"
+        android:textSize="14sp"
+        android:textColor="#196b69"
+        android:layout_below="@+id/profileName"
+        android:text="Time In"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileTimeOut"
+        android:textColor="#196b69"
+        android:text="Time Out"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileDate"
+        android:textColor="#196b69"
+        android:text="Date"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileNoOfPpl"
+        android:textColor="#196b69"
+        android:text="No of people"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profilePrice"
+        android:textColor="#196b69"
+        tools:text="Total price"
+        android:textSize="14sp"/>
+</LinearLayout>
+
+</android.support.v7.widget.CardView>

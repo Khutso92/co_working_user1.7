@@ -155,6 +155,13 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/nameOfPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0E3047"
+            tools:text="Name of person " />
+
+        <TextView
             android:id="@+id/txtTimein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
