@@ -72,7 +72,7 @@ public class Profile extends AppCompatActivity {
 
         profilePic = (ImageView) findViewById(R.id.profilePic);
         btnUpload = (Button) findViewById(R.id.btnUpload);
-        btnPlus = findViewById(R.id.btnPlus);
+
 
 
         Intent i = getIntent();
@@ -155,7 +155,7 @@ if (selected ==true ) {
 }
 else {
 
-    btnPlus.setVisibility(View.VISIBLE);
+
 }
 
         //profile

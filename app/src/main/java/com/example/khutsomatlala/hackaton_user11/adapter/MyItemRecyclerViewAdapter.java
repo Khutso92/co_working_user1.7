@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.PlaceDetailsActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.PlaceDetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.model.WorkingSpace;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,6 +79,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
                 mAuth = FirebaseAuth.getInstance();
                 String key = mAuth.getCurrentUser().getUid();
+
 
                 myRef.child("users").child(key).addValueEventListener(new ValueEventListener() {
                     @Override

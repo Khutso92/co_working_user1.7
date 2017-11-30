@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Auth_login"
+            android:name=".Activities.Auth_login"
             android:label="Co-Working Spaces">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,29 +26,29 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".AuthActivity" />
+        <activity android:name=".Activities.AuthActivity" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".book_new"
+            android:name=".Activities.book_new"
             android:label="Booking" />
-        <activity android:name=".Splash" />
+        <activity android:name=".Activities.Splash" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="Co-Working Spaces" />
-        <activity android:name=".MaxPicActivity" />
+        <activity android:name=".Activities.MaxPicActivity" />
         <activity
-            android:name=".PlaceDetailsActivity"
+            android:name=".Activities.PlaceDetailsActivity"
             android:label="@string/title_activity_place_details"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ReviewActivity"
+            android:name=".Activities.ReviewActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Time_picker" />
-        <activity android:name=".Read_more" />
-        <activity android:name=".Forgot_Password" />
+        <activity android:name=".Activities.Time_picker" />
+        <activity android:name=".Activities.Read_more" />
+        <activity android:name=".Activities.Forgot_Password" />
         <activity android:name=".model.Profile"></activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.content.Intent;
 import android.os.Build;
@@ -13,14 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.example.khutsomatlala.hackaton_user11.model.Profile;
 import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
-import com.example.khutsomatlala.hackaton_user11.model.Bookings;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,37 +43,34 @@ import java.util.Locale;
 public class book_new extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    //Profile adapter
-    DatabaseReference db;
-    Boolean saved;
-    ArrayList<ProfilePojo> profileList = new ArrayList<>();
+
     private FirebaseAuth mAuth;
+
+    Boolean date_selected = false;
 
     int hourIn, hourOut, personNumber, totalPrice;
 
-    TextView mPrice,   txtPrice,txtTimein,txtTimeOut,txtDateBooked,txtNumberOfppl, nameOfPerson, txtEmail;
+    TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson;
 
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
     Button book, add, subtract;
 
 
-    Date  Cal_date;
+    Date Cal_date;
     private DatabaseReference mCheckSpaceReference, mbookingReference;
 
-    String details = "Booking Details\n\n",Time_in,Time_out,numberofPeople;
+    String details = "Booking Details\n\n", Time_in, Time_out, numberofPeople;
 
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
 
     Calendar dateTime = Calendar.getInstance();
 
-    ImageView imageView;
-
 
     private FirebaseDatabase mFirebaseDatabase;
 
     int hourOfDay, minute, second, minteger = 0, bookBlocker = 0;
-    String in_hour, out_hour, month, year, day, date, user_uid, open_time, close_time, pic, name, pricee, email, mUsername,image;
+    String in_hour, out_hour, month, year, day, date, user_uid, open_time, close_time, pic, name, pricee, mEmail, mUsername, placeName;
 
     //Calendar
     CompactCalendarView compactCalendarView;
@@ -89,7 +86,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00",
             "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
             "22:00", "23:00"};
-
+    Calendar cal;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
 
@@ -109,13 +106,11 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         pic = i.getStringExtra("pic");
         name = i.getStringExtra("name");
         pricee = i.getStringExtra("price");
-        email = i.getStringExtra("email");
+        mEmail = i.getStringExtra("email");
         mUsername = i.getStringExtra("mUsername");
         user_uid = i.getStringExtra("user_uid");
         in_hour = i.getStringExtra("hourIn");
         out_hour = i.getStringExtra("hourOut");
-        image = i.getStringExtra("image");
-
 
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
@@ -138,8 +133,6 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         txtDateBooked = (TextView) findViewById(R.id.txtDateBooked);
         txtNumberOfppl = (TextView) findViewById(R.id.txtNumberPpl);
         nameOfPerson = findViewById(R.id.nameOfPerson);
-        txtEmail = findViewById(R.id.profileEmail);
-        imageView = findViewById(R.id.profileBackground);
 
         spinnerTimeIn = (Spinner) findViewById(R.id.spinnerTimeIn);
         spinnerTimeOut = (Spinner) findViewById(R.id.spinnerTimeOut);
@@ -156,14 +149,14 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         spinnerTimeOut.setAdapter(TimeOutAdapter);
 
         //Calendar
-        final Calendar cal = Calendar.getInstance();
-        final SimpleDateFormat dateFormat = new SimpleDateFormat(" MMMM yyyy");
+        cal = Calendar.getInstance();
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("  MMMM yyyy");
 
 
         final ActionBar actionBar = getSupportActionBar();
 
-       actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(  dateFormat.format(cal.getTime() ));
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle(dateFormat.format(cal.getTime()));
 
         compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
@@ -180,8 +173,13 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
                 date = day + "-" + month + "-" + year;
 
-                Toast.makeText(book_new.this, "" + date, Toast.LENGTH_SHORT).show();
-
+                // Toast.makeText(book_new.this, "" + date, Toast.LENGTH_SHORT).show();
+                if (date_selected == true) {
+                    txtDateBooked.setText("Date booked - " + date);
+                } else {
+                    txtDateBooked.setText("Date booked - date not selected");
+                }
+                date_selected = true;
             }
 
             @Override
@@ -225,50 +223,26 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                             //TODO  the booking here
 
 
-                            if (hourOut > hourIn) {
+                            if (date_selected == true) {
+                                if (minteger >= 1) {
 
+                                    MakeBooking(hourIn, hourOut);
+                                } else {
+                                    Toast.makeText(book_new.this, "No. of people not selected", Toast.LENGTH_SHORT).show();
+                                }
 
-                                //Making a booking
-                                mbookingReference = mFirebaseDatabase.getReference().child("booking").child("user_id").child(user_uid);
-                                mbookingReference.child(name).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                        Bookings bookings = new Bookings(""+image,mUsername+"",""+name + "" + email,Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice));
-
-                                        String key = mbookingReference.push().getKey();
-
-
-                                        Time_in = Integer.toString( hourIn);
-                                        Time_out = Integer.toString( hourOut);
-
-                                        if (bookBlocker == 0) {
-                                            mbookingReference.child(key).setValue(bookings);
-                                            Toast.makeText(book_new.this, "Successfully booked", Toast.LENGTH_SHORT).show();
-                                            bookBlocker++;
-                                        } else {
-                                            Toast.makeText(book_new.this, "You have already booked", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }
-
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
                             } else {
-                                Toast.makeText(book_new.this, "Time in must be lesser than time out", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(book_new.this, "date not selected", Toast.LENGTH_SHORT).show();
                             }
+
+
                         } else {
-                            Toast.makeText(book_new.this, name +" closed at " + close_time+":00", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(book_new.this, name + " closed at " + close_time + ":00", Toast.LENGTH_SHORT).show();
                         }
 
 
                     } else {
-                        Toast.makeText(book_new.this, name +" opens at - "+ open_time + ":00" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(book_new.this, name + " opens at - " + open_time + ":00", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -284,13 +258,14 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         });
 
 
-        Intent intent = new Intent(this, Profile.class);
+       /*
+
+       Intent intent = new Intent(this, Profile.class);
         intent.putExtra("user_uid", user_uid);
         intent.putExtra("mUsername", mUsername);
-        intent.putExtra("email", email);
-        intent.putExtra("image", image);
-
         startActivity(intent);
+
+        */
 
 
     }
@@ -378,6 +353,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
             }
 
+            txtTimein.setText("Time in - " + hourIn + ":00");
 
         }
 
@@ -456,6 +432,22 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                     hourOut = 23;
 
             }
+
+            txtTimeOut.setText("Time out - " + hourOut + ":00");
+            nameOfPerson.setText("Name :" + mUsername);
+            if (date_selected == true) {
+                txtDateBooked.setText("Date booked - " + date);
+            } else {
+                txtDateBooked.setText("Date booked - " + "date not selected ");
+            }
+
+            if (minteger >= 1) {
+                txtNumberOfppl.setText("Number of people - " + minteger);
+            } else {
+                txtNumberOfppl.setText("Number of people - " + 0);
+            }
+
+
         }
     }
 
@@ -467,7 +459,14 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
     public void increase(View view) {
 
         minteger = minteger + 1;
-        display(minteger);
+
+        if (minteger <= 10) {
+
+            display(minteger);
+        } else {
+            Toast.makeText(this, "cant be more than 10", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
@@ -475,6 +474,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
         if (minteger > 0) {
             minteger = minteger - 1;
+
+
             display(minteger);
 
 
@@ -495,13 +496,18 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
             totalPrice = Integer.parseInt("" + pricee) * number;
 
-          //  Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
-            nameOfPerson.setText("Name " + mUsername);
-            txtTimein.setText("Time in - " + hourIn +":00");
-            txtTimeOut.setText("Time out - " + hourOut +":00");
-            txtDateBooked.setText("Date booked - "+ date );
-            txtNumberOfppl.setText("Number of people - "+  numberofPeople );
+            //  Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
+            nameOfPerson.setText("Name :" + mUsername);
+            txtTimein.setText("Time in - " + hourIn + ":00");
+            txtTimeOut.setText("Time out - " + hourOut + ":00");
 
+            if (date_selected == true) {
+                txtDateBooked.setText("Date booked - " + date);
+            } else {
+
+            }
+
+            txtNumberOfppl.setText("Number of people - " + numberofPeople);
 
             txtPrice.setText("R " + totalPrice);
         } catch (Exception e) {
@@ -542,9 +548,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                 Intent intent = new Intent(this, Profile.class);
                 intent.putExtra("user_uid", user_uid);
                 intent.putExtra("mUsername", mUsername);
-                intent.putExtra("email", email);
-                intent.putExtra("image", image);
-
+                Toast.makeText(this, "" + mUsername, Toast.LENGTH_SHORT).show();
 
                 startActivity(intent);
 
@@ -552,6 +556,44 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         }
         return true;
 
+    }
+
+    //hourOut > hourIn
+    public void MakeBooking(final int in, final int out) {
+
+        if (out > in) {
+            //Making a booking
+            mbookingReference = mFirebaseDatabase.getReference().child("booking").child("user_id").child(user_uid);
+            mbookingReference.child(name).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    Bookings bookings = new Bookings(mUsername + "", "" + name, Integer.toString(out - in), Integer.toString(in), Integer.toString(out), date, Integer.toString(personNumber), Integer.toString(totalPrice));
+
+                    String key = mbookingReference.push().getKey();
+
+                    Time_in = Integer.toString(in);
+                    Time_out = Integer.toString(out);
+
+                    if (bookBlocker == 0) {
+                        mbookingReference.child(key).setValue(bookings);
+                        Toast.makeText(book_new.this, "Successfully booked", Toast.LENGTH_SHORT).show();
+                        bookBlocker++;
+                    } else {
+                        Toast.makeText(book_new.this, "You have already booked", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        } else {
+
+            Toast.makeText(book_new.this, "Time in must be lesser than time out", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
