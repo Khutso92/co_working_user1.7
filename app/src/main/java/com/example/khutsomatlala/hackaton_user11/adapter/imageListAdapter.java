@@ -15,11 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.MaxPicActivity;
-import com.example.khutsomatlala.hackaton_user11.Place;
-import com.example.khutsomatlala.hackaton_user11.PlaceDetailsActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.MaxPicActivity;
+import com.example.khutsomatlala.hackaton_user11.model.Place;
+import com.example.khutsomatlala.hackaton_user11.Activities.PlaceDetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.book_new;
+import com.example.khutsomatlala.hackaton_user11.Activities.book_new;
 
 import java.util.List;
 

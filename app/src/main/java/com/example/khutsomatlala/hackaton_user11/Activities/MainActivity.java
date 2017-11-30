@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
+import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.Feature;
 import com.example.khutsomatlala.hackaton_user11.model.PlaceDetails;
 import com.example.khutsomatlala.hackaton_user11.model.PlacePicture;
 import com.example.khutsomatlala.hackaton_user11.model.WorkingSpace;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,10 +32,6 @@ public class MainActivity extends Activity {
     private MyItemRecyclerViewAdapter adapter;
     private ProgressDialog progressDialog;
     public static Boolean stauts = false;
-
-    ImageView ivBook;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

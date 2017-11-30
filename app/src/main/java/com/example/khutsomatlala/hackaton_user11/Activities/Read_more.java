@@ -1,10 +1,12 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.khutsomatlala.hackaton_user11.R;
 
 public class Read_more extends AppCompatActivity {
     TextView tvReadmore;

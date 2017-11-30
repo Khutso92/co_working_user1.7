@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.model;
 
 import com.example.khutsomatlala.hackaton_user11.model.Feature;
 

@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/finalbackground"
     android:orientation="vertical"
-    tools:context="com.example.khutsomatlala.hackaton_user11.AuthActivity">
+    tools:context="com.example.khutsomatlala.hackaton_user11.Activities.AuthActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
