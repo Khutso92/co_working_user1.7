@@ -644,7 +644,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
     public void getFeature() {
 
-        mFeatdatabase = FirebaseDatabase.getInstance().getReference().child("Features").child(PlaceName);
+        mFeatdatabase = FirebaseDatabase.getInstance().getReference().child("new_Features").child(PlaceName);
 
         mFeatdatabase.addValueEventListener(new ValueEventListener() {
             @Override

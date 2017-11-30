@@ -23,7 +23,7 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     //public static final String FB_DATABASE_PATH = "new_places";
-    public static final String FB_DATABASE_PATH = "new_places";
+    public static final String FB_DATABASE_PATH = "places";
     private DatabaseReference mDatabaseRefDetails;
     private List<WorkingSpace> workingSpaces = new ArrayList<>();
     private RecyclerView mRecyclerView;
