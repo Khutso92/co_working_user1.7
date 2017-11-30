@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.model;
 
 public class FriendlyMessage {
 

@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.khutsomatlala.hackaton_user11.MaxPicActivity;
+import com.example.khutsomatlala.hackaton_user11.Place;
+import com.example.khutsomatlala.hackaton_user11.PlaceDetailsActivity;
+import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.book_new;
 
 import java.util.List;
 

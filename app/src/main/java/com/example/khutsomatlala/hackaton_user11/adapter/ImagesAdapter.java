@@ -76,7 +76,6 @@ public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.MyViewHold
 
             imageButton1 = itemView.findViewById(R.id.imageslide);
 
-
 //                        //FUEL ICON COLOR CHANGE
 
         }

@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.khutsomatlala.Profile;
-import com.example.khutsomatlala.ProfilePojo;
+import com.example.khutsomatlala.hackaton_user11.model.Profile;
+import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
 import com.example.khutsomatlala.hackaton_user11.R;
 
 import java.util.List;

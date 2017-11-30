@@ -28,7 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.khutsomatlala.hackaton_user11.adapter.ImageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
+import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
+import com.example.khutsomatlala.hackaton_user11.model.FriendlyMessage;
 import com.example.khutsomatlala.hackaton_user11.model.Slide;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

@@ -1,4 +1,4 @@
-package com.example.khutsomatlala;
+package com.example.khutsomatlala.hackaton_user11.model;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

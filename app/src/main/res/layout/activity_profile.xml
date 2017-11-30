@@ -6,7 +6,7 @@
     android:layout_height="150dp"
     android:orientation="vertical"
     android:layout_marginLeft="4dp"
-    tools:context="com.example.khutsomatlala.Profile">
+    tools:context=".model.Profile">
 
 
    <!-- <ImageView
