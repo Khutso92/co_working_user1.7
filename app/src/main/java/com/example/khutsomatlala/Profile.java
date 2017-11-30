@@ -20,8 +20,6 @@ import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.ProfileAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,12 +45,12 @@ public class Profile extends AppCompatActivity {
 
     TextView profilePlaceName, profileName, profiletimeIn, profiletimeOut, profileDate, profileNoOfPpl, profilePrice;
     StorageReference childRef;
-    Button btnUpload;
+    Button btnUpload, btnPlus;
 
 
     //profile adapter
     DatabaseReference db;
-    Boolean saved;
+    Boolean selected = false;
     ArrayList<ProfilePojo> profileList = new ArrayList<>();
 
     List<ProfilePojo> profile;
@@ -73,6 +71,7 @@ public class Profile extends AppCompatActivity {
 
         profilePic = (ImageView) findViewById(R.id.profilePic);
         btnUpload = (Button) findViewById(R.id.btnUpload);
+        btnPlus = findViewById(R.id.btnPlus);
 
 
         Intent i = getIntent();
@@ -98,48 +97,60 @@ public class Profile extends AppCompatActivity {
         btnUpload.setVisibility(View.GONE);
 
 
+if (selected ==true ) {
+
+    btnUpload.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            if (isClick == true) {
+                btnUpload.setVisibility(View.GONE);
 
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isClick == true) {
-                    btnUpload.setVisibility(View.GONE);
+                //uploading the image
+                UploadTask uploadTask = childRef.putFile(filePath);
 
-                    childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
+                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    //uploading the image
-                    UploadTask uploadTask = childRef.putFile(filePath);
-                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
 
-                            @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
+                        ProfilePojo profilePojo = new ProfilePojo();
 
-                            ProfilePojo profilePojo = new ProfilePojo();
-
-                            profilePojo.setImage(uir.toString());
+                        profilePojo.setImage(uir.toString());
 
 //            profilePojo.setStuffNo(stuffNo);
 
-                            FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+//                            FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+
+
+                        if (uir != null) {
+                            childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
                             databaseProfile.setValue(profilePojo);
-
-
-                            Toast.makeText(Profile.this, "Upload successful ", Toast.LENGTH_SHORT).show();
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
 
-                            Toast.makeText(Profile.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+
+                        Toast.makeText(Profile.this, "Upload successful ", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        Toast.makeText(Profile.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        });
 
 
+        }
+    });
+
+}
+else {
+
+    btnPlus.setVisibility(View.VISIBLE);
+}
 
         //profile
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -152,11 +163,14 @@ public class Profile extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                Glide.with(getApplicationContext())
-                        .load(dataSnapshot.getValue().toString())
-                        .centerCrop()
-                        .override(300, 150)
-                        .into(profilePic);
+                if (dataSnapshot.hasChildren()) {
+                    Glide.with(getApplicationContext())
+                            .load(dataSnapshot.getValue().toString())
+                            .centerCrop()
+                            .override(300, 150)
+                            .into(profilePic);
+                }
+
             }
 
             @Override
@@ -202,16 +216,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
-
-
-
     }
-
-
-
-
-
 
 
 
@@ -229,6 +234,7 @@ public class Profile extends AppCompatActivity {
 
                 //Setting image to ImageView
                 profilePic.setImageBitmap(bitmap);
+                selected = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -244,5 +250,6 @@ public class Profile extends AppCompatActivity {
         intent.setAction(Intent.ACTION_PICK);
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
         btnUpload.setVisibility(View.VISIBLE);
+
     }
 }
