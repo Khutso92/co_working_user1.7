@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
     int hourIn, hourOut, personNumber, totalPrice;
 
-    TextView mPrice,   txtPrice,txtTimein,txtTimeOut,txtDateBooked,txtNumberOfppl, nameOfPerson;
+    TextView mPrice,   txtPrice,txtTimein,txtTimeOut,txtDateBooked,txtNumberOfppl, nameOfPerson, txtEmail;
 
     String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
@@ -66,11 +67,13 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
     Calendar dateTime = Calendar.getInstance();
 
+    ImageView imageView;
+
 
     private FirebaseDatabase mFirebaseDatabase;
 
     int hourOfDay, minute, second, minteger = 0, bookBlocker = 0;
-    String in_hour, out_hour, month, year, day, date, user_uid, open_time, close_time, pic, name, pricee, mEmail, mUsername,placeName;
+    String in_hour, out_hour, month, year, day, date, user_uid, open_time, close_time, pic, name, pricee, email, mUsername,image;
 
     //Calendar
     CompactCalendarView compactCalendarView;
@@ -106,11 +109,12 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         pic = i.getStringExtra("pic");
         name = i.getStringExtra("name");
         pricee = i.getStringExtra("price");
-        mEmail = i.getStringExtra("email");
+        email = i.getStringExtra("email");
         mUsername = i.getStringExtra("mUsername");
         user_uid = i.getStringExtra("user_uid");
         in_hour = i.getStringExtra("hourIn");
         out_hour = i.getStringExtra("hourOut");
+        image = i.getStringExtra("image");
 
 
 
@@ -134,6 +138,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         txtDateBooked = (TextView) findViewById(R.id.txtDateBooked);
         txtNumberOfppl = (TextView) findViewById(R.id.txtNumberPpl);
         nameOfPerson = findViewById(R.id.nameOfPerson);
+        txtEmail = findViewById(R.id.profileEmail);
+        imageView = findViewById(R.id.profileBackground);
 
         spinnerTimeIn = (Spinner) findViewById(R.id.spinnerTimeIn);
         spinnerTimeOut = (Spinner) findViewById(R.id.spinnerTimeOut);
@@ -228,7 +234,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Bookings bookings = new Bookings(mUsername+"",""+name,Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice));
+                                        Bookings bookings = new Bookings(""+image,mUsername+"",""+name + "" + email,Integer.toString(hourOut - hourIn), Integer.toString(hourIn), Integer.toString(hourOut), date, Integer.toString(personNumber), Integer.toString(totalPrice));
 
                                         String key = mbookingReference.push().getKey();
 
@@ -281,6 +287,8 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         Intent intent = new Intent(this, Profile.class);
         intent.putExtra("user_uid", user_uid);
         intent.putExtra("mUsername", mUsername);
+        intent.putExtra("email", email);
+        intent.putExtra("image", image);
 
         startActivity(intent);
 
@@ -494,6 +502,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             txtDateBooked.setText("Date booked - "+ date );
             txtNumberOfppl.setText("Number of people - "+  numberofPeople );
 
+
             txtPrice.setText("R " + totalPrice);
         } catch (Exception e) {
 
@@ -533,7 +542,9 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                 Intent intent = new Intent(this, Profile.class);
                 intent.putExtra("user_uid", user_uid);
                 intent.putExtra("mUsername", mUsername);
-                Toast.makeText(this, "" + mUsername, Toast.LENGTH_SHORT).show();
+                intent.putExtra("email", email);
+                intent.putExtra("image", image);
+
 
                 startActivity(intent);
 

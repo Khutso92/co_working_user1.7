@@ -9,27 +9,23 @@
     tools:context=".model.Profile">
 
 
-   <!-- <ImageView
-        android:id="@+id/profilePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="ivProfile"
-        android:src="@drawable/user"
-        tools:ignore="OnClick" />
 
-    <Button
-        android:id="@+id/btnUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="upload"
-         />-->
-
-<LinearLayout
+<FrameLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="8dp"
     android:layout_marginTop="8dp"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/profileBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +75,7 @@
         android:textColor="#196b69"
         tools:text="Total price"
         android:textSize="14sp"/>
-</LinearLayout>
+    </LinearLayout>
+</FrameLayout>
 
 </android.support.v7.widget.CardView>

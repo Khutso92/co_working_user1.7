@@ -10,8 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,14 +38,15 @@ public class Profile extends AppCompatActivity {
     ProgressDialog pd;
     Uri filePath;
     DatabaseReference databaseProfile;
-    ImageView profilePic;
+    ImageView profilePic, backgroundPic;
     boolean isClick = false;
 
-    String  timeOut, timeIn, placeName, noOfPeople, price, date,user_uid,mUsername;
+    String  timeOut, timeIn, placeName, noOfPeople, price, date,user_uid,mUsername,email,image;
 
-    TextView profilePlaceName, profileName, profiletimeIn, profiletimeOut, profileDate, profileNoOfPpl, profilePrice;
+    TextView profilePlaceName, profileName, profiletimeIn, profiletimeOut, profileDate, profileNoOfPpl, profilePrice,profileEmail;
     StorageReference childRef;
     Button btnUpload, btnPlus;
+
 
 
     //profile adapter
@@ -54,7 +55,7 @@ public class Profile extends AppCompatActivity {
     ArrayList<ProfilePojo> profileList = new ArrayList<>();
 
     List<ProfilePojo> profile;
-    ListView profileListView;
+    GridView profileListView;
     public ProfileAdapter mProfileAdapter;
     long reviews;
     private FirebaseDatabase mFirebaseDatabase;
@@ -84,7 +85,10 @@ public class Profile extends AppCompatActivity {
         price = i.getStringExtra("price");
         date = i.getStringExtra("date");
         user_uid = i.getStringExtra("user_uid");
+        email = i.getStringExtra("email");
+        image = i.getStringExtra("image");
 
+        profileEmail = findViewById(R.id.profileEmail);
         profilePlaceName = findViewById(R.id.profilePlaceName);
         profileName = findViewById(R.id.profileName);
         profiletimeIn = findViewById(R.id.profileTimeIn);
@@ -92,6 +96,8 @@ public class Profile extends AppCompatActivity {
         profileDate = findViewById(R.id.profileDate);
         profileNoOfPpl = findViewById(R.id.profileNoOfPpl);
         profilePrice = findViewById(R.id.profilePrice);
+        backgroundPic = findViewById(R.id.profileBackground);
+
         mStorage = FirebaseStorage.getInstance().getReference();
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
         btnUpload.setVisibility(View.GONE);
@@ -192,6 +198,8 @@ else {
 
                     reviews = dataSnapshot.getChildrenCount();
 
+
+
                      ProfilePojo profilePojo = snapshot.getValue(ProfilePojo.class);
 
 
@@ -201,12 +209,9 @@ else {
 
                     //
                     profileListView.setAdapter(mProfileAdapter);
-
                     profileName.setText(mUsername);
-
+                    profileEmail.setText(email);
                 }
-
-
 
             }
 

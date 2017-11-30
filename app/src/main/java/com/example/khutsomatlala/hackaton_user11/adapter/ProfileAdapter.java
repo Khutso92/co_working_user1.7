@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.model.Profile;
 import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
-import com.example.khutsomatlala.hackaton_user11.R;
 
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class ProfileAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(c).inflate(R.layout.activity_profile, parent, false);
         }
 
-        //ImageView imgView = convertView.findViewById(R.id.profilePic);
+        ImageView imgView = convertView.findViewById(R.id.profileBackground);
        /// Button btnUpload = convertView.findViewById(R.id.btnUpload);
         TextView placenameTxt = convertView.findViewById(R.id.profilePlaceName);
         TextView nameTxt = convertView.findViewById(R.id.profileName);
@@ -64,6 +66,10 @@ public class ProfileAdapter extends BaseAdapter {
 
         //image
         final ProfilePojo s = (ProfilePojo) this.getItem(position);
+        Glide.with(c)
+                .load(s.getImage())
+                .into(imgView);
+
 
         placenameTxt.setText("Place name " + s.getPlaceName());
         timeInTxt.setText("Time in " + s.getStart_time() + ":00");

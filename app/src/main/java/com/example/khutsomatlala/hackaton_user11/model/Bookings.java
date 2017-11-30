@@ -15,7 +15,7 @@ public class Bookings {
 
 
 
-    public Bookings(String names, String placeName, String booked_hours, String start_time, String end_time, String date_booked, String numberOfPeople, String price) {
+    public Bookings(String s, String names, String placeName, String booked_hours, String start_time, String end_time, String date_booked, String numberOfPeople, String price) {
         this.names = names;
         this.placeName = placeName;
         this.booked_hours = booked_hours;

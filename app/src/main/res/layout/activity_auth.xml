@@ -69,7 +69,7 @@
                 android:backgroundTint="@android:color/white"
                 android:drawableLeft="@drawable/person"
                 android:drawablePadding="12dp"
-                android:hint="Name"
+                android:hint="Name &amp; Surname"
                 android:textColor="#fff"
                 android:textColorHint="#40ffffff" />
 

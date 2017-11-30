@@ -2,15 +2,19 @@ package com.example.khutsomatlala.hackaton_user11;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.Feature;
 import com.example.khutsomatlala.hackaton_user11.model.PlaceDetails;
 import com.example.khutsomatlala.hackaton_user11.model.PlacePicture;
+import com.example.khutsomatlala.hackaton_user11.model.Profile;
 import com.example.khutsomatlala.hackaton_user11.model.WorkingSpace;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,12 +37,19 @@ public class MainActivity extends Activity {
 
     ImageView ivBook;
 
+//Booking
+private DatabaseReference user;
 
+    String in_hour, out_hour, month, year, day, date, user_uid, user_name, close_time, pic, name, pricee, email, mUsername,placeName,Time_in,Time_out,numberofPeople;
+FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+         user_uid = mAuth.getCurrentUser().getUid();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -54,6 +65,8 @@ public class MainActivity extends Activity {
         //Init adapter
         adapter = new MyItemRecyclerViewAdapter(workingSpaces, MainActivity.this);
         mRecyclerView.setAdapter(adapter);
+
+
 
 
 
@@ -112,6 +125,28 @@ public class MainActivity extends Activity {
 
 
 
+        user = FirebaseDatabase.getInstance().getReference().child("users").child(user_uid);
+        user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user_name = dataSnapshot.child("name").getValue().toString();
+                email = dataSnapshot.child("email").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void fab(View view){
+        Intent intent = new Intent(MainActivity.this, Profile.class);
+        intent.putExtra("user_uid", user_uid);
+        intent.putExtra("mUsername", mUsername);
+        intent.putExtra("email", email);
+
+        startActivity(intent);
     }
 
 
