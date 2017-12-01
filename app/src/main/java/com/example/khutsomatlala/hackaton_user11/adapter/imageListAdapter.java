@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.Activities.MaxPicActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.bookingActivity;
 import com.example.khutsomatlala.hackaton_user11.model.Place;
 import com.example.khutsomatlala.hackaton_user11.Activities.PlaceDetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.Activities.book_new;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class imageListAdapter extends ArrayAdapter<Place> {
         ivBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, book_new.class);
+                Intent i = new Intent(context, bookingActivity.class);
 
 
                 String price = listImage.get(position).getPlaceAddress();
@@ -227,7 +227,7 @@ public class imageListAdapter extends ArrayAdapter<Place> {
                     @Override
                     public void onClick(View view) {
 
-                        Intent intent = new Intent(getContext(), book_new.class);
+                        Intent intent = new Intent(getContext(), bookingActivity.class);
 
                         String name = listImage.get(position).getPlaceName();
                         String pic = listImage.get(position).getUrI();

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.Auth_login"
+            android:name=".Activities.Auth_loginActivity"
             android:label="Co-Working Spaces">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".Activities.book_new"
+            android:name=".Activities.bookingActivity"
             android:label="Booking" />
         <activity android:name=".Activities.Splash" />
         <activity
@@ -46,10 +46,10 @@
         <activity
             android:name=".Activities.ReviewActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activities.Time_picker" />
-        <activity android:name=".Activities.Read_more" />
+        <activity android:name=".Activities.Read_moreActivity" />
         <activity android:name=".Activities.Forgot_Password" />
-        <activity android:name=".model.Profile"></activity>
+        <activity android:name=".Activities.ProfileActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

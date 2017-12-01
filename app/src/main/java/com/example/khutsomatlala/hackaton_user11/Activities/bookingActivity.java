@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.model.Bookings;
-import com.example.khutsomatlala.hackaton_user11.model.Profile;
-import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,9 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -40,7 +36,8 @@ import java.util.Locale;
  * Created by Admin on 9/15/2017.
  */
 
-public class book_new extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class bookingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
 
 
 
@@ -60,11 +57,9 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
     Date Cal_date;
     private DatabaseReference mCheckSpaceReference, mbookingReference;
 
-    String details = "Booking Details\n\n", Time_in, Time_out, numberofPeople;
+    String  Time_in, Time_out, numberofPeople;
 
-    DateFormat formatDateTime = DateFormat.getDateTimeInstance();
 
-    Calendar dateTime = Calendar.getInstance();
 
 
     private FirebaseDatabase mFirebaseDatabase;
@@ -117,25 +112,24 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
         txtPrice = (TextView) findViewById(R.id.txtPrice);
 
-
         //Get a new instance of Calendar
         final Calendar c = Calendar.getInstance();
         hourOfDay = c.get(c.HOUR_OF_DAY); //Current Hour
         minute = c.get(c.MINUTE); //Current Minute
         second = c.get(c.SECOND); //Current Second
 
-        book = (Button) findViewById(R.id.btn_book);
-        add = (Button) findViewById(R.id.btn_pos);
-        subtract = (Button) findViewById(R.id.btn_neg);
+        book =  findViewById(R.id.btn_book);
+        add =   findViewById(R.id.btn_pos);
+        subtract =   findViewById(R.id.btn_neg);
 
-        txtTimein = (TextView) findViewById(R.id.txtTimein);
-        txtTimeOut = (TextView) findViewById(R.id.txtTimeout);
-        txtDateBooked = (TextView) findViewById(R.id.txtDateBooked);
-        txtNumberOfppl = (TextView) findViewById(R.id.txtNumberPpl);
+        txtTimein =  findViewById(R.id.txtTimein);
+        txtTimeOut =   findViewById(R.id.txtTimeout);
+        txtDateBooked =  findViewById(R.id.txtDateBooked);
+        txtNumberOfppl =   findViewById(R.id.txtNumberPpl);
         nameOfPerson = findViewById(R.id.nameOfPerson);
 
-        spinnerTimeIn = (Spinner) findViewById(R.id.spinnerTimeIn);
-        spinnerTimeOut = (Spinner) findViewById(R.id.spinnerTimeOut);
+        spinnerTimeIn =   findViewById(R.id.spinnerTimeIn);
+        spinnerTimeOut =   findViewById(R.id.spinnerTimeOut);
 
         spinnerTimeOut.setOnItemSelectedListener(this);
         spinnerTimeIn.setOnItemSelectedListener(this);
@@ -158,7 +152,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle(dateFormat.format(cal.getTime()));
 
-        compactCalendarView = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
+        compactCalendarView =  findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
 
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
@@ -171,29 +165,34 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
                 month = "" + (dateClicked.getMonth() + 1);
 
-                date = day + "-" + month + "-" + year;
 
-                // Toast.makeText(book_new.this, "" + date, Toast.LENGTH_SHORT).show();
                 if (date_selected == true) {
                     txtDateBooked.setText("Date booked - " + date);
                 } else {
                     txtDateBooked.setText("Date booked - date not selected");
                 }
-                date_selected = true;
+
+
+                Date todaysDate = new Date();
+                if( todaysDate.before(dateClicked))
+                {
+                  //  Toast.makeText(bookingActivity.this, "valid  date ", Toast.LENGTH_SHORT).show();
+                    date = day + "-" + month + "-" + year;
+                    date_selected = true;
+                    txtDateBooked.setText("Date booked - " + date);
+                }
+                else {
+                    Toast.makeText(bookingActivity.this, "date has pasted", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-
                 actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
-
-
                 Cal_date = firstDayOfNewMonth;
             }
 
-
         });
-
 
     }
 
@@ -203,51 +202,45 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
         mCheckSpaceReference = mFirebaseDatabase.getReference();
 
-        mCheckSpaceReference.child("working_hours").child(name).addValueEventListener(new ValueEventListener() {
+        mCheckSpaceReference.child("new_working_hours").child(name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
 
                 if (dataSnapshot.hasChildren()) {
 
                     open_time = dataSnapshot.child("open_time").getValue().toString();
-                    close_time = dataSnapshot.child("open_time").getValue().toString();
+                    close_time = dataSnapshot.child("close_time").getValue().toString();
 
                     if (hourIn >= Integer.parseInt(open_time)) {
-                        //  Toast.makeText(book_new.this, "Valid date for in time", Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(bookingActivity.this, "Valid date for in time", Toast.LENGTH_SHORT).show();
 
-                        if (hourOut >= Integer.parseInt(open_time)) {
-
-                            //Toast.makeText(book_new.this, "Valid date close time", Toast.LENGTH_SHORT).show();
-
-                            //TODO  the booking here
-
+                        if (hourOut <= Integer.parseInt(close_time)) {
 
                             if (date_selected == true) {
                                 if (minteger >= 1) {
 
                                     MakeBooking(hourIn, hourOut);
                                 } else {
-                                    Toast.makeText(book_new.this, "No. of people not selected", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(bookingActivity.this, "No. of people not selected", Toast.LENGTH_SHORT).show();
                                 }
 
                             } else {
-                                Toast.makeText(book_new.this, "date not selected", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(bookingActivity.this, "date not selected", Toast.LENGTH_SHORT).show();
                             }
 
 
                         } else {
-                            Toast.makeText(book_new.this, name + " closed at " + close_time + ":00", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(bookingActivity.this, name + " closes at " + close_time + ":00", Toast.LENGTH_SHORT).show();
                         }
 
 
                     } else {
-                        Toast.makeText(book_new.this, name + " opens at - " + open_time + ":00", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(bookingActivity.this, name + " opens at - " + open_time + ":00", Toast.LENGTH_SHORT).show();
                     }
 
 
                 } else {
-                    Toast.makeText(book_new.this, "No values in the DB", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(bookingActivity.this, "No values in the DB", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -260,7 +253,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
        /*
 
-       Intent intent = new Intent(this, Profile.class);
+       Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("user_uid", user_uid);
         intent.putExtra("mUsername", mUsername);
         startActivity(intent);
@@ -485,7 +478,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
     }
 
     private void display(int number) {
-        TextView displayInteger = (TextView) findViewById(R.id.tvNoOfPpl);
+        TextView displayInteger =  findViewById(R.id.tvNoOfPpl);
         displayInteger.setText("" + number);
 
         personNumber = number;
@@ -536,7 +529,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             case R.id.about:
                 mAuth.signOut();
 
-                Intent i = new Intent(book_new.this, Auth_login.class);
+                Intent i = new Intent(bookingActivity.this, Auth_loginActivity.class);
                 startActivity(i);
 
         }
@@ -545,11 +538,10 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             case R.id.profile:
 
 
-                Intent intent = new Intent(this, Profile.class);
+                Intent intent = new Intent(this, ProfileActivity.class);
                 intent.putExtra("user_uid", user_uid);
                 intent.putExtra("mUsername", mUsername);
                 Toast.makeText(this, "" + mUsername, Toast.LENGTH_SHORT).show();
-
                 startActivity(intent);
 
 
@@ -568,7 +560,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    Bookings bookings = new Bookings(mUsername + "", "" + name, Integer.toString(out - in), Integer.toString(in), Integer.toString(out), date, Integer.toString(personNumber), Integer.toString(totalPrice));
+                    Bookings bookings = new Bookings(mUsername + "", "" + name, Integer.toString(out - in), Integer.toString(in), Integer.toString(out), date, Integer.toString(personNumber), Integer.toString(totalPrice),pic);
 
                     String key = mbookingReference.push().getKey();
 
@@ -577,12 +569,11 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
 
                     if (bookBlocker == 0) {
                         mbookingReference.child(key).setValue(bookings);
-                        Toast.makeText(book_new.this, "Successfully booked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(bookingActivity.this, "Successfully booked", Toast.LENGTH_SHORT).show();
                         bookBlocker++;
                     } else {
-                        Toast.makeText(book_new.this, "You have already booked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(bookingActivity.this, "You have already booked", Toast.LENGTH_SHORT).show();
                     }
-
                 }
 
                 @Override
@@ -592,7 +583,7 @@ public class book_new extends AppCompatActivity implements AdapterView.OnItemSel
             });
         } else {
 
-            Toast.makeText(book_new.this, "Time in must be lesser than time out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(bookingActivity.this, "Time in must be lesser than time out", Toast.LENGTH_SHORT).show();
         }
     }
 
