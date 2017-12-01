@@ -34,9 +34,12 @@ import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.FriendlyMessage;
 import com.example.khutsomatlala.hackaton_user11.model.Slide;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -578,14 +581,14 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
             String PlaceName = intent.getStringExtra("name");
 
-//            Double lat = Double.parseDouble(intent.getStringExtra("lat"));
-//            Double lon = Double.parseDouble(intent.getStringExtra("lon"));
+             Double lat = Double.parseDouble(intent.getStringExtra("lat"));
+            Double lon = Double.parseDouble(intent.getStringExtra("lon"));
 
             // Add a marker in co_space and move the camera
-//            LatLng co_space = new LatLng(lat, lon);
+             LatLng co_space = new LatLng(lat, lon);
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-//            mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
+            mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
         } catch (NullPointerException e) {
             e.printStackTrace();
             Toast.makeText(this, "NullPointerException  ", Toast.LENGTH_SHORT).show();
@@ -620,7 +623,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     public void getFeature() {
 
         mFeatdatabase = FirebaseDatabase.getInstance().getReference().child("new_Features").child(PlaceName);
-
         mFeatdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -3,15 +3,15 @@ package com.example.khutsomatlala.hackaton_user11.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.Activities.ProfileActivity;
@@ -28,13 +28,12 @@ public class ProfileAdapter extends BaseAdapter {
 
     Context c;
     List<ProfilePojo> profileList;
-    private int resource;
-    private Activity context;
+
 
     public ProfileAdapter(ProfileActivity c, int resource, List<ProfilePojo> profileItems) {
         this.c = c;
         this.profileList = profileItems;
-        this.resource = resource;
+
 
     }
 
@@ -56,10 +55,9 @@ public class ProfileAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-
-        if (convertView == null) {
-            convertView = LayoutInflater.from(c).inflate(R.layout.activity_profile, parent, false);
-        }
+        //if (convertView != null) {
+        convertView = LayoutInflater.from(c).inflate(R.layout.activity_profile, parent, false);
+        //     }
 
         //ImageView imgView = convertView.findViewById(R.id.profilePic);
         /// Button btnUpload = convertView.findViewById(R.id.btnUpload);
@@ -69,9 +67,9 @@ public class ProfileAdapter extends BaseAdapter {
         TextView dateTxt = convertView.findViewById(R.id.profileDate);
         TextView noOfPplTxt = convertView.findViewById(R.id.profileNoOfPpl);
         TextView priceTxt = convertView.findViewById(R.id.profilePrice);
-        final ImageView spacePic = convertView.findViewById(R.id.iv_spacePic);
+        ImageView spacePic = convertView.findViewById(R.id.iv_spacePic);
 
-        FrameLayout profileGridView = convertView.findViewById(R.id.linearLayout);
+        RelativeLayout profileGridView = convertView.findViewById(R.id.linearLayout);
 
         final ProfilePojo s = (ProfilePojo) this.getItem(position);
 
@@ -93,16 +91,13 @@ public class ProfileAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-     final AlertDialog.Builder builder = new AlertDialog.Builder(c);
-
-               final LayoutInflater inflater = context.getLayoutInflater();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(c);
 
 
+                // final View dialogView = inflater.inflate(R.layout.custom_dialog_profile, null);
 
-                View dialogView = inflater.inflate(R.layout.custom_dialog_profile, parent, false);
 
-
-      // View dialogView = inflater.inflate(R.layout.custom_dialog_profile, null);
+                View dialogView = LayoutInflater.from(c).inflate(R.layout.custom_dialog_profile, parent, false);
 
                 ImageView placePic = dialogView.findViewById(R.id.GridPlacePic);
                 TextView placeName = dialogView.findViewById(R.id.GridPlaceName);
@@ -112,7 +107,6 @@ public class ProfileAdapter extends BaseAdapter {
                 TextView peopleNumber = dialogView.findViewById(R.id.GridNumberOfPeople);
                 TextView TotalPrice = dialogView.findViewById(R.id.GridTotalPrice);
 
-
                 String pic = s.getPlace_image();
 
                 Glide.with(c)
@@ -120,30 +114,24 @@ public class ProfileAdapter extends BaseAdapter {
                         .centerCrop()
                         .into(placePic);
 
-
-                placeName.setText("Place name " + s.getPlaceName());
-                timeIn.setText("time in " + s.getStart_time());
-                timeOut.setText("time out " + s.getEnd_time());
-                date.setText("Date" + s.getDate_booked());
-                peopleNumber.setText("Number of people" + s.getNumberOfPeople());
-                TotalPrice.setText("Total price" + s.getPrice());
+                placeName.setText( s.getPlaceName());
+                timeIn.setText("time in " + s.getStart_time() +":00");
+                timeOut.setText("time out " + s.getEnd_time()+":00");
+                date.setText("Date booked " + s.getDate_booked());
+                peopleNumber.setText("Number of people " + s.getNumberOfPeople());
+                TotalPrice.setText("Total price  R" + s.getPrice());
 
 
                 builder.setView(dialogView);
 
                 final AlertDialog alertDialog = builder.create();
 
-
                 alertDialog.show();
-
-
-
 
             }
         });
 
         return convertView;
-
     }
 
 

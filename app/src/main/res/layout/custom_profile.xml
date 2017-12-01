@@ -16,15 +16,17 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="80dp"
+                android:id="@+id/profilePic"
                 android:layout_height="80dp"
+                android:onClick="btnAdd"
                 android:src="@drawable/userprofile"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="50dp"/>
 
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/editText_profileName"
+        <TextView
+            android:id="@+id/TextView_profileName"
             android:hint="Khutso Matlala"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,8 +34,8 @@
             android:textStyle="bold"
             android:background="@null"/>
 
-        <EditText
-            android:id="@+id/editText_profileEmail"
+        <TextView
+            android:id="@+id/TextView_profileEmail"
             android:hint="KhutsoMatlala@gmail.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,8 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginBottom="5dp"
             android:textAppearance="?android:textAppearanceMedium" />
 
@@ -63,7 +65,8 @@
             android:layout_height="0.1dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
             android:background="#bababa " />
 
     </LinearLayout>
@@ -72,12 +75,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
-        <GridView
+        <ListView
             android:id="@+id/profileGridView"
             android:layout_width="match_parent"
+            android:horizontalSpacing="1dip"
+            android:dividerHeight="4dp"
+            android:verticalSpacing="1dip"
             android:layout_height="wrap_content"
             android:divider="@android:color/transparent"
             android:numColumns="2" />

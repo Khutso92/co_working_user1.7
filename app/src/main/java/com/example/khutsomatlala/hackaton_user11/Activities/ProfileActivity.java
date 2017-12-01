@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,47 +34,53 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity {
     private int PICK_IMAGE_REQUEST = 111;
     StorageReference mStorage;
-    ProgressDialog pd;
+
     Uri filePath;
     DatabaseReference databaseProfile;
     ImageView profilePic;
     boolean isClick = false;
 
-    String  timeOut, timeIn, placeName, noOfPeople, price, date,user_uid,mUsername;
+    String timeOut, timeIn, placeName, noOfPeople, price, date, user_uid, mUsername ,email;
 
     TextView profilePlaceName, profileName, profiletimeIn, profiletimeOut, profileDate, profileNoOfPpl, profilePrice;
     StorageReference childRef;
     Button btnUpload, btnPlus;
 
-
+    CircleImageView profilePicture;
     //profile adapter
     DatabaseReference db;
     Boolean selected = false;
     ArrayList<ProfilePojo> profileList = new ArrayList<>();
 
     List<ProfilePojo> profile;
-    GridView profileListView;
+    ListView profileListView;
     public ProfileAdapter mProfileAdapter;
     long reviews;
     private FirebaseDatabase mFirebaseDatabase;
+
+    TextView tv_user_email,tv_user_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_profile);
 
-        profileListView = (GridView)findViewById(R.id.profileGridView);
+        profileListView = (ListView) findViewById(R.id.profileGridView);
         final List<ProfilePojo> profilePojos = new ArrayList<>();
         mProfileAdapter = new ProfileAdapter(this, R.layout.activity_profile, profilePojos);
         profileListView.setAdapter(mProfileAdapter);
         profile = new ArrayList<>();
 
-        profilePic = (ImageView) findViewById(R.id.profilePic);
-        btnUpload = (Button) findViewById(R.id.btnUpload);
-
-
+        profilePic =   findViewById(R.id.profilePic);
+        btnUpload =  findViewById(R.id.btnUpload);
+        tv_user_email = findViewById(R.id.TextView_profileEmail);
+        tv_user_name = findViewById(R.id.TextView_profileName);
+        profilePicture =  findViewById(R.id.profilePic);
 
         Intent i = getIntent();
 
@@ -85,6 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         price = i.getStringExtra("price");
         date = i.getStringExtra("date");
         user_uid = i.getStringExtra("user_uid");
+        email = i.getStringExtra("email");
 
         profilePlaceName = findViewById(R.id.profilePlaceName);
         profileName = findViewById(R.id.profileName);
@@ -97,61 +105,55 @@ public class ProfileActivity extends AppCompatActivity {
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
         //btnUpload.setVisibility(View.GONE);
 
+/*
 
-if (selected ==true ) {
-
-    btnUpload.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            if (isClick == true) {
-                btnUpload.setVisibility(View.GONE);
+            btnUpload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
 
-                //uploading the image
-                UploadTask uploadTask = childRef.putFile(filePath);
+                        btnUpload.setVisibility(View.GONE);
 
-                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
+                        //uploading the image
+                        UploadTask uploadTask = childRef.putFile(filePath);
 
-                        ProfilePojo profilePojo = new ProfilePojo();
+                        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        profilePojo.setImage(uir.toString());
+                                @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
+
+                                ProfilePojo profilePojo = new ProfilePojo();
+
+                                profilePojo.setImage(uir.toString());
 
 //            profilePojo.setStuffNo(stuffNo);
 
 //                            FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
 
 
-                        if (uir != null) {
-                            childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
-                            databaseProfile.setValue(profilePojo);
-                        }
+                                if (uir != null) {
+                                    childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
+                                    databaseProfile.setValue(profilePojo);
+                                }
 
 
-                        Toast.makeText(ProfileActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ProfileActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
-                        Toast.makeText(ProfileActivity.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                                Toast.makeText(ProfileActivity.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-
-        }
-    });
-
-}
-else {
+                }
+            });
+*/
 
 
-}
 
         //profile
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -169,7 +171,7 @@ else {
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
                             .override(300, 150)
-                            .into(profilePic);
+                            .into(profilePicture);
                 }
 
             }
@@ -182,7 +184,7 @@ else {
 
 
         // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
-         db.child("booking").child("user_id").child(user_uid).addValueEventListener(new ValueEventListener() {
+        db.child("booking").child("user_id").child(user_uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 profile.clear();
@@ -193,19 +195,18 @@ else {
 
                     reviews = dataSnapshot.getChildrenCount();
 
-                     ProfilePojo profilePojo = snapshot.getValue(ProfilePojo.class);
+                    ProfilePojo profilePojo = snapshot.getValue(ProfilePojo.class);
 
 
                     profile.add(profilePojo);
                     //Init adapter
-                    mProfileAdapter = new ProfileAdapter(ProfileActivity.this,R.layout.activity_profile,profile);
+                    mProfileAdapter = new ProfileAdapter(ProfileActivity.this, R.layout.activity_profile, profile);
 
                     //
                     profileListView.setAdapter(mProfileAdapter);
 
-               //profileName.setText(mUsername);
+                    //profileName.setText(mUsername);
                 }
-
             }
 
             @Override
@@ -214,8 +215,10 @@ else {
             }
         });
 
-    }
 
+        tv_user_email.setText(email);
+        tv_user_name.setText(mUsername  );
+    }
 
 
     @Override
@@ -224,30 +227,69 @@ else {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
-
+           // UploadProfilePic();
 
             try {
                 //getting image from gallery
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
 
                 //Setting image to ImageView
-                profilePic.setImageBitmap(bitmap);
+                profilePicture.setImageBitmap(bitmap);
                 selected = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            profilePic.setImageURI(filePath);
+            profilePicture.setImageURI(filePath);
         }
 
     }
 
-    public void btnAdd(View view){
+    public void btnAdd(View view) {
         isClick = true;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
-        btnUpload.setVisibility(View.VISIBLE);
+    //    btnUpload.setVisibility(View.VISIBLE);
 
+    }
+
+
+    public void UploadProfilePic(){
+
+
+        //uploading the image
+        UploadTask uploadTask = childRef.putFile(filePath);
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
+
+                ProfilePojo profilePojo = new ProfilePojo();
+
+                profilePojo.setImage(uir.toString());
+
+//            profilePojo.setStuffNo(stuffNo);
+
+//                            FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+
+
+                if (uir != null) {
+                    childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
+                    databaseProfile.setValue(profilePojo);
+                }
+
+
+                Toast.makeText(ProfileActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(ProfileActivity.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

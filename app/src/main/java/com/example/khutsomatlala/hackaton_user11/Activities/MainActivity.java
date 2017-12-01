@@ -2,9 +2,11 @@ package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
@@ -32,33 +34,35 @@ public class MainActivity extends Activity {
     private MyItemRecyclerViewAdapter adapter;
     private ProgressDialog progressDialog;
     public static Boolean stauts = false;
+    private DatabaseReference user;
+
+
+    String user_name, user_uid, email;
+
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mAuth = FirebaseAuth.getInstance();
 
-        // Showprogress dialog during list image loading
-        progressDialog = new ProgressDialog(this);
-
-     /*progressDialog.setMessage("Co working places  loading...");
-        progressDialog.show();*/
+        user_uid = mAuth.getCurrentUser().getUid();
 
         mDatabaseRefDetails = FirebaseDatabase.getInstance().getReference("new_places");
-
 
         //Init adapter
         adapter = new MyItemRecyclerViewAdapter(workingSpaces, MainActivity.this);
         mRecyclerView.setAdapter(adapter);
 
 
-
         mDatabaseRefDetails.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-              //  progressDialog.dismiss();
+                //  progressDialog.dismiss();
                 workingSpaces.clear();
 
                 //Fectching information from database
@@ -109,7 +113,32 @@ public class MainActivity extends Activity {
         });
 
 
+        user = FirebaseDatabase.getInstance().getReference().child("users").child(user_uid);
+        user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user_name = dataSnapshot.child("name").getValue().toString();
+                email = dataSnapshot.child("email").getValue().toString();
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    public void fab(View view) {
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        intent.putExtra("user_uid", user_uid);
+        intent.putExtra("mUsername", user_name);
+        intent.putExtra("email", email);
+
+
+       // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 
 

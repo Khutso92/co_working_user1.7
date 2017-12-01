@@ -155,8 +155,8 @@
 
                         <ImageView
                             android:id="@+id/feat1Pic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:src="@drawable/blackchat" />
 
                         <Button
@@ -177,8 +177,8 @@
 
                         <ImageView
                             android:id="@+id/feat2Pic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:src="@drawable/stars" />
 
                         <Button
@@ -199,8 +199,8 @@
 
                         <ImageView
                             android:id="@+id/feat3Pic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:src="@drawable/people" />
 
                         <Button
