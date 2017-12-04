@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.Feature;
 import com.example.khutsomatlala.hackaton_user11.model.PlaceDetails;
 import com.example.khutsomatlala.hackaton_user11.model.PlacePicture;
-import com.example.khutsomatlala.hackaton_user11.model.Profile;
 import com.example.khutsomatlala.hackaton_user11.model.WorkingSpace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,46 +34,35 @@ public class MainActivity extends Activity {
     private MyItemRecyclerViewAdapter adapter;
     private ProgressDialog progressDialog;
     public static Boolean stauts = false;
+    private DatabaseReference user;
 
-    ImageView ivBook;
 
-//Booking
-private DatabaseReference user;
+    String user_name, user_uid, email;
 
-    String in_hour, out_hour, month, year, day, date, user_uid, user_name, close_time, pic, name, pricee, email, mUsername,placeName,Time_in,Time_out,numberofPeople;
-FirebaseAuth mAuth;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mRecyclerView = findViewById(R.id.recyclerView);
         mAuth = FirebaseAuth.getInstance();
-         user_uid = mAuth.getCurrentUser().getUid();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-        // Showprogress dialog during list image loading
-        progressDialog = new ProgressDialog(this);
-
-     /*progressDialog.setMessage("Co working places  loading...");
-        progressDialog.show();*/
+        user_uid = mAuth.getCurrentUser().getUid();
 
         mDatabaseRefDetails = FirebaseDatabase.getInstance().getReference("new_places");
-
 
         //Init adapter
         adapter = new MyItemRecyclerViewAdapter(workingSpaces, MainActivity.this);
         mRecyclerView.setAdapter(adapter);
 
 
-
-
-
         mDatabaseRefDetails.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-              //  progressDialog.dismiss();
+                //  progressDialog.dismiss();
                 workingSpaces.clear();
 
                 //Fectching information from database
@@ -124,7 +113,6 @@ FirebaseAuth mAuth;
         });
 
 
-
         user = FirebaseDatabase.getInstance().getReference().child("users").child(user_uid);
         user.addValueEventListener(new ValueEventListener() {
             @Override
@@ -138,14 +126,18 @@ FirebaseAuth mAuth;
 
             }
         });
+
+
     }
 
-    public void fab(View view){
-        Intent intent = new Intent(MainActivity.this, Profile.class);
+    public void fab(View view) {
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
         intent.putExtra("user_uid", user_uid);
-        intent.putExtra("mUsername", mUsername);
+        intent.putExtra("mUsername", user_name);
         intent.putExtra("email", email);
 
+
+       // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
 

@@ -226,7 +226,7 @@ public class AuthActivity extends Activity {
         }
     }
     public void tvLogin(View view) {
-        Intent i = new Intent(AuthActivity.this, Auth_login.class);
+        Intent i = new Intent(AuthActivity.this, Auth_loginActivity.class);
         startActivity(i);
     }
 

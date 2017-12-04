@@ -10,14 +10,24 @@ public class ProfilePojo {
     String placeName;
     String start_time;
     String end_time;
-    String date;
+    String date_booked;
     String booked_hours;
     String numberOfPeople;
     String Price;
     String Image;
 
+    String place_image;
+
     public String getImage() {
         return Image;
+    }
+
+    public String getPlace_image() {
+        return place_image;
+    }
+
+    public void setPlace_image(String place_image) {
+        this.place_image = place_image;
     }
 
     public void setImage(String image) {
@@ -59,12 +69,12 @@ public class ProfilePojo {
         this.end_time = end_time;
     }
 
-    public String getDate() {
-        return date;
+    public String getDate_booked() {
+        return date_booked;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date_booked = date;
     }
 
     public String getBooked_hours() {

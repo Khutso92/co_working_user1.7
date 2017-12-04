@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
-public class Read_more extends AppCompatActivity {
+public class Read_moreActivity extends AppCompatActivity {
     TextView tvReadmore;
     String infor;
     boolean visible;

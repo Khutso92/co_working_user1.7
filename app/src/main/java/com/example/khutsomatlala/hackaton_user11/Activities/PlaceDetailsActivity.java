@@ -34,9 +34,12 @@ import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.FriendlyMessage;
 import com.example.khutsomatlala.hackaton_user11.model.Slide;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -96,7 +99,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     private EditText mMessageEditText;
     private Button mSendButton, ftitle1;
 
-    String mUsername, rateMessage, Feat1, Feat2, Feat3,FeatTitle1,FeatTitle2,FeatTitle3 ;
+    String mUsername, rateMessage, Feat1, Feat2, Feat3, FeatTitle1, FeatTitle2, FeatTitle3;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference, mDatabaseFeatures;
@@ -148,11 +151,13 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         infor = i.getStringExtra("infor");
         address = i.getStringExtra("address");
         hours = i.getStringExtra("hours");
-        pic1 = i.getStringExtra("pic1");
+        pic1 = i.getStringExtra("SpacePic");
         price = i.getStringExtra("price");
         location = i.getStringExtra("location");
         email = i.getStringExtra("email");
         user_name = i.getStringExtra("user_name");
+
+
 
 
         SendTextLinearLayout = findViewById(R.id.linearLayout);
@@ -187,7 +192,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
         getFeature();
-
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -521,7 +525,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                     for (DataSnapshot catalogSnapshot : dataSnapshot.child(PlaceName).getChildren()) {
 
                         Slide image1 = catalogSnapshot.getValue(Slide.class);
-                      //  Toast.makeText(PlaceDetailsActivity.this, "scroller not empty", Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(PlaceDetailsActivity.this, "scroller not empty", Toast.LENGTH_SHORT).show();
 
                         image1.setPic1(image1.getPic1());
 
@@ -554,7 +558,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
     public void GoToBook(View view) {
 
-        Intent i = new Intent(PlaceDetailsActivity.this, book_new.class);
+        Intent i = new Intent(PlaceDetailsActivity.this, bookingActivity.class);
         i.putExtra("pic", pic1);
         i.putExtra("name", PlaceName);
         i.putExtra("price", price);
@@ -577,14 +581,14 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
             String PlaceName = intent.getStringExtra("name");
 
-//            Double lat = Double.parseDouble(intent.getStringExtra("lat"));
-//            Double lon = Double.parseDouble(intent.getStringExtra("lon"));
+             Double lat = Double.parseDouble(intent.getStringExtra("lat"));
+            Double lon = Double.parseDouble(intent.getStringExtra("lon"));
 
             // Add a marker in co_space and move the camera
-//            LatLng co_space = new LatLng(lat, lon);
+             LatLng co_space = new LatLng(lat, lon);
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-//            mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
+            mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
         } catch (NullPointerException e) {
             e.printStackTrace();
             Toast.makeText(this, "NullPointerException  ", Toast.LENGTH_SHORT).show();
@@ -611,7 +615,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 //
 //        TransitionManager.beginDelayedTransition(transitionsContainer, set);
 //        readMoreDetails.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
-        Intent intent = new Intent(this, Read_more.class);
+        Intent intent = new Intent(this, Read_moreActivity.class);
         intent.putExtra("infor", infor);
         startActivity(intent);
     }
@@ -619,28 +623,25 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
     public void getFeature() {
 
         mFeatdatabase = FirebaseDatabase.getInstance().getReference().child("new_Features").child(PlaceName);
-
         mFeatdatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.hasChildren()) {
 
-                  Feat1 = dataSnapshot.child("feature1").getValue().toString();
-                   Feat2 = dataSnapshot.child("feature2").getValue().toString();
-                   Feat3 = dataSnapshot.child("feature3").getValue().toString();
+                    Feat1 = dataSnapshot.child("feature1").getValue().toString();
+                    Feat2 = dataSnapshot.child("feature2").getValue().toString();
+                    Feat3 = dataSnapshot.child("feature3").getValue().toString();
 
-                   FeatTitle1 = dataSnapshot.child("title1").getValue().toString();
-                   FeatTitle2 = dataSnapshot.child("title2").getValue().toString();
-                   FeatTitle3 = dataSnapshot.child("title3").getValue().toString();
+                    FeatTitle1 = dataSnapshot.child("title1").getValue().toString();
+                    FeatTitle2 = dataSnapshot.child("title2").getValue().toString();
+                    FeatTitle3 = dataSnapshot.child("title3").getValue().toString();
 
-                    Toast.makeText(getApplicationContext(), "feat 1 " +FeatTitle1 +"\n" +"Feat 2 - " + FeatTitle2 + "\nFeat3" + FeatTitle3, Toast.LENGTH_SHORT).show();
-
-                 System.out.print("Feature 1 " + Feat1);
+                    //   System.out.print("Feature 1 " + Feat1);
                     //  System.out.print("Feature 2 " + Feat2);
                     //System.out.print("Feature 3 " + Feat3);
 
-                 //   Toast.makeText(getApplicationContext(), ""+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), ""+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
 
                     Glide.with(getApplicationContext())
                             .load(Feat1)
@@ -657,11 +658,9 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                             .override(80, 80)
                             .into(feat3P);
 
-
-
-                    ftitle1.setText( FeatTitle1);
-                    ftitle2.setText(FeatTitle2 );
-                    ftitle3.setText(FeatTitle3 );
+                    ftitle1.setText(FeatTitle1);
+                    ftitle2.setText(FeatTitle2);
+                    ftitle3.setText(FeatTitle3);
 
 
                 } else {

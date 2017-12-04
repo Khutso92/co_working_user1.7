@@ -4,85 +4,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
 <RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-android:layout_gravity="center_horizontal">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profilePic"
-        android:layout_width="150dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/profilePics"
+        android:layout_width="match_parent"
         android:scaleType="centerCrop"
         android:layout_height="150dp"
         android:onClick="ivProfile"
-
-        android:background="@drawable/rounder_corner"
-        android:src="@drawable/userprofile"
+        android:background="#196b69"
+        android:src="@drawable/picture"
         />
 
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-
-android:id="@+id/btnPlus"
-        android:layout_marginTop="110dp"
         android:background="@drawable/plus"
-        android:onClick="btnAdd" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="122dp"
+        android:onClick="btnAdd"
+        />
 
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@drawable/success"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="110dp"
-        android:background="@drawable/success" />
+        android:layout_marginTop="122dp" />
 
-
-</RelativeLayout>
     <TextView
         android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profilePic"
+        android:layout_alignBottom="@+id/profilePic"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#196b69"
-        android:text="Name and Surname"
-        android:textSize="25dp" />
-
-    <TextView
-        android:id="@+id/profileEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profilePic"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#196b69"
-        android:text="Email"
-        android:textSize="20dp" />
+        android:gravity="center_horizontal"
+        android:text="Your Name"
+        android:textColor="#fff"
+        android:textSize="30dp" />
 
 
-    <View
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:layout_gravity="center_horizontal"
-        android:background="#000"
-        android:layout_marginBottom="8dp"/>
+</RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="#196b69"
         android:layout_marginLeft="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="Booking History"/>
-    <GridView
-        android:id="@+id/profileListView"
+        android:text="History"/>
+    <ListView
+        android:id="@+id/profileGridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="2"
+        android:dividerHeight="4dp"
         android:divider="@android:color/transparent"/>
 
 </LinearLayout>

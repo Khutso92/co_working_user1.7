@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Auth_login extends Activity {
+public class Auth_loginActivity extends Activity {
     private FirebaseAuth mAuth;
     private EditText email ,name;
     private EditText password;
@@ -73,7 +73,7 @@ public class Auth_login extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent i = new Intent(Auth_login.this, AuthActivity.class);
+                Intent i = new Intent(Auth_loginActivity.this, AuthActivity.class);
                 startActivity(i);
 
             }
@@ -134,7 +134,7 @@ public class Auth_login extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(Auth_login.this, "Email or Password incorrect", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Auth_loginActivity.this, "Email or Password incorrect", Toast.LENGTH_SHORT).show();
                         } else {
                             finish();
                             startActivity(new Intent(getApplicationContext(), Splash.class));
@@ -147,7 +147,7 @@ public class Auth_login extends Activity {
     }
 
     public void forgotPassword(View view){
-        Intent i = new Intent(Auth_login.this,Forgot_Password.class);
+        Intent i = new Intent(Auth_loginActivity.this,Forgot_Password.class);
         startActivity(i);
     }
 }
