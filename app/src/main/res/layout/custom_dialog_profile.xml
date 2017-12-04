@@ -2,76 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="5"
     android:layout_margin="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="5">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="4"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="4">
 
         <ImageView
             android:id="@+id/GridPlacePic"
-            android:background="@drawable/placeholder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/placeholder" />
 
     </LinearLayout>
 
 
-
     <LinearLayout
-        android:layout_weight="1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/GridPlaceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=" place name"/>
-
+            android:textSize="18dp"
+            android:fontFamily= "sans-serif"
+            android:textStyle="bold"
+            android:hint=" place name"
+            android:textColor="#196b69" />
 
         <TextView
             android:id="@+id/GridTimeIn"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Time in"/>
+            android:gravity="center"
+            android:hint="Time in"
+            android:textColor="#196b69" />
+
         <TextView
             android:id="@+id/GridTimeOut"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Time out"/>
+            android:gravity="center"
+            android:hint="Time out"
+            android:textColor="#196b69" />
 
         <TextView
             android:id="@+id/GridDate"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="date"/>
-
+            android:gravity="center"
+            android:hint="date"
+            android:textColor="#196b69" />
 
 
         <TextView
             android:id="@+id/GridNumberOfPeople"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Number of people"/>
+            android:gravity="center"
+            android:hint="Number of people"
+            android:textColor="#196b69" />
 
         <TextView
             android:id="@+id/GridTotalPrice"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Total price"/>
-
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:hint="Total price"
+            android:textColor="#196b69" />
 
     </LinearLayout>
 

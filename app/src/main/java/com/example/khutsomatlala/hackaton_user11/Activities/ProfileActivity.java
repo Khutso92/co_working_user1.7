@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +24,8 @@ import com.example.khutsomatlala.hackaton_user11.adapter.ProfileAdapter;
 import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference databaseProfile;
     ImageView profilePic;
     boolean isClick = false;
-
+    private FirebaseAuth mAuth;
     String timeOut, timeIn, placeName, noOfPeople, price, date, user_uid, mUsername ,email;
 
     TextView profilePlaceName, profileName, profiletimeIn, profiletimeOut, profileDate, profileNoOfPpl, profilePrice;
@@ -56,6 +60,9 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference db;
     Boolean selected = false;
     ArrayList<ProfilePojo> profileList = new ArrayList<>();
+    ProgressDialog pd;
+    String profileUri;
+    boolean save = true;
 
     List<ProfilePojo> profile;
     ListView profileListView;
@@ -64,6 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
 
     TextView tv_user_email,tv_user_name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +111,9 @@ public class ProfileActivity extends AppCompatActivity {
         profilePrice = findViewById(R.id.profilePrice);
         mStorage = FirebaseStorage.getInstance().getReference();
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
-        //btnUpload.setVisibility(View.GONE);
+
+
+        btnUpload.setVisibility(View.GONE);
 
 /*
 
@@ -165,14 +175,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
-                if (dataSnapshot.hasChildren()) {
                     Glide.with(getApplicationContext())
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
-                            .override(300, 150)
                             .into(profilePicture);
-                }
+
 
             }
 
@@ -218,6 +225,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         tv_user_email.setText(email);
         tv_user_name.setText(mUsername  );
+
+
     }
 
 
@@ -242,6 +251,8 @@ public class ProfileActivity extends AppCompatActivity {
             profilePicture.setImageURI(filePath);
         }
 
+
+
     }
 
     public void btnAdd(View view) {
@@ -249,17 +260,19 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
+
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
-    //    btnUpload.setVisibility(View.VISIBLE);
+        btnUpload.setVisibility(View.VISIBLE);
+
 
     }
 
 
-    public void UploadProfilePic(){
+        public void UploadProfilePic (View view) {
 
 
-        //uploading the image
-        UploadTask uploadTask = childRef.putFile(filePath);
+                //uploading the image
+       /* UploadTask uploadTask = childRef.putFile(filePath);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -290,6 +303,76 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Toast.makeText(ProfileActivity.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+
+                btnUpload.setVisibility(View.GONE);
+
+
+                    StorageReference childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
+
+                    //uploading the image
+                    UploadTask uploadTask = childRef.putFile(filePath);
+                    uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            pd.dismiss();
+
+                            @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
+                            profileUri = uir.toString();
+                            ProfilePojo profilePojo = new ProfilePojo();
+
+                            profilePojo.setImage(uir.toString());
+                /*profilePojo.setDepartmentName(department);
+                profilePojo.setName(name);*/
+//            profilePojo.setStuffNo(stuffNo);
+
+                            FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+                            databaseProfile.setValue(profilePojo);
+
+                            Toast.makeText(ProfileActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
+
+                            Toast.makeText(ProfileActivity.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+             pd = new ProgressDialog(ProfileActivity.this);
+             pd.setMessage("loading");
+             pd.show();
+
+                }
+
+
+
+    //Log out menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option, menu);
+        return true;
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        mAuth = FirebaseAuth.getInstance();
+
+
+        //respond to menu item selection
+
+        switch (item.getItemId()) {
+            case R.id.about:
+                mAuth.signOut();
+
+                Intent i = new Intent(ProfileActivity.this, Auth_loginActivity.class);
+                startActivity(i);
+
+        }
+
+        return true;
+
+    }
+
 }

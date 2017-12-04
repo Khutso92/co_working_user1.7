@@ -10,6 +10,12 @@ import android.widget.TextView;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
+//import com.example.khutsomatlala.hackaton_user11.MainActivity;
+//import com.example.khutsomatlala.hackaton_user11.R;
+////
+//import com.example.khutsomatlala.hackaton_user11.MainActivity;
+//import com.example.khutsomatlala.hackaton_user11.R;
+
 public class Splash extends Activity {
     private TextView tv;
     private ImageView iv;

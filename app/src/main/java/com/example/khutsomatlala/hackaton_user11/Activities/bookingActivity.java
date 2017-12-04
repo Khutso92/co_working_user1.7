@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -511,44 +508,6 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
     }
 
 
-    //Log out menu
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        mAuth = FirebaseAuth.getInstance();
-
-
-        //respond to menu item selection
-
-        switch (item.getItemId()) {
-            case R.id.about:
-                mAuth.signOut();
-
-                Intent i = new Intent(bookingActivity.this, Auth_loginActivity.class);
-                startActivity(i);
-
-        }
-
-        switch (item.getItemId()) {
-            case R.id.profile:
-
-
-                Intent intent = new Intent(this, ProfileActivity.class);
-                intent.putExtra("user_uid", user_uid);
-                intent.putExtra("mUsername", mUsername);
-                Toast.makeText(this, "" + mUsername, Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-
-
-        }
-        return true;
-
-    }
 
     //hourOut > hourIn
     public void MakeBooking(final int in, final int out) {
@@ -571,6 +530,9 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                         mbookingReference.child(key).setValue(bookings);
                         Toast.makeText(bookingActivity.this, "Successfully booked", Toast.LENGTH_SHORT).show();
                         bookBlocker++;
+
+                        Intent i = new Intent(bookingActivity.this,MainActivity.class);
+                        startActivity(i);
                     } else {
                         Toast.makeText(bookingActivity.this, "You have already booked", Toast.LENGTH_SHORT).show();
                     }
