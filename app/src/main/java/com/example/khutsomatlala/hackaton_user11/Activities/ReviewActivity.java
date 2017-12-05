@@ -30,17 +30,19 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ReviewActivity extends Activity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference;
     private String rateMessage;
     EditText message;
-    String PlaceName;
+    String PlaceName, user_uid;
     List<FriendlyMessage> mComments;
     private FirebaseAuth mFirebaseAuth;
 
-
+    DatabaseReference db;
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 140;
 
@@ -54,7 +56,7 @@ public class ReviewActivity extends Activity {
 
 
     int minute, hour;
-
+    CircleImageView profilePicture;
 
     //rating
     int mTotalRating = 0;
@@ -79,6 +81,7 @@ public class ReviewActivity extends Activity {
         Intent i = getIntent();
         user_name = i.getStringExtra("user_name");
         PlaceName = i.getStringExtra("PlaceName");
+        user_uid = i.getStringExtra("user_uid");
 
 
         mUsername = ANONYMOUS;
@@ -89,7 +92,7 @@ public class ReviewActivity extends Activity {
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
-
+        profilePicture = findViewById(R.id.profilePic);
 
         //  numberOfUser.setText(""+users);
 
@@ -275,7 +278,7 @@ public class ReviewActivity extends Activity {
                     mTotalRating = 0;
 
                 } catch (ArithmeticException e) {
-                   // Toast.makeText(ReviewActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(ReviewActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -287,6 +290,37 @@ public class ReviewActivity extends Activity {
 
         });
 
+
+    /*    //pic
+        db = mFirebaseDatabase.getReference();
+
+        db.child("profile").child(user_uid).child("image").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Toast.makeText(ReviewActivity.this, ""+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+
+
+             Log.v("Pic",dataSnapshot.getValue().toString() );
+
+                if (dataSnapshot.hasChildren()) {
+
+                    String image = dataSnapshot.child(dataSnapshot.getValue().toString()).getValue().toString();
+
+                    Glide.with(getApplicationContext())
+                            .load(image)
+                            .centerCrop()
+                            .override(100, 100)
+                            .into(profilePicture);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
 
     }
 

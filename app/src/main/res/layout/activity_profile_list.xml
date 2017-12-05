@@ -60,6 +60,8 @@
         android:textColor="#196b69"
         android:background="@null"/>
 
+
+
     <TextView
         android:id="@+id/TextView_profileEmail"
         android:textColor="#196b69"
@@ -69,22 +71,63 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textAppearance="?android:textAppearanceSmall"
-        android:background="@null"/>+
-    <Button
+        android:background="@null"/>
+    <View
         android:layout_width="match_parent"
+        android:layout_margin="12dp"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_height="1dp"
+        android:background="#196b69"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:cardElevation="12dp"
+        android:layout_margin="8dp">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:onClick="GoToProfile"
-        android:text="bookings >" />
+        android:drawableLeft="@drawable/open_book"
+        android:drawablePadding="8dp"
+        android:background="@android:color/transparent"
+        android:text="bookings " />
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:cardElevation="12dp"
+
+        android:layout_margin="8dp">
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="GoToHost"
+        android:drawablePadding="8dp"
+        android:drawableLeft="@drawable/database"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
         android:text="host a space  " />
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:cardElevation="12dp"
+
+        android:layout_margin="8dp">
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:layout_gravity="center"
         android:onClick="SignOut"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/logout"
         android:text="sign out " />
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

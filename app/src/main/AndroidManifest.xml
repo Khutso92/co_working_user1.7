@@ -50,10 +50,14 @@
         <activity android:name=".Activities.Forgot_Password" />
         <activity
             android:name=".Activities.ProfileActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activities.ProfileListActivity" />
+            android:windowSoftInputMode="adjustPan"
+            android:label="Booking History"/>
+        <activity android:name=".Activities.ProfileListActivity"
+            android:label="Profile"/>
 
-        <activity android:name=".Activities.HostActivity"></activity>
+        <activity android:name=".Activities.HostActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:label="Host Your Space"></activity>
     </application>
 
 </manifest>

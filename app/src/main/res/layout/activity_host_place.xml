@@ -17,87 +17,169 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/EdtPlaceName"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Place name " />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/EdtPlaceInfor"
+                <EditText
+                    android:id="@+id/EdtPlaceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Place name "
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Place details" />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/EdtAddress"
+                <EditText
+                    android:id="@+id/EdtPlaceInfor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Place details"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="suburb" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/EdtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="suburb"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
-
-            <EditText
-                android:id="@+id/EdtCell"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="tell" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/EdtCell"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="tell"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
-
-            <EditText
-                android:id="@+id/edtWorkingHours"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Working hours e.g (7am - 8pm)" />
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/EdtWebsite"
+
+                <EditText
+                    android:id="@+id/edtWorkingHours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#40A798"
+                    android:hint="Working hours e.g (7am - 8pm)"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="email" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/EdtWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="email"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
 
-            <EditText
-                android:id="@+id/edtLongitude"
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Longitude"
-                android:inputType="numberDecimal|numberSigned" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edtLongitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Longitude"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/edtLatitude"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Latitude"
-                android:inputType="numberDecimal|numberSigned" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edtLatitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Latitude"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/edtPrice"
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Price per hour"
-                android:inputType="numberDecimal|numberSigned" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edtPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Price per hour"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/edtOpenTime"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="open time - e.g(7)"
-                android:inputType="numberDecimal|numberSigned" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edtOpenTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="open time - e.g(7)"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
-
-            <EditText
-                android:id="@+id/edtCloseTime"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="close time - e.g(21)"
-                android:inputType="numberDecimal|numberSigned" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edtCloseTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="close time - e.g(21)"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColorHint="#900E3047"
+                    android:layout_margin="2dp"
+                    android:backgroundTint="#40A798"/>
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Slide  Section " />
+                android:text="Slide  Section "
+                android:textColor="#0E3047"
+                android:layout_margin="2dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,7 +194,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="upSlidePic"
-                    android:text="  slide pic 1" />
+                    android:text="  slide pic 1"
+                    android:background="#0E3047"
+                    android:layout_margin="2dp"
+                    android:textColor="#fff"/>
 
                 <Button
                     android:id="@+id/slidePic2"
@@ -120,7 +205,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="upSlidePic2"
-                    android:text="  slide pic 2" />
+                    android:text="  slide pic 2"
+                    android:background="#0E3047"
+                    android:layout_margin="2dp"
+                    android:textColor="#fff"/>
 
                 <Button
                     android:id="@+id/slidePic3"
@@ -128,7 +216,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="upSlidePic3"
-                    android:text="  slide pic 3" />
+                    android:text="  slide pic 3"
+                    android:background="#0E3047"
+                    android:layout_margin="2dp"
+                    android:textColor="#fff"/>
 
 
             </LinearLayout>
@@ -138,7 +229,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Feature Section " />
+                android:text="Feature Section "
+                android:textColor="#0E3047"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,35 +242,86 @@
                 <Button
                     android:id="@+id/FeaturePic1"
                     android:layout_width="0dp"
-                    android:onClick="upLoadFeatPic1"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="  Feature pic 1" />
+                    android:text="  Feature pic 1"
+                    android:background="#0E3047"
+                    android:layout_margin="2dp"
+                    android:textColor="#fff"/>
 
                 <Button
                     android:id="@+id/FeaturePic2"
                     android:layout_width="0dp"
-                    android:onClick="upLoadFeatPic2"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="  Feature pic 2" />
+                    android:text="  Feature pic 2"
+                    android:background="#0E3047"
+                    android:layout_margin="2dp"
+                    android:textColor="#fff"/>
 
                 <Button
                     android:id="@+id/FeaturePic3"
                     android:layout_width="0dp"
-                    android:onClick="upLoadFeatPic3"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="  Feature pic 3" />
+                    android:text="  Feature pic 3"
+                    android:background="#0E3047"
+                    android:layout_margin="2dp"
+                    android:textColor="#fff"/>
+
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtFeatT1"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="feat 1 title"
+                    android:inputType="text" />
+
+
+                <EditText
+                    android:id="@+id/edtFeatT2"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="feat 2 title"
+                    android:inputType="text" />
+
+
+
+                <EditText
+                    android:layout_weight="1"
+                    android:id="@+id/edtFeatT3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="feat 2 title"
+                    android:inputType="text" />
+
+            </LinearLayout>
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="btnUpload_Click"
-                android:text="save" />
+                android:text="save"
+                android:background="#196b69"
+                android:layout_margin="8dp"
+                android:textColor="#fff"/>
+
+
+
+
+
+
 
             <ImageView
                 android:id="@+id/ImageView"

@@ -156,7 +156,11 @@ public class Auth_loginActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Toast.makeText(this, "sss", Toast.LENGTH_SHORT).show();
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
         finish();
+
     }
 }

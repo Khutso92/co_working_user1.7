@@ -3,108 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="4dp"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-      <!--  <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilePic"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/userprofile" />
-
-            <Button
-                android:id="@+id/Add"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignBottom="@+id/profilePic"
-                android:layout_alignEnd="@+id/profilePic"
-                android:layout_alignRight="@+id/profilePic"
-                android:background="@drawable/plus"
-                android:onClick="btnAdd"
-                android:layout_marginBottom="15dp"/>
-
-            <Button
-                android:id="@+id/btnUpload"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignBottom="@+id/profilePic"
-                android:layout_alignLeft="@+id/Add"
-                android:layout_alignStart="@+id/Add"
-                android:background="@drawable/success"
-                android:onClick="UploadProfilePic"
-                android:layout_marginBottom="15dp"/>
-
-        </RelativeLayout>-->
-
-    <!--    <TextView
-            android:id="@+id/TextView_profileName"
-            android:hint="Khutso Matlala"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textColor="#196b69"
-            android:background="@null"/>
-
-        <TextView
-            android:id="@+id/TextView_profileEmail"
-            android:textColor="#196b69"
-
-            android:hint="KhutsoMatlala@gmail.com"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:background="@null"/>-->
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:text="Booking History"
-            android:textColor="#196b69"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="5dp"
-            android:textAppearance="?android:textAppearanceMedium" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"
-            android:background="#bababa " />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:orientation="horizontal">
 
         <ListView
             android:id="@+id/profileGridView"
@@ -115,9 +15,5 @@
             android:layout_height="wrap_content"
             android:divider="@android:color/transparent"
             android:numColumns="2" />
-
-
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -41,7 +41,7 @@ public class HostActivity extends AppCompatActivity {
     FirebaseDatabase database;
 
     // fields of the details
-    String placeLongitude, placeLatitude, placeAddress, placeCell, placeHours, placeInfo, placeName, PlacePrice, placeWebsite, openTime, closeTime;
+    String placeLongitude, placeLatitude, placeAddress, placeCell, placeHours, placeInfo, placeName, PlacePrice, placeWebsite, openTime, closeTime ,featTit1e1,featTit1e2,featTit1e3;
 
     String urI, uri2, uri3;
     String featUri, featUri2, featUri3;
@@ -61,7 +61,7 @@ public class HostActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_F2 = 125;
     public static final int REQUEST_CODE_F3 = 251;
     boolean valid = false;
-    private EditText EdtPlaceName, EdtPlaceInfor, EdtAddress, EdtCell, edtWorkingHours, EdtWebsite, edtLongitude, edtLatitude, edtPrice, edtCloseTime, edtOpenTime;
+    private EditText EdtPlaceName, EdtPlaceInfor, EdtAddress, EdtCell, edtWorkingHours, EdtWebsite, edtLongitude, edtLatitude, edtPrice, edtCloseTime, edtOpenTime,edtFeatT1,edtFeatT2,edtFeatT3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,10 @@ public class HostActivity extends AppCompatActivity {
         edtPrice = (EditText) findViewById(R.id.edtPrice);
         edtCloseTime = (EditText) findViewById(R.id.edtCloseTime);
         edtOpenTime = (EditText) findViewById(R.id.edtOpenTime);
+
+        edtFeatT1 = (EditText) findViewById(R.id.edtFeatT1);
+        edtFeatT2= (EditText) findViewById(R.id.edtFeatT2);
+        edtFeatT3 = (EditText) findViewById(R.id.edtFeatT3);
 
     }
 
@@ -389,7 +393,11 @@ public class HostActivity extends AppCompatActivity {
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                             featUri3 = taskSnapshot.getDownloadUrl().toString();
 
-                                                            features feat = new features(featUri, featUri2, featUri3);
+                                                            featTit1e1 =edtFeatT1.toString().trim();
+                                                            featTit1e2 =edtFeatT2.toString().trim();
+                                                            featTit1e3 =edtFeatT3.toString().trim();
+
+                                                            features feat = new features(featUri, featUri2, featUri3,featTit1e1,featTit1e2,featTit1e3);
                                                             mDataRefFeat.child(placeName).setValue(feat);
 
                                                         }

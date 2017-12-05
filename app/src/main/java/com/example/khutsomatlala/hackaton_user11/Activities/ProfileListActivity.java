@@ -60,7 +60,7 @@ public class ProfileListActivity extends AppCompatActivity {
     List<ProfilePojo> profile;
     public ProfileAdapter mProfileAdapter;
     long reviews;
-    TextView tv_user_email,tv_user_name;
+    TextView tv_user_email, tv_user_name;
 
 
     @Override
@@ -95,12 +95,14 @@ public class ProfileListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+               if (dataSnapshot != null) {
 
                     Glide.with(getApplicationContext())
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
+                            .override(100,100)
                             .into(profilePicture);
+              }
 
             }
 
@@ -143,10 +145,9 @@ public class ProfileListActivity extends AppCompatActivity {
         });
 
         tv_user_email.setText(email);
-        tv_user_name.setText(mUsername  );
+        tv_user_name.setText(mUsername);
 
     }
-
 
 
     @Override
@@ -184,8 +185,6 @@ public class ProfileListActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
     public void UploadProfilePic(View view) {
@@ -264,7 +263,6 @@ public class ProfileListActivity extends AppCompatActivity {
         pd.show();
 
     }
-
 
 
     public void GoToProfile(View view) {

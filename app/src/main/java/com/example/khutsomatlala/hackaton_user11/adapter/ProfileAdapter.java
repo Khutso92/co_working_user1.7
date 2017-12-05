@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.Activities.ProfileListActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 
@@ -27,12 +26,13 @@ public class ProfileAdapter extends BaseAdapter {
     List<ProfilePojo> profileList;
 
 
-    public ProfileAdapter(ProfileListActivity c, int resource, List<ProfilePojo> profileItems) {
+    public ProfileAdapter(Context c, int resource, List<ProfilePojo> profileItems) {
         this.c = c;
         this.profileList = (List<ProfilePojo>) profileItems;
 
 
     }
+
 
 
     @Override

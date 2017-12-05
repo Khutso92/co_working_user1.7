@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -17,8 +14,11 @@ import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.ProfileAdapter;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -60,13 +60,13 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_profile);
 
         profileListView = (ListView) findViewById(R.id.profileGridView);
         final List<ProfilePojo> profilePojos = new ArrayList<>();
-//        mProfileAdapter = new ProfileAdapter(this,R.layout.activity_profile,profileListView);
+        mProfileAdapter = new ProfileAdapter(this,R.layout.activity_profile,profilePojos);
         profileListView.setAdapter(mProfileAdapter);
         profile = new ArrayList<>();
 
@@ -97,8 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
         profilePrice = findViewById(R.id.profilePrice);
         mStorage = FirebaseStorage.getInstance().getReference();
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
-
-
 
 
 /*
@@ -182,7 +180,10 @@ public class ProfileActivity extends AppCompatActivity {
         });*/
 
 
-        /*// mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
+        // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        db = mFirebaseDatabase.getReference();
         db.child("booking").child("user_id").child(user_uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -212,7 +213,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
 
 
@@ -337,31 +338,31 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-    //Log out menu
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option, menu);
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        mAuth = FirebaseAuth.getInstance();
-
-
-        //respond to menu item selection
-
-        switch (item.getItemId()) {
-            case R.id.about:
-                mAuth.signOut();
-
-                Intent i = new Intent(ProfileActivity.this, Auth_loginActivity.class);
-                startActivity(i);
-
-        }
-
-        return true;
-
-    }
+//    //Log out menu
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.option, menu);
+//        return true;
+//    }
+//
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        mAuth = FirebaseAuth.getInstance();
+//
+//
+//        //respond to menu item selection
+//
+//        switch (item.getItemId()) {
+//            case R.id.about:
+//                mAuth.signOut();
+//
+//                Intent i = new Intent(ProfileActivity.this, Auth_loginActivity.class);
+//                startActivity(i);
+//
+//        }
+//
+//        return true;
+//
+//    }
 
 }

@@ -600,6 +600,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         Intent intent = new Intent(this, ReviewActivity.class);
         intent.putExtra("PlaceName", PlaceName);
         intent.putExtra("user_name", user_name);
+        intent.putExtra("user_uid", uid);
         startActivity(intent);
     }
 
@@ -633,9 +634,9 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                     Feat2 = dataSnapshot.child("feature2").getValue().toString();
                     Feat3 = dataSnapshot.child("feature3").getValue().toString();
 
-//                    FeatTitle1 = dataSnapshot.child("title1").getValue().toString();
-//                    FeatTitle2 = dataSnapshot.child("title2").getValue().toString();
-//                    FeatTitle3 = dataSnapshot.child("title3").getValue().toString();
+                    FeatTitle1 = dataSnapshot.child("title1").getValue().toString();
+                    FeatTitle2 = dataSnapshot.child("title2").getValue().toString();
+                    FeatTitle3 = dataSnapshot.child("title3").getValue().toString();
 
                     //   System.out.print("Feature 1 " + Feat1);
                     //  System.out.print("Feature 2 " + Feat2);
