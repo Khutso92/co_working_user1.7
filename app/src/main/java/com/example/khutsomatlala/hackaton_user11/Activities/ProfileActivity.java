@@ -2,38 +2,25 @@ package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.ProfileAdapter;
-import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +46,9 @@ public class ProfileActivity extends AppCompatActivity {
     //profile adapter
     DatabaseReference db;
     Boolean selected = false;
-    ArrayList<ProfilePojo> profileList = new ArrayList<>();
+
     ProgressDialog pd;
     String profileUri;
-    boolean save = true;
 
     List<ProfilePojo> profile;
     ListView profileListView;
@@ -80,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileListView = (ListView) findViewById(R.id.profileGridView);
         final List<ProfilePojo> profilePojos = new ArrayList<>();
-        mProfileAdapter = new ProfileAdapter(this, R.layout.activity_profile, profilePojos);
+//        mProfileAdapter = new ProfileAdapter(this,R.layout.activity_profile,profileListView);
         profileListView.setAdapter(mProfileAdapter);
         profile = new ArrayList<>();
 
@@ -113,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
 
 
-        btnUpload.setVisibility(View.GONE);
+
 
 /*
 
@@ -165,7 +151,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        //profile
+    /*    //profile
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
 
@@ -175,10 +161,16 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+
+                if (dataSnapshot.hasChildren()){
                     Glide.with(getApplicationContext())
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
                             .into(profilePicture);
+                }else
+                {
+                    Toast.makeText(ProfileActivity.this, "no dp", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
@@ -187,10 +179,10 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
-        // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
+        /*// mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
         db.child("booking").child("user_id").child(user_uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -220,17 +212,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
-        tv_user_email.setText(email);
-        tv_user_name.setText(mUsername  );
 
 
     }
 
 
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -258,7 +248,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void btnAdd(View view) {
         isClick = true;
         Intent intent = new Intent();
-        intent.setType("image/*");
+        intent.setType("image*//*");
         intent.setAction(Intent.ACTION_PICK);
 
         startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
@@ -272,7 +262,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 //uploading the image
-       /* UploadTask uploadTask = childRef.putFile(filePath);
+       *//* UploadTask uploadTask = childRef.putFile(filePath);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -303,8 +293,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Toast.makeText(ProfileActivity.this, "Upload Failed -> " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });*/
-
+        });*//*
                 btnUpload.setVisibility(View.GONE);
 
 
@@ -322,8 +311,8 @@ public class ProfileActivity extends AppCompatActivity {
                             ProfilePojo profilePojo = new ProfilePojo();
 
                             profilePojo.setImage(uir.toString());
-                /*profilePojo.setDepartmentName(department);
-                profilePojo.setName(name);*/
+                *//*profilePojo.setDepartmentName(department);
+                profilePojo.setName(name);*//*
 //            profilePojo.setStuffNo(stuffNo);
 
                             FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
@@ -344,7 +333,7 @@ public class ProfileActivity extends AppCompatActivity {
              pd.setMessage("loading");
              pd.show();
 
-                }
+                }*/
 
 
 

@@ -1,10 +1,7 @@
-package com.example.khutsomatlala.hackaton_user11.model;
-
-import com.example.khutsomatlala.hackaton_user11.model.Feature;
+package com.example.khutsomatlala.hackaton_user11.model_for_user_app;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by khutsomatlala on 2017/08/29.

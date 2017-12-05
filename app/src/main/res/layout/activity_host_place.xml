@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/EdtPlaceName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Place name " />
+
+            <EditText
+                android:id="@+id/EdtPlaceInfor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Place details" />
+
+            <EditText
+                android:id="@+id/EdtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="suburb" />
+
+
+            <EditText
+                android:id="@+id/EdtCell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="tell" />
+
+
+            <EditText
+                android:id="@+id/edtWorkingHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Working hours e.g (7am - 8pm)" />
+
+            <EditText
+                android:id="@+id/EdtWebsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="email" />
+
+            <EditText
+                android:id="@+id/edtLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Longitude"
+                android:inputType="numberDecimal|numberSigned" />
+
+
+            <EditText
+                android:id="@+id/edtLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Latitude"
+                android:inputType="numberDecimal|numberSigned" />
+
+            <EditText
+                android:id="@+id/edtPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price per hour"
+                android:inputType="numberDecimal|numberSigned" />
+
+
+            <EditText
+                android:id="@+id/edtOpenTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="open time - e.g(7)"
+                android:inputType="numberDecimal|numberSigned" />
+
+
+            <EditText
+                android:id="@+id/edtCloseTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="close time - e.g(21)"
+                android:inputType="numberDecimal|numberSigned" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Slide  Section " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Button
+                    android:id="@+id/slidePic1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="upSlidePic"
+                    android:text="  slide pic 1" />
+
+                <Button
+                    android:id="@+id/slidePic2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="upSlidePic2"
+                    android:text="  slide pic 2" />
+
+                <Button
+                    android:id="@+id/slidePic3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="upSlidePic3"
+                    android:text="  slide pic 3" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Feature Section " />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <Button
+                    android:id="@+id/FeaturePic1"
+                    android:layout_width="0dp"
+                    android:onClick="upLoadFeatPic1"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  Feature pic 1" />
+
+                <Button
+                    android:id="@+id/FeaturePic2"
+                    android:layout_width="0dp"
+                    android:onClick="upLoadFeatPic2"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  Feature pic 2" />
+
+                <Button
+                    android:id="@+id/FeaturePic3"
+                    android:layout_width="0dp"
+                    android:onClick="upLoadFeatPic3"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  Feature pic 3" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="btnUpload_Click"
+                android:text="save" />
+
+            <ImageView
+                android:id="@+id/ImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/btnViewDB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="btnUpload_Click"
+                android:text="View the database"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

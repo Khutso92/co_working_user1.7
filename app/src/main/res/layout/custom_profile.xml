@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+      <!--  <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -46,9 +46,9 @@
                 android:onClick="UploadProfilePic"
                 android:layout_marginBottom="15dp"/>
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
-        <TextView
+    <!--    <TextView
             android:id="@+id/TextView_profileName"
             android:hint="Khutso Matlala"
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textAppearance="?android:textAppearanceSmall"
-            android:background="@null"/>
+            android:background="@null"/>-->
 
     </LinearLayout>
 

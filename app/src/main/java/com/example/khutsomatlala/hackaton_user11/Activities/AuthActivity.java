@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.model.userInformation;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.userInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

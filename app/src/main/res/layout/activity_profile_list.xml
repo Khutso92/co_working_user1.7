@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.khutsomatlala.hackaton_user11.Activities.ProfileListActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePic"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/userprofile"
+            />
+
+        <Button
+            android:id="@+id/Add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/profilePic"
+            android:layout_alignEnd="@+id/profilePic"
+            android:layout_alignRight="@+id/profilePic"
+            android:background="@drawable/plus"
+            android:onClick="btnAdd"
+            android:layout_marginBottom="15dp"
+            tools:ignore="OnClick"
+            />
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/profilePic"
+            android:layout_alignLeft="@+id/Add"
+            android:layout_alignStart="@+id/Add"
+            android:background="@drawable/success"
+            android:onClick="UploadProfilePic"
+            android:layout_marginBottom="15dp"
+            tools:ignore="OnClick"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/TextView_profileName"
+        tools:hint="Khutso Matlala"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="#196b69"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/TextView_profileEmail"
+        android:textColor="#196b69"
+
+        tools:hint="KhutsoMatlala@gmail.com"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:background="@null"/>+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoToProfile"
+        android:text="bookings >" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoToHost"
+        android:text="host a space  " />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SignOut"
+        android:text="sign out " />
+</LinearLayout>

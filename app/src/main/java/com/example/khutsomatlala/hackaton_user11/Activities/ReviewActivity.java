@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
-import com.example.khutsomatlala.hackaton_user11.model.FriendlyMessage;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.FriendlyMessage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

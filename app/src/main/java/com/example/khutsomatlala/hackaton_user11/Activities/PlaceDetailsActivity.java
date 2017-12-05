@@ -32,8 +32,8 @@ import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
-import com.example.khutsomatlala.hackaton_user11.model.FriendlyMessage;
-import com.example.khutsomatlala.hackaton_user11.model.Slide;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.FriendlyMessage;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Slide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -633,9 +633,9 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                     Feat2 = dataSnapshot.child("feature2").getValue().toString();
                     Feat3 = dataSnapshot.child("feature3").getValue().toString();
 
-                    FeatTitle1 = dataSnapshot.child("title1").getValue().toString();
-                    FeatTitle2 = dataSnapshot.child("title2").getValue().toString();
-                    FeatTitle3 = dataSnapshot.child("title3").getValue().toString();
+//                    FeatTitle1 = dataSnapshot.child("title1").getValue().toString();
+//                    FeatTitle2 = dataSnapshot.child("title2").getValue().toString();
+//                    FeatTitle3 = dataSnapshot.child("title3").getValue().toString();
 
                     //   System.out.print("Feature 1 " + Feat1);
                     //  System.out.print("Feature 2 " + Feat2);

@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
-import com.example.khutsomatlala.hackaton_user11.model.Feature;
-import com.example.khutsomatlala.hackaton_user11.model.PlaceDetails;
-import com.example.khutsomatlala.hackaton_user11.model.PlacePicture;
-import com.example.khutsomatlala.hackaton_user11.model.WorkingSpace;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Feature;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.PlaceDetails;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.PlacePicture;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.WorkingSpace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -131,7 +130,7 @@ public class MainActivity extends Activity {
     }
 
     public void fab(View view) {
-        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(MainActivity.this, ProfileListActivity.class);
         intent.putExtra("user_uid", user_uid);
         intent.putExtra("mUsername", user_name);
         intent.putExtra("email", email);

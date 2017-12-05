@@ -150,4 +150,13 @@ public class Auth_loginActivity extends Activity {
         Intent i = new Intent(Auth_loginActivity.this,Forgot_Password.class);
         startActivity(i);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Toast.makeText(this, "sss", Toast.LENGTH_SHORT).show();
+        finish();
+    }
 }

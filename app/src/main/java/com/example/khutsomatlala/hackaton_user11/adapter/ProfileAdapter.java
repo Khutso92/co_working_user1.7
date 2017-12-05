@@ -1,22 +1,19 @@
 package com.example.khutsomatlala.hackaton_user11.adapter;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.Activities.ProfileActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.ProfileListActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.model.ProfilePojo;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 
 import java.util.List;
 
@@ -30,9 +27,9 @@ public class ProfileAdapter extends BaseAdapter {
     List<ProfilePojo> profileList;
 
 
-    public ProfileAdapter(ProfileActivity c, int resource, List<ProfilePojo> profileItems) {
+    public ProfileAdapter(ProfileListActivity c, int resource, List<ProfilePojo> profileItems) {
         this.c = c;
-        this.profileList = profileItems;
+        this.profileList = (List<ProfilePojo>) profileItems;
 
 
     }
