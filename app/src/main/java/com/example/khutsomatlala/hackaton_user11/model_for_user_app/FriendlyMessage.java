@@ -15,11 +15,11 @@
  */
 package com.example.khutsomatlala.hackaton_user11.model_for_user_app;
 
-public class FriendlyMessage {
+public class FriendlyMessage  {
 
     private String text;
     private String name;
-    private     String messageTime;
+    private String messageTime;
 
     public FriendlyMessage() {
     }

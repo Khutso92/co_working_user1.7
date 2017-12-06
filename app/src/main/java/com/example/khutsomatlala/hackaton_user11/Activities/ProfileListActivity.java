@@ -20,7 +20,6 @@ import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -95,14 +94,17 @@ public class ProfileListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-               if (dataSnapshot != null) {
+                if (dataSnapshot != null) {
+
 
                     Glide.with(getApplicationContext())
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
-                            .override(100,100)
+                            .override(100, 100)
                             .into(profilePicture);
-              }
+                } else {
+                    Toast.makeText(ProfileListActivity.this, "no dp from pro", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -237,14 +239,9 @@ public class ProfileListActivity extends AppCompatActivity {
 
                 @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
                 profileUri = uir.toString();
+
                 ProfilePojo profilePojo = new ProfilePojo();
-
                 profilePojo.setImage(uir.toString());
-                /*profilePojo.setDepartmentName(department);
-                profilePojo.setName(name);*/
-//            profilePojo.setStuffNo(stuffNo);
-
-                FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
                 databaseProfile.setValue(profilePojo);
 
                 Toast.makeText(ProfileListActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();

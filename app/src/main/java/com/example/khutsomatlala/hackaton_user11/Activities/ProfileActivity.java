@@ -189,7 +189,6 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 profile.clear();
 //
-
                 //Fectching information from database
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 

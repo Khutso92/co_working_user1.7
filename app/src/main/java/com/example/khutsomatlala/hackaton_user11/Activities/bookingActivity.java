@@ -36,8 +36,6 @@ import java.util.Locale;
 public class bookingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-
-
     private FirebaseAuth mAuth;
 
     Boolean date_selected = false;
@@ -46,7 +44,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
     TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson;
 
-    String dayStamp = new SimpleDateFormat("yyyy - MM - dd").format(new Date());
+    String dayStamp = new SimpleDateFormat("dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
     Button book, add, subtract;
 
@@ -54,9 +52,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
     Date Cal_date;
     private DatabaseReference mCheckSpaceReference, mbookingReference;
 
-    String  Time_in, Time_out, numberofPeople;
-
-
+    String Time_in, Time_out, numberofPeople;
 
 
     private FirebaseDatabase mFirebaseDatabase;
@@ -78,6 +74,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             "6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00",
             "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00",
             "22:00", "23:00"};
+
     Calendar cal;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -115,18 +112,18 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         minute = c.get(c.MINUTE); //Current Minute
         second = c.get(c.SECOND); //Current Second
 
-        book =  findViewById(R.id.btn_book);
-        add =   findViewById(R.id.btn_pos);
-        subtract =   findViewById(R.id.btn_neg);
+        book = findViewById(R.id.btn_book);
+        add = findViewById(R.id.btn_pos);
+        subtract = findViewById(R.id.btn_neg);
 
-        txtTimein =  findViewById(R.id.txtTimein);
-        txtTimeOut =   findViewById(R.id.txtTimeout);
-        txtDateBooked =  findViewById(R.id.txtDateBooked);
-        txtNumberOfppl =   findViewById(R.id.txtNumberPpl);
+        txtTimein = findViewById(R.id.txtTimein);
+        txtTimeOut = findViewById(R.id.txtTimeout);
+        txtDateBooked = findViewById(R.id.txtDateBooked);
+        txtNumberOfppl = findViewById(R.id.txtNumberPpl);
         nameOfPerson = findViewById(R.id.nameOfPerson);
 
-        spinnerTimeIn =   findViewById(R.id.spinnerTimeIn);
-        spinnerTimeOut =   findViewById(R.id.spinnerTimeOut);
+        spinnerTimeIn = findViewById(R.id.spinnerTimeIn);
+        spinnerTimeOut = findViewById(R.id.spinnerTimeOut);
 
         spinnerTimeOut.setOnItemSelectedListener(this);
         spinnerTimeIn.setOnItemSelectedListener(this);
@@ -141,15 +138,13 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
         //Calendar
         cal = Calendar.getInstance();
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("  MMMM yyyy");
-
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy");
 
         final ActionBar actionBar = getSupportActionBar();
-
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setTitle(dateFormat.format(cal.getTime()));
 
-        compactCalendarView =  findViewById(R.id.compactcalendar_view);
+        compactCalendarView = findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
 
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
@@ -157,29 +152,29 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             public void onDayClick(Date dateClicked) {
 
                 year = "20" + (dateClicked.getYear() - 100);
-
-                day = "" + dateClicked.getDate();
-
+                day = "0" + dateClicked.getDate();
                 month = "" + (dateClicked.getMonth() + 1);
 
-
                 if (date_selected == true) {
+
                     txtDateBooked.setText("Date booked - " + date);
                 } else {
                     txtDateBooked.setText("Date booked - date not selected");
                 }
 
-
                 Date todaysDate = new Date();
-                if( todaysDate.before(dateClicked))
-                {
-                  //  Toast.makeText(bookingActivity.this, "valid  date ", Toast.LENGTH_SHORT).show();
+
+                if (todaysDate.before(dateClicked)  || day.equals(dayStamp.toString())) {
+                    //  Toast.makeText(bookingActivity.this, "valid  date ", Toast.LENGTH_SHORT).show();
                     date = day + "-" + month + "-" + year;
+
                     date_selected = true;
+
                     txtDateBooked.setText("Date booked - " + date);
-                }
-                else {
-                    Toast.makeText(bookingActivity.this, "date has pasted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(bookingActivity.this, "date has pasted " + dayStamp, Toast.LENGTH_SHORT).show();
+
+
                 }
             }
 
@@ -448,16 +443,13 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
     public void increase(View view) {
 
-        minteger = minteger + 1;
-
         if (minteger <= 10) {
-
+            minteger = minteger + 1;
             display(minteger);
+
         } else {
-            Toast.makeText(this, "cant be more than 10", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "cant be more than 11", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     public void decrease(View view) {
@@ -475,7 +467,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
     }
 
     private void display(int number) {
-        TextView displayInteger =  findViewById(R.id.tvNoOfPpl);
+        TextView displayInteger = findViewById(R.id.tvNoOfPpl);
         displayInteger.setText("" + number);
 
         personNumber = number;
@@ -508,7 +500,6 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
     }
 
 
-
     //hourOut > hourIn
     public void MakeBooking(final int in, final int out) {
 
@@ -519,7 +510,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    Bookings bookings = new Bookings(mUsername + "", "" + name, Integer.toString(out - in), Integer.toString(in), Integer.toString(out), date, Integer.toString(personNumber), Integer.toString(totalPrice),pic);
+                    Bookings bookings = new Bookings(mUsername + "", "" + name, Integer.toString(out - in), Integer.toString(in), Integer.toString(out), date, Integer.toString(personNumber), Integer.toString(totalPrice), pic);
 
                     String key = mbookingReference.push().getKey();
 
@@ -531,7 +522,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                         Toast.makeText(bookingActivity.this, "Successfully booked", Toast.LENGTH_SHORT).show();
                         bookBlocker++;
 
-                        Intent i = new Intent(bookingActivity.this,MainActivity.class);
+                        Intent i = new Intent(bookingActivity.this, MainActivity.class);
                         startActivity(i);
                     } else {
                         Toast.makeText(bookingActivity.this, "You have already booked", Toast.LENGTH_SHORT).show();

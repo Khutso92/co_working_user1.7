@@ -677,4 +677,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
     }
+
+
 }

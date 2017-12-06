@@ -92,7 +92,7 @@ public class ReviewActivity extends Activity {
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
-        profilePicture = findViewById(R.id.profilePic);
+        profilePicture = findViewById(R.id.profilePicMessage);
 
         //  numberOfUser.setText(""+users);
 
@@ -165,9 +165,88 @@ public class ReviewActivity extends Activity {
                 minute = date.get(Calendar.MINUTE);
                 hour = date.get(Calendar.HOUR);
 
+                String hourText = "";
+                String minuteText;
+
+
+                switch (minute) {
+                    case 0:
+                        minuteText = "00";
+                        break;
+                    case 1:
+                        minuteText = "01";
+                        break;
+                    case 2:
+                        minuteText = "02";
+                        break;
+                    case 3:
+                        minuteText = "03";
+                        break;
+                    case 4:
+                        minuteText = "04";
+                        break;
+                    case 5:
+                        minuteText = "05";
+                        break;
+                    case 6:
+                        minuteText = "06";
+                        break;
+                    case 7:
+                        minuteText = "07";
+                        break;
+                    case 8:
+                        minuteText = "08";
+                        break;
+                    case 9:
+                        minuteText = "09";
+                        break;
+                    default:
+                        minuteText = String.valueOf(minute);
+
+                }
+
+
+                switch (hour) {
+                    case 0:
+                        hourText = "12";
+                        break;
+                    case 1:
+                        hourText = "01";
+                        break;
+                    case 2:
+                        hourText = "02";
+                        break;
+                    case 3:
+                        hourText = "03";
+                        break;
+                    case 4:
+                        hourText = "04";
+                        break;
+                    case 5:
+                        hourText = "05";
+                        break;
+                    case 6:
+                        hourText = "06";
+                        break;
+                    case 7:
+                        hourText = "07";
+                        break;
+                    case 8:
+                        hourText = "08";
+                        break;
+                    case 9:
+                        hourText = "09";
+                        break;
+                        default:
+                            hourText = String.valueOf(hour);
+
+
+                }
+
 
                 // TODO: Sending data to the DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name, hour + ":" + minute);
+                //FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name, hour + ":" + minute);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name, String.valueOf(hourText) + ":" + minuteText);
 
                 String key = mCommentsDatabaseReference.push().getKey();
 
@@ -192,7 +271,6 @@ public class ReviewActivity extends Activity {
 
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
-
 
                 }
 
@@ -291,36 +369,44 @@ public class ReviewActivity extends Activity {
         });
 
 
-    /*    //pic
+       //pic
         db = mFirebaseDatabase.getReference();
 
         db.child("profile").child(user_uid).child("image").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Toast.makeText(ReviewActivity.this, ""+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ReviewActivity.this, ""+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
 
 
-             Log.v("Pic",dataSnapshot.getValue().toString() );
+             //Log.v("Pic",dataSnapshot.getValue().toString() );
 
-                if (dataSnapshot.hasChildren()) {
+            //    if (dataSnapshot.hasChildren()) {
 
-                    String image = dataSnapshot.child(dataSnapshot.getValue().toString()).getValue().toString();
+                //    String image = dataSnapshot.child(dataSnapshot.getValue().toString()).getValue().toString();
 
-                    Glide.with(getApplicationContext())
-                            .load(image)
-                            .centerCrop()
-                            .override(100, 100)
-                            .into(profilePicture);
+//                    Glide.with(getApplicationContext())
+//                            .load(dataSnapshot.getValue().toString())
+//                         //   .centerCrop()
+//                            .override(100, 100)
+//                            .into(profilePicture);
 
-                }
+
+
+//                Picasso.with(getApplicationContext())
+//                        .load(dataSnapshot.getValue().toString())
+//                        .fit()
+//                        .centerCrop()
+//                        .into(profilePicture);
+
+            //    }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
     }
 
