@@ -22,7 +22,7 @@
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/backlogo" />
+            android:src="@drawable/logo_one" />
     </LinearLayout>
 
     <LinearLayout

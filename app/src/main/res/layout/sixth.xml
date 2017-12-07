@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="please provide us with 3 pictures"
+            android:textColor="#196b69"
+            android:layout_marginLeft="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="1st pic"
+                android:textColor="#196b69"
+                android:layout_margin="4dp"
+                android:textAllCaps="false"
+                android:background="@drawable/square"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="2nd pic"
+                android:textColor="#196b69"
+                android:layout_margin="4dp"
+                android:textAllCaps="false"
+                android:background="@drawable/square"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="3rd pic"
+                android:textColor="#196b69"
+                android:layout_margin="4dp"
+                android:textAllCaps="false"
+                android:background="@drawable/square"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#196b69"
+            android:text="please provide us with 3 amenities"
+            android:layout_marginLeft="4dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="1st pic"
+                android:textColor="#196b69"
+                android:layout_margin="4dp"
+                android:textAllCaps="false"
+                android:background="@drawable/square"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="2nd pic"
+                android:textColor="#196b69"
+                android:layout_margin="4dp"
+                android:textAllCaps="false"
+                android:background="@drawable/square"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="3rd pic"
+                android:layout_margin="4dp"
+                android:textAllCaps="false"
+                android:textColor="#196b69"
+                android:background="@drawable/square"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

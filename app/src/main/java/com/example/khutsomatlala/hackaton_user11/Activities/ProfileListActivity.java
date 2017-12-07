@@ -14,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.khutsomatlala.hackaton_user11.Preference_Manager;
 import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.Welcome_activity;
 import com.example.khutsomatlala.hackaton_user11.adapter.ProfileAdapter;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -94,17 +96,20 @@ public class ProfileListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot != null) {
 
-
+                try {
                     Glide.with(getApplicationContext())
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
                             .override(100, 100)
                             .into(profilePicture);
-                } else {
-                    Toast.makeText(ProfileListActivity.this, "no dp from pro", Toast.LENGTH_SHORT).show();
+
+                } catch (Exception e) {
+
+                    Toast.makeText(ProfileListActivity.this, "no dp", Toast.LENGTH_SHORT).show();
+
                 }
+
 
             }
 
@@ -282,7 +287,11 @@ public class ProfileListActivity extends AppCompatActivity {
 
     public void GoToHost(View view) {
 
-        Intent i = new Intent(ProfileListActivity.this, HostActivity.class);
+        Intent i = new Intent(ProfileListActivity.this, Welcome_activity.class);
+
+            new Preference_Manager(this).clearPreferences();
+            startActivity(new Intent(this, Welcome_activity.class));
+            finish();
 
         startActivity(i);
 
