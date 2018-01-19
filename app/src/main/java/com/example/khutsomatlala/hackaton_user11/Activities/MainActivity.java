@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
                 //  progressDialog.dismiss();
                 workingSpaces.clear();
 
-                //Fectching information from database
+                //Fetching information from database
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     WorkingSpace workingSpace = new WorkingSpace();
 
@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
                     }
 
                     workingSpace.setPictures(pictures);
-                    //Get and set fetaures of working space
+                    //Get and set features of working space
                     List<Feature> features = new ArrayList<>();
                     for (DataSnapshot _snap : snapshot.child("features").getChildren()) {
                         Feature feature = new Feature();

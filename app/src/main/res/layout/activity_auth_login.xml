@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="24dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/backlogo" />
+        android:src="@drawable/one" />
 
 
     <LinearLayout
