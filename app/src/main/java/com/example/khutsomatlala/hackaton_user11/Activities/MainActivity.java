@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
                     details.setPrice((long) snapshot.child("details").child("PlacePrice").getValue());
                     details.setPlaceLatitude(snapshot.child("details").child("Latitude").getValue().toString());
                     details.setPlaceLongitude(snapshot.child("details").child("Longitude").getValue().toString());
-                    details.setPlaceWebsite(snapshot.child("details").child("PlaceWebsite").getValue().toString());
+               //     details.setPlaceWebsite(snapshot.child("details").child("PlaceWebsite").getValue().toString());
                     details.setCover_pic(snapshot.child("details").child("cover_pic").getValue().toString());
 
                     workingSpace.setPlaceDetails(details);

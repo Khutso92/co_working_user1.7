@@ -28,7 +28,6 @@ public class Auth_loginActivity extends Activity {
     FirebaseDatabase database;
     DatabaseReference myRef;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +41,6 @@ public class Auth_loginActivity extends Activity {
         password = (EditText) findViewById(R.id.edt_password);
         signIn = (Button) findViewById(R.id.btn_sign_in);
         signUp = (Button) findViewById(R.id.btn_sign_up);
-
-
 
         //Checks if user is already logged in
         if (mAuth.getCurrentUser() != null) {
@@ -61,7 +58,6 @@ public class Auth_loginActivity extends Activity {
                 String getPassword = password.getText().toString().trim();
 
                 if (!validateSign()) {
-
                     return;
                 } else {
 

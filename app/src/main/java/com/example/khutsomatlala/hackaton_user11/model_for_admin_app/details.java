@@ -2,7 +2,8 @@ package com.example.khutsomatlala.hackaton_user11.model_for_admin_app;
 
 
 
-public class details {
+public class
+details {
 
     //Data members
     public String Latitude;
@@ -13,7 +14,6 @@ public class details {
     public String PlaceInfo;
     public String PlaceName;
     public int PlacePrice;
-    public String PlaceWebsite;
     public String cover_pic;
 
 
@@ -22,16 +22,16 @@ public class details {
 
     }
 
-    public details(String latitude, String longitude, String placeAddress, String placeCell, String placeHours, String placeInfo, String placeName, int placePrice, String placeWebsite, String cover_pic) {
-        Latitude = latitude;
-        Longitude = longitude;
+    public details(String Latitude, String Longitude, String placeAddress, String placeCell, String placeHours, String placeInfo, String placeName, int placePrice , String cover_pic) {
+      this.Latitude = Latitude;
+      this.Longitude = Longitude;
         PlaceAddress = placeAddress;
         PlaceCell = placeCell;
         PlaceHours = placeHours;
         PlaceInfo = placeInfo;
         PlaceName = placeName;
         PlacePrice = placePrice;
-        PlaceWebsite = placeWebsite;
+
         this.cover_pic = cover_pic;
     }
 }

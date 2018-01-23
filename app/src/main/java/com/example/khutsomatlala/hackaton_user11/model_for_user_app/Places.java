@@ -7,7 +7,7 @@ import java.util.List;
  * Created by khutsomatlala on 2017/08/29.
  */
 
-public class Place implements Serializable {
+public class Places implements Serializable {
 
     //Data members
     public String placeName;
@@ -48,16 +48,16 @@ public class Place implements Serializable {
 
     //For user
 
-    public Place() {
+    public Places() {
 
     }
 
 
-    public Place(String comment, String rate) {
+    public Places(String comment, String rate) {
 
     }
 
-    public Place(String placeName, String placeInfo, String placeAddress, String placeCell, String placeHours, String placeWebsite, String placeLongitude, String placeLatitude, String urI, String email, List<Feature> features, String like, int num) {
+    public Places(String placeName, String placeInfo, String placeAddress, String placeCell, String placeHours, String placeWebsite, String placeLongitude, String placeLatitude, String urI, String email, List<Feature> features, String like, int num) {
         this.placeName = placeName;
         this.placeInfo = placeInfo;
         this.placeAddress = placeAddress;

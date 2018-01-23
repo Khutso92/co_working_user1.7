@@ -17,21 +17,21 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.Activities.MaxPicActivity;
 import com.example.khutsomatlala.hackaton_user11.Activities.bookingActivity;
-import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Place;
+import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Places;
 import com.example.khutsomatlala.hackaton_user11.Activities.PlaceDetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
 
 import java.util.List;
 
 
-public class imageListAdapter extends ArrayAdapter<Place> {
+public class imageListAdapter extends ArrayAdapter<Places> {
 
     private Activity context;
     private int resource;
-    private List<Place> listImage;
+    private List<Places> listImage;
 
 
-    public imageListAdapter(@NonNull Activity context, @LayoutRes int resource, @NonNull List<Place> objects) {
+    public imageListAdapter(@NonNull Activity context, @LayoutRes int resource, @NonNull List<Places> objects) {
         super(context, resource, objects);
 
         this.context = context;

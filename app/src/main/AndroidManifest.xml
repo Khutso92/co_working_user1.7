@@ -5,13 +5,18 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+    <meta-data android:name="com.google.geo.API_KEY"
+        android:value="AIzaSyD_E84UnP0nmc8-w-ZiS1CxxUMJ9acZINM"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/one"
         android:label="@string/app_name"
         android:roundIcon="@drawable/one"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="android.support.multidex.MultiDexApplication">
         <activity
             android:name=".Activities.Auth_loginActivity"
             android:label="Co-Working Spaces">
@@ -59,7 +64,12 @@
             android:windowSoftInputMode="adjustPan"
             android:label="Host Your Space"></activity>
 
-        <activity android:name=".Welcome_activity"/>
+        <activity android:name=".Activities.First_Host"/>
+        <activity android:name=".Activities.Second_Host"/>
+        <activity android:name=".Activities.Third_Host"/>
+        <activity android:name=".Activities.Fourth_Host"/>
+        <activity android:name=".Activities.Firth_Host"/>
+        <activity android:name=".Activities.Sixth_Host"/>
     </application>
 
 </manifest>

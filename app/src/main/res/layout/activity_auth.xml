@@ -79,9 +79,7 @@
         <android.support.design.widget.TextInputLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            >
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/edt_password"
@@ -96,7 +94,6 @@
                 android:textColor="#fff"
                 android:textColorHint="#40ffffff" />
         </android.support.design.widget.TextInputLayout>
-
 
     </LinearLayout>
 

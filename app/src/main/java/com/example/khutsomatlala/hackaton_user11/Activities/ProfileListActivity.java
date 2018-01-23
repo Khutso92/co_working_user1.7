@@ -14,9 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.Preference_Manager;
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.Welcome_activity;
 import com.example.khutsomatlala.hackaton_user11.adapter.ProfileAdapter;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.ProfilePojo;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -232,40 +230,43 @@ public class ProfileListActivity extends AppCompatActivity {
         });*/
         btnUpload.setVisibility(View.GONE);
 
+       try {
+           childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
 
-        StorageReference childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
+            //uploading the image
+            UploadTask uploadTask = childRef.putFile(filePath);
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    pd.dismiss();
 
-        //uploading the image
-        UploadTask uploadTask = childRef.putFile(filePath);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                pd.dismiss();
+                    @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
+                    profileUri = uir.toString();
 
-                @SuppressWarnings("VisibleForTests") Uri uir = taskSnapshot.getDownloadUrl();
-                profileUri = uir.toString();
+                    ProfilePojo profilePojo = new ProfilePojo();
+                    profilePojo.setImage(uir.toString());
+                    databaseProfile.setValue(profilePojo);
 
-                ProfilePojo profilePojo = new ProfilePojo();
-                profilePojo.setImage(uir.toString());
-                databaseProfile.setValue(profilePojo);
+                    Toast.makeText(ProfileListActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    pd.dismiss();
 
-                Toast.makeText(ProfileListActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
+                    Toast.makeText(ProfileListActivity.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
+                }
+            });
 
-                Toast.makeText(ProfileListActivity.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
-            }
-        });
+            pd = new ProgressDialog(ProfileListActivity.this);
+            pd.setMessage("loading");
+            pd.show();
 
-        pd = new ProgressDialog(ProfileListActivity.this);
-        pd.setMessage("loading");
-        pd.show();
-
+       }
+       catch (NullPointerException f){
+           Toast.makeText(this, "unable to upload pro pic", Toast.LENGTH_SHORT).show();
+       }
     }
-
 
     public void GoToProfile(View view) {
 
@@ -287,11 +288,9 @@ public class ProfileListActivity extends AppCompatActivity {
 
     public void GoToHost(View view) {
 
-        Intent i = new Intent(ProfileListActivity.this, Welcome_activity.class);
+        Intent i = new Intent(ProfileListActivity.this, First_Host.class);
+        i.putExtra("name",mUsername);
 
-            new Preference_Manager(this).clearPreferences();
-            startActivity(new Intent(this, Welcome_activity.class));
-            finish();
 
         startActivity(i);
 

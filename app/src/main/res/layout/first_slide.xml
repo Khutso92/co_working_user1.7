@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg"
     android:orientation="vertical">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+       android:layout_centerInParent="true"
+        android:paddingTop="30dp"
         android:orientation="vertical">
 
         <TextView
@@ -23,10 +27,11 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Lerato Sambula"
+            tools:text="Lerato Sambula"
             android:textColor="#196b69" />
 
         <TextView
@@ -35,6 +40,21 @@
             android:layout_margin="12dp"
             android:text="We just neeed to get to know you better before you can host your space"
             android:textColor="#000" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_next_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="next"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="false"
+            android:textColor="#196b69"
+            android:background="@android:color/transparent"
+            />
+        </RelativeLayout>
     </LinearLayout>
 
 
