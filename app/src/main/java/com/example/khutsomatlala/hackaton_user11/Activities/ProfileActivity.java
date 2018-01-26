@@ -64,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_profile);
 
-        profileListView = (ListView) findViewById(R.id.profileGridView);
+        profileListView =   findViewById(R.id.profileGridView);
         final List<ProfilePojo> profilePojos = new ArrayList<>();
         mProfileAdapter = new ProfileAdapter(this,R.layout.activity_profile,profilePojos);
         profileListView.setAdapter(mProfileAdapter);
@@ -97,7 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
         profilePrice = findViewById(R.id.profilePrice);
         mStorage = FirebaseStorage.getInstance().getReference();
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
-
 
 /*
 

@@ -42,7 +42,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
     int hourIn, hourOut, personNumber, totalPrice;
 
-    TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson;
+    TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson, tv_month;
 
     String dayStamp = new SimpleDateFormat("dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
@@ -50,6 +50,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
 
     Date Cal_date;
+
     private DatabaseReference mCheckSpaceReference, mbookingReference;
 
     String Time_in, Time_out, numberofPeople;
@@ -103,8 +104,8 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
 
         mPrice = (TextView) findViewById(R.id.txtPrice);
-
         txtPrice = (TextView) findViewById(R.id.txtPrice);
+        tv_month = findViewById(R.id.tv_month);
 
         //Get a new instance of Calendar
         final Calendar c = Calendar.getInstance();
@@ -138,11 +139,13 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
         //Calendar
         cal = Calendar.getInstance();
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("  MMMM yyyy");
+
+        final SimpleDateFormat dateFormatday = new SimpleDateFormat("dd MMMM yyyy");
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(dateFormat.format(cal.getTime()));
+        //  actionBar.setTitle(dateFormat.format(cal.getTime()));
 
         compactCalendarView = findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
@@ -152,39 +155,52 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             public void onDayClick(Date dateClicked) {
 
                 year = "20" + (dateClicked.getYear() - 100);
-                day = "0" + dateClicked.getDate();
+                day = "" + dateClicked.getDate();
                 month = "" + (dateClicked.getMonth() + 1);
 
                 if (date_selected == true) {
 
                     txtDateBooked.setText("Date booked - " + date);
+
                 } else {
                     txtDateBooked.setText("Date booked - date not selected");
                 }
 
                 Date todaysDate = new Date();
 
-                if (todaysDate.before(dateClicked)  || day.equals(dayStamp.toString())) {
-                    //  Toast.makeText(bookingActivity.this, "valid  date ", Toast.LENGTH_SHORT).show();
-                    date = day + "-" + month + "-" + year;
+                if (dateFormatday.format(dateClicked).equals(dateFormatday.format(cal.getTime()).toString())){
 
-                    date_selected = true;
+                    Toast.makeText(bookingActivity.this, "cant  book for today", Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    if (todaysDate.before(dateClicked)) {
 
-                    txtDateBooked.setText("Date booked - " + date);
-                } else {
-                    Toast.makeText(bookingActivity.this, "date has pasted " + dayStamp, Toast.LENGTH_SHORT).show();
+                        date = day + "-" + month + "-" + year;
 
+                        date_selected = true;
 
+                        txtDateBooked.setText("Date booked - " + date);
+                    } else {
+                        Toast.makeText(bookingActivity.this, "date has pasted", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
+
+
+
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
+                // actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
                 Cal_date = firstDayOfNewMonth;
+
+                tv_month.setText(dateFormat.format(Cal_date).toString());
             }
 
         });
+
+        tv_month.setText(dateFormat.format(cal.getTime()) + "");
 
     }
 

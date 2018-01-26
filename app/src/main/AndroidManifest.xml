@@ -37,7 +37,7 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".Activities.bookingActivity"
-            android:label="Booking" />
+          />
         <activity android:name=".Activities.Splash" />
         <activity
             android:name=".Activities.MainActivity"

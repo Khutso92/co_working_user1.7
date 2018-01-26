@@ -265,7 +265,7 @@ public class Sixth_Host extends AppCompatActivity {
                     String key = mDatabaseRefPlaces.push().getKey();
 
                     //details details = new details( latlon, placeAddress, phone, hours, infor, PlaceName, Integer.parseInt(price),  urI);
-                    details details = new details("5485", "88455", placeAddress, phone, hours, infor, PlaceName, Integer.parseInt(price), urI);
+                    details details = new details("34.058653", "-118.443135", placeAddress, phone, hours, infor, PlaceName, Integer.parseInt(price), urI);
 
 
 

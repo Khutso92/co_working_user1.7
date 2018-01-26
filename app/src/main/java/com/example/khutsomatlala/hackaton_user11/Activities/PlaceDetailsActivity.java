@@ -544,7 +544,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
                 } else {
 
-                    Toast.makeText(PlaceDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(PlaceDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -665,7 +665,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
                 } else {
-                    Toast.makeText(PlaceDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(PlaceDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
                 }
             }
 
