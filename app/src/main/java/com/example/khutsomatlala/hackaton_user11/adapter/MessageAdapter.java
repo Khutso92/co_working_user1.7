@@ -46,8 +46,6 @@ int positionU ;
         authorTextView.setText(message.getName());
         timeTextView.setText(message.getMessageTime());
 
-
-
         return convertView;
     }
 }
