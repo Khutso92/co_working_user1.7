@@ -29,9 +29,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by Admin on 9/15/2017.
- */
 
 public class bookingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -164,7 +161,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
                 Date todaysDate = new Date();
 
-                if (todaysDate.before(dateClicked)  || day.equals(dayStamp.toString())) {
+                if (todaysDate.before(dateClicked) || day.equals(dayStamp.toString())) {
                     //  Toast.makeText(bookingActivity.this, "valid  date ", Toast.LENGTH_SHORT).show();
                     date = day + "-" + month + "-" + year;
 
@@ -225,11 +222,9 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                             Toast.makeText(bookingActivity.this, name + " closes at " + close_time + ":00", Toast.LENGTH_SHORT).show();
                         }
 
-
                     } else {
                         Toast.makeText(bookingActivity.this, name + " opens at - " + open_time + ":00", Toast.LENGTH_SHORT).show();
                     }
-
 
                 } else {
                     Toast.makeText(bookingActivity.this, "No values in the DB", Toast.LENGTH_SHORT).show();
