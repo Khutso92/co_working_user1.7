@@ -58,17 +58,6 @@ public class ReviewActivity extends Activity {
     int minute, hour;
     CircleImageView profilePicture;
 
-    //rating
-    int mTotalRating = 0;
-    long mNumberofUser = 0;
-    float mAverage = 0;
-    Button ftitle2, ftitle3;
-    RatingBar ratingBar;
-
-    RatingBar ratingRatingBar;
-    TextView ratingDisplayTextView;
-    int RateNumber;
-    String NumberofUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +157,6 @@ public class ReviewActivity extends Activity {
                 String hourText = "";
                 String minuteText;
 
-
                 switch (minute) {
                     case 0:
                         minuteText = "00";
@@ -205,7 +193,6 @@ public class ReviewActivity extends Activity {
 
                 }
 
-
                 switch (hour) {
                     case 0:
                         hourText = "12";
@@ -237,20 +224,16 @@ public class ReviewActivity extends Activity {
                     case 9:
                         hourText = "09";
                         break;
-                        default:
-                            hourText = String.valueOf(hour);
-
+                    default:
+                        hourText = String.valueOf(hour);
 
                 }
-
 
                 // TODO: Sending data to the DB
                 //FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name, hour + ":" + minute);
                 FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), user_name, String.valueOf(hourText) + ":" + minuteText);
 
                 String key = mCommentsDatabaseReference.push().getKey();
-
-
                 mCommentsDatabaseReference.child(PlaceName).child(key).setValue(friendlyMessage);
 
                 // Clear input box
@@ -262,13 +245,12 @@ public class ReviewActivity extends Activity {
         mCommentsDatabaseReference.child(PlaceName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//
+
 
                 //Fectching information from database
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     reviews = dataSnapshot.getChildrenCount();
-
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
 
@@ -286,127 +268,6 @@ public class ReviewActivity extends Activity {
 
             }
         });
-        mRateDatabaseReference = mFirebaseDatabase.getReference();
-        ratingRatingBar = findViewById(R.id.rating_rating_bar);
-        ratingDisplayTextView = findViewById(R.id.rating_display_text_View);
-        ratingRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(final RatingBar ratingBar, float v, boolean b) {
-                if (ratingRatingBar.getRating() == 1) {
-                    rateMessage = "Hated it";
-                    RateNumber = 1;
-
-                } else if ((int) v == 2) {
-                    rateMessage = "Disliked it";
-                    RateNumber = 2;
-                } else if ((int) v == 3) {
-                    rateMessage = "It's OK";
-                    RateNumber = 3;
-                } else if ((int) v == 4) {
-                    rateMessage = "Liked it";
-                    RateNumber = 4;
-                } else {
-                    rateMessage = "Loved it";
-                    RateNumber = 5;
-                }
-
-                ratingDisplayTextView.setText("" + rateMessage);
-
-                //sending the rating
-                mRateDatabaseReference.child("Rating").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        //mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(RateNumber);
-                        mRateDatabaseReference.child("Rating").child(PlaceName).child("Khutso").setValue(RateNumber);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-
-
-        });
-
-        mRateDatabaseReference.child("Rating").child(PlaceName).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                mNumberofUser = dataSnapshot.getChildrenCount();
-
-
-                NumberofUser = String.valueOf(mNumberofUser);
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    mTotalRating = mTotalRating + Integer.parseInt(snapshot.getValue().toString());
-                }
-                try {
-
-                    mAverage = (float) ((mTotalRating / mNumberofUser));
-
-                 /*   DecimalFormat decimalFormat = new DecimalFormat("#.##");
-
-                    ftitle2.setText(decimalFormat.format(mAverage) + "\n Stars");*/
-
-                    mTotalRating = 0;
-
-                } catch (ArithmeticException e) {
-                    // Toast.makeText(ReviewActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-
-
-       //pic
-        db = mFirebaseDatabase.getReference();
-
-        db.child("profile").child(user_uid).child("image").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //Toast.makeText(ReviewActivity.this, ""+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-
-
-             //Log.v("Pic",dataSnapshot.getValue().toString() );
-
-            //    if (dataSnapshot.hasChildren()) {
-
-                //    String image = dataSnapshot.child(dataSnapshot.getValue().toString()).getValue().toString();
-
-//                    Glide.with(getApplicationContext())
-//                            .load(dataSnapshot.getValue().toString())
-//                         //   .centerCrop()
-//                            .override(100, 100)
-//                            .into(profilePicture);
-
-
-
-//                Picasso.with(getApplicationContext())
-//                        .load(dataSnapshot.getValue().toString())
-//                        .fit()
-//                        .centerCrop()
-//                        .into(profilePicture);
-
-            //    }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
 
@@ -414,7 +275,6 @@ public class ReviewActivity extends Activity {
 
         Intent intent = new Intent(this, ReviewActivity.class);
         intent.putExtra("PlaceName", PlaceName);
-        intent.putExtra("number", NumberofUser);
         startActivity(intent);
     }
 }
