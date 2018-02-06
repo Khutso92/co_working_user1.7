@@ -19,7 +19,7 @@
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             app:di_borderEnabled="false"
-            android:src="@drawable/walk"
+            android:src="@drawable/gathere"
             app:di_direction="bottom"
             app:di_overlap="90dp"
             app:di_position="bottom" />
