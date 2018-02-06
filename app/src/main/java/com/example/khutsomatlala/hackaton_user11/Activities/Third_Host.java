@@ -1,6 +1,7 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -69,21 +70,23 @@ public class Third_Host extends AppCompatActivity {
                 placeAdress = placeAddress.getText().toString();
 
 
-                if (PlaceName.trim().isEmpty()) {
-                    Toast.makeText(Third_Host.this, "enter place name", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (placeAdress.trim().isEmpty()) {
-                        Toast.makeText(Third_Host.this, "Enter address", Toast.LENGTH_SHORT).show();
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                    if (PlaceName.trim().isEmpty()) {
+                        Toast.makeText(Third_Host.this, "enter place name", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (infor.trim().isEmpty()) {
-                       Toast.makeText(Third_Host.this, "enter infor", Toast.LENGTH_SHORT).show();
+                        if (placeAdress.trim().isEmpty()) {
+                            Toast.makeText(Third_Host.this, "Enter address", Toast.LENGTH_SHORT).show();
+
                         } else {
-                            Intent i = new Intent(Third_Host.this, Fourth_Host.class);
-                            i.putExtra("name", PlaceName);
-                            i.putExtra("infor", infor);
-                            i.putExtra("placeAddress", placeAdress);
-                            startActivity(i);
+                            if (infor.trim().isEmpty()) {
+                           Toast.makeText(Third_Host.this, "enter infor", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Intent i = new Intent(Third_Host.this, Fourth_Host.class);
+                                i.putExtra("name", PlaceName);
+                                i.putExtra("infor", infor);
+                                i.putExtra("placeAddress", placeAdress);
+                                startActivity(i);
+                            }
                         }
                     }
                 }

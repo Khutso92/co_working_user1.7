@@ -253,6 +253,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         String itemIn = spinnerTimeIn.getSelectedItem().toString();
 
         String itemOut = spinnerTimeOut.getSelectedItem().toString();
