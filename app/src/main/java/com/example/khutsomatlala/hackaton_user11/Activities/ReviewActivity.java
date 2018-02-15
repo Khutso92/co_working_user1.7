@@ -236,6 +236,8 @@ public class ReviewActivity extends Activity {
                 String key = mCommentsDatabaseReference.push().getKey();
                 mCommentsDatabaseReference.child(PlaceName).child(key).setValue(friendlyMessage);
 
+
+
                 // Clear input box
                 mMessageEditText.setText("");
             }
@@ -253,6 +255,7 @@ public class ReviewActivity extends Activity {
                     reviews = dataSnapshot.getChildrenCount();
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
+
 
                 }
 

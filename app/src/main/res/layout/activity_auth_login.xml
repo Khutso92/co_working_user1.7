@@ -22,7 +22,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -33,13 +33,15 @@
 
             <EditText
                 android:id="@+id/edt_email"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
+
                 android:backgroundTint="@android:color/white"
-                android:drawableLeft="@drawable/icn"
-                android:drawablePadding="12dp"
+
+    android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:hint="Email Address"
                 android:inputType="textEmailAddress"
                 android:textColor="#fff"
@@ -54,13 +56,15 @@
 
             <EditText
                 android:id="@+id/edt_password"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:layout_height="wrap_content"
 
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="@android:color/white"
-                android:drawableLeft="@drawable/locked"
-                android:drawablePadding="12dp"
+
+
                 android:hint="Password"
                 android:inputType="textPassword|textNoSuggestions"
                 android:textColor="#fff"
@@ -68,12 +72,16 @@
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+
         android:layout_marginTop="12dp"
         android:orientation="horizontal">
 
@@ -123,6 +131,8 @@
         android:textColor="#fff"
         android:textSize="16dp"
         tools:ignore="OnClick" />
+
+</LinearLayout>
 
 
 </LinearLayout>
