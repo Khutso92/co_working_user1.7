@@ -1,11 +1,16 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
@@ -23,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Fragment {
 
     //public static final String FB_DATABASE_PATH = "new_places";
     public static final String FB_DATABASE_PATH = "places";
@@ -35,18 +40,25 @@ public class MainActivity extends Activity {
     public static Boolean stauts = false;
     private DatabaseReference user;
 
-
+    private  View view;
     String user_name, user_uid, email;
 
 
     FirebaseAuth mAuth;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        mRecyclerView = findViewById(R.id.recyclerView);
+
+
+    public MainActivity(){}
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.activity_main, container, false);
+
+
+        mRecyclerView = view.findViewById(R.id.recyclerView);
         mAuth = FirebaseAuth.getInstance();
 
         user_uid = mAuth.getCurrentUser().getUid();
@@ -54,7 +66,7 @@ public class MainActivity extends Activity {
         mDatabaseRefDetails = FirebaseDatabase.getInstance().getReference("new_places");
 
         //Init adapter
-        adapter = new MyItemRecyclerViewAdapter(workingSpaces, MainActivity.this);
+        adapter = new MyItemRecyclerViewAdapter(workingSpaces, getActivity());
         mRecyclerView.setAdapter(adapter);
 
 
@@ -126,19 +138,19 @@ public class MainActivity extends Activity {
             }
         });
 
-
+return view;
     }
 
-    public void fab(View view) {
-        Intent intent = new Intent(MainActivity.this, ProfileListActivity.class);
-        intent.putExtra("user_uid", user_uid);
-        intent.putExtra("mUsername", user_name);
-        intent.putExtra("email", email);
-
-
-       // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
-        startActivity(intent);
-    }
+//    public void fab(View view) {
+//        Intent intent = new Intent(MainActivity.this, ProfileListActivity.class);
+//        intent.putExtra("user_uid", user_uid);
+//        intent.putExtra("mUsername", user_name);
+//        intent.putExtra("email", email);
+//
+//
+//       // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
+//        startActivity(intent);
+//    }
 
 
 }

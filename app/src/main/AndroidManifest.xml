@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <meta-data
         android:name="com.google.geo.API_KEY"
         android:value="AIzaSyD_E84UnP0nmc8-w-ZiS1CxxUMJ9acZINM" />
@@ -20,7 +19,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.Auth_loginActivity"
-            android:label="Co-Working Spaces">
+            android:label="Co-Working Spaces"
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,13 +36,10 @@
         <activity
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".Activities.bookingActivity"
-          />
+        <activity android:name=".Activities.bookingActivity" />
         <activity android:name=".Activities.Splash" />
-        <activity
-            android:name=".Activities.MainActivity"
-            android:label="Co-Working Spaces" />
+
+
         <activity android:name=".Activities.MaxPicActivity" />
         <activity
             android:name=".Activities.PlaceDetailsActivity"
@@ -61,18 +58,20 @@
         <activity
             android:name=".Activities.ProfileListActivity"
             android:label="Profile" />
-
         <activity
             android:name=".Activities.HostActivity"
             android:label="Host Your Space"
-            android:windowSoftInputMode="adjustPan"></activity>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.First_Host" />
         <activity android:name=".Activities.Second_Host" />
         <activity android:name=".Activities.Third_Host" />
         <activity android:name=".Activities.Fourth_Host" />
         <activity android:name=".Activities.Firth_Host" />
         <activity android:name=".Activities.Sixth_Host" />
+        <activity
+            android:name=".Activities.MainMenuActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main_menu"></activity>
     </application>
 
 </manifest>

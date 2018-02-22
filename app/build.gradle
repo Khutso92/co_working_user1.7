@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
+        vectorDrawables.useSupportLibrary = true
     }
 
 
@@ -26,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -49,10 +51,15 @@ dependencies {
     compile 'com.andkulikov:transitionseverywhere:1.7.7'
     compile 'com.squareup.picasso:picasso:2.5.0'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.firebase:firebase-core:10.0.1'
     compile 'com.github.santalu:diagonal-imageview:1.0.3'
     implementation 'com.google.android.gms:play-services:10.0.1'
+
     testCompile 'junit:junit:4.12'
 
 }
+
+
+
 
 apply plugin: 'com.google.gms.google-services'

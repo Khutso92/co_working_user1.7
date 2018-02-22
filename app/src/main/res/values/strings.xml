@@ -96,6 +96,10 @@
     <string name="title_activity_place_details">PlaceDetailsActivity</string>
     <string name="my_preference" />
     <string name="my_preference_key">my_preference_key</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="title_home">CWS</string>
+    <string name="title_dashboard">events</string>
+    <string name="title_notifications">rentals</string>
 
 
 </resources>

@@ -121,6 +121,7 @@ public class Auth_loginActivity extends Activity {
                     public static final String TAG = "Auth";
 
 
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 //                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
@@ -135,7 +136,6 @@ public class Auth_loginActivity extends Activity {
                             finish();
                             startActivity(new Intent(getApplicationContext(), Splash.class));
                         }
-
                     }
                 });
 
@@ -149,14 +149,13 @@ public class Auth_loginActivity extends Activity {
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed(){
         super.onBackPressed();
 
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory( Intent.CATEGORY_HOME );
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
-        finish();
 
     }
 }
