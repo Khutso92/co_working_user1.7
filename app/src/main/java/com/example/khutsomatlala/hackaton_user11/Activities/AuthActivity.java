@@ -26,7 +26,7 @@ public class AuthActivity extends Activity {
     FirebaseDatabase database;
 
     DatabaseReference myRef;
-    String getname,     getEmail, getPassword;
+    String getname,getEmail, getPassword;
 
     private EditText email;
     private EditText password;

@@ -1,9 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
-import android.app.Activity;
-
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -45,9 +42,6 @@ public class MainActivity extends Fragment {
 
 
     FirebaseAuth mAuth;
-
-
-
 
     public MainActivity(){}
 

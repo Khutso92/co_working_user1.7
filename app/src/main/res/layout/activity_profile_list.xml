@@ -62,7 +62,6 @@
     <TextView
         android:id="@+id/TextView_profileEmail"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:background="@null"
         android:textAlignment="center"
@@ -73,7 +72,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
-
         android:layout_gravity="center_horizontal"
         android:layout_margin="12dp"
         android:background="#196b69" />
@@ -83,8 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="8dp"
-        android:onClick="GoToProfile"
-        app:cardElevation="12dp">
+        android:onClick="GoToProfile">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -112,8 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="8dp"
-        android:onClick="GoToHost"
-        app:cardElevation="12dp">
+        android:onClick="GoToHost">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -142,7 +138,7 @@
         android:layout_height="80dp"
         android:layout_margin="8dp"
         android:onClick="SignOut"
-        app:cardElevation="12dp">
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -48,7 +48,7 @@ public class Auth_loginActivity extends Activity {
 
 //            User not logged in
             finish();
-            startActivity(new Intent(getApplicationContext(), Splash.class));
+            startActivity(new Intent(getApplicationContext(), newSplashActivity.class));
         }
 
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +134,7 @@ public class Auth_loginActivity extends Activity {
                             Toast.makeText(Auth_loginActivity.this, "Email or Password incorrect", Toast.LENGTH_SHORT).show();
                         } else {
                             finish();
-                            startActivity(new Intent(getApplicationContext(), Splash.class));
+                            startActivity(new Intent(getApplicationContext(), newSplashActivity.class));
                         }
                     }
                 });

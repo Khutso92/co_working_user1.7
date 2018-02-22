@@ -19,11 +19,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.Auth_loginActivity"
-            android:label="Co-Working Spaces"
-           >
+            android:label="Co-Working Spaces">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,9 +35,6 @@
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.bookingActivity" />
-        <activity android:name=".Activities.Splash" />
-
-
         <activity android:name=".Activities.MaxPicActivity" />
         <activity
             android:name=".Activities.PlaceDetailsActivity"
@@ -68,10 +63,12 @@
         <activity android:name=".Activities.Fourth_Host" />
         <activity android:name=".Activities.Firth_Host" />
         <activity android:name=".Activities.Sixth_Host" />
+        <activity android:name=".Activities.Splash" />
         <activity
             android:name=".Activities.MainMenuActivity"
             android:exported="true"
-            android:label="@string/title_activity_main_menu"></activity>
+            android:label="@string/title_activity_main_menu" />
+        <activity android:name=".Activities.newSplashActivity"></activity>
     </application>
 
 </manifest>
