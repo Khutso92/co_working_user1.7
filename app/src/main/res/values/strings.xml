@@ -97,9 +97,9 @@
     <string name="my_preference" />
     <string name="my_preference_key">my_preference_key</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>
-    <string name="title_home">CWS</string>
-    <string name="title_dashboard">events</string>
-    <string name="title_notifications">rentals</string>
+    <string name="title_cws">co working space  loading ...</string>
+    <string name="title_events">events</string>
+    <string name="title_property">property</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

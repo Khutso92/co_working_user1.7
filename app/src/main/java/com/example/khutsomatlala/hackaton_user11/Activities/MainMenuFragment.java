@@ -26,15 +26,16 @@ android.support.v4.app.FragmentManager fragmentManager;
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    mTextMessage.setText(R.string.title_cws);
                     fragment = new MainActivity();
 //                    return true;
                     break;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    mTextMessage.setText(R.string.title_events);
+                    fragment = new EventFragment();
                     break;
                 case R.id.navigation_property:
-                    //mTextMessage.setText(R.string.title_notifications);
+                mTextMessage.setText(R.string.title_property);
                     fragment = new PropertyFragment();
                     break;
             }
