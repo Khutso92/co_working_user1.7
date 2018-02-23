@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuFragment extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -28,13 +28,15 @@ android.support.v4.app.FragmentManager fragmentManager;
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     fragment = new MainActivity();
-                    return true;
+//                    return true;
+                    break;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
+                    break;
+                case R.id.navigation_property:
+                    //mTextMessage.setText(R.string.title_notifications);
+                    fragment = new PropertyFragment();
+                    break;
             }
 
             final android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();

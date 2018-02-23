@@ -65,7 +65,7 @@
         <activity android:name=".Activities.Sixth_Host" />
         <activity android:name=".Activities.Splash" />
         <activity
-            android:name=".Activities.MainMenuActivity"
+            android:name=".Activities.MainMenuFragment"
             android:exported="true"
             android:label="@string/title_activity_main_menu" />
         <activity android:name=".Activities.newSplashActivity"></activity>

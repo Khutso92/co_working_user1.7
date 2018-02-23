@@ -113,10 +113,8 @@ public class MainActivity extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
 
         user = FirebaseDatabase.getInstance().getReference().child("users").child(user_uid);
         user.addValueEventListener(new ValueEventListener() {
