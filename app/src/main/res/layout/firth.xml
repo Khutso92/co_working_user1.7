@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
 
-        <com.santalu.diagonalimageview.DiagonalImageView
+        <!--<com.santalu.diagonalimageview.DiagonalImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -23,7 +23,7 @@
             android:src="@drawable/impacthub"
             app:di_direction="bottom"
             app:di_overlap="90dp"
-            app:di_position="bottom" />
+            app:di_position="bottom" />-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
