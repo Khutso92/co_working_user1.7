@@ -1,74 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/placeLocation"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            android:layout_alignParentTop="true"
-            android:fontFamily="sans-serif"
-            android:text="Johannesburg"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="R2500 p/m"
-            android:textColor="#000000"
-            android:textSize="14dp"
 
-            android:textStyle="bold" />
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/placePhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="011 123 4567"
-        android:textColor="#000000"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="House to rent"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#0E3047"
-        android:fontFamily="sans-serif-condensed"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="3"
-        android:ellipsize="end"
-        android:fontFamily="sans-serif"
-        android:scrollHorizontally="true"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer convallis enim tellus, ac imperdiet turpis ultricies eu. Cras at tempor libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer sem ex, convallis id quam vitae, aliquet imperdiet mi." />
+                        <ImageView
+                            android:id="@+id/iv_pic1"
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/placeholder" />
 
-    <TextView
-        android:id="@+id/readMoreProperty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Read More"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enquire"
-        android:textAllCaps="false" />
-    <include layout="@layout/activity_maps" />
 
-</android.support.v4.widget.NestedScrollView>
+                        <ImageView
+                            android:id="@+id/iv_pic2"
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/placeholder" />
+
+
+                        <ImageView
+                            android:id="@+id/iv_pic3"
+                            android:layout_width="300dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/placeholder" />
+                    </LinearLayout>
+
+
+                </HorizontalScrollView>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+
+                <TextView
+                    android:id="@+id/placeLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:layout_alignParentTop="true"
+                    android:fontFamily="sans-serif"
+                    android:text="Johannesburg"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="R2500 p/m"
+                    android:textColor="#000000"
+                    android:textSize="14dp"
+
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/placePhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="011 123 4567"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="House to rent"
+                android:textColor="#0E3047"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+
+                android:scrollHorizontally="true"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer conval Pellentesque lacinia augue odio, sit amet rutrum velit convallis et. Aenean at dictum tortor. Aenean feugiat ante quis sem ullamcorper, eget posuere nulla interdum. Aliquam sodales malesuada sapien eu auctor. Nunc vulputate mauris ornare, auctor risus eu, ultrices mi. Donec pretium ac quam ac efficitur. Maecenas a mollis elit, vel rhoncus sapien. Ut luctus odio suscipit, aliquam sem vitae, tristique purus. Cras nec egestas neque.
+
+Etiam sed eros pulvinar nibh bibendum convallis. Nam convallis, orci eget euismod ultrices, elit lorem convallis odio, vel luctus neque libero a nunc. Sed eu lacinia urna. Donec auctor dui metus, id condimentum ex scelerisque eget. Integer ullamcorper lacus sodales urna pulvinar, vitae viverra orci cursus. In quis malesuada sapien. Aliquam venenatis ac orci a vehicula. In diam mauris, ullamcorper id dictum eget, porta eget metus. Sed efficitur turpis maximus, feugiat felis sit amet, tincidunt risus. Morbi interdum est ac diam viverra, in faucibus metus vehicula.
+
+Ut eu nisi tempor nulla placerat tincidunt. Suspendisse vestibulum est eu ante pretium auctor. Pellentesque in tempor ex, eu congue est. Ut bibendum nibh a est dignissim rutrum. In et elementum elit, non dictum nibh. Donec quis sem sollicitudin, semper tellus non, cursus lorem. Sed luctus eget ex aliquet ornare. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin arcu erat, fermentum sit amet sagittis aliquet, facilisis quis dui. Nam hendrerit posuere rutrum. Nulla pellentesque posuere leo eget eleifend. Quisque in velit felis. In ut augue maximus, viverra nulla quis, facilisis velit. Praesent vulputate, metus sed semper finibus, felis quam vestibulum sapien, id maximus diam dui eu nibh. Etiam vel eros erat. Morbi eleifend sit amet neque vitae tristique.
+
+Aliquam vitae metus arcu. Praesent ornare luctus tempor. Maecenas cursus arcu sagittis, imperdiet dolor a, hendrerit libero. Curabitur ac diam at lacus mollis rhoncus quis quis arcu. Nunc vel ultricies diam. Maecenas feugiat, augue at accumsan rutrum, tortor tortor gravida lacus, ac fringilla neque diam et nisl. Suspendisse tempus est vitae urna feugiat, eu tristique velit luctus. Ut quis nisl a mi semper auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; lis enim tellus, ac imperdiet turpis ultricies eu. Cras at tempor libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer sem ex, convallis id quam vitae, aliquet imperdiet mi." />
+
+            <TextView
+                android:id="@+id/readMoreProperty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Read More" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enquire"
+                android:textAllCaps="false" />
+
+            <include layout="@layout/activity_maps" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

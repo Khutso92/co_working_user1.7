@@ -38,7 +38,7 @@
         <activity android:name=".Activities.bookingActivity" />
         <activity android:name=".Activities.MaxPicActivity" />
         <activity
-            android:name=".Activities.PlaceDetailsActivity"
+            android:name=".Activities.CWSDetailsActivity"
             android:label="@string/title_activity_place_details"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
@@ -70,6 +70,7 @@
             android:exported="true"
             android:label="@string/title_activity_main_menu" />
         <activity android:name=".Activities.newSplashActivity" />
+        <activity android:name=".Activities.PropertyDetailsActivity" />
     </application>
 
 </manifest>

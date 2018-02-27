@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,14 +54,14 @@ import java.util.Date;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class PlaceDetailsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCallback {
     //slide
-    List<PlaceDetailsActivity> catalogList;
-    LinearLayoutManager linearLayoutManager;
-    List<PlaceDetailsActivity> catalogLists, catalogListCars, catalogListFurniture, catalogListPhones;
-    DatabaseReference getDatabaseImages;
+    List<CWSDetailsActivity> catalogList;
+
+
+
     ImagesAdapter Slideadapter;
-    Context context;
+
 
     //FIREBASE CONNECTION
     private DatabaseReference Slidedatabase, mFeatdatabase;
@@ -316,7 +315,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                 }
 
                 //Init adapter
-                mMessageAdapter = new MessageAdapter(PlaceDetailsActivity.this, R.layout.image_item, mComments);
+                mMessageAdapter = new MessageAdapter(CWSDetailsActivity.this, R.layout.image_item, mComments);
 
                 mMessageListView.setAdapter(mMessageAdapter);
 
@@ -344,7 +343,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         //viewPager.setAdapter(adapter);
 
 
-        // Queries Firebase for places endpoint
+        // Queries Firebase for places endpoint  Sihle
         FirebaseDatabase.getInstance().getReference().child("places").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -390,114 +389,6 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
         mAuth = FirebaseAuth.getInstance();
 
 
-        //reading the rating bar
-       /* mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                if (dataSnapshot.getValue() == null) {
-
-                    mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(0);
-                } else {
-
-                     ratingBar.setRating(Float.parseFloat(dataSnapshot.getValue().toString()));
-
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });*/
-
-        //getting number total number of users and calc. the average
-   /*     mRateDatabaseReference.child("Rating").child(PlaceName).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                mNumberofUser = dataSnapshot.getChildrenCount();
-
-
-                NumberofUser = String.valueOf(mNumberofUser);
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    mTotalRating = mTotalRating + Integer.parseInt(snapshot.getValue().toString());
-                }
-                try {
-
-                    mAverage = (float) ((mTotalRating / mNumberofUser));
-
-                 *//*   DecimalFormat decimalFormat = new DecimalFormat("#.##");
-
-                    ftitle2.setText(decimalFormat.format(mAverage) + "\n Stars");*//*
-
-                    mTotalRating = 0;
-
-                } catch (ArithmeticException e) {
-                    Toast.makeText(PlaceDetailsActivity.this, "error - " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-*/
-
-        //rating  the place
-
-  /*      ratingRatingBar = findViewById(R.id.rating_rating_bar);
-        ratingDisplayTextView = findViewById(R.id.rating_display_text_View);
-        ratingRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(final RatingBar ratingBar, float v, boolean b) {
-                if (ratingRatingBar.getRating() == 1) {
-                    rateMessage = "Hated it";
-                    RateNumber = 1;
-
-                } else if ((int) v == 2) {
-                    rateMessage = "Disliked it";
-                    RateNumber = 2;
-                } else if ((int) v == 3) {
-                    rateMessage = "It's OK";
-                    RateNumber = 3;
-                } else if ((int) v == 4) {
-                    rateMessage = "Liked it";
-                    RateNumber = 4;
-                } else {
-                    rateMessage = "Loved it";
-                    RateNumber = 5;
-                }
-
-                ratingDisplayTextView.setText("" + rateMessage);
-
-                //sending the rating
-                mRateDatabaseReference.child("Rating").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        // mRateDatabaseReference.child("Rating").child(PlaceName).child(mAuth.getCurrentUser().getDisplayName()).setValue(RateNumber);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-            }
-
-
-        });
-*/
-
 
         //slide
         catalogList = new ArrayList<>();
@@ -518,7 +409,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                     for (DataSnapshot catalogSnapshot : dataSnapshot.child(PlaceName).getChildren()) {
 
                         Slide image1 = catalogSnapshot.getValue(Slide.class);
-                        //  Toast.makeText(PlaceDetailsActivity.this, "scroller not empty", Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(CWSDetailsActivity.this, "scroller not empty", Toast.LENGTH_SHORT).show();
 
                         image1.setPic1(image1.getPic1());
 
@@ -528,7 +419,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
                                 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
                         RecyclerView ListViewCatalog = findViewById(R.id.recycler_view);
-                        Slideadapter = new ImagesAdapter(PlaceDetailsActivity.this, image);
+                        Slideadapter = new ImagesAdapter(CWSDetailsActivity.this, image);
 //                    Toast.makeText(CatalogActivity.this, ""+catalog.getCatalogtitle(), Toast.LENGTH_SHORT).show();
                         ListViewCatalog.setLayoutManager(layoutManager);
 
@@ -537,13 +428,13 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
                 } else {
 
-                  //  Toast.makeText(PlaceDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(CWSDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(PlaceDetailsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CWSDetailsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -551,7 +442,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
     public void GoToBook(View view) {
 
-        Intent i = new Intent(PlaceDetailsActivity.this, bookingActivity.class);
+        Intent i = new Intent(CWSDetailsActivity.this, bookingActivity.class);
         i.putExtra("pic", pic1);
         i.putExtra("name", PlaceName);
         i.putExtra("price", price);
@@ -658,7 +549,7 @@ public class PlaceDetailsActivity extends FragmentActivity implements OnMapReady
 
 
                 } else {
-                   // Toast.makeText(PlaceDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(CWSDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
                 }
             }
 

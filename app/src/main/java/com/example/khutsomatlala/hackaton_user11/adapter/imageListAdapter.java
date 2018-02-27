@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.Activities.MaxPicActivity;
 import com.example.khutsomatlala.hackaton_user11.Activities.bookingActivity;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Places;
-import com.example.khutsomatlala.hackaton_user11.Activities.PlaceDetailsActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.CWSDetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
 
 import java.util.List;
@@ -91,7 +91,7 @@ public class imageListAdapter extends ArrayAdapter<Places> {
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(getContext(), PlaceDetailsActivity.class);
+                Intent intent = new Intent(getContext(), CWSDetailsActivity.class);
 
                 String lat = listImage.get(position).getPlaceLatitude();
                 String lon = listImage.get(position).getPlaceLongitude();

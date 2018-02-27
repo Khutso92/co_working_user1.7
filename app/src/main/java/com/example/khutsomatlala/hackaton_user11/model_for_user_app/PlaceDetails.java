@@ -18,6 +18,7 @@ public class PlaceDetails {
     public long price;
     public String cover_pic;
 
+
     public String getCover_pic() {
         return cover_pic;
     }
