@@ -37,11 +37,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileListActivity extends AppCompatActivity {
 
 
-    String user_uid, mUsername, email;
+    String user_uid, mUsername, email,type;
     FirebaseAuth mAuth;
 
     StorageReference childRef;
-    Button btnUpload, btnPlus;
+    Button btnUpload, btnHost;
 
     CircleImageView profilePicture;
     //profile adapter
@@ -73,15 +73,25 @@ public class ProfileListActivity extends AppCompatActivity {
 
         user_uid = i.getStringExtra("user_uid");
         email = i.getStringExtra("email");
+        type = i.getStringExtra("type");
 
         btnUpload = findViewById(R.id.btnUpload);
+        btnHost = findViewById(R.id.btn_host);
         profilePicture = findViewById(R.id.profilePic);
         tv_user_email = findViewById(R.id.TextView_profileEmail);
         tv_user_name = findViewById(R.id.TextView_profileName);
 
         mStorage = FirebaseStorage.getInstance().getReference();
-        databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child(user_uid);
+        databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
 
+
+
+        if (type.equals("cws")){
+            btnHost.setText("Host a co working space");
+        }
+        else {
+            btnHost.setText("Host a "+type);
+        }
         profile = new ArrayList<>();
 
         //profile
@@ -90,7 +100,7 @@ public class ProfileListActivity extends AppCompatActivity {
 
         db = mFirebaseDatabase.getReference();
 
-        db.child("profile").child(user_uid).child("image").addValueEventListener(new ValueEventListener() {
+        db.child("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2").child("image").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -118,7 +128,7 @@ public class ProfileListActivity extends AppCompatActivity {
         });
 
         // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
-        db.child("booking").child("user_id").child(user_uid).addValueEventListener(new ValueEventListener() {
+        db.child("booking").child("user_id").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 profile.clear();

@@ -56,7 +56,8 @@ public class Sixth_Host extends AppCompatActivity {
     private Uri FeatimgUri, FeatimgUri2, FeatimgUri3;
     String featUri, featUri2, featUri3, latlon;
     int numberOfPlaces = 1;
-    public static final String FB_STORAGE_PATH = "new_places/";
+    //public static final String FB_STORAGE_PATH = "new_places/";
+    public static final String FB_STORAGE_PATH = "events/";
     public static final int REQUEST_CODE_S1 = 1;
     public static final int REQUEST_CODE_S2 = 12;
     public static final int REQUEST_CODE_S3 = 123;
@@ -72,7 +73,8 @@ public class Sixth_Host extends AppCompatActivity {
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        mDatabaseRefPlaces = FirebaseDatabase.getInstance().getReference("new_places");
+     //   mDatabaseRefPlaces = FirebaseDatabase.getInstance().getReference("new_places");
+        mDatabaseRefPlaces = FirebaseDatabase.getInstance().getReference("property");
         mDataRefFeat = FirebaseDatabase.getInstance().getReference("new_Features");
         database = FirebaseDatabase.getInstance();
         mDatabaseRefWorkingHours = database.getReference().child("new_working_hours");
@@ -111,7 +113,7 @@ public class Sixth_Host extends AppCompatActivity {
                 try {
                     if (PicSaver() == true) {
 
-                        Intent i = new Intent(Sixth_Host.this, MainActivity.class);
+                        Intent i = new Intent(Sixth_Host.this, MainMenuFragment.class);
                         startActivity(i);
                         PicSaver();
 
@@ -355,7 +357,7 @@ public class Sixth_Host extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "saved", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainMenuFragment.class);
                     startActivity(intent);
                     dialog.dismiss();
                 }

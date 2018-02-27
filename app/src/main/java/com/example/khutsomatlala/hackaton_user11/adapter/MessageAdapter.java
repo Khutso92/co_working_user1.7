@@ -23,8 +23,7 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
 
     }
 
-    FirebaseAuth mAuth;
-int positionU ;
+
     Context context;
     CircleImageView profilePicture;
 

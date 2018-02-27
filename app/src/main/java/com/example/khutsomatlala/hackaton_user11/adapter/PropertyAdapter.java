@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.khutsomatlala.hackaton_user11.Activities.PlaceDetailsActivity;
@@ -22,28 +23,28 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+
+public class PropertyAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<WorkingSpace> mValues;
     private Activity activity;
 
     private FirebaseAuth mAuth;
 
-    public MyItemRecyclerViewAdapter(List<WorkingSpace> items, Activity activity) {
+    public PropertyAdapter(List<WorkingSpace> items, Activity activity) {
         this.mValues = items;
         this.activity = activity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.working_spaces_item_layout, parent, false);
-        return new ViewHolder(view);
+        return new MyItemRecyclerViewAdapter.ViewHolder(view);
     }
-
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyItemRecyclerViewAdapter.ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
 
         System.out.println(mValues.get(position).getPlaceDetails().getPlaceName() + " " + mValues.get(position).getPlaceDetails().getPlaceHours());
@@ -81,7 +82,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
                         String user_name = dataSnapshot.child("name").getValue().toString();
 
-
                         Intent intent = new Intent(activity, PlaceDetailsActivity.class);
 
                         String lat = mValues.get(position).getPlaceDetails().getPlaceLatitude();
@@ -95,7 +95,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         String email = mValues.get(position).getPlaceDetails().getPlaceWebsite();
                         String price = Long.toString(mValues.get(position).getPlaceDetails().getPrice());
 
-
                         intent.putExtra("lat", lat);
                         intent.putExtra("lon", lon);
                         intent.putExtra("name", name);
@@ -107,6 +106,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                         intent.putExtra("price", price);
                         intent.putExtra("email", email);
 
+                        Toast.makeText(activity, "ddd", Toast.LENGTH_SHORT).show();
 
                         intent.putExtra("user_name", user_name);
 
@@ -164,4 +164,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             return super.toString() + " '" + placeName.getText() + "'";
         }
     }
+
+
+
 }

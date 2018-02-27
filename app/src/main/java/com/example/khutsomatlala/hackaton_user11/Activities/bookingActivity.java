@@ -138,8 +138,8 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         final SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy");
 
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(dateFormat.format(cal.getTime()));
+      //  actionBar.setDisplayHomeAsUpEnabled(false);
+      //  actionBar.setTitle(dateFormat.format(cal.getTime()));
 
         compactCalendarView = findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);

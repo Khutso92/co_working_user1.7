@@ -35,8 +35,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ReviewActivity extends Activity {
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference;
-    private String rateMessage;
+    private DatabaseReference mCommentsDatabaseReference;
+
     EditText message;
     String PlaceName, user_uid;
     List<FriendlyMessage> mComments;
@@ -108,8 +108,6 @@ public class ReviewActivity extends Activity {
 
             // Name, email address, and profile photo Url
             String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
 
 
             // The user's ID, unique to the Firebase project. Do NOT use this value to

@@ -47,52 +47,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-    <android.support.design.widget.FloatingActionButton
-
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-
-        app:borderWidth="1dp"
-        app:fabSize="normal"
-        android:layout_alignParentRight="true"
-        app:layout_anchorGravity="top|end" />
 
 
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="7dp"
-        android:textColor="#ffffff"
-        tools:text="R78"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="34dp"
-        android:layout_alignParentRight="true"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:onClick="GoToBook"
-            android:text="Book now"
-            android:textStyle="bold"
-            android:layout_alignParentRight="true"
-            />
-
-    </RelativeLayout>
 
     <include layout="@layout/content_place_details" />
 

@@ -22,28 +22,31 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+/**
+ * Created by Admin on 2/23/2018.
+ */
+
+public class EventsAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<WorkingSpace> mValues;
     private Activity activity;
-
     private FirebaseAuth mAuth;
 
-    public MyItemRecyclerViewAdapter(List<WorkingSpace> items, Activity activity) {
+    public EventsAdapter(List<WorkingSpace> items, Activity activity) {
         this.mValues = items;
         this.activity = activity;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.working_spaces_item_layout, parent, false);
-        return new ViewHolder(view);
+        return new MyItemRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyItemRecyclerViewAdapter.ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
 
         System.out.println(mValues.get(position).getPlaceDetails().getPlaceName() + " " + mValues.get(position).getPlaceDetails().getPlaceHours());
@@ -164,4 +167,5 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             return super.toString() + " '" + placeName.getText() + "'";
         }
     }
+
 }

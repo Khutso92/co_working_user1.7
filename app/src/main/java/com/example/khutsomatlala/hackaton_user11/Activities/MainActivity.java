@@ -1,10 +1,13 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +30,7 @@ import java.util.List;
 
 public class MainActivity extends Fragment {
 
-    //public static final String FB_DATABASE_PATH = "new_places";
-    public static final String FB_DATABASE_PATH = "places";
+
     private DatabaseReference mDatabaseRefDetails;
     private List<WorkingSpace> workingSpaces = new ArrayList<>();
     private RecyclerView mRecyclerView;
@@ -45,11 +47,24 @@ public class MainActivity extends Fragment {
 
     public MainActivity(){}
 
+
+    private Toolbar toolbarBottomNav;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+
+
         view = inflater.inflate(R.layout.activity_main, container, false);
+
+
+        //set Toobar
+
+        toolbarBottomNav = view.findViewById(R.id.toolbarBottomNav);
+
+        toolbarBottomNav.setTitle("Destination");
+        toolbarBottomNav.setBackgroundColor(Color.WHITE);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarBottomNav);
 
 
         mRecyclerView = view.findViewById(R.id.recyclerView);
@@ -83,7 +98,7 @@ public class MainActivity extends Fragment {
                     details.setPrice((long) snapshot.child("details").child("PlacePrice").getValue());
                     details.setPlaceLatitude(snapshot.child("details").child("Latitude").getValue().toString());
                     details.setPlaceLongitude(snapshot.child("details").child("Longitude").getValue().toString());
-               //     details.setPlaceWebsite(snapshot.child("details").child("PlaceWebsite").getValue().toString());
+               // details.setPlaceWebsite(snapshot.child("details").child("PlaceWebsite").getValue().toString());
                     details.setCover_pic(snapshot.child("details").child("cover_pic").getValue().toString());
 
                     workingSpace.setPlaceDetails(details);
@@ -133,16 +148,7 @@ public class MainActivity extends Fragment {
 return view;
     }
 
-//    public void fab(View view) {
-//        Intent intent = new Intent(MainActivity.this, ProfileListActivity.class);
-//        intent.putExtra("user_uid", user_uid);
-//        intent.putExtra("mUsername", user_name);
-//        intent.putExtra("email", email);
-//
-//
-//       // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
-//        startActivity(intent);
-//    }
+
 
 
 }

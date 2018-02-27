@@ -12,18 +12,11 @@ import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
-/**
- * Created by Admin on 1/19/2018.
- */
-
 public class Third_Host extends AppCompatActivity {
     Button btn_third_host;
     String PlaceName, infor, address, placeAdress;
     EditText placeName, information, placeAddress;
     TextView location;
-
-
-    int PLACE_PICKER_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,29 +30,6 @@ public class Third_Host extends AppCompatActivity {
         information = (EditText) findViewById(R.id.edt_information_host);
         placeAddress = (EditText) findViewById(R.id.edt_placeAddress_host);
 
-
-
-
-      /*  placeName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                PlacePicker.IntentBuilder builder =  new PlacePicker.IntentBuilder();
-
-                Intent intent;
-                try {
-
-                    intent = builder.build((Activity) getApplicationContext());
-                    startActivityForResult(intent,PLACE_PICKER_REQUEST);
-
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
-
         //passing info
         btn_third_host.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +38,6 @@ public class Third_Host extends AppCompatActivity {
                 PlaceName = placeName.getText().toString();
                 infor = information.getText().toString();
                 placeAdress = placeAddress.getText().toString();
-
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
                     if (PlaceName.trim().isEmpty()) {
@@ -98,19 +67,6 @@ public class Third_Host extends AppCompatActivity {
 
     }
 
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
-        if(requestCode==PLACE_PICKER_REQUEST){
-            if (requestCode ==RESULT_OK){
-                Place place =  PlacePicker.getPlace(data,this);
-           address = String.format("Places: %s",place.getLatLng());
-
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
 
 
 }
