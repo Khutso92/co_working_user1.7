@@ -1,67 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cws_walk"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
-
-    <TextView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#196b69"
-        android:text="Does the place have good security/ Is the place secure? "
-        android:id="@+id/Q1"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@drawable/square"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Can the space accommodate disabled people?"
-        android:id="@+id/Q2"
-        android:textColor="#196b69"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@drawable/square"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/Q1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Does the space have aircons?"
-            android:id="@+id/Q3"
-            android:textColor="#196b69"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:text="Does the place have good security/ Is the place secure? "
+            android:textColor="#196b69" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@drawable/square"/>
+            android:background="@drawable/square" />
+
+        <TextView
+            android:id="@+id/Q2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Can the space accommodate disabled people?"
+            android:textColor="#196b69" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/square" />
+
+        <TextView
+            android:id="@+id/Q3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Does the space have aircons?"
+            android:textColor="#196b69" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="@drawable/square" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btn_next_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
-            android:textAllCaps="false"
-            android:text="next"/>
+            android:text="next"
+            android:textAllCaps="false" />
 
+
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
