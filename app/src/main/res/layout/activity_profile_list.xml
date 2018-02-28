@@ -30,7 +30,6 @@
             android:layout_alignRight="@+id/profilePic"
             android:layout_marginBottom="15dp"
             android:background="@drawable/plus"
-            android:onClick="btnAdd"
             tools:ignore="OnClick" />
 
         <Button
@@ -80,8 +79,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_margin="8dp"
-        android:onClick="GoToProfile">
+        android:layout_margin="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -96,6 +94,7 @@
                 android:src="@drawable/open_book" />
 
             <Button
+                android:id="@+id/btnBookings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -108,8 +107,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_margin="8dp"
-        android:onClick="GoToHost">
+        android:layout_margin="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -124,10 +122,10 @@
                 android:src="@drawable/database" />
 
             <Button
+                android:id="@+id/btn_host"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/btn_host"
                 android:layout_marginLeft="8dp"
                 android:background="@android:color/transparent"
                 android:text="host a space  " />
@@ -137,9 +135,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_margin="8dp"
-        android:onClick="SignOut"
-        >
+        android:layout_margin="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -154,12 +150,13 @@
                 android:src="@drawable/logout" />
 
             <Button
+                android:id="@+id/btnSignout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-android:layout_marginLeft="18dp"
+                android:layout_marginLeft="18dp"
                 android:background="@android:color/transparent"
 
-                android:text= "sign out " />
+                android:text="sign out " />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

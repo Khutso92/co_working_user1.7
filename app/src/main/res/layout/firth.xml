@@ -41,8 +41,20 @@
             android:layout_margin="4dp"
             android:inputType="number"
             android:background="@drawable/square"
-            android:hint="Price per hour"
+            android:hint="Enter price"
             android:textColorHint="#50196b63" />
+
+
+        <EditText
+            android:id="@+id/edt_phone_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Telephone no."
+            android:textSize="14dp"
+            android:inputType="number"
+            android:textColorHint="#50196b69"
+            android:background="@drawable/square"
+            android:layout_margin="4dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,20 +86,19 @@
                 android:textColorHint="#50196b63" />
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
         <Button
 
             android:id="@+id/btn_next_firth"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
-            android:text="next"
-            android:textColor="#196b69"
-            android:background="@android:color/transparent"/>
-        </RelativeLayout>
+            android:background="@drawable/customize_button"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:textColor="#fff"
+            android:text="Next"/>
+
 
     </LinearLayout>
 

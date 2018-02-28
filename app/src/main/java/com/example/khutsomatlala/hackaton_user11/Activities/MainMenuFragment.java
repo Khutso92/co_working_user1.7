@@ -8,12 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
@@ -38,13 +35,19 @@ public class MainMenuFragment extends AppCompatActivity {
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_events);
                     fragment = new EventFragment();
-                    type = "event";
+                    type = "venue";
 
 
                     break;
                 case R.id.navigation_property:
                     mTextMessage.setText(R.string.title_property);
                     fragment = new PropertyFragment();
+                    type = "property";
+                    break;
+
+                case R.id.profile:
+                    mTextMessage.setText(R.string.title_property);
+                   fragment = new ProfileListActivity();
                     type = "property";
                     break;
             }
@@ -88,5 +91,6 @@ public class MainMenuFragment extends AppCompatActivity {
         // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
+
 
 }

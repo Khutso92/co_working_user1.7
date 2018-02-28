@@ -1,7 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,7 +62,7 @@ public class MainActivity extends Fragment {
         toolbarBottomNav = view.findViewById(R.id.toolbarBottomNav);
 
         toolbarBottomNav.setTitle("Destination");
-        toolbarBottomNav.setBackgroundColor(Color.WHITE);
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarBottomNav);
 
 

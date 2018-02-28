@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/cws_walk"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/cws_walk"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,59 +28,86 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:text="please provide us with 3 pictures"
-            android:textColor="#196b69"
-            android:layout_marginLeft="4dp"/>
+            android:textColor="#196b69" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_first_pic"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="1st pic"
-                android:onClick="upSlidePic"
-                android:textColor="#196b69"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:onClick="upSlidePic"
+                android:text="1st pic"
                 android:textAllCaps="false"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_second_pic"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="2nd pic"
-                android:onClick="upSlidePic2"
-                android:textColor="#196b69"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:onClick="upSlidePic2"
+                android:text="2nd pic"
                 android:textAllCaps="false"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_third_pic"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="3rd pic"
-                android:onClick="upSlidePic3"
-                android:textColor="#196b69"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:onClick="upSlidePic3"
+                android:text="3rd pic"
                 android:textAllCaps="false"
+                android:textColor="#196b69"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:layout_marginRight="8dp"
                 android:background="@drawable/square"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/square"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:background="@drawable/square"/>
+
+
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#196b69"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="8dp"
             android:text="please provide us with 3 amenities"
-            android:layout_marginLeft="4dp"/>
+            android:textColor="#196b69" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,35 +118,36 @@
                 android:id="@+id/edtFeatT1"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:hint="Title"
-                android:textColor="#196b69"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:hint="Title"
                 android:textAllCaps="false"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69" />
 
             <EditText
                 android:id="@+id/edtFeatT2"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:hint="Title"
-                android:textColor="#196b69"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:hint="Title"
                 android:textAllCaps="false"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69" />
 
             <EditText
                 android:id="@+id/edtFeatT3"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:hint="Title"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:hint="Title"
                 android:textAllCaps="false"
-                android:textColor="#196b69"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,59 +157,54 @@
                 android:id="@+id/btn_first_amenities"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="1st pic"
-                android:onClick="upLoadFeatPic1"
-                android:textColor="#196b69"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:onClick="upLoadFeatPic1"
+                android:text="1st pic"
                 android:textAllCaps="false"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69" />
 
             <Button
                 android:id="@+id/btn_second_amenities"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="2nd pic"
-                android:textColor="#196b69"
-                android:onClick="upLoadFeatPic2"
                 android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/square"
+                android:onClick="upLoadFeatPic2"
+                android:text="2nd pic"
                 android:textAllCaps="false"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69" />
 
             <Button
                 android:id="@+id/btn_third_amenities"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
+                android:background="@drawable/square"
                 android:onClick="upLoadFeatPic3"
                 android:text="3rd pic"
-                android:layout_margin="4dp"
                 android:textAllCaps="false"
-                android:textColor="#196b69"
-                android:background="@drawable/square"/>
+                android:textColor="#196b69" />
         </LinearLayout>
 
-
-        <ImageView
-            android:id="@+id/ImageView"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="250dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_save_host"
-            android:onClick="btnUpload_Click"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:layout_alignParentRight="true"
-            android:text="save"
-            android:textColor="#196b69"
-            android:background="@android:color/transparent"/>
+
+            <Button
+                android:id="@+id/btn_save_host"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+                android:onClick="btnUpload_Click"
+                android:text="save"
+                android:textAllCaps="false"
+                android:textColor="#196b69" />
         </RelativeLayout>
     </LinearLayout>
 

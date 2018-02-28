@@ -1,5 +1,7 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
+
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,8 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,14 +39,15 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileListActivity extends AppCompatActivity {
+public class ProfileListActivity extends Fragment {
 
 
-    String user_uid, mUsername, email,type;
+    private static final int RESULT_OK = 1;
+    String user_uid, mUsername, email, type;
     FirebaseAuth mAuth;
 
     StorageReference childRef;
-    Button btnUpload, btnHost;
+    Button btnUpload, btnHost, btnAdd,btnBookings,btnSignout;
 
     CircleImageView profilePicture;
     //profile adapter
@@ -62,12 +68,19 @@ public class ProfileListActivity extends AppCompatActivity {
     TextView tv_user_email, tv_user_name;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_list);
+    View view;
 
-        Intent i = getIntent();
+    public ProfileListActivity() {
+    }
+
+    @SuppressLint("WrongViewCast")
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
+        view = inflater.inflate(R.layout.activity_profile_list, container, false);
+        super.onCreate(savedInstanceState);
+
+
+        Intent i = new Intent();
         mAuth = FirebaseAuth.getInstance();
         mUsername = i.getStringExtra("mUsername");
 
@@ -75,23 +88,61 @@ public class ProfileListActivity extends AppCompatActivity {
         email = i.getStringExtra("email");
         type = i.getStringExtra("type");
 
-        btnUpload = findViewById(R.id.btnUpload);
-        btnHost = findViewById(R.id.btn_host);
-        profilePicture = findViewById(R.id.profilePic);
-        tv_user_email = findViewById(R.id.TextView_profileEmail);
-        tv_user_name = findViewById(R.id.TextView_profileName);
+        btnUpload = view.findViewById(R.id.btnUpload);
+        btnHost = view.findViewById(R.id.btn_host);
+        btnAdd = view.findViewById(R.id.Add);
+        btnBookings = view.findViewById(R.id.btnBookings);
+        btnSignout = view.findViewById(R.id.btnSignout);
+        profilePicture = view.findViewById(R.id.profilePic);
+        tv_user_email = view.findViewById(R.id.TextView_profileEmail);
+        tv_user_name = view.findViewById(R.id.TextView_profileName);
+
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnAdd();
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UploadProfilePic();
+            }
+        });
+
+        btnBookings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoToProfile();
+            }
+        });
+        btnHost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GoToHost();
+            }
+        });
+        btnSignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignOut();
+            }
+        });
+
 
         mStorage = FirebaseStorage.getInstance().getReference();
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
 
 
 
-        if (type.equals("cws")){
+       /* if (type.equals("cws")){
             btnHost.setText("Host a co working space");
         }
         else {
             btnHost.setText("Host a "+type);
-        }
+        }*/
         profile = new ArrayList<>();
 
         //profile
@@ -100,13 +151,14 @@ public class ProfileListActivity extends AppCompatActivity {
 
         db = mFirebaseDatabase.getReference();
 
+
         db.child("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2").child("image").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
                 try {
-                    Glide.with(getApplicationContext())
+                    Glide.with(getActivity())
                             .load(dataSnapshot.getValue().toString())
                             .centerCrop()
                             .override(100, 100)
@@ -114,7 +166,7 @@ public class ProfileListActivity extends AppCompatActivity {
 
                 } catch (Exception e) {
 
-                    Toast.makeText(ProfileListActivity.this, "no dp", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "no dp", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -132,7 +184,7 @@ public class ProfileListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 profile.clear();
-//
+
 
                 //Fectching information from database
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -144,7 +196,7 @@ public class ProfileListActivity extends AppCompatActivity {
 
                     profile.add(profilePojo);
                     //Init adapter
-                    mProfileAdapter = new ProfileAdapter(ProfileListActivity.this, R.layout.activity_profile, profile);
+                    mProfileAdapter = new ProfileAdapter(getActivity(), R.layout.activity_profile, profile);
 
                     //
                     //profileListView.setAdapter(mProfileAdapter);
@@ -153,20 +205,22 @@ public class ProfileListActivity extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
 
+
         tv_user_email.setText(email);
         tv_user_name.setText(mUsername);
-
+        return view;
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
@@ -175,21 +229,23 @@ public class ProfileListActivity extends AppCompatActivity {
 
             try {
                 //getting image from gallery
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
 
                 //Setting image to ImageView
                 profilePicture.setImageBitmap(bitmap);
                 selected = true;
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                profilePicture.setImageURI(filePath);
             }
-            profilePicture.setImageURI(filePath);
+
         }
 
 
     }
 
-    public void btnAdd(View view) {
+    public void btnAdd() {
         isClick = true;
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -202,7 +258,7 @@ public class ProfileListActivity extends AppCompatActivity {
     }
 
 
-    public void UploadProfilePic(View view) {
+    public void UploadProfilePic() {
 
 
         //uploading the image
@@ -240,8 +296,8 @@ public class ProfileListActivity extends AppCompatActivity {
         });*/
         btnUpload.setVisibility(View.GONE);
 
-       try {
-           childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
+        try {
+            childRef = mStorage.child("ProfileImage").child(filePath.getLastPathSegment());
 
             //uploading the image
             UploadTask uploadTask = childRef.putFile(filePath);
@@ -257,49 +313,48 @@ public class ProfileListActivity extends AppCompatActivity {
                     profilePojo.setImage(uir.toString());
                     databaseProfile.setValue(profilePojo);
 
-                    Toast.makeText(ProfileListActivity.this, "Upload successful ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Upload successful ", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     pd.dismiss();
 
-                    Toast.makeText(ProfileListActivity.this, "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Upload Failed -> " + e, Toast.LENGTH_SHORT).show();
                 }
             });
 
-            pd = new ProgressDialog(ProfileListActivity.this);
+            pd = new ProgressDialog(getActivity());
             pd.setMessage("loading");
             pd.show();
 
-       }
-       catch (NullPointerException f){
-           Toast.makeText(this, "unable to upload pro pic", Toast.LENGTH_SHORT).show();
-       }
+        } catch (NullPointerException f) {
+            Toast.makeText(getActivity(), "unable to upload pro pic", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public void GoToProfile(View view) {
+    public void GoToProfile() {
 
-        Intent intent = new Intent(ProfileListActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(getActivity(), ProfileActivity.class);
         intent.putExtra("user_uid", user_uid);
         // Toast.makeText(this, "name " + user_name +"\n email" + email   , Toast.LENGTH_SHORT).show();
         startActivity(intent);
 
     }
 
-    public void SignOut(View view) {
+    public void SignOut() {
 
         mAuth.signOut();
-        Intent i = new Intent(ProfileListActivity.this, Auth_loginActivity.class);
+        Intent i = new Intent(getActivity(), Auth_loginActivity.class);
         startActivity(i);
 
     }
 
 
-    public void GoToHost(View view) {
+    public void GoToHost() {
 
-        Intent i = new Intent(ProfileListActivity.this, First_Host.class);
-        i.putExtra("name",mUsername);
+        Intent i = new Intent(getActivity(), First_Host.class);
+        i.putExtra("name", mUsername);
 
 
         startActivity(i);
