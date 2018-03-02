@@ -36,10 +36,11 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
     private FirebaseAuth mAuth;
 
     Boolean date_selected = false;
+    Boolean hours_selected = false;
 
-    int hourIn, hourOut, personNumber, totalPrice;
+    int hourIn, hourOut, personNumber, totalPrice,vadilateHourIn ,vadilateHourOut;
 
-    TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson;
+    TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson,tv_month;
 
     String dayStamp = new SimpleDateFormat("dd").format(new Date());
     Spinner spinnerTimeIn, spinnerTimeOut;
@@ -59,7 +60,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
     //Calendar
     CompactCalendarView compactCalendarView;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM ", Locale.getDefault());
 
 
     String[] TimeIn = {" 1:00", "2:00", "3:00", "4:00", "5:00",
@@ -112,6 +113,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         book = findViewById(R.id.btn_book);
         add = findViewById(R.id.btn_pos);
         subtract = findViewById(R.id.btn_neg);
+        tv_month = findViewById(R.id.tv_month);
 
         txtTimein = findViewById(R.id.txtTimein);
         txtTimeOut = findViewById(R.id.txtTimeout);
@@ -138,12 +140,13 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         final SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy");
 
         final ActionBar actionBar = getSupportActionBar();
-      //  actionBar.setDisplayHomeAsUpEnabled(false);
-      //  actionBar.setTitle(dateFormat.format(cal.getTime()));
+        //  actionBar.setDisplayHomeAsUpEnabled(false);
+        //  actionBar.setTitle(dateFormat.format(cal.getTime()));
 
         compactCalendarView = findViewById(R.id.compactcalendar_view);
         compactCalendarView.setUseThreeLetterAbbreviation(true);
 
+        tv_month.setText(  new SimpleDateFormat("MMMM yyyy").format(cal.getTime()));
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
@@ -177,14 +180,29 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
+                // actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
                 Cal_date = firstDayOfNewMonth;
             }
-
         });
 
-    }
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        mCheckSpaceReference = mFirebaseDatabase.getReference();
+
+        mCheckSpaceReference.child("new_working_hours").child(name).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                vadilateHourIn =  Integer.parseInt( dataSnapshot.child("open_time").getValue().toString());
+                vadilateHourOut =  Integer.parseInt( dataSnapshot.child("close_time").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     public void book(View view) {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -207,8 +225,12 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
                             if (date_selected == true) {
                                 if (minteger >= 1) {
-
+//TODO push hours if valid
                                     MakeBooking(hourIn, hourOut);
+                                    hours_selected = true;
+                                    getHours(hourIn, hourOut);
+
+
                                 } else {
                                     Toast.makeText(bookingActivity.this, "No. of people not selected", Toast.LENGTH_SHORT).show();
                                 }
@@ -238,16 +260,6 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         });
 
 
-       /*
-
-       Intent intent = new Intent(this, ProfileActivity.class);
-        intent.putExtra("user_uid", user_uid);
-        intent.putExtra("mUsername", mUsername);
-        startActivity(intent);
-
-        */
-
-
     }
 
 
@@ -264,73 +276,95 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             switch (itemIn) {
                 case "1:00":
                     hourIn = 1;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "2:00":
                     hourIn = 2;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "3:00":
                     hourIn = 3;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "4:00":
                     hourIn = 4;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "5:00":
                     hourIn = 5;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "6:00":
                     hourIn = 6;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "7:00":
                     hourIn = 7;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "8:00":
                     hourIn = 8;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "9:00":
                     hourIn = 9;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "10:00":
                     hourIn = 10;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "11:00":
                     hourIn = 11;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "12:00":
                     hourIn = 12;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "13:00":
                     hourIn = 13;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "14:00":
                     hourIn = 14;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "15:00":
                     hourIn = 15;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "16:00":
                     hourIn = 16;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "17:00":
                     hourIn = 17;
-                    ;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "18:00":
                     hourIn = 18;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "19:00":
                     hourIn = 19;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "20:00":
                     hourIn = 20;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "21:00":
                     hourIn = 21;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "22:00":
                     hourIn = 22;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
                     break;
                 case "23:00":
                     hourIn = 23;
+                    VadilateOpenTime(vadilateHourIn,hourIn);
 
             }
 
@@ -344,73 +378,104 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             switch (itemOut) {
                 case "1:00 ":
                     hourOut = 1;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "2:00":
                     hourOut = 2;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "3:00":
                     hourOut = 3;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "4:00":
                     hourOut = 4;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "5:00":
                     hourOut = 5;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "6:00":
                     hourOut = 6;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "7:00":
                     hourOut = 7;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "8:00":
                     hourOut = 8;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "9:00":
                     hourOut = 9;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "10:00":
                     hourOut = 10;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "11:00":
                     hourOut = 11;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "12:00":
                     hourOut = 12;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "13:00":
                     hourOut = 13;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "14:00":
                     hourOut = 14;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "15:00":
                     hourOut = 15;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
+
                 case "16:00":
                     hourOut = 16;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "17:00":
+
                     hourOut = 17;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "18:00":
+
                     hourOut = 18;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "19:00":
-                    hourOut = 19;
 
+                    hourOut = 19;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "20:00":
+
                     hourOut = 20;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
                 case "21:00":
                     hourOut = 21;
+                    VadilateCloseTime(vadilateHourOut,hourOut);
                     break;
+
                 case "22:00":
                     hourOut = 22;
+
+                    VadilateCloseTime(vadilateHourOut,hourOut);
+
                     break;
                 case "23:00":
                     hourOut = 23;
+
+                    VadilateCloseTime(vadilateHourOut,hourOut);
 
             }
 
@@ -443,6 +508,14 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             minteger = minteger + 1;
             display(minteger);
 
+            //TODO added for increase
+            if (hours_selected == true) {
+                printPrice(totalPrice * (hourOut - hourIn));
+            } else {
+                printPrice(totalPrice);
+            }
+
+
         } else {
             Toast.makeText(this, "cant be more than 11", Toast.LENGTH_SHORT).show();
         }
@@ -455,6 +528,13 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
 
             display(minteger);
+
+            //TODO added for decrease
+            if (hours_selected == true) {
+                printPrice(totalPrice * (hourOut - hourIn));
+            } else {
+                printPrice(totalPrice);
+            }
 
 
         } else {
@@ -470,24 +550,29 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         numberofPeople = Integer.toString(personNumber);
 
         try {
-            //txtTotalPrice.setText("R"+number * Integer.parseInt( ""+price));
+
 
             totalPrice = Integer.parseInt("" + pricee) * number;
 
-            //  Toast.makeText(this, "R" + totalPrice, Toast.LENGTH_SHORT).show();
+
             nameOfPerson.setText("Name :" + mUsername);
             txtTimein.setText("Time in - " + hourIn + ":00");
             txtTimeOut.setText("Time out - " + hourOut + ":00");
 
             if (date_selected == true) {
                 txtDateBooked.setText("Date booked - " + date);
-            } else {
-
             }
-
             txtNumberOfppl.setText("Number of people - " + numberofPeople);
 
-            txtPrice.setText("R " + totalPrice);
+            //TODO add logic
+
+
+            if (hours_selected == true) {
+                printPrice(totalPrice * (hourOut - hourIn));
+            } else {
+                printPrice(totalPrice);
+            }
+
         } catch (Exception e) {
 
             Toast.makeText(this, "Something went wrong ", Toast.LENGTH_SHORT).show();
@@ -518,7 +603,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                         Toast.makeText(bookingActivity.this, "Successfully booked", Toast.LENGTH_SHORT).show();
                         bookBlocker++;
 
-                        Intent i = new Intent(bookingActivity.this, MainActivity.class);
+                        Intent i = new Intent(bookingActivity.this, MainMenuFragment.class);
                         startActivity(i);
                     } else {
                         Toast.makeText(bookingActivity.this, "You have already booked", Toast.LENGTH_SHORT).show();
@@ -536,6 +621,44 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         }
     }
 
+    public void printPrice(int price) {
 
+        txtPrice.setText("R " + price);
+    }
+
+
+    public void getHours(int hourIn, int hourOut){
+        Toast.makeText(this, "hours - " + (hourOut - hourIn), Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void VadilateOpenTime(int openTime ,int timeSelected){
+
+        if (((openTime == timeSelected) || (openTime<timeSelected))){
+
+            Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+
+            Toast.makeText(this, "we open at "+openTime+":00", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void VadilateCloseTime(int closeTime ,int timeSelected){
+
+        if (((closeTime == timeSelected) || (closeTime>timeSelected))){
+
+            Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+
+            Toast.makeText(this, "we close at "+closeTime +":00", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
+
+
+
 

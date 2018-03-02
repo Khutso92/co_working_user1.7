@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
+import com.example.khutsomatlala.hackaton_user11.adapter.ViewPagerAdapter;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.FriendlyMessage;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Slide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -56,9 +58,15 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCallback {
     //slide
+    private LinearLayout mDotsLayout;
+    private ViewPager viewpager;
+    private TextView[] mDots;
+
+    private FirebaseDatabase mFirebaseDatabaseSlide;
+    private DatabaseReference mPicDatabaseReferencSlide;
+    String slide1, slide2, slide3;
+
     List<CWSDetailsActivity> catalogList;
-
-
 
     ImagesAdapter Slideadapter;
 
@@ -82,8 +90,6 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     ImageView feat1P, feat2P, feat3P;
 
-
-    RatingBar ratingRatingBar;
     long reviews;
     int RateNumber;
     private FirebaseAuth mAuth;
@@ -98,7 +104,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     private EditText mMessageEditText;
     private Button mSendButton, ftitle1;
 
-    String mUsername, rateMessage, Feat1, Feat2, Feat3, FeatTitle1, FeatTitle2, FeatTitle3;
+    String mUsername, Feat1, Feat2, Feat3, FeatTitle1, FeatTitle2, FeatTitle3;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference, mDatabaseFeatures;
@@ -108,9 +114,6 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     private FirebaseAuth mFirebaseAuth;
 
 
-    //pic slide
-    private ImageView imageView;
-
     //Instantiate adapter object globally
     private ImageAdapter adapter;
 
@@ -119,19 +122,9 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     //Initialize array of images of type string
     private List<String> images = new ArrayList<>();
 
-    //rating
-    int mTotalRating = 0;
-    long mNumberofUser = 0;
-    float mAverage = 0;
+
     Button ftitle2, ftitle3;
     RatingBar ratingBar;
-
-    //transition
-    boolean visible;
-
-    //Date format - yyyy.MM.dd.HH.mm.ss
-    String dayStamp = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
-    String timeStamp = new SimpleDateFormat("HH.mm").format(new Date());
 
     // availability checked
     @Override
@@ -157,8 +150,6 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         user_name = i.getStringExtra("user_name");
 
 
-
-
         SendTextLinearLayout = findViewById(R.id.linearLayout);
         placeName = findViewById(R.id.txt_placeName);
         placeLocation = findViewById(R.id.txt_location);
@@ -179,19 +170,15 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         feat2P = findViewById(R.id.feat2Pic);
         feat3P = findViewById(R.id.feat3Pic);
 
-
         placeName.setText(PlaceName);
         placeLocation.setText(address);
         txtInformation.setText(" " + infor);
         SendTextLinearLayout.setVisibility(View.GONE);
 
-
         txtHours.setText(hours);
         txtPrice.setText("R" + price + " per hour");
 
-
         getFeature();
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -253,7 +240,6 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
             mUsername = name;
         }
 
-
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -308,10 +294,8 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
                     reviews = dataSnapshot.getChildrenCount();
 
-
                     //readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);
-
                 }
 
                 //Init adapter
@@ -330,7 +314,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
         //pic slide
 
-        imageView = findViewById(R.id.image);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
 
         /*
@@ -389,17 +373,12 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         mAuth = FirebaseAuth.getInstance();
 
 
-
         //slide
         catalogList = new ArrayList<>();
         final List<Slide> image = new ArrayList<>();
 
-        /**
-         * PLACES PICTURES IN LISTVIEW
-         */
-
-
         Slidedatabase = FirebaseDatabase.getInstance().getReference().child("new_Slide");
+
         Slidedatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -428,7 +407,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
                 } else {
 
-                  //  Toast.makeText(CWSDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(CWSDetailsActivity.this, "no slide added", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -438,7 +417,92 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
 
+        //Slide
+        List<String> images = new ArrayList<>();
+        viewpager = findViewById(R.id.pager);
+
+        mDotsLayout = findViewById(R.id.dots);
+        mFirebaseDatabaseSlide = FirebaseDatabase.getInstance();
+        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("pics");
+
+        mPicDatabaseReferencSlide.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot != null) {
+
+                    if (dataSnapshot.hasChildren()) {
+
+                        slide1 = dataSnapshot.child("pic1").getValue().toString();
+                        slide2 = dataSnapshot.child("pic2").getValue().toString();
+                        slide3 = dataSnapshot.child("pic3").getValue().toString();
+
+                        Toast.makeText(CWSDetailsActivity.this, "" + slide1, Toast.LENGTH_SHORT).show();
+                        System.out.print( "pic 1 "+slide1);
+
+                    } else {
+
+                        Toast.makeText(CWSDetailsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+
+                    Toast.makeText(CWSDetailsActivity.this, "data snapshot is null", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        images.add(slide1);
+        images.add(slide2);
+        images.add(slide3);
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(CWSDetailsActivity.this, images);
+        viewpager.setAdapter(adapter);
+        addDotsIndicator(0);
+
+        viewpager.addOnPageChangeListener(viewListerner);
     }
+
+    public void addDotsIndicator(int position){
+
+        mDots = new TextView[3];
+        mDotsLayout.removeAllViews();
+        for (int i = 0; i < mDots.length; i++) {
+            mDots[i] = new TextView(this);
+            mDots[i].setText(Html.fromHtml("&#8226"));
+            mDots[i].setTextSize(25);
+            mDots[i].setTextColor(getResources().getColor(R.color.colorPrimary));
+
+            mDotsLayout.addView(mDots[i]);
+        }
+
+        if (mDots.length > 0) {
+
+            mDots[position].setTextColor(getResources().getColor(R.color.colorAccent));
+        }
+
+    }
+
+    ViewPager.OnPageChangeListener viewListerner = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            addDotsIndicator(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 
     public void GoToBook(View view) {
 
@@ -465,14 +529,14 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
             String PlaceName = intent.getStringExtra("name");
 
-             Double lat = Double.parseDouble(intent.getStringExtra("lat"));
+            Double lat = Double.parseDouble(intent.getStringExtra("lat"));
             Double lon = Double.parseDouble(intent.getStringExtra("lon"));
 
             // Add a marker in co_space and move the camera
-             LatLng co_space = new LatLng(lat, lon);
+            LatLng co_space = new LatLng(lat, lon);
             googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
             mMap.addMarker(new MarkerOptions().position(co_space).title(PlaceName));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(co_space, 15));
         } catch (NullPointerException e) {
             e.printStackTrace();
             Toast.makeText(this, "NullPointerException  ", Toast.LENGTH_SHORT).show();
@@ -529,9 +593,9 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
                     //Toast.makeText(getApplicationContext(), ""+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
 
                     Glide.with(getApplicationContext())
-                            .load(Feat1)
+                            .load(Feat1) //string
                             .override(80, 80)
-                            .into(feat1P);
+                            .into(feat1P); //imageview
 
                     Glide.with(getApplicationContext())
                             .load(Feat2)
@@ -549,7 +613,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
 
                 } else {
-                   // Toast.makeText(CWSDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(CWSDetailsActivity.this, "no feature added", Toast.LENGTH_SHORT).show();
                 }
             }
 
