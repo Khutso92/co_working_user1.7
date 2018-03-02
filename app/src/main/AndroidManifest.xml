@@ -71,7 +71,10 @@
             android:label="@string/title_activity_main_menu" />
         <activity android:name=".Activities.newSplashActivity" />
         <activity android:name=".Activities.PropertyDetailsActivity" />
-        <activity android:name=".Activity_Host"></activity>
+        <activity android:name=".Activity_Host" />
+        <activity android:name=".ActivityAmenities"></activity>
+        <activity android:name=".Venue_Questions"/>
+        <activity android:name=".Property_Questions"/>
     </application>
 
 </manifest>

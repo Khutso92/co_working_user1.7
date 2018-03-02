@@ -3,7 +3,7 @@ package com.example.khutsomatlala.hackaton_user11;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Events_Questions extends AppCompatActivity {
+public class Venue_Questions extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

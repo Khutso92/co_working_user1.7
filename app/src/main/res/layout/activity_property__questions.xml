@@ -44,6 +44,18 @@
             android:layout_height="wrap_content"
             android:background="@drawable/square"/>
 
+        <Button
+            android:id="@+id/btn_next_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/customize_button"
+            android:textSize="18sp"
+            android:layout_margin="4dp"
+            android:textColor="#fff"
+            android:text="Next"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 
 </RelativeLayout>

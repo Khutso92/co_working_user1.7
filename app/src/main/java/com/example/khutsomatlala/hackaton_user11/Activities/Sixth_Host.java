@@ -1,5 +1,7 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -9,10 +11,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
@@ -39,7 +44,8 @@ import java.io.IOException;
  */
 
 public class Sixth_Host extends AppCompatActivity {
-    Button first_pic, second_pic, third_pic, first_amenities, second_amenities, third_amenities, save;
+    ImageView first_pic, second_pic, third_pic;
+    Button  first_amenities, second_amenities, third_amenities, save;
     String price, in, out, hours, phone, infor, PlaceName, btn_first_pic, btn_second_pic, btn_third_pic, featTit1e1, featTit1e2, featTit1e3, placeAddress;
     String urI, uri2, uri3;
     int i = 0;
@@ -66,14 +72,20 @@ public class Sixth_Host extends AppCompatActivity {
     public static final int REQUEST_CODE_F2 = 125;
     public static final int REQUEST_CODE_F3 = 251;
 
+    private CheckBox chkIos, chkAndroid, chkWindows;
+    TextView txt_seeall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sixth);
 
 
+        //addListenerOnChkIos();
+        //addListenerOnButton();
+
+
         mStorageRef = FirebaseStorage.getInstance().getReference();
-     //   mDatabaseRefPlaces = FirebaseDatabase.getInstance().getReference("new_places");
+        //   mDatabaseRefPlaces = FirebaseDatabase.getInstance().getReference("new_places");
         mDatabaseRefPlaces = FirebaseDatabase.getInstance().getReference("property");
         mDataRefFeat = FirebaseDatabase.getInstance().getReference("new_Features");
         database = FirebaseDatabase.getInstance();
@@ -88,6 +100,18 @@ public class Sixth_Host extends AppCompatActivity {
 
         save = findViewById(R.id.btn_save_host);
         imageView = findViewById(R.id.ImageView);
+        txt_seeall = findViewById(R.id.txt_seeall);
+
+
+
+        txt_seeall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewDialog alert = new ViewDialog();
+
+                alert.showDialog(Sixth_Host.this, "");
+            }
+        });
 
         edtFeatT1 = findViewById(R.id.edtFeatT1);
         edtFeatT2 = findViewById(R.id.edtFeatT2);
@@ -120,9 +144,7 @@ public class Sixth_Host extends AppCompatActivity {
                     } else {
                         Toast.makeText(Sixth_Host.this, " upload all pics", Toast.LENGTH_SHORT).show();
                     }
-                }
-
-                catch (NullPointerException e ){
+                } catch (NullPointerException e) {
 
                     Toast.makeText(Sixth_Host.this, "- enter all text fields \n - upload all 3 pics ", Toast.LENGTH_SHORT).show();
 
@@ -130,9 +152,37 @@ public class Sixth_Host extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    public void addListenerOnChkIos() {
+
+        chkIos = (CheckBox) findViewById(R.id.chkIos);
+
+        chkIos.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    Toast.makeText(Sixth_Host.this,
+                            "Bro, try Android :)", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
 
     }
 
+ /*   public void addListenerOnButton() {
+
+        chkIos = (CheckBox) findViewById(R.id.chkIos);
+        chkAndroid = (CheckBox) findViewById(R.id.chkAndroid);
+        chkWindows = (CheckBox) findViewById(R.id.chkWindows);
+
+    }
+*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -144,7 +194,7 @@ public class Sixth_Host extends AppCompatActivity {
 
             try {
                 Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
-                imageView.setImageBitmap(bm);
+                first_pic.setImageBitmap(bm);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -158,7 +208,7 @@ public class Sixth_Host extends AppCompatActivity {
 
             try {
                 Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri2);
-                imageView.setImageBitmap(bm);
+                second_pic.setImageBitmap(bm);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -174,7 +224,7 @@ public class Sixth_Host extends AppCompatActivity {
 
             try {
                 Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri3);
-                imageView.setImageBitmap(bm);
+                third_pic.setImageBitmap(bm);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -225,6 +275,8 @@ public class Sixth_Host extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+
     }
 
     public Boolean PicSaver() {
@@ -493,6 +545,28 @@ public class Sixth_Host extends AppCompatActivity {
     }
 
 
+    public class ViewDialog {
 
+        public void showDialog(Activity activity, String msg) {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.activity_amenities);
+
+            /*TextView text = (TextView) dialog.findViewById(R.id.txt_seeall);
+            text.setText(msg);*/
+
+            Button btn_ok =  dialog.findViewById(R.id.btn_ok);
+            btn_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        }
+    }
 
 }

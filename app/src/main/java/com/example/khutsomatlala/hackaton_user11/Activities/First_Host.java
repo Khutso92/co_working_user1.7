@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.khutsomatlala.hackaton_user11.Activity_Host;
 import com.example.khutsomatlala.hackaton_user11.R;
 
 /**
@@ -36,7 +37,7 @@ public class First_Host extends Activity {
         btn_first_host.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(First_Host.this, Third_Host.class);
+                Intent i = new Intent(First_Host.this, Activity_Host.class);
                 startActivity(i);
             }
         });
