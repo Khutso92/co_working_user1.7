@@ -35,8 +35,9 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+           <include layout="@layout/slide"/>
+            <include  layout="@layout/activity_main_viewpager"/>
 
-            <include layout="@layout/slide"/>
 
 
             <!--<include layout="@layout/activity_images"/>-->

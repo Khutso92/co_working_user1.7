@@ -31,9 +31,7 @@ import java.util.List;
 
 public class EventFragment extends Fragment {
 
-
-    public static final String FB_DATABASE_PATH = "events";
-    private DatabaseReference mDatabaseRefDetails;
+    private DatabaseReference mDatabaseRefDetails,slide;
     private List<WorkingSpace> workingSpaces = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private MyItemRecyclerViewAdapter adapter;
@@ -43,11 +41,7 @@ public class EventFragment extends Fragment {
 
     private View view;
     String user_name, user_uid, email;
-
-
     FirebaseAuth mAuth;
-
-
     public EventFragment() {
     }
 
@@ -64,11 +58,11 @@ public class EventFragment extends Fragment {
         user_uid = mAuth.getCurrentUser().getUid();
 
         mDatabaseRefDetails = FirebaseDatabase.getInstance().getReference("events");
+        slide = FirebaseDatabase.getInstance().getReference("pics");
 
         //Init adapter
         adapter = new MyItemRecyclerViewAdapter(workingSpaces, getActivity());
         mRecyclerView.setAdapter(adapter);
-
 
         mDatabaseRefDetails.addValueEventListener(new ValueEventListener() {
             @Override
@@ -119,6 +113,21 @@ public class EventFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+        slide.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
