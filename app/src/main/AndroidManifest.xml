@@ -5,9 +5,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <meta-data
         android:name="com.google.geo.API_KEY"
-        android:value="AIzaSyD_E84UnP0nmc8-w-ZiS1CxxUMJ9acZINM" />
+        android:value="AIzaSyBK7nROGp71AODK-1X9RE6XNJKGD8yZ6Sk" />
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -30,6 +31,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+
 
         <activity android:name=".Activities.AuthActivity" />
         <activity
@@ -75,6 +78,19 @@
         <activity android:name=".ActivityAmenities"></activity>
         <activity android:name=".Venue_Questions"/>
         <activity android:name=".Property_Questions"/>
+
+
+
+        <meta-data
+            android:name="com.google.geo.API_KEY"
+            android:value="AIzaSyD_E84UnP0nmc8-w-ZiS1CxxUMJ9acZINM"
+            />
+
+
+
     </application>
+
+
+
 
 </manifest>

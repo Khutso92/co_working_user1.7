@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cws_walk"
+    android:background="@drawable/building"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -70,8 +70,17 @@
                 android:inputType="number"
                 android:background="@drawable/square"
                 android:hint="time in, eg 7"
-
+android:visibility="gone"
                 android:textColorHint="#50196b63" />
+
+            <Spinner
+                android:id="@+id/spinnerTimeIn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:background="@drawable/square"
+                android:layout_marginLeft="4dp"
+                 />
 
             <EditText
                 android:id="@+id/edt_timeout_host"
@@ -82,8 +91,18 @@
                 android:inputType="number"
                 android:background="@drawable/square"
                 android:hint="time out, eg 20"
-
+android:visibility="gone"
                 android:textColorHint="#50196b63" />
+
+            <Spinner
+                android:id="@+id/spinnerTimeOut"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:background="@drawable/square"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                />
         </LinearLayout>
 
         <Button

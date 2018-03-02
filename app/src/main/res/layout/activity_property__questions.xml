@@ -4,54 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cws_walk"
+    android:background="@drawable/building"
     tools:context="com.example.khutsomatlala.hackaton_user11.Property_Questions">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textColor="#196b69"
             android:text="Do you have pets?"/>
 
-        <EditText
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/square"/>
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#196b69"
+                android:text="Yes"/>
 
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#196b69"
+                android:text="No"/>
+        </RadioGroup>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="#196b69"
             android:text="How many bedrooms does it have?"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/square"/>
+            android:background="@drawable/square"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="#196b69"
             android:text="How many bathrooms does it have?"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/square"/>
+            android:background="@drawable/square"
+            android:inputType="number"/>
 
         <Button
-            android:id="@+id/btn_next_second"
+            android:id="@+id/btn_next_property"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/customize_button"
             android:textSize="18sp"
-            android:layout_margin="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
             android:textColor="#fff"
             android:text="Next"
             android:textAllCaps="false" />

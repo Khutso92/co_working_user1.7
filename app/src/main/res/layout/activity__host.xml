@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/cws_walk"
+    android:background="@drawable/building"
     android:layout_weight="3"
     tools:context="com.example.khutsomatlala.hackaton_user11.Activity_Host">
 
@@ -18,12 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
         android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+
+        android:textColor="#196b69"
         android:text="Select type of hosting space"/>
 
 
@@ -33,24 +38,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="14dp"
         android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/cws"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#196b69"
             android:text="Co-working space"/>
 
         <RadioButton
             android:id="@+id/venue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#196b69"
             android:text="Venue"/>
 
         <RadioButton
             android:id="@+id/property"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#196b69"
             android:text="Property"/>
 
 
