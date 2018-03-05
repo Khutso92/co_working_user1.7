@@ -50,7 +50,7 @@ public class Third_Host extends AppCompatActivity {
                             if (infor.trim().isEmpty()) {
                            Toast.makeText(Third_Host.this, "enter infor", Toast.LENGTH_SHORT).show();
                             } else {
-                                Intent i = new Intent(Third_Host.this, Fourth_Host.class);
+                                Intent i = new Intent(Third_Host.this, Firth_Host.class);
                                 i.putExtra("name", PlaceName);
                                 i.putExtra("infor", infor);
                                 i.putExtra("placeAddress", placeAdress);
@@ -63,6 +63,13 @@ public class Third_Host extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
+
+
 
 
     }
