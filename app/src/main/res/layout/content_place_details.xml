@@ -234,6 +234,7 @@
                     <TextView
                         android:id="@+id/parking_cws"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/parking"
@@ -241,6 +242,7 @@
 
                     <TextView
                         android:id="@+id/ac_cws"
+                        android:visibility="gone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -250,6 +252,7 @@
                     <TextView
                         android:id="@+id/meeting_cws"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/users"
@@ -258,6 +261,7 @@
                     <TextView
                         android:id="@+id/wifi_cws"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/wifi"
@@ -267,6 +271,7 @@
                         android:id="@+id/workshop_cws"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/workshop"
                         android:text="Workshop" />
@@ -276,12 +281,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:drawableTop="@drawable/kitchen_profile"
                         android:text="Kitchen" />
 
                     <TextView
                         android:id="@+id/pets_property"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/kitchen_profile"
@@ -290,6 +297,7 @@
                     <TextView
                         android:id="@+id/rooms_property"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/kitchen_profile"
@@ -298,6 +306,7 @@
                     <TextView
                         android:id="@+id/kitchen"
                         android:layout_width="0dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableTop="@drawable/kitchen_profile"

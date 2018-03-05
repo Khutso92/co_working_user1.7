@@ -71,6 +71,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     ImagesAdapter Slideadapter;
 
 
+    String  amenity1 = "Parking",amenity2 = "AC",amenity3 = "wifi";
     //FIREBASE CONNECTION
     private DatabaseReference Slidedatabase, mFeatdatabase;
     private StorageReference mStorageReference;
@@ -86,7 +87,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid, user_name;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, ratingDisplayTextView, readAllReviews, txtPrice, txtHours;
+    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours ,parking_cws;
 
     ImageView feat1P, feat2P, feat3P;
 
@@ -177,6 +178,15 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
         txtHours.setText(hours);
         txtPrice.setText("R" + price + " per hour");
+
+//071 335 8349
+        parking_cws = findViewById(R.id.parking_cws);
+
+        String parkingText  = parking_cws.getText().toString();
+
+        if(parkingText.equals(amenity1)|| parkingText.equals(amenity2) ||parkingText.equals(amenity3) ){
+            parking_cws.setVisibility(View.VISIBLE);
+        }
 
         getFeature();
 
@@ -433,7 +443,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
                     if (dataSnapshot.hasChildren()) {
 
-                      slide1 = dataSnapshot.child("pic1").getValue().toString();
+                        slide1 = dataSnapshot.child("pic1").getValue().toString();
                         slide2 = dataSnapshot.child("pic2").getValue().toString();
                         slide3 = dataSnapshot.child("pic3").getValue().toString();
 
@@ -465,7 +475,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     }
 
-    public void addDotsIndicator(int position){
+    public void addDotsIndicator(int position) {
 
         mDots = new TextView[3];
         mDotsLayout.removeAllViews();
