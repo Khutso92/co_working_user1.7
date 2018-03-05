@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#196b69"
-            android:text="Do you have pets?"/>
+            android:text="Do you allow pets?"/>
 
         <RadioGroup
             android:layout_width="match_parent"
