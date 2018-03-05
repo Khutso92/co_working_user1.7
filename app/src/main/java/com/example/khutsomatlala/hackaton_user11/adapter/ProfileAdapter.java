@@ -75,7 +75,7 @@ public class ProfileAdapter extends BaseAdapter {
         timeOutTxt.setText("Time out " + s.getEnd_time() + ":00");
         dateTxt.setText(s.getDate_booked());
         noOfPplTxt.setText("No. of people " + s.getNumberOfPeople());
-        priceTxt.setText("Total Price R" + s.getPrice());
+        //priceTxt.setText("Total Price R" + s.getPrice());
         String placePic = s.getPlace_image();
 
         Glide.with(c)
@@ -116,7 +116,7 @@ public class ProfileAdapter extends BaseAdapter {
                 timeOut.setText("time out " + s.getEnd_time()+":00");
                 date.setText("Date booked " + s.getDate_booked());
                 peopleNumber.setText("Number of people " + s.getNumberOfPeople());
-                TotalPrice.setText("Total price  R" + s.getPrice());
+                TotalPrice.setText("Total price  R" + s.getPrice() );
 
 
                 builder.setView(dialogView);

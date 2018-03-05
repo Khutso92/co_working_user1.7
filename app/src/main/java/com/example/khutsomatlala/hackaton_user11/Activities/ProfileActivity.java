@@ -101,14 +101,11 @@ public class ProfileActivity extends AppCompatActivity {
         mStorage = FirebaseStorage.getInstance().getReference();
         databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
 
-
-
-
         // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         db = mFirebaseDatabase.getReference();
-        db.child("booking").child("user_id").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2").addValueEventListener(new ValueEventListener() {
+        db.child("booking").child("user_id").child("xqJ4TyEByIWjnLKP0xNnro0HELk2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 profile.clear();
@@ -116,10 +113,8 @@ public class ProfileActivity extends AppCompatActivity {
                 //Fectching information from database
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    reviews = dataSnapshot.getChildrenCount();
 
                     ProfilePojo profilePojo = snapshot.getValue(ProfilePojo.class);
-
 
                     profile.add(profilePojo);
                     //Init adapter
@@ -128,7 +123,6 @@ public class ProfileActivity extends AppCompatActivity {
                     //
                     profileListView.setAdapter(mProfileAdapter);
 
-                    //profileName.setText(mUsername);
                 }
             }
 

@@ -7,12 +7,12 @@ package com.example.khutsomatlala.hackaton_user11.model_for_user_app;
 public class ProfilePojo {
 
 
-    String placeName;
+     String placeName;
     String start_time;
     String end_time;
     String date_booked;
     String numberOfPeople;
-    String price;
+ private String Price;
     String image;
     String place_image;
 
@@ -45,7 +45,11 @@ public class ProfilePojo {
     }
 
     public String getPrice() {
-        return price;
+        return Price;
+    }
+
+    public void setPrice(String price) {
+        Price = price;
     }
 
     public String getImage() {
