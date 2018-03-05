@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:orientation="vertical"
     tools:context="com.example.khutsomatlala.hackaton_user11.ActivityAmenities">
 
@@ -11,17 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textColor="#196b69"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
         android:text="All Amenities"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:background="#000"
+        android:layout_marginBottom="4dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <CheckBox
@@ -29,13 +37,17 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="wifi" />
+            android:text="wifi"
+            android:textColor="#196b69"
+            android:textSize="12sp"/>
 
         <CheckBox
             android:id="@+id/chkAndroid"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:textColor="#196b69"
+            android:textSize="10sp"
             android:text="meeting room" />
 
         <CheckBox
@@ -43,6 +55,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#196b69"
             android:text="workshop" />
 
 
@@ -58,13 +72,17 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="facilities" />
+            android:textColor="#196b69"
+            android:text="facilities"
+            android:textSize="12sp"/>
 
         <CheckBox
             android:id="@+id/chkAndroid2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:textColor="#196b69"
+            android:textSize="12sp"
             android:text="Another" />
 
         <CheckBox
@@ -72,6 +90,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#196b69"
             android:text="Another" />
 
 
@@ -83,7 +103,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/customize_button"
         android:text="Ok"
         android:textAllCaps="false"

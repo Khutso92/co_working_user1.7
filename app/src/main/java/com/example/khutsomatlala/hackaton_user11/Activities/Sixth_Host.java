@@ -547,6 +547,8 @@ public class Sixth_Host extends AppCompatActivity {
 
     public class ViewDialog {
 
+
+
         public void showDialog(Activity activity, String msg) {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -557,10 +559,17 @@ public class Sixth_Host extends AppCompatActivity {
             text.setText(msg);*/
 
             Button btn_ok =  dialog.findViewById(R.id.btn_ok);
+            final CheckBox chk_wifi=  dialog.findViewById(R.id.chkIos1);
             btn_ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
+
+
+                    if (chk_wifi.isChecked()){
+
+                        Toast.makeText(Sixth_Host.this  , "wifi", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

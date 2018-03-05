@@ -9,6 +9,8 @@
     android:layout_weight="3"
     tools:context="com.example.khutsomatlala.hackaton_user11.Activity_Host">
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
