@@ -17,7 +17,7 @@ import com.example.khutsomatlala.hackaton_user11.R;
 public class MainMenuFragment extends AppCompatActivity {
 
     private TextView mTextMessage;
-    String type ;
+    String type;
     Fragment fragment;
     android.support.v4.app.FragmentManager fragmentManager;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -30,32 +30,32 @@ public class MainMenuFragment extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_cws);
                     fragment = new MainActivity();
                     type = "cws";
+                    loadFragment(fragment);
+                    return true;
 
-                    break;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_events);
                     fragment = new EventFragment();
                     type = "venue";
+                    loadFragment(fragment);
+                    return true;
 
-
-                    break;
                 case R.id.navigation_property:
                     mTextMessage.setText(R.string.title_property);
                     fragment = new PropertyFragment();
                     type = "property";
-                    break;
+                    loadFragment(fragment);
+                    return true;
 
                 case R.id.profile:
                     mTextMessage.setText(R.string.title_property);
-                   fragment = new ProfileListActivity();
+                    fragment = new ProfileListActivity();
                     type = "property";
-                    break;
+                    loadFragment(fragment);
+                    return true;
             }
 
-            final android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-            transaction.replace(R.id.container, fragment).commit();
-            return false;
+return false;
         }
     };
 
@@ -63,9 +63,7 @@ public class MainMenuFragment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-
         MainActivity f = new MainActivity();
-
         fragmentManager = this.getSupportFragmentManager();
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -75,7 +73,6 @@ public class MainMenuFragment extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
 
     }
 
@@ -92,5 +89,15 @@ public class MainMenuFragment extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void loadFragment(Fragment fragment) {
+
+        // load fragment
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
+
+    }
 
 }
