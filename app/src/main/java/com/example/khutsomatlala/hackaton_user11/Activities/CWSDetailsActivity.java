@@ -65,7 +65,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     private FirebaseDatabase mFirebaseDatabaseSlide;
     private DatabaseReference mPicDatabaseReferencSlide;
     String slide1, slide2, slide3;
-
+    ViewPagerAdapter adapterV;
     List<CWSDetailsActivity> catalogList;
 
     ImagesAdapter Slideadapter;
@@ -418,7 +418,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         });
 
         //Slide
-        List<String> images = new ArrayList<>();
+        final List<String> images = new ArrayList<>();
         viewpager = findViewById(R.id.pager);
 
         mDotsLayout = findViewById(R.id.dots);
@@ -433,13 +433,19 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
                     if (dataSnapshot.hasChildren()) {
 
-                        slide1 = dataSnapshot.child("pic1").getValue().toString();
+                      slide1 = dataSnapshot.child("pic1").getValue().toString();
                         slide2 = dataSnapshot.child("pic2").getValue().toString();
                         slide3 = dataSnapshot.child("pic3").getValue().toString();
 
-                        Toast.makeText(CWSDetailsActivity.this, "" + slide1, Toast.LENGTH_SHORT).show();
-                        System.out.print( "pic 1 "+slide1);
+                        images.add(slide1);
+                        images.add(slide2);
+                        images.add(slide3);
 
+                        adapterV = new ViewPagerAdapter(CWSDetailsActivity.this, images);
+                        viewpager.setAdapter(adapterV);
+                        addDotsIndicator(0);
+
+                        viewpager.addOnPageChangeListener(viewListerner);
                     } else {
 
                         Toast.makeText(CWSDetailsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
@@ -456,15 +462,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
 
-        images.add(slide1);
-        images.add(slide2);
-        images.add(slide3);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(CWSDetailsActivity.this, images);
-        viewpager.setAdapter(adapter);
-        addDotsIndicator(0);
-
-        viewpager.addOnPageChangeListener(viewListerner);
     }
 
     public void addDotsIndicator(int position){

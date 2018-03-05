@@ -180,8 +180,8 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                // actionBar.setTitle(dateFormat.format(firstDayOfNewMonth));
-                Cal_date = firstDayOfNewMonth;
+                tv_month.setText(dateFormat.format(firstDayOfNewMonth));
+
             }
         });
 
@@ -228,7 +228,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 //TODO push hours if valid
                                     MakeBooking(hourIn, hourOut);
                                     hours_selected = true;
-                                    getHours(hourIn, hourOut);
+
 
 
                                 } else {
@@ -508,12 +508,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             minteger = minteger + 1;
             display(minteger);
 
-            //TODO added for increase
-            if (hours_selected == true) {
-                printPrice(totalPrice * (hourOut - hourIn));
-            } else {
-                printPrice(totalPrice);
-            }
+            printPrice(totalPrice);
 
 
         } else {
@@ -529,12 +524,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
             display(minteger);
 
-            //TODO added for decrease
-            if (hours_selected == true) {
-                printPrice(totalPrice * (hourOut - hourIn));
-            } else {
-                printPrice(totalPrice);
-            }
+            printPrice(totalPrice);
 
 
         } else {
@@ -567,11 +557,8 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             //TODO add logic
 
 
-            if (hours_selected == true) {
-                printPrice(totalPrice * (hourOut - hourIn));
-            } else {
-                printPrice(totalPrice);
-            }
+           // txtPrice.setText("R " + totalPrice  );
+           // printPrice(totalPrice);
 
         } catch (Exception e) {
 
@@ -623,12 +610,18 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
     public void printPrice(int price) {
 
-        txtPrice.setText("R " + price);
-    }
 
+           if(vadilateHourIn > vadilateHourOut)
+           {
+               int diff = vadilateHourOut -vadilateHourIn;
+               txtPrice.setText("R " + price * diff);
+               Toast.makeText(this, "diff"+diff, Toast.LENGTH_SHORT).show();
+           }else
+           {
 
-    public void getHours(int hourIn, int hourOut){
-        Toast.makeText(this, "hours - " + (hourOut - hourIn), Toast.LENGTH_SHORT).show();
+               txtPrice.setText("R " + price  );
+           }
+
     }
 
 
@@ -637,6 +630,9 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         if (((openTime == timeSelected) || (openTime<timeSelected))){
 
             Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
+
+         //   int diff = vadilateHourOut - vadilateHourIn;
+           // txtPrice.setText("R " + totalPrice * diff);
 
         }
         else {
@@ -650,6 +646,9 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         if (((closeTime == timeSelected) || (closeTime>timeSelected))){
 
             Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
+
+          //  int diff = vadilateHourOut -vadilateHourIn;
+          //  txtPrice.setText("R " + totalPrice * diff);
 
         }
         else {
