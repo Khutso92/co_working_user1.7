@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <meta-data
         android:name="com.google.geo.API_KEY"
         android:value="AIzaSyBK7nROGp71AODK-1X9RE6XNJKGD8yZ6Sk" />
@@ -31,8 +30,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-
 
         <activity android:name=".Activities.AuthActivity" />
         <activity
@@ -75,22 +72,18 @@
         <activity android:name=".Activities.newSplashActivity" />
         <activity android:name=".Activities.PropertyDetailsActivity" />
         <activity android:name=".Activity_Host" />
-        <activity android:name=".ActivityAmenities"></activity>
-        <activity android:name=".Venue_Questions"/>
-        <activity android:name=".Property_Questions"/>
-
-
+        <activity android:name=".ActivityAmenities" />
+        <activity android:name=".Venue_Questions" />
+        <activity android:name=".Property_Questions" />
 
         <meta-data
             android:name="com.google.geo.API_KEY"
-            android:value="AIzaSyD_E84UnP0nmc8-w-ZiS1CxxUMJ9acZINM"
-            />
+            android:value="AIzaSyD_E84UnP0nmc8-w-ZiS1CxxUMJ9acZINM" />
 
-
-
+        <activity
+            android:name=".Activities.EventsActivity"
+            android:label="@string/title_activity_events"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
-
-
 
 </manifest>

@@ -1,14 +1,14 @@
 package com.example.khutsomatlala.hackaton_user11;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.khutsomatlala.hackaton_user11.Activities.Second_Host;
+import com.example.khutsomatlala.hackaton_user11.Activities.Third_Host;
 
 public class Activity_Host extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class Activity_Host extends AppCompatActivity {
             public void onClick(View view) {
                 switch (radioGroup.getCheckedRadioButtonId()) {
                     case R.id.cws:
-                        Intent i = new Intent(Activity_Host.this, Second_Host.class);
+                        Intent i = new Intent(Activity_Host.this, Third_Host.class);
                         startActivity(i);
 
                         break;
