@@ -522,6 +522,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                     VadilateCloseTime(vadilateHourOut, hourOut);
                     printPrice();
 
+
                     break;
                 case "23:00":
                     hourOut = 23;

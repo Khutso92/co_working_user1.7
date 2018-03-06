@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:inputType="number"
+
             android:background="@drawable/square"
             android:hint="Enter price"
             android:textColorHint="#50196b63" />
@@ -74,7 +75,7 @@ android:visibility="gone"
                 android:textColorHint="#50196b63" />
 
             <Spinner
-                android:id="@+id/spinnerTimeIn"
+                android:id="@+id/spinnerTimeInHost"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="30dp"
@@ -95,7 +96,7 @@ android:visibility="gone"
                 android:textColorHint="#50196b63" />
 
             <Spinner
-                android:id="@+id/spinnerTimeOut"
+                android:id="@+id/spinnerTimeOutHost"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="30dp"
@@ -114,6 +115,7 @@ android:visibility="gone"
             android:textAllCaps="false"
             android:background="@drawable/customize_button"
             android:textSize="18sp"
+            android:onClick="nextaa"
             android:layout_margin="4dp"
             android:textColor="#fff"
             android:text="Next"/>

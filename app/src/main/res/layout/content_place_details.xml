@@ -220,78 +220,116 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/parking_cws"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
-                        android:drawableTop="@drawable/parking"
-                        android:text="Parking" />
+                        <TextView
+                            android:id="@+id/txt_parking"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/parking"
+                            android:text="Parking" />
 
-                    <TextView
-                        android:id="@+id/ac_cws"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/ac"
-                        android:text="AC" />
+                    </LinearLayout>
 
-                    <TextView
+
+                    <LinearLayout
                         android:id="@+id/meeting_cws"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
-                        android:drawableTop="@drawable/users"
-                        android:text="Meeting" />
+                        <TextView
+                            android:id="@+id/txt_meeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/users"
+                            android:text="Meeting" />
 
-                    <TextView
-                        android:id="@+id/wifi_cws"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    </LinearLayout>
 
-                        android:drawableTop="@drawable/wifi"
-                        android:text="wifi" />
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/workshop_cws"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
-                        android:drawableTop="@drawable/workshop"
-                        android:text="Workshop" />
+                        <TextView
+                            android:id="@+id/txt_workshop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                    <TextView
+                            android:drawableTop="@drawable/workshop"
+                            android:text="Workshop" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/wifi_cws"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/txt_wifi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:drawableTop="@drawable/wifi"
+                            android:text="wifi" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/kitchen_cws"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
-                        android:drawableTop="@drawable/kitchen_profile"
-                        android:text="Kitchen" />
+                        <TextView
+                            android:id="@+id/txt_kitchen"
 
-                    <TextView
-                        android:id="@+id/pets_property"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                        android:drawableTop="@drawable/kitchen_profile"
-                        android:text="Kitchen" />
+                            android:drawableTop="@drawable/kitchen_profile"
+                            android:text="Kitchen" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/rooms_property"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <!--  <TextView
+                          android:id="@+id/pets_property"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
 
-                        android:drawableTop="@drawable/kitchen_profile"
-                        android:text="Kitchen" />
+                          android:drawableTop="@drawable/kitchen_profile"
+                          android:text="Kitchen" />
 
-                    <TextView
-                        android:id="@+id/kitchen"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                      <TextView
+                          android:id="@+id/rooms_property"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
 
-                        android:drawableTop="@drawable/dog"
-                        android:text="Kitchen" />
+                          android:drawableTop="@drawable/kitchen_profile"
+                          android:text="Kitchen" />
+
+                      <TextView
+                          android:id="@+id/kitchen"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:drawableTop="@drawable/dog"
+                          android:text="Kitchen" />-->
                 </LinearLayout>
 
                 <View

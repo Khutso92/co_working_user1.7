@@ -1,7 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -50,9 +49,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -71,7 +68,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     ImagesAdapter Slideadapter;
 
 
-    String cws_amenity1, cws_amenity2, cws_amenity3;
+    String cws_amenity1, cws_amenity2, cws_amenity3, cws_amenity4, cws_amenity5;
     //FIREBASE CONNECTION
     private DatabaseReference Slidedatabase, mFeatdatabase;
     private StorageReference mStorageReference;
@@ -87,8 +84,8 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid, user_name;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws;
-
+    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws, workshp_cws, kitchen_cws;
+    LinearLayout parking_cws_layout, ac_cws_layout, meeting_cws_layout, workshp_cws_layout, kitchen_cws_layout;
     ImageView feat1P, feat2P, feat3P;
 
     long reviews;
@@ -181,31 +178,53 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
 
         //This will from firebase
-        cws_amenity1 = "Parking";
-        cws_amenity2 = "AC";
-        cws_amenity3 = "wifi";
+        //cws_amenity1 = "Parking";
+        cws_amenity2 = "Meeting";
+        //cws_amenity3 = "wifi";
+        cws_amenity4 = "Kitchen";
+        cws_amenity5 = "Workshop";
 
-        parking_cws = findViewById(R.id.parking_cws);
-        ac_cws = findViewById(R.id.ac_cws);
-        meeting_cws = findViewById(R.id.meeting_cws);
+        parking_cws_layout = findViewById(R.id.parking_cws);
+        ac_cws_layout = findViewById(R.id.wifi_cws);
+        meeting_cws_layout = findViewById(R.id.meeting_cws);
+        kitchen_cws_layout = findViewById(R.id.kitchen_cws);
+        workshp_cws_layout = findViewById(R.id.workshop_cws);
+
+        parking_cws = findViewById(R.id.txt_parking);
+        ac_cws = findViewById(R.id.txt_wifi);
+        meeting_cws = findViewById(R.id.txt_meeting);
+
+        workshp_cws = findViewById(R.id.txt_workshop);
+        kitchen_cws = findViewById(R.id.txt_kitchen);
 
         //getting the text from the TextView
         String parkingText = parking_cws.getText().toString();
         String acText = ac_cws.getText().toString();
         String meetingText = meeting_cws.getText().toString();
+        String workshopText = workshp_cws.getText().toString();
+        String kitchenText = kitchen_cws.getText().toString();
 
 
-        if (parkingText.equals(cws_amenity1) || parkingText.equals(cws_amenity2) || parkingText.equals(cws_amenity3)) {
-            parking_cws.setVisibility(View.VISIBLE);
+        if (parkingText.equals(cws_amenity1) || parkingText.equals(cws_amenity2) || parkingText.equals(cws_amenity3) || parkingText.equals(cws_amenity4) || parkingText.equals(cws_amenity5)) {
+            parking_cws_layout.setVisibility(View.VISIBLE);
         }
 
-        if (acText.equals(cws_amenity1) || acText.equals(cws_amenity2) || acText.equals(cws_amenity3)) {
-            ac_cws.setVisibility(View.VISIBLE);
+        if (acText.equals(cws_amenity1) || acText.equals(cws_amenity2) || acText.equals(cws_amenity3) || acText.equals(cws_amenity4) || acText.equals(cws_amenity5)) {
+            ac_cws_layout.setVisibility(View.VISIBLE);
 
 
         }
-        if (meetingText.equals(cws_amenity1) || meetingText.equals(cws_amenity2) || meetingText.equals(cws_amenity3)) {
-            meeting_cws.setVisibility(View.VISIBLE);
+        if (meetingText.equals(cws_amenity1) || meetingText.equals(cws_amenity2) || meetingText.equals(cws_amenity3) || meetingText.equals(cws_amenity5) || meetingText.equals(cws_amenity5)) {
+            meeting_cws_layout.setVisibility(View.VISIBLE);
+        }
+
+        if (workshopText.equals(cws_amenity1) || workshopText.equals(cws_amenity2) || workshopText.equals(cws_amenity3) || workshopText.equals(cws_amenity5) || workshopText.equals(cws_amenity4)) {
+            workshp_cws_layout.setVisibility(View.VISIBLE);
+
+
+        }
+        if (kitchenText.equals(cws_amenity1) || kitchenText.equals(cws_amenity2) || kitchenText.equals(cws_amenity3)  || kitchenText.equals(cws_amenity4) || kitchenText.equals(cws_amenity5)) {
+            kitchen_cws_layout.setVisibility(View.VISIBLE);
         }
 
 
