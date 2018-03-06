@@ -71,7 +71,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     ImagesAdapter Slideadapter;
 
 
-    String  amenity1 = "Parking",amenity2 = "AC",amenity3 = "wifi";
+    String cws_amenity1, cws_amenity2, cws_amenity3;
     //FIREBASE CONNECTION
     private DatabaseReference Slidedatabase, mFeatdatabase;
     private StorageReference mStorageReference;
@@ -87,7 +87,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid, user_name;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours ,parking_cws;
+    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws;
 
     ImageView feat1P, feat2P, feat3P;
 
@@ -179,14 +179,35 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         txtHours.setText(hours);
         txtPrice.setText("R" + price + " per hour");
 
-//071 335 8349
+
+        //This will from firebase
+        cws_amenity1 = "Parking";
+        cws_amenity2 = "AC";
+        cws_amenity3 = "wifi";
+
         parking_cws = findViewById(R.id.parking_cws);
+        ac_cws = findViewById(R.id.ac_cws);
+        meeting_cws = findViewById(R.id.meeting_cws);
 
-        String parkingText  = parking_cws.getText().toString();
+        //getting the text from the TextView
+        String parkingText = parking_cws.getText().toString();
+        String acText = ac_cws.getText().toString();
+        String meetingText = meeting_cws.getText().toString();
 
-        if(parkingText.equals(amenity1)|| parkingText.equals(amenity2) ||parkingText.equals(amenity3) ){
+
+        if (parkingText.equals(cws_amenity1) || parkingText.equals(cws_amenity2) || parkingText.equals(cws_amenity3)) {
             parking_cws.setVisibility(View.VISIBLE);
         }
+
+        if (acText.equals(cws_amenity1) || acText.equals(cws_amenity2) || acText.equals(cws_amenity3)) {
+            ac_cws.setVisibility(View.VISIBLE);
+
+
+        }
+        if (meetingText.equals(cws_amenity1) || meetingText.equals(cws_amenity2) || meetingText.equals(cws_amenity3)) {
+            meeting_cws.setVisibility(View.VISIBLE);
+        }
+
 
         getFeature();
 
@@ -196,7 +217,6 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         // ------------------- reviews sections
         mUsername = ANONYMOUS;
