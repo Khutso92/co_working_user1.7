@@ -290,7 +290,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:drawableTop="@drawable/kitchen_profile"
+                        android:drawableTop="@drawable/dog"
                         android:text="Kitchen" />
                 </LinearLayout>
 
