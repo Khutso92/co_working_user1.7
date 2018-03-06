@@ -55,7 +55,7 @@ public class MainMenuFragment extends AppCompatActivity {
                     return true;
             }
 
-return false;
+            return false;
         }
     };
 

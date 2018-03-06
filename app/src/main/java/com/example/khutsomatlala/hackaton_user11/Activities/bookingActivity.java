@@ -38,7 +38,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
     Boolean date_selected = false;
     Boolean hours_selected = false;
 
-    int hourIn, hourOut, personNumber, totalPrice, vadilateHourIn, vadilateHourOut;
+    int hourIn, hourOut, personNumber, totalPrice, vadilateHourIn, vadilateHourOut, overAllPrice;
 
     TextView mPrice, txtPrice, txtTimein, txtTimeOut, txtDateBooked, txtNumberOfppl, nameOfPerson, tv_month;
 
@@ -225,12 +225,14 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
                             if (date_selected == true) {
                                 if (minteger >= 1) {
-//TODO push hours if valid
+                                    //TODO push hours if valid
                                     MakeBooking(hourIn, hourOut);
                                     hours_selected = true;
-                                    int diff = vadilateHourOut - vadilateHourIn;
+                                    int diff = hourOut - hourIn;
+                                    totalPrice = totalPrice * diff;
 
-                                    Toast.makeText(bookingActivity.this, "" + diff, Toast.LENGTH_SHORT).show();
+
+                                    Toast.makeText(bookingActivity.this, "total price" + totalPrice + "\n hours " + diff, Toast.LENGTH_LONG).show();
 
 
                                 } else {
@@ -279,42 +281,52 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                 case "1:00":
                     hourIn = 1;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "2:00":
                     hourIn = 2;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "3:00":
                     hourIn = 3;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "4:00":
                     hourIn = 4;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "5:00":
                     hourIn = 5;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "6:00":
                     hourIn = 6;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "7:00":
                     hourIn = 7;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "8:00":
                     hourIn = 8;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "9:00":
                     hourIn = 9;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "10:00":
                     hourIn = 10;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "11:00":
                     hourIn = 11;
@@ -323,26 +335,32 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                 case "12:00":
                     hourIn = 12;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "13:00":
                     hourIn = 13;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "14:00":
                     hourIn = 14;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "15:00":
                     hourIn = 15;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "16:00":
                     hourIn = 16;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "17:00":
                     hourIn = 17;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "18:00":
                     hourIn = 18;
@@ -351,23 +369,27 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                 case "19:00":
                     hourIn = 19;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "20:00":
                     hourIn = 20;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "21:00":
                     hourIn = 21;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "22:00":
                     hourIn = 22;
                     VadilateOpenTime(vadilateHourIn, hourIn);
+                    printPrice();
                     break;
                 case "23:00":
                     hourIn = 23;
                     VadilateOpenTime(vadilateHourIn, hourIn);
-
+                    printPrice();
             }
 
             txtTimein.setText("Time in - " + hourIn + ":00");
@@ -381,103 +403,130 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                 case "1:00 ":
                     hourOut = 1;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
+
                 case "2:00":
                     hourOut = 2;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
+
                 case "3:00":
                     hourOut = 3;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
+
                     break;
                 case "4:00":
                     hourOut = 4;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
+
                 case "5:00":
                     hourOut = 5;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
+
                 case "6:00":
                     hourOut = 6;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
+
                     break;
                 case "7:00":
                     hourOut = 7;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "8:00":
                     hourOut = 8;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "9:00":
                     hourOut = 9;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "10:00":
                     hourOut = 10;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "11:00":
                     hourOut = 11;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "12:00":
                     hourOut = 12;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "13:00":
                     hourOut = 13;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "14:00":
                     hourOut = 14;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "15:00":
                     hourOut = 15;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
 
                 case "16:00":
                     hourOut = 16;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "17:00":
 
                     hourOut = 17;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "18:00":
 
                     hourOut = 18;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "19:00":
 
                     hourOut = 19;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "20:00":
 
                     hourOut = 20;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
                 case "21:00":
                     hourOut = 21;
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
                     break;
 
                 case "22:00":
                     hourOut = 22;
-
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
 
                     break;
                 case "23:00":
                     hourOut = 23;
-
                     VadilateCloseTime(vadilateHourOut, hourOut);
+                    printPrice();
 
             }
 
@@ -510,12 +559,17 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             minteger = minteger + 1;
             display(minteger);
 
-            printPrice(totalPrice);
+            int diff = hourOut - hourIn;
 
+            if (diff > 0) {
+                txtPrice.setText("R " + totalPrice * diff);
+            }
 
         } else {
             Toast.makeText(this, "cant be more than 11", Toast.LENGTH_SHORT).show();
         }
+
+        printPrice();
     }
 
     public void decrease(View view) {
@@ -525,9 +579,13 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
 
             display(minteger);
-
-            printPrice(totalPrice);
-
+//            int diff = hourOut - hourIn;
+//            if(diff>0){
+//                txtPrice.setText("R " + totalPrice * diff);
+//
+//            }
+//
+            printPrice();
 
         } else {
             Toast.makeText(this, "cant be less than zero", Toast.LENGTH_SHORT).show();
@@ -553,11 +611,6 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             }
             txtNumberOfppl.setText("Number of people - " + numberofPeople);
 
-            //TODO add logic
-
-
-            // txtPrice.setText("R " + totalPrice  );
-            // printPrice(totalPrice);
 
         } catch (Exception e) {
 
@@ -590,6 +643,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                         bookBlocker++;
 
                         Intent i = new Intent(bookingActivity.this, MainMenuFragment.class);
+
                         startActivity(i);
                     } else {
                         Toast.makeText(bookingActivity.this, "You have already booked", Toast.LENGTH_SHORT).show();
@@ -607,20 +661,6 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
         }
     }
 
-    public void printPrice(int price) {
-
-
-        if (vadilateHourIn > vadilateHourOut) {
-            int diff = vadilateHourOut - vadilateHourIn;
-            txtPrice.setText("R " + price * diff);
-            Toast.makeText(this, "diff" + diff, Toast.LENGTH_SHORT).show();
-        } else {
-
-            txtPrice.setText("R " + price);
-        }
-
-    }
-
 
     public void VadilateOpenTime(int openTime, int timeSelected) {
 
@@ -628,8 +668,6 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
             Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
 
-            int diff = vadilateHourOut - vadilateHourIn;
-            // txtPrice.setText("R " + totalPrice * diff);
 
         } else {
 
@@ -643,12 +681,20 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
             Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
 
-            //  int diff = vadilateHourOut -vadilateHourIn;
-            //  txtPrice.setText("R " + totalPrice * diff);
 
         } else {
 
             Toast.makeText(this, "we close at " + closeTime + ":00", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void printPrice() {
+        int diff = hourOut - hourIn;
+
+        if (diff > 0) {
+            txtPrice.setText("R " + totalPrice * diff);
+        } else {
+            txtPrice.setText("R " + totalPrice);
         }
     }
 }
