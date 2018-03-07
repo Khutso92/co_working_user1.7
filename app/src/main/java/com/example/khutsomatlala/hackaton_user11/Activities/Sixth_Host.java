@@ -59,6 +59,7 @@ public class Sixth_Host extends AppCompatActivity {
 
 
     CheckBox Wifi, meeting_shop, workshop, parking, kitchen;
+    String wifiText,meeting_shop_text, workshop_text, parking_text, kitchen_text;
     FirebaseDatabase database;
     private Uri imgUri, imgUri2, imgUri3;
     private Uri FeatimgUri, FeatimgUri2, FeatimgUri3;
@@ -588,18 +589,23 @@ public class Sixth_Host extends AppCompatActivity {
         int i = 0;
         if (Wifi.isChecked()) {
             i++;
+              wifiText = Wifi.getText().toString();
         }
         if (meeting_shop.isChecked()) {
             i++;
+            meeting_shop_text = meeting_shop.getText().toString();
         }
         if (workshop.isChecked()) {
             i++;
+            workshop_text = workshop.getText().toString();
         }
         if (parking.isChecked()) {
             i++;
+            parking_text = parking.getText().toString();
         }
         if (kitchen.isChecked()) {
             i++;
+            kitchen_text = kitchen.getText().toString();
         }
 
 
@@ -607,11 +613,16 @@ public class Sixth_Host extends AppCompatActivity {
 
             Toast.makeText(this, "select only 3 ", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(this, "value = "+ i, Toast.LENGTH_SHORT).show();
+
         } else
         {
             Toast.makeText(this, "Thanks", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "value = "+ i, Toast.LENGTH_SHORT).show();
+
+
+             if(!wifiText.isEmpty()){
+
+                 Toast.makeText(this, ""+wifiText, Toast.LENGTH_SHORT).show();
+             }
         }
     }
 }
