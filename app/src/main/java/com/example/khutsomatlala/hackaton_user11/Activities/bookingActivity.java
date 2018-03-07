@@ -172,7 +172,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
                     txtDateBooked.setText("Date booked - " + date);
                 } else {
-                    Toast.makeText(bookingActivity.this, "date has pasted " + dayStamp, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(bookingActivity.this, "date has passed" + dayStamp, Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -589,7 +589,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             printPrice();
 
         } else {
-            Toast.makeText(this, "cant be less than zero", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "can not be less than zero", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -667,7 +667,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
         if (((openTime == timeSelected) || (openTime < timeSelected))) {
 
-            Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
+
 
 
         } else {

@@ -166,7 +166,7 @@ public class ProfileListActivity extends Fragment {
 
                 } catch (Exception e) {
 
-                    Toast.makeText(getActivity(), "no dp", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "no picture", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -329,7 +329,7 @@ public class ProfileListActivity extends Fragment {
             pd.show();
 
         } catch (NullPointerException f) {
-            Toast.makeText(getActivity(), "unable to upload pro pic", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "unable to upload picture", Toast.LENGTH_SHORT).show();
         }
     }
 
