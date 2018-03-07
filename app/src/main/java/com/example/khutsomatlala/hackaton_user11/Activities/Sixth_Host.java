@@ -45,7 +45,7 @@ import java.io.IOException;
 
 public class Sixth_Host extends AppCompatActivity {
     ImageView first_pic, second_pic, third_pic;
-    Button  first_amenities, second_amenities, third_amenities, save;
+    Button first_amenities, second_amenities, third_amenities, save;
     String price, in, out, hours, phone, infor, PlaceName, btn_first_pic, btn_second_pic, btn_third_pic, featTit1e1, featTit1e2, featTit1e3, placeAddress;
     String urI, uri2, uri3;
     int i = 0;
@@ -57,6 +57,8 @@ public class Sixth_Host extends AppCompatActivity {
     private DatabaseReference mDatabaseRefPlaces, mDatabaseRefSlide, mDatabaseRefWorkingHours, mDataRefFeat;
     private ImageView imageView;
 
+
+    CheckBox Wifi, meeting_shop, workshop, parking, kitchen;
     FirebaseDatabase database;
     private Uri imgUri, imgUri2, imgUri3;
     private Uri FeatimgUri, FeatimgUri2, FeatimgUri3;
@@ -74,6 +76,7 @@ public class Sixth_Host extends AppCompatActivity {
 
     private CheckBox chkIos, chkAndroid, chkWindows;
     TextView txt_seeall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +106,6 @@ public class Sixth_Host extends AppCompatActivity {
         txt_seeall = findViewById(R.id.txt_seeall);
 
 
-
         txt_seeall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +118,12 @@ public class Sixth_Host extends AppCompatActivity {
         edtFeatT1 = findViewById(R.id.edtFeatT1);
         edtFeatT2 = findViewById(R.id.edtFeatT2);
         edtFeatT3 = findViewById(R.id.edtFeatT3);
+
+        Wifi = findViewById(R.id.chkWifi);
+        meeting_shop = findViewById(R.id.chkMeeting);
+        workshop = findViewById(R.id.chkworkingShop);
+        kitchen = findViewById(R.id.chkKitchen);
+        parking = findViewById(R.id.chkParking);
 
         Intent i = getIntent();
         price = i.getStringExtra("price");
@@ -155,7 +163,6 @@ public class Sixth_Host extends AppCompatActivity {
     }
 
 
-
     public void addListenerOnChkIos() {
 
         chkIos = (CheckBox) findViewById(R.id.chkIos);
@@ -175,14 +182,14 @@ public class Sixth_Host extends AppCompatActivity {
 
     }
 
- /*   public void addListenerOnButton() {
+    /*   public void addListenerOnButton() {
 
-        chkIos = (CheckBox) findViewById(R.id.chkIos);
-        chkAndroid = (CheckBox) findViewById(R.id.chkAndroid);
-        chkWindows = (CheckBox) findViewById(R.id.chkWindows);
+           chkIos = (CheckBox) findViewById(R.id.chkIos);
+           chkAndroid = (CheckBox) findViewById(R.id.chkAndroid);
+           chkWindows = (CheckBox) findViewById(R.id.chkWindows);
 
-    }
-*/
+       }
+   */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -322,9 +329,8 @@ public class Sixth_Host extends AppCompatActivity {
                     details details = new details("34.058653", "-118.443135", placeAddress, phone, hours, infor, PlaceName, Integer.parseInt(price), urI);
 
 
-
-                    if (numberOfPlaces == 1){
-                    mDatabaseRefPlaces.push().child("details").setValue(details);
+                    if (numberOfPlaces == 1) {
+                        mDatabaseRefPlaces.push().child("details").setValue(details);
                         numberOfPlaces++;
                     }
                     //for silde 3
@@ -385,8 +391,8 @@ public class Sixth_Host extends AppCompatActivity {
                                                             featTit1e2 = edtFeatT2.getText().toString().trim();
                                                             featTit1e3 = edtFeatT3.getText().toString().trim();
 
-                                                                features feat = new features(featUri, featUri2, featUri3, featTit1e1, featTit1e2, featTit1e3);
-                                                                mDataRefFeat.child(PlaceName).setValue(feat);
+                                                            features feat = new features(featUri, featUri2, featUri3, featTit1e1, featTit1e2, featTit1e3);
+                                                            mDataRefFeat.child(PlaceName).setValue(feat);
 
                                                         }
                                                     });
@@ -548,7 +554,6 @@ public class Sixth_Host extends AppCompatActivity {
     public class ViewDialog {
 
 
-
         public void showDialog(Activity activity, String msg) {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -558,17 +563,17 @@ public class Sixth_Host extends AppCompatActivity {
             /*TextView text = (TextView) dialog.findViewById(R.id.txt_seeall);
             text.setText(msg);*/
 
-            Button btn_ok =  dialog.findViewById(R.id.btn_ok);
-            final CheckBox chk_wifi=  dialog.findViewById(R.id.chkIos1);
+            Button btn_ok = dialog.findViewById(R.id.btn_ok);
+            final CheckBox chk_wifi = dialog.findViewById(R.id.chkIos1);
             btn_ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
 
 
-                    if (chk_wifi.isChecked()){
+                    if (chk_wifi.isChecked()) {
 
-                        Toast.makeText(Sixth_Host.this  , "wifi", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Sixth_Host.this, "wifi", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -578,4 +583,35 @@ public class Sixth_Host extends AppCompatActivity {
         }
     }
 
+
+    public void test(View test) {
+        int i = 0;
+        if (Wifi.isChecked()) {
+            i++;
+        }
+        if (meeting_shop.isChecked()) {
+            i++;
+        }
+        if (workshop.isChecked()) {
+            i++;
+        }
+        if (parking.isChecked()) {
+            i++;
+        }
+        if (kitchen.isChecked()) {
+            i++;
+        }
+
+
+        if((i>3 || i<3)){
+
+            Toast.makeText(this, "select only 3 ", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this, "value = "+ i, Toast.LENGTH_SHORT).show();
+        } else
+        {
+            Toast.makeText(this, "Thanks", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "value = "+ i, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

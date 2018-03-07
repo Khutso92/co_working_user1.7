@@ -340,19 +340,19 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
                 case "23:00":
                     hourOut = 23;
                     closetime = "11PM";
-                    workinghours = opentime + "-" + closetime;
+
 
 
             }
 
-            Toast.makeText(this, ""+closetime, Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(this, ""+closetime, Toast.LENGTH_SHORT).show();
         }
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        Toast.makeText(this, "nothing selected", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -361,10 +361,23 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
         in = timein.getText().toString();
         out = timeout.getText().toString();
         if (price.trim().isEmpty()) {
-
+            workinghours = opentime + "-" + closetime;
             Toast.makeText(Firth_Host.this, "enter price", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, ""+opentime +" - "+closetime, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" +workinghours + "\nopen time"+hourIn + "\nclose time"+hourOut, Toast.LENGTH_LONG).show();
 
+        }
+        else
+        {
+            Intent i = new Intent(Firth_Host.this, Sixth_Host.class);
+            i.putExtra("price", price);
+            i.putExtra("timein", in);
+            i.putExtra("timeout", out);
+            i.putExtra("hour", hours);
+            i.putExtra("phone", phone);
+            i.putExtra("name", PlaceName);
+            i.putExtra("infor", infor);
+            i.putExtra("placeAddress", placeAddress);
+            startActivity(i);
         }
     }
 

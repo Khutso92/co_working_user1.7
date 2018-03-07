@@ -216,26 +216,62 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/chkIos"
+                android:id="@+id/chkWifi"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="wifi" />
 
             <CheckBox
-                android:id="@+id/chkAndroid"
+                android:id="@+id/chkMeeting"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="meeting room" />
 
             <CheckBox
-                android:id="@+id/chkWindows"
+                android:id="@+id/chkworkingShop "
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="workshop" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkParking"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Parking" />
+
+            <CheckBox
+                android:id="@+id/chkKitchen"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Kitchen" />
+
+            <CheckBox
+
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="workshop" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:text="test"
+                android:layout_height="wrap_content"
+                android:onClick="test"
+                />
 
         </LinearLayout>
 
