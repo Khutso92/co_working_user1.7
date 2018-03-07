@@ -41,14 +41,14 @@ public class Third_Host extends AppCompatActivity {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
                     if (PlaceName.trim().isEmpty()) {
-                        Toast.makeText(Third_Host.this, "enter place name", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Third_Host.this, "Enter place name", Toast.LENGTH_SHORT).show();
                     } else {
                         if (placeAdress.trim().isEmpty()) {
                             Toast.makeText(Third_Host.this, "Enter address", Toast.LENGTH_SHORT).show();
 
                         } else {
                             if (infor.trim().isEmpty()) {
-                           Toast.makeText(Third_Host.this, "enter infor", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(Third_Host.this, "Enter information", Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent i = new Intent(Third_Host.this, Firth_Host.class);
                                 i.putExtra("name", PlaceName);
