@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btnUpload, btnPlus;
 
     CircleImageView profilePicture;
-    //profile adapter
+    //propety_activity adapter
     DatabaseReference db;
     Boolean selected = false;
 
@@ -99,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileNoOfPpl = findViewById(R.id.profileNoOfPpl);
         profilePrice = findViewById(R.id.profilePrice);
         mStorage = FirebaseStorage.getInstance().getReference();
-        databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
+        databaseProfile = FirebaseDatabase.getInstance().getReference("propety_activity").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
 
         // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
         mFirebaseDatabase = FirebaseDatabase.getInstance();

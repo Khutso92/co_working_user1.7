@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.Activities.CWSDetailsActivity;
-import com.example.khutsomatlala.hackaton_user11.Activities.PropertyDetailsActivity;
+import com.example.khutsomatlala.hackaton_user11.Property_DetailsActivity;
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.WorkingSpace;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,7 +81,7 @@ public class PropertyAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdap
 
                         String user_name = dataSnapshot.child("name").getValue().toString();
 
-                        Intent intent = new Intent(activity, PropertyDetailsActivity.class);
+                        Intent intent = new Intent(activity, Property_DetailsActivity.class);
 
 
                         String lat = mValues.get(position).getPlaceDetails().getPlaceLatitude();
@@ -108,7 +106,6 @@ public class PropertyAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdap
                         intent.putExtra("price", price);
                         intent.putExtra("email", email);
 
-                        Toast.makeText(activity, "ddd", Toast.LENGTH_SHORT).show();
 
                         intent.putExtra("user_name", user_name);
 

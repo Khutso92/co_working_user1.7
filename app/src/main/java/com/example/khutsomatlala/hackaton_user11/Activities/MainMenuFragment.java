@@ -27,30 +27,30 @@ public class MainMenuFragment extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_cws);
+
                     fragment = new MainActivity();
-                    type = "cws";
+
                     loadFragment(fragment);
                     return true;
 
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_events);
+
                     fragment = new EventFragment();
-                    type = "venue";
+
                     loadFragment(fragment);
                     return true;
 
                 case R.id.navigation_property:
-                    mTextMessage.setText(R.string.title_property);
+
                     fragment = new PropertyFragment();
-                    type = "property";
+
                     loadFragment(fragment);
                     return true;
 
                 case R.id.profile:
-                    mTextMessage.setText(R.string.title_property);
+
                     fragment = new ProfileListActivity();
-                    type = "property";
+
                     loadFragment(fragment);
                     return true;
             }

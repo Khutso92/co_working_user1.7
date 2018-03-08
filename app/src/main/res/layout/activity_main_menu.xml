@@ -7,13 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.khutsomatlala.hackaton_user11.Activities.MainMenuFragment">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_cws"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
 

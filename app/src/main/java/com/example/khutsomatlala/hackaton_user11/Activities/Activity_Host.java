@@ -56,7 +56,7 @@ public class Activity_Host extends AppCompatActivity {
                         Intent intentp = new Intent(Activity_Host.this, Property_Questions.class);
                         host_type = "property";
                         Toast.makeText(Activity_Host.this, "" + host_type, Toast.LENGTH_SHORT).show();
-                        //startActivity(intentp);
+                        startActivity(intentp);
                 }
             }
         });

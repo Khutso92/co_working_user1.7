@@ -50,7 +50,7 @@ public class ProfileListActivity extends Fragment {
     Button btnUpload, btnHost, btnAdd,btnBookings,btnSignout;
 
     CircleImageView profilePicture;
-    //profile adapter
+    //propety_activity adapter
     DatabaseReference db;
     Boolean selected = false;
 
@@ -134,7 +134,7 @@ public class ProfileListActivity extends Fragment {
 
 
         mStorage = FirebaseStorage.getInstance().getReference();
-        databaseProfile = FirebaseDatabase.getInstance().getReference("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
+        databaseProfile = FirebaseDatabase.getInstance().getReference("propety_activity").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2");
 
 
 
@@ -146,14 +146,14 @@ public class ProfileListActivity extends Fragment {
         }*/
         profile = new ArrayList<>();
 
-        //profile
+        //propety_activity
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
 
         db = mFirebaseDatabase.getReference();
 
 
-        db.child("profile").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2").child("image").addValueEventListener(new ValueEventListener() {
+        db.child("propety_activity").child("eiWnjD8H3WeglN0un0j0jmc8CuJ2").child("image").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

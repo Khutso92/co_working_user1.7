@@ -155,7 +155,7 @@ public class Sixth_Host extends AppCompatActivity {
                     }
                 } catch (NullPointerException e) {
 
-                    Toast.makeText(Sixth_Host.this, "- enter all text fields \n - upload all 3 pics ", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Sixth_Host.this, "- enter all text fields \n - upload all 3 pics ", Toast.LENGTH_SHORT).show();
 
                 }
 

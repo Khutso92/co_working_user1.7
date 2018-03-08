@@ -1,135 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
 
-    <ScrollView
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.khutsomatlala.hackaton_user11.Activities.CWSDetailsActivity"
+    tools:showIn="@layout/activity_events">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
-
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/iv_pic1"
-                            android:layout_width="300dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/placeholder" />
-
-
-                        <ImageView
-                            android:id="@+id/iv_pic2"
-                            android:layout_width="300dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/placeholder" />
-
-
-                        <ImageView
-                            android:id="@+id/iv_pic3"
-                            android:layout_width="300dp"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/placeholder" />
-                    </LinearLayout>
-
-
-                </HorizontalScrollView>
-
-
-            </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/placeLocation"
+                    android:id="@+id/txt_placeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="The Wanderers Club"
+                    android:textColor="#0E3047"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/book"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:background="#196b69"
+                    android:fontFamily="sans-serif"
+                    android:onClick="GoToBook"
+                    android:text="Book now"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_location"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-
-                    android:layout_alignParentTop="true"
+                    android:layout_below="@+id/txt_placeName"
+                    android:layout_marginRight="18dp"
                     android:fontFamily="sans-serif"
-                    android:text="Johannesburg"
+                    android:gravity="center_vertical"
+                    android:text="Illovo Sandton"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/price"
+                    android:id="@+id/txtHours"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:text="R2500 p/m"
-                    android:textColor="#000000"
-                    android:textSize="14dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/book"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="10dp"
+                    android:text="24hrs"
+                    android:textColor="#000" />
 
-                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/book"
+                    android:layout_marginRight="4dp"
+                    android:textColor="#0E3047"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    tools:text="R78p/h" />
+
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/placePhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="011 123 4567"
-                android:textColor="#000000" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical"
+            android:paddingRight="16dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
-                android:text="House to rent"
-                android:textColor="#0E3047"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:id="@+id/txtInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif"
-
+                android:lines="2"
                 android:scrollHorizontally="true"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer conval Pellentesque lacinia augue odio, sit amet rutrum velit convallis et. Aenean at dictum tortor. Aenean feugiat ante quis sem ullamcorper, eget posuere nulla interdum. Aliquam sodales malesuada sapien eu auctor. Nunc vulputate mauris ornare, auctor risus eu, ultrices mi. Donec pretium ac quam ac efficitur. Maecenas a mollis elit, vel rhoncus sapien. Ut luctus odio suscipit, aliquam sem vitae, tristique purus. Cras nec egestas neque.
-
-Etiam sed eros pulvinar nibh bibendum convallis. Nam convallis, orci eget euismod ultrices, elit lorem convallis odio, vel luctus neque libero a nunc. Sed eu lacinia urna. Donec auctor dui metus, id condimentum ex scelerisque eget. Integer ullamcorper lacus sodales urna pulvinar, vitae viverra orci cursus. In quis malesuada sapien. Aliquam venenatis ac orci a vehicula. In diam mauris, ullamcorper id dictum eget, porta eget metus. Sed efficitur turpis maximus, feugiat felis sit amet, tincidunt risus. Morbi interdum est ac diam viverra, in faucibus metus vehicula.
-
-Ut eu nisi tempor nulla placerat tincidunt. Suspendisse vestibulum est eu ante pretium auctor. Pellentesque in tempor ex, eu congue est. Ut bibendum nibh a est dignissim rutrum. In et elementum elit, non dictum nibh. Donec quis sem sollicitudin, semper tellus non, cursus lorem. Sed luctus eget ex aliquet ornare. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin arcu erat, fermentum sit amet sagittis aliquet, facilisis quis dui. Nam hendrerit posuere rutrum. Nulla pellentesque posuere leo eget eleifend. Quisque in velit felis. In ut augue maximus, viverra nulla quis, facilisis velit. Praesent vulputate, metus sed semper finibus, felis quam vestibulum sapien, id maximus diam dui eu nibh. Etiam vel eros erat. Morbi eleifend sit amet neque vitae tristique.
-
-Aliquam vitae metus arcu. Praesent ornare luctus tempor. Maecenas cursus arcu sagittis, imperdiet dolor a, hendrerit libero. Curabitur ac diam at lacus mollis rhoncus quis quis arcu. Nunc vel ultricies diam. Maecenas feugiat, augue at accumsan rutrum, tortor tortor gravida lacus, ac fringilla neque diam et nisl. Suspendisse tempus est vitae urna feugiat, eu tristique velit luctus. Ut quis nisl a mi semper auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; lis enim tellus, ac imperdiet turpis ultricies eu. Cras at tempor libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer sem ex, convallis id quam vitae, aliquet imperdiet mi." />
+                android:text="Lorem ipsulum dolor sit ame,  this is some random placehp;edr stuff. Like genuinely, there\'s no forethpught to the stuff I am writing now. So let us  just stop typing"
+                android:textAllCaps="false"
+                android:textColor="#000" />
 
             <TextView
-                android:id="@+id/readMoreProperty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Read More" />
-
-            <Button
+                android:id="@+id/readMoreDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enquire"
-                android:textAllCaps="false" />
-
-            <include layout="@layout/activity_maps" />
+                android:onClick="readMore"
+                android:text="read more"
+                android:textColor="#00f"
+                tools:ignore="OnClick" />
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#C0C0C0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent"
+                    android:visibility="gone"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/feat1Pic"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/blackchat" />
+
+                        <Button
+                            android:id="@+id/btn_reviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:background="@android:color/transparent"
+                            android:text="0" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/feat2Pic"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/stars" />
+
+                        <Button
+                            android:id="@+id/btn_ratingStars"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:background="@android:color/transparent"
+                            android:text="4.6" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/feat3Pic"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/people" />
+
+                        <Button
+                            android:id="@+id/btn_title3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+
+                            android:background="@android:color/transparent"
+                            android:text="6" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableBottom="@drawable/pets"
+                            android:text="Pets" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="not allowed" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableBottom="@drawable/beds"
+                            android:text="No. of Beds" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="24dp"
+                            android:text="05" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableBottom="@drawable/dj"
+                            android:text="No. of bathrooms" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="09" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#C0C0C0" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <include layout="@layout/activity_maps" />
+
+        <include layout="@layout/card_layout_comments" />
+
+        <TextView
+            android:id="@+id/txtReadAll"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:onClick="GoToReview"
+            android:text="Read  reviews" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

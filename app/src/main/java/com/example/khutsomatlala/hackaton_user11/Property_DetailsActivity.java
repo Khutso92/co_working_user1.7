@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11.Activities;
+package com.example.khutsomatlala.hackaton_user11;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -24,7 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.Activities.AuthActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.CWSDetailsActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.Read_moreActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.ReviewActivity;
+import com.example.khutsomatlala.hackaton_user11.Activities.bookingActivity;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
@@ -49,7 +53,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class Property_DetailsActivity extends FragmentActivity implements OnMapReadyCallback {
 
 
     //slide
@@ -126,7 +130,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_events);
+        setContentView(R.layout.propety_activity);
 
         message = findViewById(R.id.messageEditText);
         mComments = new ArrayList<>();
@@ -345,7 +349,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
                 }
 
                 //Init adapter
-                mMessageAdapter = new MessageAdapter(EventsActivity.this, R.layout.image_item, mComments);
+                mMessageAdapter = new MessageAdapter(Property_DetailsActivity.this, R.layout.image_item, mComments);
 
                 mMessageListView.setAdapter(mMessageAdapter);
 
@@ -444,7 +448,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
                                 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
                         RecyclerView ListViewCatalog = findViewById(R.id.recycler_view);
-                        Slideadapter = new ImagesAdapter(EventsActivity.this, image);
+                        Slideadapter = new ImagesAdapter(Property_DetailsActivity.this, image);
 //                    Toast.makeText(CatalogActivity.this, ""+catalog.getCatalogtitle(), Toast.LENGTH_SHORT).show();
                         ListViewCatalog.setLayoutManager(layoutManager);
 
@@ -459,7 +463,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(EventsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Property_DetailsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -487,18 +491,18 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
                         images.add(slide2);
                         images.add(slide3);
 
-                        adapterV = new ViewPagerAdapter(EventsActivity.this, images);
+                        adapterV = new ViewPagerAdapter(Property_DetailsActivity.this, images);
                         viewpager.setAdapter(adapterV);
                         addDotsIndicator(0);
 
                         viewpager.addOnPageChangeListener(viewListerner);
                     } else {
 
-                        Toast.makeText(EventsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Property_DetailsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
                     }
                 } else {
 
-                    Toast.makeText(EventsActivity.this, "data snapshot is null", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Property_DetailsActivity.this, "data snapshot is null", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -551,7 +555,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
 
     public void GoToBook(View view) {
 
-        Intent i = new Intent(EventsActivity.this, bookingActivity.class);
+        Intent i = new Intent(Property_DetailsActivity.this, bookingActivity.class);
         i.putExtra("pic", pic1);
         i.putExtra("name", PlaceName);
         i.putExtra("price", price);
