@@ -106,6 +106,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
     private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference, mDatabaseFeatures;
     EditText message;
 
+    TextView tv_view;
     List<FriendlyMessage> mComments;
     private FirebaseAuth mFirebaseAuth;
 
@@ -151,7 +152,9 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
         placeLocation = findViewById(R.id.txt_location);
         ratingBar = findViewById(R.id.rating_rating_bar);
 
+
         txtHours = findViewById(R.id.txtHours);
+        tv_view = findViewById(R.id.tv_review);
 
         ftitle1 = findViewById(R.id.btn_reviews);
         ftitle2 = findViewById(R.id.btn_ratingStars);
@@ -339,6 +342,12 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
 
                     reviews = dataSnapshot.getChildrenCount();
+
+
+                    if(reviews >0){
+
+                        tv_view.setVisibility(View.GONE);
+                    }
 
                     //readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);

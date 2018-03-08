@@ -85,7 +85,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid, user_name;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws, workshp_cws, kitchen_cws;
+    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws, workshp_cws, kitchen_cws,tv_review;
     LinearLayout parking_cws_layout, ac_cws_layout, meeting_cws_layout, workshp_cws_layout, kitchen_cws_layout;
     ImageView feat1P, feat2P, feat3P;
 
@@ -155,6 +155,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         ratingBar = findViewById(R.id.rating_rating_bar);
 
         txtHours = findViewById(R.id.txtHours);
+        tv_review = findViewById(R.id.tv_review);
 
         ftitle1 = findViewById(R.id.btn_reviews);
         ftitle2 = findViewById(R.id.btn_ratingStars);
@@ -308,6 +309,12 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
 
                     reviews = dataSnapshot.getChildrenCount();
+
+                    if(reviews >0){
+
+                        tv_review.setVisibility(View.GONE);
+                    }
+
 
                     //readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);

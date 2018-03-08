@@ -86,7 +86,7 @@
             android:name=".Activities.EventsActivity"
             android:label="@string/title_activity_events"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Property_DetailsActivity"></activity>
+        <activity android:name=".Activities.Property_DetailsActivity"></activity>
     </application>
 
 </manifest>

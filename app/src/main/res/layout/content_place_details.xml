@@ -356,7 +356,7 @@
             android:layout_marginRight="16dp"
             android:gravity="center"
             android:onClick="GoToReview"
-            android:text="Read  reviews" />
+            android:text="Read and write reviews" />
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
@@ -53,6 +54,7 @@ public class ReviewActivity extends Activity {
     String mUsername;
     String user_name;
     long reviews;
+    TextView tv_view;
 
 
     int minute, hour;
@@ -82,6 +84,7 @@ public class ReviewActivity extends Activity {
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
         profilePicture = findViewById(R.id.profilePicMessage);
+        tv_view = findViewById(R.id.tv_review);
 
         //  numberOfUser.setText(""+users);
 
@@ -251,6 +254,13 @@ public class ReviewActivity extends Activity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                     reviews = dataSnapshot.getChildrenCount();
+
+
+                    if(reviews >0){
+
+                        tv_view.setVisibility(View.GONE);
+                    }
+
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
                     mComments.add(friendlyMessage);
 
