@@ -10,9 +10,6 @@ import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
-/**
- * Created by Admin on 1/19/2018.
- */
 
 public class Fourth_Host extends Activity {
 
@@ -30,7 +27,6 @@ public class Fourth_Host extends Activity {
 
         working_hours = (EditText) findViewById(R.id.edt_hours_host);
         telephone = findViewById(R.id.edt_phone_host);
-
 
         Intent i = getIntent();
         PlaceName = i.getStringExtra("name");

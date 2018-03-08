@@ -44,9 +44,6 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
         btn_firth_host = (Button) findViewById(R.id.btn_next_firth);
 
         priceperHr = findViewById(R.id.edt_price_host);
-        timein = findViewById(R.id.edt_timein_host);
-        timeout = findViewById(R.id.edt_timeout_host);
-
 
         Intent i = getIntent();
         hours = i.getStringExtra("hour");
@@ -57,9 +54,6 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
 
 
         //Spinner
-
-
-
         spinnerTimeIn = findViewById(R.id.spinnerTimeInHost);
         spinnerTimeOut = findViewById(R.id.spinnerTimeOutHost);
 
@@ -135,7 +129,6 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
         String itemIn = spinnerTimeIn.getSelectedItem().toString();
 
         String itemOut = spinnerTimeOut.getSelectedItem().toString();
-
 
 
         //Time in
@@ -342,10 +335,9 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
                     closetime = "11PM";
 
 
-
             }
 
-         //   Toast.makeText(this, ""+closetime, Toast.LENGTH_SHORT).show();
+            //   Toast.makeText(this, ""+closetime, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -353,21 +345,18 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-
     }
 
     public void nextaa(View view) {
+
         price = priceperHr.getText().toString();
-        in = timein.getText().toString();
-        out = timeout.getText().toString();
+
         if (price.trim().isEmpty()) {
             workinghours = opentime + "-" + closetime;
-            Toast.makeText(Firth_Host.this, "enter price", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "" +workinghours + "\nopen time"+hourIn + "\nclose time"+hourOut, Toast.LENGTH_LONG).show();
+          //  Toast.makeText(Firth_Host.this, "enter price", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "" + workinghours + "\nopen time" + hourIn + "\nclose time" + hourOut, Toast.LENGTH_LONG).show();
 
-        }
-        else
-        {
+        } else {
             Intent i = new Intent(Firth_Host.this, Sixth_Host.class);
             i.putExtra("price", price);
             i.putExtra("timein", in);
@@ -377,7 +366,11 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
             i.putExtra("name", PlaceName);
             i.putExtra("infor", infor);
             i.putExtra("placeAddress", placeAddress);
-            startActivity(i);
+           startActivity(i);
+
+            String hours = opentime +" - " + closetime;
+
+            Toast.makeText(this, "Price " +price +  "\nopen time" + hourIn + "\nclose time  "+hourOut + "\n hours "+ hours, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -21,9 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.Amenities;
 import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.Slide;
 import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.details;
-import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.features;
 import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.working_hours;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -59,7 +59,7 @@ public class Sixth_Host extends AppCompatActivity {
 
 
     CheckBox Wifi, meeting_shop, workshop, parking, kitchen;
-    String wifiText,meeting_shop_text, workshop_text, parking_text, kitchen_text;
+    String wifiText, meeting_shop_text, workshop_text, parking_text, kitchen_text;
     FirebaseDatabase database;
     private Uri imgUri, imgUri2, imgUri3;
     private Uri FeatimgUri, FeatimgUri2, FeatimgUri3;
@@ -349,24 +349,10 @@ public class Sixth_Host extends AppCompatActivity {
 
                                     uri2 = taskSnapshot.getDownloadUrl().toString();
 
-
-                                    mDatabaseRefSlide = FirebaseDatabase.getInstance().getReference("new_Slide").child(PlaceName);
-                                    if (i == 0) {
-
-                                        Slide slide1 = new Slide(urI);
-                                        String imge1 = mDatabaseRefSlide.push().getKey();
-                                        mDatabaseRefSlide.child(imge1).setValue(slide1);
-
-                                        Slide slide2 = new Slide(uri2);
-                                        String imge2Id = mDatabaseRefSlide.push().getKey();
-                                        mDatabaseRefSlide.child(imge2Id).setValue(slide2);
-
-                                        Slide slide3 = new Slide(uri3);
-                                        String imge3Id = mDatabaseRefSlide.push().getKey();
-                                        mDatabaseRefSlide.child(imge3Id).setValue(slide3);
-                                        i++;
-                                    }
-
+                                   //TODO add pics for the slide
+                                /*    mDatabaseRefSlide = FirebaseDatabase.getInstance().getReference("new_Slide");
+                                    Slide slide = new Slide(urI,uri2,uri3);
+                                    mDatabaseRefSlide.child("Khutso").setValue(slide);*/
 
                                     //for Feat1 1
                                     refFeat1.putFile(FeatimgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -392,8 +378,8 @@ public class Sixth_Host extends AppCompatActivity {
                                                             featTit1e2 = edtFeatT2.getText().toString().trim();
                                                             featTit1e3 = edtFeatT3.getText().toString().trim();
 
-                                                            features feat = new features(featUri, featUri2, featUri3, featTit1e1, featTit1e2, featTit1e3);
-                                                            mDataRefFeat.child(PlaceName).setValue(feat);
+                                                            //   Amenities feat = new Amenities(featUri, featUri2, featUri3, featTit1e1, featTit1e2, featTit1e3);
+                                                            //  mDataRefFeat.child(PlaceName).setValue(feat);
 
                                                         }
                                                     });
@@ -589,7 +575,7 @@ public class Sixth_Host extends AppCompatActivity {
         int i = 0;
         if (Wifi.isChecked()) {
             i++;
-              wifiText = Wifi.getText().toString();
+            wifiText = Wifi.getText().toString();
         }
         if (meeting_shop.isChecked()) {
             i++;
@@ -609,20 +595,51 @@ public class Sixth_Host extends AppCompatActivity {
         }
 
 
-        if((i>3 || i<3)){
+        if ((i > 3 || i < 3)) {
 
             Toast.makeText(this, "select only 3 ", Toast.LENGTH_SHORT).show();
-
-
-        } else
-        {
+            wifiText = null;
+            meeting_shop_text = null;
+            workshop_text = null;
+            parking_text = null;
+            kitchen_text = null;
+        } else {
             Toast.makeText(this, "Thanks", Toast.LENGTH_SHORT).show();
 
+            if (wifiText == null) {
 
-             if(!wifiText.isEmpty()){
+                wifiText = "not selected  ";
+            }
 
-                 Toast.makeText(this, ""+wifiText, Toast.LENGTH_SHORT).show();
-             }
+            if (meeting_shop_text == null) {
+
+                meeting_shop_text = "not selected  ";
+            }
+            if (workshop_text == null) {
+
+                workshop_text = "not selected  ";
+            }
+            if (parking_text == null) {
+
+                parking_text = "not selected ";
+            }
+            if (kitchen_text == null) {
+
+                kitchen_text = "not selected  ";
+            }
+
+
+            mDataRefFeat = FirebaseDatabase.getInstance().getReference("new_Features");
+            Amenities amenities = new Amenities(wifiText, meeting_shop_text, workshop_text, parking_text, kitchen_text);
+            mDataRefFeat.child("Khutso").setValue(amenities);
         }
+    }
+
+    public void upo (View view){
+
+        mDatabaseRefSlide = FirebaseDatabase.getInstance().getReference("new_Slide");
+       // Slide slide = new Slide(urI,uri2,uri3);
+        Slide slide = new Slide("pic1","pic2","pp");
+        mDatabaseRefSlide.child("Khutso").setValue(slide);
     }
 }

@@ -44,16 +44,18 @@ public class Third_Host extends AppCompatActivity {
                         Toast.makeText(Third_Host.this, "Enter place name", Toast.LENGTH_SHORT).show();
                     } else {
                         if (placeAdress.trim().isEmpty()) {
-                            Toast.makeText(Third_Host.this, "Enter address", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Third_Host.this, "Enter suburb name", Toast.LENGTH_SHORT).show();
 
                         } else {
                             if (infor.trim().isEmpty()) {
-                           Toast.makeText(Third_Host.this, "Enter information", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Third_Host.this, "Enter information about the space", Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent i = new Intent(Third_Host.this, Firth_Host.class);
                                 i.putExtra("name", PlaceName);
                                 i.putExtra("infor", infor);
                                 i.putExtra("placeAddress", placeAdress);
+
+                                Toast.makeText(Third_Host.this, "name" + PlaceName + "\ninfor " + infor + "\n suburb name" + placeAdress, Toast.LENGTH_SHORT).show();
                                 startActivity(i);
                             }
                         }
@@ -65,15 +67,7 @@ public class Third_Host extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
     }
-
 
 
 }

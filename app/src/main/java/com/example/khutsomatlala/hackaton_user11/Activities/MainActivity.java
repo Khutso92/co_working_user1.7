@@ -111,9 +111,9 @@ public class MainActivity extends Fragment {
                     }
 
                     workingSpace.setPictures(pictures);
-                    //Get and set features of working space
+                    //Get and set Amenities of working space
                     List<Feature> features = new ArrayList<>();
-                    for (DataSnapshot _snap : snapshot.child("features").getChildren()) {
+                    for (DataSnapshot _snap : snapshot.child("Amenities").getChildren()) {
                         Feature feature = new Feature();
                         feature.setTitle(_snap.child("title").getValue().toString());
                         feature.setImageUrl(_snap.child("image").getValue().toString());

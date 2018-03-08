@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.khutsomatlala.hackaton_user11.Activity_Host;
 import com.example.khutsomatlala.hackaton_user11.R;
 
 /**

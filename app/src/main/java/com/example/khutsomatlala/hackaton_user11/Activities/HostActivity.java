@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
+import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.Amenities;
 import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.Slide;
-import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.features;
 import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.working_hours;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -354,21 +354,21 @@ public class HostActivity extends AppCompatActivity {
 
                                     mDatabaseRefSlide = FirebaseDatabase.getInstance().getReference("new_Slide").child(placeName);
 
-                                    if (i == 0) {
-
-                                        Slide slide1 = new Slide(urI);
-                                        String imge1 = mDatabaseRefSlide.push().getKey();
-                                        mDatabaseRefSlide.child(imge1).setValue(slide1);
-
-                                        Slide slide2 = new Slide(uri2);
-                                        String imge2Id = mDatabaseRefSlide.push().getKey();
-                                        mDatabaseRefSlide.child(imge2Id).setValue(slide2);
-
-                                        Slide slide3 = new Slide(uri3);
-                                        String imge3Id = mDatabaseRefSlide.push().getKey();
-                                        mDatabaseRefSlide.child(imge3Id).setValue(slide3);
-                                        i++;
-                                    }
+//                                    if (i == 0) {
+//
+//                                        Slide slide1 = new Slide(urI);
+//                                        String imge1 = mDatabaseRefSlide.push().getKey();
+//                                        mDatabaseRefSlide.child(imge1).setValue(slide1);
+//
+//                                        Slide slide2 = new Slide(uri2);
+//                                        String imge2Id = mDatabaseRefSlide.push().getKey();
+//                                        mDatabaseRefSlide.child(imge2Id).setValue(slide2);
+//
+//                                        Slide slide3 = new Slide(uri3);
+//                                        String imge3Id = mDatabaseRefSlide.push().getKey();
+//                                        mDatabaseRefSlide.child(imge3Id).setValue(slide3);
+//                                        i++;
+//                                    }
 
 
                                     //for Feat1 1
@@ -395,8 +395,8 @@ public class HostActivity extends AppCompatActivity {
                                                             featTit1e2 = edtFeatT2.getText().toString().trim();
                                                             featTit1e3 = edtFeatT3.getText().toString().trim();
 
-                                                            features feat = new features(featUri, featUri2, featUri3, featTit1e1, featTit1e2, featTit1e3);
-                                                            mDataRefFeat.child(placeName).setValue(feat);
+                                                         //   Amenities feat = new Amenities(featUri, featUri2, featUri3, featTit1e1, featTit1e2, featTit1e3);
+                                                         //   mDataRefFeat.child(placeName).setValue(feat);
 
                                                         }
                                                     });

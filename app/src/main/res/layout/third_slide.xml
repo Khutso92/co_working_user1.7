@@ -47,6 +47,7 @@
             android:layout_margin="4dp"
             android:background="@drawable/square"
             android:hint="Place Name"
+            android:singleLine="true"
             android:textColorHint="#50196b69"
             android:textSize="12sp" />
 
@@ -74,6 +75,7 @@
             android:layout_margin="4dp"
             android:background="@drawable/square"
             android:drawableRight="@drawable/map"
+            android:lines="5"
             android:hint="Select your location"
             android:textColorHint="#50196b69"
             android:textSize="12sp"
