@@ -10,7 +10,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-   android:layout_alignParentBottom="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
             android:orientation="vertical">
         <TextView
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:text="We just neeed to get to know you better before you can host your space This we'll guide you through the process of host your places and making sure you have all you details that you need to host your places"
+            android:text="We just need to get to know you better before you can host your space This we'll guide you through the process of host your places and making sure you have all you details that you need to host your places"
             android:textColor="#000" />
 
             <Button

@@ -98,6 +98,7 @@ public class ProfileListActivity extends Fragment {
         tv_user_name = view.findViewById(R.id.TextView_profileName);
 
 
+
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -216,11 +217,14 @@ public class ProfileListActivity extends Fragment {
         tv_user_email.setText(email);
         tv_user_name.setText(mUsername);
         return view;
+
+
     }
 
 
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
@@ -332,6 +336,8 @@ public class ProfileListActivity extends Fragment {
             Toast.makeText(getActivity(), "unable to upload picture", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     public void GoToProfile() {
 
