@@ -152,8 +152,8 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
             public void onDayClick(Date dateClicked) {
 
                 year = "20" + (dateClicked.getYear() - 100);
-                day = "0" + dateClicked.getDate();
-                month = "" + (dateClicked.getMonth() + 1);
+                day = ""+ dateClicked.getDate();
+
 
                 if (date_selected == true) {
 
@@ -165,14 +165,38 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
                 Date todaysDate = new Date();
 
                 if (todaysDate.before(dateClicked) || day.equals(dayStamp.toString())) {
-                    //  Toast.makeText(bookingActivity.this, "valid  date ", Toast.LENGTH_SHORT).show();
+
+
+                    if(dateClicked.getMonth() < 10){
+                        month   = "0" + (dateClicked.getMonth() + 1);
+                    }
+                    else {
+                        month = "" + (dateClicked.getMonth() + 1);
+                    }
+
+                if(dateClicked.getDate() <10){
+                    date = "0"+day + "-" + month + "-" + year;
+                }
+                else {
                     date = day + "-" + month + "-" + year;
+                }
 
                     date_selected = true;
 
                     txtDateBooked.setText("Date booked - " + date);
                 } else {
-                    Toast.makeText(bookingActivity.this, "date has passed" + dayStamp, Toast.LENGTH_SHORT).show();
+
+
+                    if(dateClicked.getDate() <10) {
+                        date = "0"+day + "-" + month + "-" + year;
+
+                        Toast.makeText(bookingActivity.this, date+ " has passed ", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(bookingActivity.this, date+ " has passed ", Toast.LENGTH_SHORT).show();
+                    }
+
+
 
 
                 }

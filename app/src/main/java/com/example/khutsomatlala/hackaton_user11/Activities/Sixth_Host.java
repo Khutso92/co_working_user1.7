@@ -571,7 +571,7 @@ public class Sixth_Host extends AppCompatActivity {
     }
 
 
-    public void test(View test) {
+    public void test( ) {
         int i = 0;
         if (Wifi.isChecked()) {
             i++;
@@ -629,17 +629,22 @@ public class Sixth_Host extends AppCompatActivity {
             }
 
 
-            mDataRefFeat = FirebaseDatabase.getInstance().getReference("new_Features");
+            mDataRefFeat = FirebaseDatabase.getInstance().getReference("amenities");
             Amenities amenities = new Amenities(wifiText, meeting_shop_text, workshop_text, parking_text, kitchen_text);
             mDataRefFeat.child("Khutso").setValue(amenities);
+
+
         }
     }
 
-    public void upo (View view){
+    public void upo (View view ){
 
         mDatabaseRefSlide = FirebaseDatabase.getInstance().getReference("new_Slide");
        // Slide slide = new Slide(urI,uri2,uri3);
         Slide slide = new Slide("pic1","pic2","pp");
         mDatabaseRefSlide.child("Khutso").setValue(slide);
+
+        test();
+
     }
 }

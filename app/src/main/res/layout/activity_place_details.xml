@@ -26,8 +26,6 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-
-
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -38,18 +36,11 @@
            <include layout="@layout/slide"/>
             <include  layout="@layout/activity_main_viewpager"/>
 
-
-
             <!--<include layout="@layout/activity_images"/>-->
-
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
-
     </android.support.design.widget.AppBarLayout>
-
-
-
 
     <include layout="@layout/content_place_details" />
 
