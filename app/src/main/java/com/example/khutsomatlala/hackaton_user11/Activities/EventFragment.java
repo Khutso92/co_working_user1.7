@@ -1,8 +1,6 @@
 package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,10 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
-import com.example.khutsomatlala.hackaton_user11.adapter.MyItemRecyclerViewAdapter;
+import com.example.khutsomatlala.hackaton_user11.adapter.EventsAdapter;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Feature;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.PlaceDetails;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.PlacePicture;
@@ -34,7 +31,7 @@ public class EventFragment extends Fragment {
     private DatabaseReference mDatabaseRefDetails,slide;
     private List<WorkingSpace> workingSpaces = new ArrayList<>();
     private RecyclerView mRecyclerView;
-    private MyItemRecyclerViewAdapter adapter;
+    private EventsAdapter adapter;
     private ProgressDialog progressDialog;
     public static Boolean stauts = false;
     private DatabaseReference user;
@@ -58,10 +55,10 @@ public class EventFragment extends Fragment {
         user_uid = mAuth.getCurrentUser().getUid();
 
         mDatabaseRefDetails = FirebaseDatabase.getInstance().getReference("events");
-        slide = FirebaseDatabase.getInstance().getReference("pics");
+        slide = FirebaseDatabase.getInstance().getReference("pic");
 
         //Init adapter
-        adapter = new MyItemRecyclerViewAdapter(workingSpaces, getActivity());
+        adapter = new EventsAdapter(workingSpaces, getActivity());
         mRecyclerView.setAdapter(adapter);
 
         mDatabaseRefDetails.addValueEventListener(new ValueEventListener() {

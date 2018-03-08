@@ -8,7 +8,7 @@
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.khutsomatlala.hackaton_user11.Activities.CWSDetailsActivity"
-    tools:showIn="@layout/activity_place_details">
+    tools:showIn="@layout/activity_events">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -224,25 +224,44 @@
                     android:layout_marginLeft="16dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="wifi" />
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="wifi" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/pets"
+                            android:text="Pets" />
+                    </LinearLayout>
 
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="wifi" />
+                        android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/beds"
+                        android:text="Beds" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/dj"
+                        android:text="Dj" />
+                    </LinearLayout>
 
                 </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
