@@ -91,7 +91,7 @@ public class MainActivity extends Fragment {
                     PlaceDetails details = new PlaceDetails();
                     details.setPlaceAddress(snapshot.child("details").child("PlaceAddress").getValue().toString());
                     details.setPlaceName(snapshot.child("details").child("PlaceName").getValue().toString());
-//                    details.setPlaceCell(snapshot.child("details").child("PlaceCell").getValue().toString());
+//                  details.setPlaceCell(snapshot.child("details").child("PlaceCell").getValue().toString());
                     details.setPlaceInfo(snapshot.child("details").child("PlaceInfo").getValue().toString());
                     details.setPlaceHours(snapshot.child("details").child("PlaceHours").getValue().toString());
                     details.setPrice((long) snapshot.child("details").child("PlacePrice").getValue());

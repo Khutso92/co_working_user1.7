@@ -15,6 +15,7 @@ import com.example.khutsomatlala.hackaton_user11.R;
 public class Third_Host extends AppCompatActivity {
     Button btn_third_host;
     String PlaceName, infor, address, placeAdress;
+    String DeeJay, OverNight,holdNumber;
     EditText placeName, information, placeAddress;
     TextView location;
 
@@ -23,12 +24,18 @@ public class Third_Host extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.third_slide);
 
-        btn_third_host = (Button) findViewById(R.id.btn_next_third);
+        Intent i = getIntent();
+
+        DeeJay = i.getStringExtra("DeeJay" );
+        OverNight = i.getStringExtra("OverNight");
+        OverNight = i.getStringExtra("holdNumber");
+
+        btn_third_host =   findViewById(R.id.btn_next_third);
 
         location = findViewById(R.id.txt_placeaddress_host);
-        placeName = (EditText) findViewById(R.id.edt_placename_host);
-        information = (EditText) findViewById(R.id.edt_information_host);
-        placeAddress = (EditText) findViewById(R.id.edt_placeAddress_host);
+        placeName =  findViewById(R.id.edt_placename_host);
+        information =   findViewById(R.id.edt_information_host);
+        placeAddress =  findViewById(R.id.edt_placeAddress_host);
 
         //passing info
         btn_third_host.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +62,10 @@ public class Third_Host extends AppCompatActivity {
                                 i.putExtra("infor", infor);
                                 i.putExtra("placeAddress", placeAdress);
 
-                                Toast.makeText(Third_Host.this, "name" + PlaceName + "\ninfor " + infor + "\n suburb name" + placeAdress, Toast.LENGTH_SHORT).show();
+                                i.putExtra("DeeJay", DeeJay);
+                                i.putExtra("OverNight", OverNight);
+                                i.putExtra("holdNumber", holdNumber);
+
                                 startActivity(i);
                             }
                         }

@@ -20,7 +20,7 @@ import com.example.khutsomatlala.hackaton_user11.R;
 public class Firth_Host extends Activity implements AdapterView.OnItemSelectedListener {
 
     Button btn_firth_host;
-    String price, in, out, hours, phone, infor, PlaceName, latlon, placeAddress, opentime, closetime, workinghours;
+    String price, in, out, hours, phone, infor, PlaceName, latlon, placeAddress, opentime, closetime, workinghours, DeeJay, OverNight, holdNumber;
     EditText priceperHr, timein, timeout;
 
     String[] TimeIn = {" 1:00", "2:00", "3:00", "4:00", "5:00",
@@ -52,6 +52,11 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
         infor = i.getStringExtra("infor");
         placeAddress = i.getStringExtra("placeAddress");
 
+        DeeJay = i.getStringExtra("DeeJay");
+        holdNumber = i.getStringExtra("holdNumber");
+        OverNight = i.getStringExtra("OverNight");
+
+        i.putExtra("DeeJay", holdNumber);
 
         //Spinner
         spinnerTimeIn = findViewById(R.id.spinnerTimeInHost);
@@ -353,7 +358,7 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
 
         if (price.trim().isEmpty()) {
             workinghours = opentime + "-" + closetime;
-          //  Toast.makeText(Firth_Host.this, "enter price", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(Firth_Host.this, "enter price", Toast.LENGTH_SHORT).show();
             //Toast.makeText(this, "" + workinghours + "\nopen time" + hourIn + "\nclose time" + hourOut, Toast.LENGTH_LONG).show();
 
         } else {
@@ -366,11 +371,14 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
             i.putExtra("name", PlaceName);
             i.putExtra("infor", infor);
             i.putExtra("placeAddress", placeAddress);
-           startActivity(i);
 
-            String hours = opentime +" - " + closetime;
+            i.putExtra("DeeJay", DeeJay);
+            i.putExtra("holdNumber", holdNumber);
+            i.putExtra("OverNight", OverNight);
+            startActivity(i);
+            String hours = opentime + " - " + closetime;
 
-            Toast.makeText(this, "Price " +price +  "\nopen time" + hourIn + "\nclose time  "+hourOut + "\n hours "+ hours, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Price " + price + "\nopen time" + hourIn + "\nclose time  " + hourOut + "\n hours " + hours, Toast.LENGTH_SHORT).show();
         }
     }
 

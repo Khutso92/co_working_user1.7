@@ -46,8 +46,9 @@ import java.io.IOException;
 public class Sixth_Host extends AppCompatActivity {
     ImageView first_pic, second_pic, third_pic;
     Button first_amenities, second_amenities, third_amenities, save;
-    String price, in, out, hours, phone, infor, PlaceName, btn_first_pic, btn_second_pic, btn_third_pic, featTit1e1, featTit1e2, featTit1e3, placeAddress;
+    String price, in, out, hours, phone, infor, PlaceName, btn_first_pic, btn_second_pic, btn_third_pic, featTit1e1, featTit1e2, featTit1e3, placeAddress ;
     String urI, uri2, uri3;
+    String DeeJay, holdNumber, OverNight;
     int i = 0;
 
     Boolean uploadFeature = false, uploadPics = false;
@@ -65,6 +66,7 @@ public class Sixth_Host extends AppCompatActivity {
     private Uri FeatimgUri, FeatimgUri2, FeatimgUri3;
     String featUri, featUri2, featUri3, latlon;
     int numberOfPlaces = 1;
+
     //public static final String FB_STORAGE_PATH = "new_places/";
     public static final String FB_STORAGE_PATH = "events/";
     public static final int REQUEST_CODE_S1 = 1;
@@ -82,10 +84,6 @@ public class Sixth_Host extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sixth);
-
-
-        //addListenerOnChkIos();
-        //addListenerOnButton();
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -138,10 +136,13 @@ public class Sixth_Host extends AppCompatActivity {
         placeAddress = i.getStringExtra("placeAddress");
 
 
+        i.putExtra("DeeJay", DeeJay);
+        i.putExtra("holdNumber", holdNumber);
+        i.putExtra("OverNight", OverNight);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 try {
                     if (PicSaver() == true) {
@@ -288,7 +289,6 @@ public class Sixth_Host extends AppCompatActivity {
     }
 
     public Boolean PicSaver() {
-
 
         /*if (EdtPlaceName.length() > 0 &&
                 EdtPlaceInfor.length() > 0 &&
@@ -536,7 +536,6 @@ public class Sixth_Host extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select image"), REQUEST_CODE_F3);
     }
-
 
     public class ViewDialog {
 

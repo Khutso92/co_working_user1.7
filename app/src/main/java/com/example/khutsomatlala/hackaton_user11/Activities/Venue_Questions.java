@@ -13,10 +13,10 @@ import com.example.khutsomatlala.hackaton_user11.R;
 
 public class Venue_Questions extends AppCompatActivity {
 
-    Button next_venue;
+
     RadioButton OverNightYes, OverNightNo, DeeJayYes, DeeJayNo;
-EditText VenueNumber;
-    Boolean OverNight, DeeJay;
+    EditText VenueNumber;
+    Boolean OverNight = null, DeeJay = null;
 
     //  String
     @Override
@@ -25,7 +25,7 @@ EditText VenueNumber;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events__questions);
 
-        next_venue = findViewById(R.id.btn_next_venue);
+
         VenueNumber = findViewById(R.id.btnVenueNumber);
 
         OverNightYes = findViewById(R.id.RadOverNightYes);
@@ -33,40 +33,46 @@ EditText VenueNumber;
         DeeJayNo = findViewById(R.id.RadDeeJayNo);
         DeeJayYes = findViewById(R.id.RadDeeJayYes);
 
-        next_venue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Venue_Questions.this, Third_Host.class);
-                startActivity(i);
-            }
-        });
-
 
     }
 
 
-    public void y(View view) {
+    public void NexttoThird_Host(View view) {
         if (OverNightYes.isChecked()) {
 
             OverNight = true;
-            Toast.makeText(this, "over night " + OverNight, Toast.LENGTH_SHORT).show();
-        } else {
+
+        }
+        if (OverNightYes.isChecked()) {
             OverNight = false;
-            Toast.makeText(this, "over night  " + OverNight, Toast.LENGTH_SHORT).show();
 
         }
         if (DeeJayYes.isChecked()) {
 
             DeeJay = true;
-            Toast.makeText(this, "Dee jay " + DeeJay, Toast.LENGTH_SHORT).show();
-        } else {
+
+        }
+        if (DeeJayNo.isChecked()) {
             DeeJay = false;
-            Toast.makeText(this, "Dee jay  " + DeeJay, Toast.LENGTH_SHORT).show();
         }
 
 
         String holdNumber = VenueNumber.getText().toString();
 
-        Toast.makeText(this, ""+holdNumber, Toast.LENGTH_SHORT).show();
+        if (!holdNumber.isEmpty()) {
+
+            if (!OverNightYes.isChecked() || !OverNightNo.isChecked()) {
+
+                Intent i = new Intent(Venue_Questions.this, Third_Host.class);
+
+                i.putExtra("DeeJay", DeeJay);
+                i.putExtra("OverNight", OverNight);
+                i.putExtra("holdNumber", holdNumber);
+                startActivity(i);
+
+            } else {
+                Toast.makeText(this, " Enter number of people ", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
