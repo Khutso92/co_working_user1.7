@@ -167,7 +167,7 @@ public class ProfileListActivity extends Fragment {
 
                 } catch (Exception e) {
 
-                    Toast.makeText(getActivity(), "no picture", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(getActivity(), "no picture", Toast.LENGTH_SHORT).show();
 
                 }
 

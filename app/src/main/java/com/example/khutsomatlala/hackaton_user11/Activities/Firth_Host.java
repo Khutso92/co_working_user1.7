@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.khutsomatlala.hackaton_user11.R;
 
@@ -378,7 +377,7 @@ public class Firth_Host extends Activity implements AdapterView.OnItemSelectedLi
             startActivity(i);
             String hours = opentime + " - " + closetime;
 
-            Toast.makeText(this, "Price " + price + "\nopen time" + hourIn + "\nclose time  " + hourOut + "\n hours " + hours, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Price " + price + "\nopen time" + hourIn + "\nclose time  " + hourOut + "\n hours " + hours, Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -476,7 +476,7 @@ public class Property_DetailsActivity extends FragmentActivity implements OnMapR
 
         mDotsLayout = findViewById(R.id.dots);
         mFirebaseDatabaseSlide = FirebaseDatabase.getInstance();
-        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("Slides").child("property").child(PlaceName);
+        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("pic");
 
         mPicDatabaseReferencSlide.addValueEventListener(new ValueEventListener() {
             @Override

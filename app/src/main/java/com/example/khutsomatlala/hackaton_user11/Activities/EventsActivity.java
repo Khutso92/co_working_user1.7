@@ -174,7 +174,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
         SendTextLinearLayout.setVisibility(View.GONE);
 
         txtHours.setText(hours);
-        txtPrice.setText("R" + price + " per hour");
+        txtPrice.setText("R" + price + " per month");
 
 
         //This will from firebase
@@ -478,7 +478,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
 
         mDotsLayout = findViewById(R.id.dots);
         mFirebaseDatabaseSlide = FirebaseDatabase.getInstance();
-        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("Slides").child("events").child(PlaceName);
+        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("pic");
 
         mPicDatabaseReferencSlide.addValueEventListener(new ValueEventListener() {
             @Override
@@ -505,11 +505,11 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
 
                        // Toast.makeText(EventsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(EventsActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EventsActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
 
-                    Toast.makeText(EventsActivity.this, "data snapshot is null", Toast.LENGTH_SHORT).show();
+                   //  Toast.makeText(EventsActivity.this, "data snapshot is null", Toast.LENGTH_SHORT).show();
                 }
             }
 

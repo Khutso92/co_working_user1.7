@@ -704,7 +704,7 @@ public class bookingActivity extends AppCompatActivity implements AdapterView.On
 
         if (((closeTime == timeSelected) || (closeTime > timeSelected))) {
 
-            Toast.makeText(this, "Taaaa", Toast.LENGTH_SHORT).show();
+
 
 
         } else {
