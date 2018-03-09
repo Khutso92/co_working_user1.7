@@ -478,7 +478,7 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
 
         mDotsLayout = findViewById(R.id.dots);
         mFirebaseDatabaseSlide = FirebaseDatabase.getInstance();
-        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("pics");
+        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("Slides").child("events").child(PlaceName);
 
         mPicDatabaseReferencSlide.addValueEventListener(new ValueEventListener() {
             @Override
@@ -503,7 +503,9 @@ public class EventsActivity extends FragmentActivity implements OnMapReadyCallba
                         viewpager.addOnPageChangeListener(viewListerner);
                     } else {
 
-                        Toast.makeText(EventsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(EventsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(EventsActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
 

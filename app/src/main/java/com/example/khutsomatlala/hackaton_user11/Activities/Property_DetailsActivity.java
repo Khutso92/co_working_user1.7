@@ -476,7 +476,7 @@ public class Property_DetailsActivity extends FragmentActivity implements OnMapR
 
         mDotsLayout = findViewById(R.id.dots);
         mFirebaseDatabaseSlide = FirebaseDatabase.getInstance();
-        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("pics");
+        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("Slides").child("property").child(PlaceName);
 
         mPicDatabaseReferencSlide.addValueEventListener(new ValueEventListener() {
             @Override
@@ -495,10 +495,17 @@ public class Property_DetailsActivity extends FragmentActivity implements OnMapR
                         images.add(slide3);
 
                         adapterV = new ViewPagerAdapter(Property_DetailsActivity.this, images);
-                        viewpager.setAdapter(adapterV);
-                        addDotsIndicator(0);
+                       try {
 
-                        viewpager.addOnPageChangeListener(viewListerner);
+                           viewpager.setAdapter(adapterV);
+                           addDotsIndicator(0);
+
+
+                           viewpager.addOnPageChangeListener(viewListerner);
+                       }catch (Exception e)
+                       {
+                           System.out.print(" error "+e.getMessage());
+                       }
                     } else {
 
                         Toast.makeText(Property_DetailsActivity.this, "data snapshot is has no children", Toast.LENGTH_SHORT).show();

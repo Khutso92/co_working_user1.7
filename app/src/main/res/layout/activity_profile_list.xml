@@ -9,7 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilePic"
@@ -55,7 +56,9 @@
         android:textAlignment="center"
         android:textColor="#196b69"
         android:textStyle="bold"
-        tools:hint="Khutso Matlala" />
+        android:textSize="16dp"
+        android:layout_marginTop="150dp"
+        android:text="Lerato Nkosi" />
 
 
     <TextView
@@ -66,7 +69,9 @@
         android:textAlignment="center"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#196b69"
-        tools:hint="KhutsoMatlala@gmail.com" />
+
+        android:textSize="16dp"
+        android:text="sambula.lerato4@gmail.com" />
 
     <View
         android:layout_width="match_parent"
