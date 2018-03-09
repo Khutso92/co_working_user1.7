@@ -1,4 +1,4 @@
-package com.example.khutsomatlala.hackaton_user11;
+package com.example.khutsomatlala.hackaton_user11.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -24,11 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.khutsomatlala.hackaton_user11.Activities.AuthActivity;
-import com.example.khutsomatlala.hackaton_user11.Activities.CWSDetailsActivity;
-import com.example.khutsomatlala.hackaton_user11.Activities.Read_moreActivity;
-import com.example.khutsomatlala.hackaton_user11.Activities.ReviewActivity;
-import com.example.khutsomatlala.hackaton_user11.Activities.bookingActivity;
+import com.example.khutsomatlala.hackaton_user11.R;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
@@ -91,7 +87,7 @@ public class Property_DetailsActivity extends FragmentActivity implements OnMapR
     ImageView feat1P, feat2P, feat3P;
 
     long reviews;
-    int RateNumber;
+    TextView tv_review;
     private FirebaseAuth mAuth;
     private GoogleMap mMap;
 
@@ -156,6 +152,7 @@ public class Property_DetailsActivity extends FragmentActivity implements OnMapR
         ratingBar = findViewById(R.id.rating_rating_bar);
 
         txtHours = findViewById(R.id.txtHours);
+        tv_review = findViewById(R.id.tv_review);
 
         ftitle1 = findViewById(R.id.btn_reviews);
         ftitle2 = findViewById(R.id.btn_ratingStars);
@@ -343,6 +340,12 @@ public class Property_DetailsActivity extends FragmentActivity implements OnMapR
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
 
                     reviews = dataSnapshot.getChildrenCount();
+
+                    if(reviews >0){
+
+                        tv_review.setVisibility(View.GONE);
+                    }
+
 
                     //readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);

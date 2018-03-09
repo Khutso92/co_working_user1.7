@@ -32,6 +32,7 @@ import com.example.khutsomatlala.hackaton_user11.adapter.ImageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ImagesAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.MessageAdapter;
 import com.example.khutsomatlala.hackaton_user11.adapter.ViewPagerAdapter;
+import com.example.khutsomatlala.hackaton_user11.model_for_admin_app.Amenities;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.FriendlyMessage;
 import com.example.khutsomatlala.hackaton_user11.model_for_user_app.Slide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -60,7 +61,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     private TextView[] mDots;
 
     private FirebaseDatabase mFirebaseDatabaseSlide;
-    private DatabaseReference mPicDatabaseReferencSlide;
+    private DatabaseReference mPicDatabaseReferencSlide,mDatabaseReferenceAmenties;
     String slide1, slide2, slide3;
     ViewPagerAdapter adapterV;
     List<CWSDetailsActivity> catalogList;
@@ -84,7 +85,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
     String call, lat, lon, PlaceName, infor, address, hours, pic1, price, location, NumberofUser, email, feat1Title, feat2Title, feat3Title, feat1Pic, feat2Pic, feat3Pic, uid, user_name;
     LinearLayout SendTextLinearLayout;
-    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws, workshp_cws, kitchen_cws;
+    TextView placeName, placeLocation, txtInformation, readAllReviews, txtPrice, txtHours, parking_cws, ac_cws, meeting_cws, workshp_cws, kitchen_cws,tv_review;
     LinearLayout parking_cws_layout, ac_cws_layout, meeting_cws_layout, workshp_cws_layout, kitchen_cws_layout;
     ImageView feat1P, feat2P, feat3P;
 
@@ -105,7 +106,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
     String mUsername, Feat1, Feat2, Feat3, FeatTitle1, FeatTitle2, FeatTitle3;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mCommentsDatabaseReference, mRateDatabaseReference, mDatabaseFeatures;
+    private DatabaseReference mCommentsDatabaseReference, mDatabaseFeatures;
     EditText message;
 
     List<FriendlyMessage> mComments;
@@ -154,6 +155,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         ratingBar = findViewById(R.id.rating_rating_bar);
 
         txtHours = findViewById(R.id.txtHours);
+        tv_review = findViewById(R.id.tv_review);
 
         ftitle1 = findViewById(R.id.btn_reviews);
         ftitle2 = findViewById(R.id.btn_ratingStars);
@@ -178,11 +180,8 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
 
         //This will from firebase
-        //cws_amenity1 = "Parking";
-        cws_amenity2 = "Meeting";
-        //cws_amenity3 = "wifi";
-        cws_amenity4 = "Kitchen";
-        cws_amenity5 = "Workshop";
+        LoadAmenities();
+
 
         parking_cws_layout = findViewById(R.id.parking_cws);
         ac_cws_layout = findViewById(R.id.wifi_cws);
@@ -197,35 +196,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         workshp_cws = findViewById(R.id.txt_workshop);
         kitchen_cws = findViewById(R.id.txt_kitchen);
 
-        //getting the text from the TextView
-        String parkingText = parking_cws.getText().toString();
-        String acText = ac_cws.getText().toString();
-        String meetingText = meeting_cws.getText().toString();
-        String workshopText = workshp_cws.getText().toString();
-        String kitchenText = kitchen_cws.getText().toString();
 
-
-        if (parkingText.equals(cws_amenity1) || parkingText.equals(cws_amenity2) || parkingText.equals(cws_amenity3) || parkingText.equals(cws_amenity4) || parkingText.equals(cws_amenity5)) {
-            parking_cws_layout.setVisibility(View.VISIBLE);
-        }
-
-        if (acText.equals(cws_amenity1) || acText.equals(cws_amenity2) || acText.equals(cws_amenity3) || acText.equals(cws_amenity4) || acText.equals(cws_amenity5)) {
-            ac_cws_layout.setVisibility(View.VISIBLE);
-
-
-        }
-        if (meetingText.equals(cws_amenity1) || meetingText.equals(cws_amenity2) || meetingText.equals(cws_amenity3) || meetingText.equals(cws_amenity5) || meetingText.equals(cws_amenity5)) {
-            meeting_cws_layout.setVisibility(View.VISIBLE);
-        }
-
-        if (workshopText.equals(cws_amenity1) || workshopText.equals(cws_amenity2) || workshopText.equals(cws_amenity3) || workshopText.equals(cws_amenity5) || workshopText.equals(cws_amenity4)) {
-            workshp_cws_layout.setVisibility(View.VISIBLE);
-
-
-        }
-        if (kitchenText.equals(cws_amenity1) || kitchenText.equals(cws_amenity2) || kitchenText.equals(cws_amenity3)  || kitchenText.equals(cws_amenity4) || kitchenText.equals(cws_amenity5)) {
-            kitchen_cws_layout.setVisibility(View.VISIBLE);
-        }
 
 
         getFeature();
@@ -243,10 +214,6 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         mCommentsDatabaseReference = mFirebaseDatabase.getReference().child("comments");
-
-        // mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("places");
-
-        mRateDatabaseReference = mFirebaseDatabase.getReference();
 
         // Initialize references to views
 
@@ -330,7 +297,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
 
-        // mCommentsDatabaseReference.addValueEventListener(new ValueEventListener()
+
         mCommentsDatabaseReference.child(PlaceName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -342,6 +309,12 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
                     final FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
 
                     reviews = dataSnapshot.getChildrenCount();
+
+                    if(reviews >0){
+
+                        tv_review.setVisibility(View.GONE);
+                    }
+
 
                     //readAllReviews.setText("Read all " + reviews + " reviews");
                     mComments.add(friendlyMessage);
@@ -472,7 +445,7 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
 
         mDotsLayout = findViewById(R.id.dots);
         mFirebaseDatabaseSlide = FirebaseDatabase.getInstance();
-        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("pics");
+        mPicDatabaseReferencSlide = mFirebaseDatabaseSlide.getReference().child("Slides").child("cws").child(PlaceName);
 
         mPicDatabaseReferencSlide.addValueEventListener(new ValueEventListener() {
             @Override
@@ -670,6 +643,77 @@ public class CWSDetailsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
 
+
+    }
+
+
+    public void LoadAmenities(){
+
+        FirebaseDatabase.getInstance().getReference().child("amenities").child("Khutso").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot != null){
+
+
+
+                    try {
+                        cws_amenity1 = dataSnapshot.child("amenity1").getValue().toString();
+
+                        cws_amenity2 = dataSnapshot.child("amenity2").getValue().toString();
+                        cws_amenity3 = dataSnapshot.child("amenity3").getValue().toString();
+                        cws_amenity4 = dataSnapshot.child("amenity4").getValue().toString();
+                        cws_amenity5 = dataSnapshot.child("amenity5").getValue().toString();
+
+                        //getting the text from the TextView
+                        String parkingText = parking_cws.getText().toString();
+                        String acText = ac_cws.getText().toString();
+                        String meetingText = meeting_cws.getText().toString();
+                        String workshopText = workshp_cws.getText().toString();
+                        String kitchenText = kitchen_cws.getText().toString();
+
+
+                        //   Amenities amenities = new Amenities(wifiText, meeting_shop_text, workshop_text, parking_text, kitchen_text);
+
+                        if (parkingText.equals(cws_amenity1) || parkingText.equals(cws_amenity2) || parkingText.equals(cws_amenity3) || parkingText.equals(cws_amenity4) || parkingText.equals(cws_amenity5)) {
+                            parking_cws_layout.setVisibility(View.VISIBLE);
+                        }
+
+                        if (acText.equals(cws_amenity1) || acText.equals(cws_amenity2) || acText.equals(cws_amenity3) || acText.equals(cws_amenity4) || acText.equals(cws_amenity5)) {
+                            ac_cws_layout.setVisibility(View.VISIBLE);
+
+
+                        }
+                        if (meetingText.equals(cws_amenity1) || meetingText.equals(cws_amenity2) || meetingText.equals(cws_amenity3) || meetingText.equals(cws_amenity5) || meetingText.equals(cws_amenity5)) {
+                            meeting_cws_layout.setVisibility(View.VISIBLE);
+                        }
+
+                        if (workshopText.equals(cws_amenity1) || workshopText.equals(cws_amenity2) || workshopText.equals(cws_amenity3) || workshopText.equals(cws_amenity5) || workshopText.equals(cws_amenity4)) {
+                            workshp_cws_layout.setVisibility(View.VISIBLE);
+
+
+                        }
+                        if (kitchenText.equals(cws_amenity1) || kitchenText.equals(cws_amenity2) || kitchenText.equals(cws_amenity3) || kitchenText.equals(cws_amenity4) || kitchenText.equals(cws_amenity5)) {
+                            kitchen_cws_layout.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+                    catch (NullPointerException e ){
+
+                        Toast.makeText(CWSDetailsActivity.this, "null datashotsnap ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    Toast.makeText(CWSDetailsActivity.this, "   null", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

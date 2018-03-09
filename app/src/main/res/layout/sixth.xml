@@ -227,14 +227,14 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="meeting room" />
+                android:text="Meeting room" />
 
             <CheckBox
                 android:id="@+id/chkworkingShop "
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="workshop" />
+                android:text="Workshop" />
 
         </LinearLayout>
 
