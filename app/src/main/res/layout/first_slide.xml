@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
       android:background="@drawable/building"
+
     android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
             android:orientation="vertical">
@@ -39,17 +46,21 @@
             android:text="We just need to get to know you better before you can host your space This we'll guide you through the process of host your places and making sure you have all you details that you need to host your places"
             android:textColor="#000" />
 
-            <Button
-                android:id="@+id/btn_next_first"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/customize_button"
-                android:text="Get Started"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                android:textSize="18sp"
-                android:layout_margin="4dp"/>
+
 
         </LinearLayout>
-</RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_next_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customize_button"
+            android:text="Get Started"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="24dp"
+            />
+</LinearLayout>

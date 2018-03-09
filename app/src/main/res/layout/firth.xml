@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/building"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="18dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+
+
         android:orientation="vertical">
 
 
@@ -32,7 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="We are almost done"
-            android:textColor="#196b69" />
+            android:textColor="#196b69"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/edt_price_host"
@@ -51,33 +57,29 @@
             android:orientation="horizontal">
 
 
-
             <TextView
-                android:text="open time"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-
                 android:layout_marginLeft="4dp"
+                android:layout_marginTop="4dp"
                 android:layout_weight="1"
-             />
+                android:text="open time" />
 
 
             <TextView
-          android:text="close open"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="4dp"
-
                 android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
                 android:layout_weight="1"
-               />
+                android:text="close open" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
 
 
             <Spinner
@@ -95,10 +97,10 @@
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="4dp"
-                android:gravity="center"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/square" />
+                android:background="@drawable/square"
+                android:gravity="center" />
         </LinearLayout>
 
         <Button
@@ -106,8 +108,9 @@
             android:id="@+id/btn_next_firth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/customize_button"
             android:onClick="nextaa"
             android:text="Next"
@@ -118,4 +121,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
